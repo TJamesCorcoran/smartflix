@@ -1,0 +1,60 @@
+
+<% preprocess_categories!(category_list) %>
+
+<ul class="menu">
+
+  <% if @customer %>
+    <li><%= tell_a_friend_link %></li>
+  <% end %>
+    <hr>
+
+    <li><%= link_to 'SmartFlix Universities', {:controller => 'store', :action => 'universities'} %></li>
+    <hr />
+
+  <% category_list.select { |c| c.toplevel? }.each do |cat| -%>
+    <li>
+      <%= link_to_category cat %>
+      <% if (cat.selected || cat.child_selected?) && cat.children.count > 0 %>
+        <ul class="menu">
+          <% cat.children.each do |sub_cat| -%>
+            <li>
+              <%= link_to_category category_list.detect { |c| c == sub_cat } %>
+            </li>
+          <% end -%>
+        </ul>
+      <% end %>
+    </li>
+  <% end -%>
+</ul>
+
+<hr />
+
+<p><%= link_to 'Gift Certificates', {:controller => 'store', :action => 'giftcert', :id => nil} %></p>
+
+<hr />
+
+<p>
+    <%= link_to 'Most Popular Titles', {:controller => 'store', :action => 'popular'} %>
+</p>
+
+<p>
+<%= link_to 'New Titles', {:controller => 'store', :action => 'new'} %>
+&nbsp;
+</p>
+<p><%= link_to 'Top Rated Titles', {:controller => 'store', :action => 'top_rated'} %></p>
+<% if @customer && @customer.recommended_products.size > 0 -%>
+  <p><%= link_to 'Your Recommended Titles', {:controller => 'store', :action => 'recommended'} %></p>
+<% end -%>
+
+
+<hr />
+
+<p><%= 
+if @customer && @customer.affiliate?
+   link_to 'Affiliate Program', {:controller => 'affiliate'} 
+else
+   link_to 'Affiliate Program', {:controller => 'affiliate', :action=> 'introduction'} 
+end
+%>
+</p>
+

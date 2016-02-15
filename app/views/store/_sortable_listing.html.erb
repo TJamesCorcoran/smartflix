@@ -1,0 +1,16 @@
+<%# Parameter: products is an Array of Products, title is the page title, bundles is a list of bundles -%>
+
+<div class="category-listing-section">
+  <div id="subcat-title">
+    <h1><%= title %></h1>
+  </div>
+
+  <% if defined?(bundles) && bundles -%>
+    <%= render :partial => 'bundles', :locals => { :bundles => bundles } %>
+    <br style="clear:left" />
+  <% end -%>
+
+  <%= render :partial => 'product_listing', :locals => { :products => products } %>
+
+</div>
+

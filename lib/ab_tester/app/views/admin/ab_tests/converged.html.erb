@@ -1,0 +1,7 @@
+<% content_for :sidebar do %> 
+  <%= link_to "all", admin_ab_tests_active_url %>
+<% end %>
+
+
+
+<%= render(:partial => 'admin/shared/index', :locals => { :items => @items } )  %>

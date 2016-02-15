@@ -1,0 +1,17 @@
+<div class="ping-request-form">
+  <% form_tag :action => 'notify', :id => @contest do %>
+    <p>Enter now! Or, if you just want us to let you know when voting begins, give us your email address and we'll let you know:</p>
+    <h2>Don't want to enter?  Please vote!</h2>
+    <p>We're accepting entries now, but we'll let you know when voting starts.
+
+    <% if @customer %> 
+          <%= hidden_field_tag "contest_ping_request[email]", @customer.email %>
+    <% else %>
+      <b>We'll never share your email address! </b></p>
+      <label>Email:</label>
+
+      <%= text_field :contest_ping_request, :email, :size => 26 %>
+    <% end %>
+    <%= submit_tag 'email me', :class => 'button',  :id=>'email_me'%>
+  <% end %>
+</div>

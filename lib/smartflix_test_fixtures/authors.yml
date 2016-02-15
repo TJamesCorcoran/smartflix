@@ -1,0 +1,16 @@
+author1:
+  author_id: 1
+  name: 'Arthur Author'
+author2:
+  author_id: 2
+  name: 'Beltway Author'
+author3:
+  author_id: 3
+  name: 'C. Backordered Author'
+author4:
+  author_id: 4
+  name: 'C. S. Backordered Author'
+
+author5:
+  author_id: 5
+  name: 'FooBar'

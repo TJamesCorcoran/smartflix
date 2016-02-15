@@ -1,0 +1,10 @@
+<%# COMPLETED ABTEST: Are custom recommendations useful? -%>
+<%# RESULT: custom_recs_for_you are helpful, leave them on -%>
+<% if customer && customer.recommended_products.size > 0 -%>
+  <div class="category-listing-section">
+    <h1 class="rent-dvds-like">
+      Rent Videos <%= link_to 'Recommended Just For You', {:controller => 'store', :action => 'recommended'} %>, like
+    </h1>
+    <%= render :partial => 'product_listing', :locals => { :products => customer.recommended_products.sort_by { rand }[0,2] } %>
+  </div>
+<% end -%>

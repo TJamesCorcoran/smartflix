@@ -1,0 +1,26 @@
+<div class="item">
+  <h2><%= link_to_product product %></h2>
+  <%= link_to_product product, small_image_for(product) %>
+
+  <%# Unconclusively slightly negative to not show the author -- if ab_test(:redesign_author_in_listing) != :hide %>
+  <% if ! product.is_a?(UnivStub) %>
+    <h3><%= display_author_link(product) %></h3>
+  <% end %>
+
+  <p>
+    <%# length is part of Redesign Optimal.  Win. %>
+    <% length = 95 %>
+    <%= product.summary(length) %>...
+    <%= link_to_product product, 'Read more' %>
+  </p>
+
+  <% if display_queue_buttons? %>
+      <%=  queue_button_for(product, r_controller, r_action).html_safe %>
+  <% else %>
+      <% if product.product_set_member? -%>
+         <%= single_add_to_cart_button_for(product.product_set, :product_listing => true) %>
+      <% else %>
+         <%= single_add_to_cart_button_for(product, :product_listing => true) %>
+      <% end -%>
+  <% end -%>
+</div>

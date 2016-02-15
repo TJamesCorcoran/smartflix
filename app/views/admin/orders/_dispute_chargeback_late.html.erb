@@ -1,0 +1,42 @@
+    <p> The charge in question was a weekly rental fee for DVDs that
+    <%= @disputed_order.customer.full_name %> rented.  </p>
+
+
+    <p> The customer agreed in advance that he/she would pay for each
+    week that he or she rented the DVDs.  The agreement details will
+    be presented further down.  </p>
+
+    <p>
+    We particularly note that the customer confirmed that the goods were delivered (details below).
+    </p>
+
+
+    <p>
+    <h2>A timeline of events:</h2>
+    </p>
+
+    <ul>
+    <% @order_to_items.keys.each do |unreturned_order| %>
+       <li> On <%= unreturned_order.orderDate %> the customer clicked a checkbox stating that "I have read and agreed to the terms and conditions." and rented
+           <ul>
+               <% @order_to_items[unreturned_order].each do |line_item | %>
+
+                  <li style="list-style: disc outside;" > '<%= line_item.product.name %>' (this DVD has a purchase price of <%= line_item.product.purchase_price.to_f.currency %>)
+               <% end %>
+           </ul>
+
+       <li> 
+       <% @order_to_items[unreturned_order].each do |line_item | %>
+         <li> On <%= line_item.shipment.dateOut %> we shipped '<%= line_item.product.name %>' (with a serial number sticker <%= line_item.copy.sticker_id %>) to the customer
+         <li> On <%= line_item.lateMsg1Sent %> we emailed the customer and noted that the DVD was late, and asked for its return.  The DVD was not returned, nor did we get a response to our email (the customer agreed that this lack of response would serve as confirmation of delivery)
+         <li> On <%= line_item.lateMsg2Sent %> we emailed the customer a second time and again asked for its return.  The DVD was not returned, nor did we get a response to our email.
+       <% end %>
+    <% end %>
+    </ul>
+
+  <h2>The terms and conditions that the customer agreed to</h2> can be found at
+  http://smartflix.com/store/conditions and read, in part:
+
+  <blockquote>
+     <%= render :partial => "shared/conditions_for_chargeback_response" %>
+  </blockquote>

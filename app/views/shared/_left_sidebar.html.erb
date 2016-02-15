@@ -1,0 +1,12 @@
+<div id=<%= @show_right_sidebar ? "left" : "left-2col" %> class="column">
+  <div id="sidenav-wrap">
+    <div id="sidenav-box-header">
+      <%= "Categories" %>
+    </div>
+    <%# COMPLETED ABTEST: new_menu (using the new_category_list partial) wasn't successful, reverted %>
+    <div id="sidenav-box">
+      <%# Every page gets the category list; if not specified, use a default listing -%>
+      <%= render :partial => 'shared/category_list', :locals => { :category_list => @category_list || Category.display_list() } %>
+    </div>
+  </div>
+</div>

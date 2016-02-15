@@ -1,0 +1,9 @@
+<h1>Manage Contests</h1>
+  <%= form_for :contest do |f| %>
+    <table>
+    <tr><td align='right'>Title:</td><td><%= f.text_field :title %></td></tr>
+    <tr><td align='right'>Description:</td><td><%= f.text_area :description %></td></tr>
+    </table>
+    <%= f.submit @contest.new_record? ? 'Create' : 'Update' %>
+  <% end %>
+

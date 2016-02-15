@@ -1,0 +1,10 @@
+<div class="text-content">
+
+  <%= render :partial => 'customer_nav' %>
+
+  <%= error_messages_for :customer, :object_name => 'account information', :header_tag => :strong %>
+
+  <%= render :partial => 'shared/addresses', :locals => { :customer => @customer } %>
+
+
+</div>

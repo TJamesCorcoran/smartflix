@@ -1,0 +1,19 @@
+novol_invord:
+  product_id: 1000
+  quant_dvd: 3
+
+lastvol_positive_invord:
+  product_id: 1001
+  quant_dvd: 3
+
+# Note that there is no object for copy 1002
+#
+# This is on purpose.
+
+lis_exist_invord:
+  product_id: 1003
+  quant_dvd: 3
+
+success_invord:
+  product_id: 1004
+  quant_dvd: 3

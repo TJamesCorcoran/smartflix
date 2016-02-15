@@ -1,0 +1,58 @@
+#  brand:   SF
+#  machine: sf-internal 
+#
+
+# to run by hand in development:
+#     rails runner script/job_runner <task>
+#
+
+# min/  hr / day / mo / wd  command
+#-----------------------------------
+
+# Infrastructure
+#---------------
+
+30       *   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   run_delayed_jobs 
+30       0   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   sysadmin_info 
+30       1   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   late_dvds_warn 
+30       2   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   backup_pruner 
+30       2   *    *    6 /home/smart/rails/sfw/current/script/bash_runner.sh   mark_hopeless_copies 
+30       3   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   bill_pending 
+30       3   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   bill_univ_students 
+30       3   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   bill_late_dvds_charge 
+30       4   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   db_consistency_check 
+30       5   *    *    7 /home/smart/rails/sfw/current/script/bash_runner.sh   db_pull 
+30       6   *    *    7 /home/smart/rails/sfw/current/script/bash_runner.sh   db_scrub 
+30       7   *    *  1-5 /home/smart/rails/sfw/current/script/bash_runner.sh   recalc_shipping 
+30       8   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   calculate_purchasing 
+30       9   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   university_inventory_warnings 
+30      10   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   credit_affiliates 
+# 30      11   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   marketing_email_univ_new  
+# 30      12   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   marketing_email_univ_old  
+# 30      13   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   marketing_email_browsed
+30      12   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   update_product_delays 
+30      12   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   charge_expired_ccs_as_lost 
+30      12   *    *    1 /home/smart/rails/sfw/current/script/bash_runner.sh   remind_newsletter 
+30      12   *    *    2 /home/smart/rails/sfw/current/script/bash_runner.sh   remind_customers_with_tons 
+30      12   *    *    3 /home/smart/rails/sfw/current/script/bash_runner.sh   remind_bbb_status 
+30      12   *    *    5 /home/smart/rails/sfw/current/script/bash_runner.sh   remind_clean_office 
+30      13   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   update_product_recommendations 
+30      17   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   return_emails 
+30      18   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   shipment_emails 
+30      19   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   out_of_stock_mail 
+30      20   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   vidcap_needed 
+30      21   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   vidcap_push 
+
+31       8   *    *    1 /home/smart/rails/sfw/current/script/bash_runner.sh   remind_polishing 
+34       8   *    *    1 /home/smart/rails/sfw/current/script/bash_runner.sh   remind_custsup_snailmail 
+35       8   *    *    1 /home/smart/rails/sfw/current/script/bash_runner.sh   remind_finance 
+38       8   1    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   remind_purchasing 
+39       8   1    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   remind_delayed_vendors 
+40       8   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   remind_recycling 
+41       8   1    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   remind_pay_per_rent_ 
+42       8   *    *    3 /home/smart/rails/sfw/current/script/bash_runner.sh   remind_inventory_status 
+
+# marketing
+#-----------
+#  30      16   *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh   solicit_univ_reviews 
+

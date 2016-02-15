@@ -1,0 +1,30 @@
+<% last_good_payment = order.most_recent_payment_good %>
+
+<div class="univ_on_hold">
+ 
+  <div style="float:left;margin:10px;">
+    <%= image_tag("warning_icon_small.png") %>
+  </div>
+
+  <div class="univ_on_hold_inner">
+    <p>
+       <strong>Your '<%= order.name %>' subscription is on hold</strong> because we can't charge your credit card. <!-- ' -->
+    </p>
+
+    <% if ! order.most_recent_payment.andand.credit_card %>
+        <%= render :partial => 'customer/university_error_nocard' %>
+      <% elsif order.most_recent_payment.credit_card.extra_attempts > 0   %>
+        <%= render :partial => 'customer/university_error_tryagain', :locals => { :order => order} %>
+      <% elsif order.customer.most_recent_cc && order.customer.most_recent_cc > order.most_recent_payment.updated_at %>
+        <%= render :partial => 'customer/university_error_newdata' || true %>
+      <% elsif order.most_recent_payment.credit_card.expired? %>
+        <%= render :partial => 'customer/university_error_expired' %>
+      <% else %>
+        <%= render :partial => 'customer/university_error_noaction', :locals => { :order => order} %>
+      <% end %>
+
+  </div>
+   <%  if local_assigns[:verbose] && verbose %>
+      <%= render :partial => 'university_payment', :locals => { :last_payment => order.most_recent_payment } %>
+   <% end %>
+</div>

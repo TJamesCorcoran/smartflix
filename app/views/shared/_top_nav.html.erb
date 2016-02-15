@@ -1,0 +1,85 @@
+    <%# Every page gets the heading with logo and tabs and searchbox -%>
+    <div id="header">
+
+<div class="topright_nav" style="float:right; margin: 10px 10px 0 0;">
+    <%= link_to "Newsletters", { :controller => "newsletters", :action => :index} %> |
+    <%= link_to "Wiki",           :controller=> 'wiki_pages',  :action => 'index' %> |
+    <%= link_to "Projects",       :controller=> 'projects',    :action => 'index' %> |
+<!--    <%= link_to "Forum",          :controller=> 'forum',       :action => 'forums' %> | -->
+    <%= link_to "Contest",        :controller=> 'contest',     :action => 'show' %> 
+</div>
+
+      <div id="sf-logo">
+        <%= link_to image_tag('new_logo.jpg', :size => '202x40', :alt => 'SmartFlix'), :controller => 'store' %>
+      </div>
+
+
+      <div id="tab-wrap">
+        <div id="tabs">
+          <%= generate_tabs() %>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="bluebar">
+      <div id="white-graf">
+         <p>
+           Over <%= Product.count().commify %> how-to DVDs
+           &nbsp; &nbsp; &nbsp; &nbsp; ...and <%= Rating.count(:conditions =>"approved = 1").commify %> customer reviews!
+         </p>
+      </div>
+      <div id="searchbox">
+
+        <%= form_tag :controller => 'store', :action => 'search' do %>
+          <div id="search-title">Search SmartFlix:</div>
+          <div id="search-field">
+            <%= text_field_tag :q, nil, :size => 30, :maxlength => 30, :class => 'search-field' %>
+          </div>
+          <div id="search-go">
+            <%= image_submit_tag 'new_go_button.jpg' %>
+          </div>
+        <% end -%>
+
+      </div>
+    </div>
+
+    <div id="links">
+
+      <div id="breadcrumb-nav">
+        <%# Every page gets the breadcrumbs; if not specified, get the default one for this controller and action -%>
+        <% @crumbtrail ||= Breadcrumb.for_action(params[:controller_name], params[:action_name]) -%>
+
+        <%= @crumbtrail.collect { |crumb| 
+            if crumb.options.empty?
+               h(crumb.name)
+            elsif crumb.options.keys == [:url]  
+               link_to h(crumb.name), crumb.options[:url]
+            else
+               link_to h(crumb.name), crumb.options
+            end
+          }.join(' &#187; ').html_safe %>
+      </div>
+
+      <div id="account-nav">
+
+        <%# Every page gets a link to account info, help, logout, and cart -%>
+        <p>
+        <% if @customer.andand.admin? %>
+           <span class="ud_block"><%= link_to "admin", :controller=> :admin %></span> |
+        <% end %>
+
+
+        <%= your_account_link %> |
+        <%= link_to 'Help', :controller => 'help' %> |
+        <%# Only display logout link if user is actually logged in (even if just a long term session)-%>
+        <%# XXXFIX P2: Eventually, want to change link to 'Hi foo, if you're not foo click here' ala Amazon -%>
+        <% if show_logout -%>
+          <%= link_to 'Logout', :controller => 'customer', :action => 'logout' %> |
+        <% end -%>
+        <%= link_to image_tag('shopping_cart.jpg', :class => 'shopping-cart'), :controller => 'cart' %>
+        </p>
+
+      </div>
+
+    </div>

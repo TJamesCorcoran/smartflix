@@ -1,0 +1,68 @@
+<%= render 'header' %>
+
+<p>
+Dear <%= h(@name) %>,
+</p>
+
+<p>
+Welcome to <%= @university %>, powered by SmartFlix.com!
+</p>
+
+<p>
+You can change the rate at which you get DVDs at this page:
+</p>
+
+<p>
+     <%= link_to("change plan", :host => WEB_SERVER, :only_path => false, :controller => :customer, :action => :change_plan) %>
+</p>
+
+<p>
+You can check the items in your queue - and make deletions  - at this page:
+</p>
+
+<p>
+     <%= link_to("university status", :host => WEB_SERVER, :only_path => false, :controller => :customer, :action => :university_status) %>
+</p>
+
+<p>
+You can also go anywhere on the website and add new videos to your
+university by clicking an "add to queue" button.  For example, to add
+Arc Welding to your university, go here and click the "add to queue"
+button.
+</p>
+
+<p>
+     <%= link_to("Arc Welding", :host => WEB_SERVER, :only_path => false, :controller => :store, :action => :video, :id => 11) %>
+</p>
+
+<p>
+If you ever have a question, a suggestion, or a comment, please contact
+us at <a href="mailto:info@smartflix.com">info@smartflix.com</a>
+</p>
+
+<p>
+We read every single customer email, and we look forward to making you
+as satisfied with our service as the thousands of others who've rented
+from us since 2002.
+</p>
+
+<p>
+Sincerely,
+</p>
+
+<p>
+Xxx , President
+</p>
+
+<%= @university %><br/>
+<%= @university_url %><br/>
+http://smartflix.com<br />
+
+<p>
+This email address was given to us by you or by one of our customers. If
+you did not signup for an account, or feel that you have received this
+email in error, please send an email to info@smartflix.com
+</p>
+
+
+<%= render 'footer' %>

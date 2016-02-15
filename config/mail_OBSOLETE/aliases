@@ -1,0 +1,18 @@
+# See man 5 aliases for format
+#
+# run 'newaliases' after changing this file
+#
+postmaster:    root
+
+# actual accounts:
+#    xyz
+#    info
+#    purchasing
+#    bookkeeper
+#    shipping
+
+authorize_net: xyz
+bounces:       /dev/null
+outgoing:      info
+susanc:	       purchasing
+julio:	       shipping

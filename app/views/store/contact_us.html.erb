@@ -1,0 +1,60 @@
+<div class="text-content">
+
+<h1>Contact Us</h1>
+
+<% if @mail_sent -%>
+
+<p>Your message has been successfully sent.</p>
+
+<p>If you use a spam-fighting tool on your mailbox, please make sure
+that you can receive emails from the address
+<%= SmartFlix::Application::SF_OBFUSCATED_CONTACT_EMAIL.html_safe %>
+</p>
+
+<p><b>We try to respond to all messages within two business
+days.</b></p>
+
+
+<p><b>If you do not hear from us within that period, it likely means
+that either (a) your spam-blocking tool discarded our reply, or (b) you
+provided an incorrect or incomplete email address.</b> 
+
+<% else -%>
+
+<p>
+Have a question that we didn't answer in the
+<%= link_to 'help section', :controller => 'help', :action => '' %>?
+</p>
+
+<p>Drop us a note!</p>
+
+<%# XXXFIX P2: change message, mentions 'saved' -%>
+<%= error_messages_for :message, :header_tag => :strong %>
+
+<%= form_for :message do |form| -%>
+
+        <p>
+        Full name:
+        <%= form.text_field :name %>
+        </p>
+
+        <p>
+        Email address:
+        <%= form.text_field :email %>
+        </p>
+
+        <p>
+        Message:
+        </p>
+
+        <p>
+        <%= form.text_area :message, :rows => 15, :cols => 80 %>
+        </p>
+
+              <%= Button.new( "send", { :class => :orange, :method => :submit}) %>
+
+<% end -%>
+
+<% end -%>
+
+</div>

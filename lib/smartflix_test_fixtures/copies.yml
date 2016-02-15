@@ -1,0 +1,459 @@
+#----------
+#  old XXX stuff
+#----------
+
+bob_shipped_line_item_1:
+  copy_id: 9003
+  status: 1
+bob_shipped_line_item_2:
+  copy_id: 9004
+  status: 1
+bob_returned_line_item:
+  copy_id: 9006
+  status: 1
+bob_note_late_line_item:
+  copy_id: 9007
+  status: 1
+
+
+
+#----------------------------------------------------------------------
+#   ??? test
+#----------------------------------------------------------------------
+
+copy1:
+  copy_id: 1
+  product_id: 1
+  birthDATE: 2006-05-05
+  deathDATE: <%= nil %>
+  mediaformat: 2
+  status: 1
+  inStock: 1
+  tmpReserve: 0
+  death_type_id: 0
+  visibleToShipperP: 1
+copy2:
+  copy_id: 2
+  product_id: 2
+  birthDATE: 2006-11-11
+  deathDATE: <%= nil %>
+  mediaformat: 2
+  status: 1
+  inStock: 1
+  tmpReserve: 0
+  death_type_id: 0
+  visibleToShipperP: 1
+
+#----------------------------------------------------------------------
+#   copy test
+#----------------------------------------------------------------------
+
+novol_copy:
+  copy_id: 1000
+  product_id: 1000
+  birthDATE: 2006-11-11
+  deathDATE: <%= nil %>
+  mediaformat: 2
+  status: 1
+  inStock: 1
+  tmpReserve: 0
+  death_type_id: 0
+  visibleToShipperP: 1
+
+lastvol_positive_copy:
+  copy_id: 1001
+  product_id: 1001
+  birthDATE: 2006-11-11
+  deathDATE: <%= nil %>
+  mediaformat: 2
+  status: 1
+  inStock: 1
+  tmpReserve: 0
+  death_type_id: 0
+  visibleToShipperP: 1
+
+noinvord_copy:
+  copy_id: 1002
+  product_id: 1002
+  birthDATE: 2006-11-11
+  deathDATE: <%= nil %>
+  mediaformat: 2
+  status: 1
+  inStock: 1
+  tmpReserve: 0
+  death_type_id: 0
+  visibleToShipperP: 1
+
+lis_exist_copy:
+  copy_id: 1003
+  product_id: 1003
+  birthDATE: 2006-11-11
+  deathDATE: <%= nil %>
+  mediaformat: 2
+  status: 1
+  inStock: 1
+  tmpReserve: 0
+  death_type_id: 0
+  visibleToShipperP: 1
+
+success_copy:
+  copy_id: 1004
+  product_id: 1004
+
+#----------
+
+nobox:
+  copy_id: 1010
+  product_id: 1010
+
+box:
+  copy_id: 1011
+  product_id: 1011
+
+hostile:
+  copy_id: 1012
+  product_id: 1012
+
+handout:
+  copy_id: 1013
+  product_id: 1013
+
+#----------
+
+return_to_stock_already_instock:
+  copy_id: 1050
+  status: 1
+  inStock: 1
+
+return_to_stock_outstock:
+  copy_id: 1051
+  status: 1
+  inStock: 0
+
+return_to_stock_damaged:
+  copy_id: 1052
+  status: 1
+  death_type_id: 1
+  inStock: 0
+
+return_to_stock_autorepair:
+  copy_id: 1053
+  status: 1
+  death_type_id: 5
+  inStock: 0
+
+
+#----------------------------------------------------------------------
+#   title test
+#----------------------------------------------------------------------
+
+overdue_copy:
+  copy_id: 3000
+  product_id: 3000
+
+#----------------------------------------------------------------------
+#   smartflix_adwords_test
+#----------------------------------------------------------------------
+
+# NOTE: no copies of title dogstar!!
+
+
+catstar_copy1:
+    copy_id:  4010
+    product_id: 4010
+    status:  1
+    inStock: 1
+
+frogstar_copy1:
+    copy_id:  4020
+    product_id: 4020
+    status:  0
+    inStock: 1
+
+toadstar_copy1:
+    copy_id:  4030
+    product_id: 4030
+    status:  1
+    inStock: 0
+
+fishstar_copy1:
+    copy_id:  4040
+    product_id: 4040
+    status:  1
+    inStock: 1
+
+squidstar1_copy1:
+    copy_id:  4050
+    product_id: 4050
+    status:  1
+    inStock: 1
+
+#----------------------------------------------------------------------
+#   LineItemTest
+#----------------------------------------------------------------------
+
+warn_no_lateMsg_already_sent:
+    copy_id:     5000
+    status:     1
+
+warn_no_is_back:
+    copy_id:     5001
+    status:     1
+
+warn_no_is_badcopy:
+    copy_id:     5002
+    status:     0
+
+# no shipment!
+#
+#warn_no_no_shipment:
+#	lineItemID: 5003
+#    copy_id: 	5003
+#    status:     
+
+warn_no_back_already:
+    copy_id:     5004
+    status:     0
+
+warn_yes:
+    copy_id:     5005
+    status:     1
+
+warn_no_univ:
+    copy_id:     5006
+    status:     1
+
+#----------
+
+charge_yes_first:
+    copy_id:     5010
+    product_id:    5010
+    status:     1
+
+charge_yes_older_charge:
+    copy_id:     5011
+    product_id: 5011
+    status:     1
+
+# charge_yes_older_charge_thecharge:
+#
+# same as above
+
+charge_no_just_charged:
+    copy_id:     5013
+    status:     1
+
+# charge_no_just_charged_thecharge:
+#
+# same as  above
+
+
+charge_expired_cc:
+    copy_id:     5020
+    product_id:    5020
+    status:     1
+    inStock:    0
+
+#----------------------------------------------------------------------
+#   ShippingTets
+#----------------------------------------------------------------------
+
+noprecond:
+  copy_id:  6010
+  product_id: 6010
+  instock: 1
+  status:  1
+
+setA_withpreconds_item1:
+  copy_id:  6020
+  product_id: 6020
+  instock: 1
+  status:  1
+
+setA_withpreconds_item2:
+  copy_id:  6021
+  product_id: 6021
+  instock: 1
+  status:  1
+
+setA_withpreconds_item3:
+  copy_id:  6022
+  product_id: 6022
+  instock: 1
+  status:  1
+
+setA_withpreconds_item4:
+  copy_id:  6023
+  product_id: 6023
+  instock: 1
+  status:  1
+
+setB_withpreconds_item1:
+  copy_id:  6030
+  product_id: 6030
+  instock: 0
+  status:  1
+
+setB_withpreconds_item2:
+  copy_id:  6031
+  product_id: 6031
+  instock: 1
+  status:  1
+
+setC_nopreconds_item1:
+  copy_id:  6040
+  product_id: 6040
+  instock: 1
+  status:  1
+
+setC_nopreconds_item2:
+  copy_id:  6041
+  product_id: 6041
+  instock: 1
+  status:  1
+
+setC_nopreconds_item3:
+  copy_id:  6042
+  product_id: 6042
+  instock: 0
+  status:  1
+
+setC_nopreconds_item4:
+  copy_id:  6043
+  product_id: 6043
+  instock: 1
+  status:  0
+
+cancelled_item:
+  copy_id:  6050
+  product_id: 6050
+  instock: 1
+  status:  1
+
+other_customer_dibs:
+  copy_id:  6051
+  product_id: 6051
+  instock: 1
+  status:  1
+
+#----------
+
+breakup_00:
+  copy_id:  6100
+  product_id: 6100
+
+breakup_01:
+  copy_id:  6101
+  product_id: 6101
+
+breakup_02:
+  copy_id:  6102
+  product_id: 6102
+
+breakup_03:
+  copy_id:  6103
+  product_id: 6103
+
+breakup_04:
+  copy_id:  6104
+  product_id: 6104
+
+breakup_05:
+  copy_id:  6105
+  product_id: 6105
+
+breakup_06:
+  copy_id:  6106
+  product_id: 6106
+
+breakup_07:
+  copy_id:  6107
+  product_id: 6107
+
+breakup_08:
+  copy_id:  6108
+  product_id: 6108
+
+breakup_09:
+  copy_id:  6109
+  product_id: 6109
+
+breakup_010:
+  copy_id:  6110
+  product_id: 6110
+
+breakup_011:
+  copy_id:  6111
+  product_id: 6111
+
+breakup_012:
+  copy_id:  6112
+  product_id: 6112
+
+breakup_013:
+  copy_id:  6113
+  product_id: 6113
+
+breakup_014:
+  copy_id:  6114
+  product_id: 6114
+
+breakup_015:
+  copy_id:  6115
+  product_id: 6115
+
+breakup_016:
+  copy_id:  6116
+  product_id: 6116
+
+breakup_017:
+  copy_id:  6117
+  product_id: 6117
+
+breakup_018:
+  copy_id:  6118
+  product_id: 6118
+
+breakup_019:
+  copy_id:  6119
+  product_id: 6119
+
+breakup_020:
+  copy_id:  6120
+  product_id: 6120
+
+#----------
+# pruning
+#
+# the items in this order are unshipped;
+# in shipping_test.rb we try to ship them all
+# and prune
+
+prune_none_recent_l0:
+   product_id: 7200
+   copy_id: 7200
+
+prune_none_recent_l1:
+   product_id: 7201
+   copy_id: 7201
+
+prune_none_recent_l2:
+   product_id: 7202
+   copy_id: 7202
+
+prune_none_recent_l3:
+   product_id: 7203
+   copy_id: 7203
+
+prune_none_recent_l4:
+   product_id: 7204
+   copy_id: 7204
+
+prune_none_recent_l5:
+   product_id: 7205
+   copy_id: 7205
+
+prune_throttled:
+   copy_id: 7300
+   product_id: 7300
+

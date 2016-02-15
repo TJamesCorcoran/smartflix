@@ -1,0 +1,7 @@
+<div class="box">
+  <%= form_for :promotion_page, @promotion_page do |f| %>
+    <%= f.text_area :content, {:cols => '80'} %>
+    <%= hidden_field_tag 'promotion_id', @promotion_id %>
+    <%= submit_tag %>
+  <% end %>
+</div>

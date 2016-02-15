@@ -1,0 +1,24 @@
+<% if false -%>
+  <h2>Share this with your friends </h2>
+
+  <% url = @product.short_url('tw2') 
+     noun = @product.is_a?(Video) ? "DVD" : ""
+     url = "http://twitter.com/home?status=Check out #{noun} %s @ smartflix #{url}" 
+     free_chars = 140 - url.size + 2
+     url = url % [@product.short_name(free_chars)]
+
+     alt = title = "Spread the word - Tweet about #{ @product.is_a?(Video) ? 'this video' : @product.name } !"
+  %>
+
+  <div >
+    <div style="float:left;">
+        <%= link_to  image_tag('tweet_this.png', { :alt => alt, :title => title} ), 
+                     url, { :target=>"smartflix_tweet" }%>
+    </div>
+    <div style="padding-top:30px;">
+       <%= link_to  title, url, { :target=>"smartflix_tweet" } %>
+    </div>
+    <br class="clear">
+  </div>
+
+<% end %>

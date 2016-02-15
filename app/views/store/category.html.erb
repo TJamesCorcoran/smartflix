@@ -1,0 +1,37 @@
+<% if (@category.children.size > 0) -%>
+
+  <%= 
+    # ab_test(:show_discount_banner_category) - yes, show it. Win!
+    render :partial => 'shared/discount_banner'
+   %>
+
+
+  <div class="subcategories">
+    <h2><%= @category.name %> Subcategories</h2>
+    <% @category.children.divide(4).each do |cats| -%>
+      <ul>
+        <% cats.each do |cat| -%>
+          <li><%= link_to_category cat %></li>
+        <% end -%>
+      </ul>
+    <% end -%>
+  </div>
+
+  <div class="category-listing-section">
+        <div id="subcat-title">
+          <h1>"Featured videos from <%= @category.name.downcase %> subcategories"</h1>
+        </div>
+        <%= render :partial => 'product_listing', :locals => { :products => @products } %>
+  </div>
+
+<% else -%>
+
+  <%= render :partial => 'sortable_listing', :locals => { :products => @category.listable_products(@sort_option),
+                                                          :bundles => @category.product_bundles,
+                                                          :title => "#{@category.name} how-to videos on DVD" } %>
+<% end -%>
+
+
+<%= render :partial => 'find_help' %>
+
+<%= affiliate_link @category %>

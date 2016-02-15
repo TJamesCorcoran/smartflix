@@ -1,0 +1,19 @@
+<h1>account credit</h1>
+
+<div class="customer-admin">
+    <p>
+    Current credit: <%= number_to_currency(@customer.credit) %><br>
+    Current credit months: <%= @customer.credit_months %>
+    </p>
+
+    <%= form_tag admin_customer_credit_account_url(:customer_id => @customer.id) do %>
+      <p>
+      Credit account:
+      <%= text_field_tag :amount -%> dollars and/or
+      <%= text_field_tag :months -%> months
+      <%= hidden_field_tag :customer_id, @customer.id -%>
+      <%= Button.new( "apply", { :class => :orange, :method => :submit }) %>
+      </p>
+    <% end %>
+  </div>
+

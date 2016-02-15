@@ -1,0 +1,26 @@
+<h1>Editing vendor order log</h1>
+
+<%= error_messages_for :vendor_order_log %>
+
+<%= form_for(:vendor_order_log, :url => { :action => :update, :id =>@vendor_order_log}, :html => { :method => :put }) do |f| %>
+<table border=0>
+<tr><th align=left>Product: </th><td> <%= @vendor_order_log.product.name %></td></tr>
+<tr><th align=left>Order Date: </th><td> <%= @vendor_order_log.orderDate %></td></tr>
+<tr><th align=left>Old Order size:</th><td> <%= @vendor_order_log.quant %></td></tr>
+<tr><th align=left>Old Purchase:</th><td> <%= @vendor_order_log.purchaser.name_first + " " + @vendor_order_log.purchaser.name_last %></td></tr>
+
+
+<tr><th align=left>New Purchaser:</th><td> 
+	<%= fields_for ( "purchaser") do |purch| -%>
+    	     <li><%= purch.select ( :purchaser, @purchasers)  %> 
+    <% end %>
+</td></tr>
+<tr><th align=left>New order size:</th><td> 	<%= text_field 'vendor_order_log', 'quant'  %></td></tr>
+</table>
+
+    <%= submit_tag "Update" %>
+
+
+<% end %>
+
+<%= link_to 'Back to product', :controller=>"products", :action=> @vendor_order_log.product_id %> 

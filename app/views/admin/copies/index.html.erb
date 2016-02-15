@@ -1,0 +1,65 @@
+<h1>List copies / <%= link_to "Copy Consistency Problems", :action => :consistency %></h1>
+
+<table border=0 width=100%>
+	<tr>
+		<td width=50%>
+           <%= render(:partial => "admin/copies/search_by_copyid") %>
+		</td>
+		<td>
+		   <%= button_to("make copies visible to shippers", :action=>"make_copies_visible")  %> 
+		</td>
+	</tr>
+</table>
+<hr>
+<b>status:</b> 
+<%= link_to 'all' %> | 
+<s>live</s> | 
+<% @death_types.each do |deathtype| %>
+<%= link_to deathtype.name, :deathType => deathtype.id %> | 
+<% end %>
+<hr>
+<table>
+
+<tr>
+<th></th>
+<% for column in Copy.columns.reject { |c| c.name == "description" } %>
+<th>
+<%=
+            if (column.name == "title_id") 
+			    "title"
+            elsif (column.name == "copy_id") 
+			    "copy"
+            else
+				column.name
+			end
+%>
+</th>
+<% end %>
+</tr>
+  
+<% for copy in @copys %>
+  <tr>
+    <td><%= link_to 'Edit', :action => :edit, :id => copy %></td>
+<!--    <td><%= link_to 'Destroy', :action => :show, :id => copy, :confirm => 'Are you sure?', :method => :delete %></td>
+-->
+
+<% for column in Copy.columns.reject { |c| c.name == "description" } %>
+<td>
+<%=
+
+            if (column.name == "title_id") 
+			    link_to copy.title.name, :controller=>"titles", :id =>copy.title.title_id, :action=>"show"
+            elsif (column.name == "copy_id") 
+			    link_to copy.sticker_id, :action => :show, :id => copy
+            else
+				copy.send(column.name) 
+			end
+%>
+</td>
+<% end %>
+</tr>
+<% end %>
+</table>
+
+<br />
+<hr>

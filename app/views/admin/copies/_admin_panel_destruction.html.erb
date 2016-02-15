@@ -1,0 +1,8 @@
+<% if @employee.andand.authority_destroy_copy  %>
+    <div style="background-color:#f44; width:500px; margin: 10px; padding:20px; border: solid #000000;">
+		<p>
+		Remove all evidence of the copy from the db.  This is *not* the same as marking a copy as defective - it alters history to show that the copy never existed.  Do you really want to do this !?!?!?  <p>If you're not 100% sure, the answer is "no" !
+		<%= button_to "destroy copy", :action=>"destroy_copy", :id => @copy.id, :who=>session[:employee_number]  %>
+		</p>
+	</div>
+<% end %>

@@ -1,0 +1,48 @@
+Hey, it's Xxx - founder of SmartFlix - here.
+
+Interested in <%= @univ.name_verb.downcase %>?
+
+Do you know about  <%= @univ.name.downcase %> at SmartFlix?
+
+<p><%= @univ.name %> is a rental program of DVDs from the most
+talented artists and craftsmen in the field.  Keep the DVDs as long as
+you want, with no late charges!  When you're ready for more, mail them
+DVDs back, and we'll send you more.</p>
+
+<p> With exciting, informative, well shot videos from names like <%=
+@univ.top_authors.map(&:name).to_sentence %> that you can keep as long
+as you want and the ability to cancel at any time, this is a bargain
+that you can't afford to miss!</p>
+
+Go here to sign up for a risk-free trial of DVDs:
+
+<%=  univstore_one_url(:host => WEB_SERVER, :univ_id => @univ.id, :abtvid => @abtvid, :token => @token) %>
+
+You can cancel at any time.
+
+Whether you stick around for two years, or just two weeks, the first
+month is 100% free.  A full month of how-to DVDs for free.
+
+How-to DVDs are pricey to buy - most of them cost a lot more than the
+DVDs you might buy at Target or Costco.  I love picking up "Iron Man"
+or some other action movie for $11 as much as you do, but the average
+price of a how-to DVD is over $40 - with many titles selling for $80
+or more.
+
+<%= @univ.name %> has tons of great DVDs - favorites picked from our
+collection by the ratings of our customers.
+
+<% univ.products.sort_by{rand}[0,5].each do |product| %>
+          <h2><%= product.name %></h2>
+          <h3>...with <%= product.author.name %></h3>
+          <p><%= product.description %></p>
+          <% if product.minutes && product.minutes > 10 %>
+              <p>(about <%= product.minutes %> minutes)</p>
+          <% end %>
+<% end %>
+
+
+Try <%= @univ.name %> today and learn the skills you want to have,
+entirely risk free, and with the first month free.
+
+<%=  univstore_one_url(:host => WEB_SERVER, :univ_id => @univ.id, :abtvid => @abtvid, :token => @token) %>

@@ -1,0 +1,29 @@
+<table border=0>
+<tr>
+  <td><h1>DNU </h1></td>
+  <td>...for <%= @products.size %> products </td>
+</tr>
+</table>
+
+<table class="sortable" id="dnu">
+	<tr>
+	<th>vendor</th>
+	<th>title</th>
+	<th>custs waiting</th>
+	<th>univ</th>
+    </tr>
+
+    <% @products.sort_by { |title| title.vendor.name }.each do |title| %>
+        <tr>
+          <td><%= title.vendor.name %></td>
+          <td><%= link_to  title.name, :controller => :products, :action => :show, :id => title.id %></td>
+          <td><%= title.unshipped_lis.size %></td>
+
+               <% title.associated_universities.each do |univ| %>
+          <td>
+                  <%= link_to  univ.name, :controller => :universities, :action => :show, :id => univ.id %>
+           </td>
+               <% end %>
+        </tr>
+    <% end %>
+</table>

@@ -1,0 +1,27 @@
+
+    <%= render :partial => 'customer_nav' %>
+
+<% if @univ_orders.empty? %>
+   <p>
+   You're not currently subscribed to any SmartFlix Universities. 
+   </p>
+
+   <p>
+   Why not begin learning a new skill <strong>and saving money</strong> with a
+   <%= link_to "Smartflix University", :controller => :store, :action => :universities %>
+   right now?  Get a free trial, with no obligation!
+   </p>
+<% else %>
+   <p>
+   Which university subscription do you want to look at?
+   </p>
+   <ul>
+   <% @univ_orders.each do |order| %>
+     <li>
+         <%= link_to order.university.name, :action => :university_status, :id => order.id %>
+     </li>
+   <% end %>
+   </ul>
+<% end %>
+
+

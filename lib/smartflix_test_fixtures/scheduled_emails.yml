@@ -1,0 +1,18 @@
+one:
+  scheduled_email_id: 1
+  customer_id: 1
+  product_id: 1
+  email_type: 'recommendation'
+  created_at: <%= 18.days.ago.to_s(:db) %>
+two:
+  scheduled_email_id: 2  
+  customer_id: 1
+  product_id: 1
+  email_type: 'new'
+  created_at: <%= 18.days.ago.to_s(:db) %>
+three:
+  scheduled_email_id: 3  
+  customer_id: 1
+  product_id: 1
+  email_type: 'recommendation'
+  created_at: <%= 16.days.ago.to_s(:db) %>

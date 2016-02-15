@@ -1,0 +1,60 @@
+
+<%= h(@object.full_name) %>, :
+
+Here in the SmartFlix office, we've been wearing our cool company
+T-shirts for a few months (we've been removing them to wash them, of
+course!).  Employees have been sneaking into the stock room to grab
+extras for their spouses, parents, and friends, and we've had a lot of
+people around town ask us how they can get a shirt of their own.
+
+We've decided that we shouldn't keep shirts that look this good to
+ourselves, so we've decided to give them away.
+
+Here's how it works:
+
+* we've created a personalized link to SmartFlix just for you:
+
+	http://smartflix.com&ct=cf<%= @object.id %>
+
+* forward this URL to friends via email, or cut-and-paste it into your blog
+
+* if two or more people come to SmartFlix via your personalized link
+  and become customers, we'll ask you your t-shirt size, and mail you
+  a brand-spanking-new T-shirt.
+
+The T-shirts are Anvil-brand, Super Heavyweight (6.1 ounce) 100% cotton.
+
+They come in any color you want (as long as it's black), and have the
+SmartFlix light-bulb on the front, and the full logo on back.
+
+These shirts look great on men and women, young and old, painters,
+welders, hotrodders and glass-blowers.  They're perfect for every
+occasion from doing errands around town to working in your shop or
+studio (but note: they do not magically repel oil paint, hot glass,
+or welding spatter, so exercise normal caution!).
+
+So, in summary: Send your personalized SmartFlix link to your friends,
+convince them to check out our service, and get a super-slick t-shirt.
+
+Here's the link one more time:
+
+	http://smartflix.com&ct=cf<%= @object.id %>
+
+We're looking forward to handing out a bunch of shirts!
+
+
+
+The fine print:
+* void where prohibited by law
+* maximum one shirt to a customer
+
+---
+Your friends at SmartFlix.com
+
+
+We hope you enjoyed receiving this message. However, if you'd rather not
+receive future e-mails like this one, please visit our email preferences
+page:
+
+<% preferences_page = @object.email_preferences_url -%>
+<%= preferences_page %>

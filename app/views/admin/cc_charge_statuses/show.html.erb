@@ -1,0 +1,6 @@
+<h1>One <%= @item.class.to_s %></h1>
+<%= link_to "back to index", :action => :index %>
+
+
+<%= render(:partial => 'admin/shared/show_basicdata', :locals => { :item => @item })  %>
+<%= render(:partial => 'admin/shared/show_relations', :locals => { :item => @item, :reject => [] })  %>

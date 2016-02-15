@@ -1,0 +1,14 @@
+<% unless @your_votes && @your_votes.any? %>
+  <div class="contest-sidebar">
+    <div class="header">
+      YOUR VOTES
+    </div>
+    <p>Here are your votes:</p>
+    <% 3.times do |i| %>
+      <div id="entry-vote-<%= i + 1 %>" class="photo"></div>
+      <div id="entry-vote-<%= i + 1 %>" class="caption"><p></p></div>
+      <div id="entry-vote-<%= i + 1 %>" class="cancel-vote"><p></p></div>
+    <% end %>
+    <div id="entry-vote-submit" class="submit-vote"><p><strong>Choose 3 entries</strong></p></div>  
+  </div>
+<% end %>

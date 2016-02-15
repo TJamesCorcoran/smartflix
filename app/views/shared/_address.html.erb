@@ -1,0 +1,26 @@
+<%# Parameter: address is an Address -%>
+<%# Parameter: link_to_edit is a boolean that is true if the edit link should be shown -%>
+<% if address -%>
+  <h2><%= address.display_type %></h2>
+  <p>
+  <%= h(address.first_name) %>
+  <%= h(address.last_name) %>
+  <br>
+  <%= h(address.address_1) %>
+  <br>
+  <% if address.address_2.length > 0 -%>
+  <%=  h(address.address_2) %>
+  <br>
+  <% end -%>
+  <%= h(address.city) %>,
+  <%= h(address.state_code) %>
+  <%= h(address.postcode) %>
+  <br>
+  <%= h(address.country_name) %>
+  </p>
+  <% if (defined?(link_to_edit) && link_to_edit) -%>
+    <p>
+    <%= Button.new("edit", :class => :orange, :url => url_for( :controller => 'customer', :action => 'address', :id => address)) %>
+    </p>
+  <% end -%>
+<% end -%>

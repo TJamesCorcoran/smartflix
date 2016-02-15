@@ -1,0 +1,17 @@
+<div id="subcat-container">
+  <div id="subcat-container-header">
+    <h2>Please help us improve our service
+  </div>
+  <div id="subcat-wrapper">
+    <div class="survey">
+      <% form_tag :controller => 'survey', :action => 'answer' do %>
+        <% survey.survey_questions.each do |question| %>
+          <h5><%= question.question %></h5>
+          <p><%= question.answer_html %></p>
+          <p><%= Button.new( "send", {:class => :orange, :method => :submit}) %></p>
+        <% end %>
+        <%= hidden_field_tag :order_id, order_id %>
+      <% end %>
+    </div>
+  </div>
+</div>

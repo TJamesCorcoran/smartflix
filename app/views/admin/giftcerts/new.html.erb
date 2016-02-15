@@ -1,0 +1,19 @@
+<%= link_to "back to index", :action => :index %>
+
+<h1>Create GiftCert</h1>
+
+<% if @item %>
+  <p>New <%= @item.name %> successfully created!</p>
+  Code: <%= @item.code %><br>
+  Amount: <%= number_to_currency(@item.amount) %><br>
+  <p>&nbsp;</p>
+<% end %>
+
+<%= error_messages_for :gift_certificate, :header_tag => :strong %>
+
+<%= form_for @gift_certificate, :url => new_admin_giftcert_url do |form| -%>
+  <% selections = GiftCert.find(:all).map { |gc| [gc.name, gc.product_id] } %>
+  Amount: <%= form.select :id, selections %>
+  <%= submit_tag 'Create' %>
+<% end -%>
+

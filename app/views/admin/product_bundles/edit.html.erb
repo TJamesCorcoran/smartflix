@@ -1,0 +1,15 @@
+<h1>Editing product_bundle</h1>
+
+<%= error_messages_for :product_bundle %>
+
+<%= form_for(:product_bundle, :url => { :action => :create, }, :html => { :method => :put }) do |f| %>
+
+  <%= render :partial => 'form', :object => f %>
+  
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', :action => :show, :id => @product_bundle %> |
+<%= link_to 'Back',  :action => :index %>

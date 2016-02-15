@@ -1,0 +1,27 @@
+
+<%    products[0,30].each do |product|         %>
+
+    <div class="univ_element" id="video-<%= product.id %>-inner">
+
+        <div class="screencap"><%= large_image_for(product) %></div>
+        <div class="title-col">
+          <h2><%= product.name %></h2>
+          <h3>...with <%= product.author.name %></h3>
+          <p><%= product.description.html_safe %></p>
+          <% if product.minutes && product.minutes > 10 %>
+              <p>(about <%= product.minutes %> minutes)</p>
+          <% end %>
+        </div>
+
+        <div class="clear_left"></div>
+
+    </div>
+
+
+
+<% end %>
+
+       ... and dozens more!
+
+
+<div class="clear"></div>

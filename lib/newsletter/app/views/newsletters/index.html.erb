@@ -1,0 +1,20 @@
+<%= NewsletterEditor.templates['Header'].process(nil, 
+                                                 nil, 
+                                                 { :id => nil, 
+                                                   :headline => "Newsletter Archives", 
+                                                   :index_link => @index_link
+                                                 }
+                                                    ) %>
+
+<table border=0>
+    <% Newsletter.find(:all, :conditions => "total_recipients > 5", :order => "created_at desc").each do |nl| %>
+       <tr>
+    <td><%= link_to( "##{nl.id}", :action => 'show', :id => nl.id) %></td>
+    <td style="width:110px;"><%= link_to( "#{nl.updated_at.strftime("%d %b %Y")}", :action => 'show', :id => nl.id) %></td>
+    <td><%= link_to( "#{nl.headline}", :action => 'show', :id => nl.id) %></td>
+
+       </tr>
+    <% end %>
+</table>
+
+<%= NewsletterEditor.templates['Footer'].process(nil,nil) %>

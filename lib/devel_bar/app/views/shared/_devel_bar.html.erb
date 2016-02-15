@@ -1,0 +1,66 @@
+<% if Rails.env.development? -%>
+    <div id="devel_bar">
+
+        <div id="close_devel_bar" style="float:right;">X</div>
+
+        <% timestamp_age = (Time.now.to_i - session[:timestamp].to_i) 
+           session_cookie = request.session_options[:id]
+           unless session[:session_sql_id]
+              session[:session_sql_id] = ActiveRecord::Base::connection.select_all("select id from  sessions where session_id = '#{session_cookie}'").andand.last.andand["id"]
+           end
+           session_sql_id = session[:session_sql_id]
+         %>
+
+        <%= "sess = #{session_sql_id} // #{session_cookie} ; cust = #{session[:customer_id].inspect} / #{h @customer.andand.email}; ts: #{timestamp_age} > #{   	 	 (Rails.application.class)::SESSION_TIMEOUT} ?  #{(timestamp_age >=    	 	 (Rails.application.class)::SESSION_TIMEOUT) ? "t/o" : "good" }" -%>
+        <%= link_to "destroy session",  admin_devel_bar_flush_cookie_url(:all => true) -%>
+        [ <span id="toggle_ab" style="color:#225D85;text-decoration: underline; ">show A/B test</span> ]
+        [ <span id="toggle_origins" style="color:#225D85;text-decoration: underline; ">show origins</span> ]
+        [ <span id="toggle_session" style="color:#225D85;text-decoration: underline; ">show session</span> ]
+
+        <br>
+        CT = <%= session[:ct] %> //  <%= session[:ct_timestamp] %><br>
+        showed_email_capture = <%= session[:showed_email_capture] ? "true" : "false" %><br>
+        interrupted_quickbuy_product = <%= session[:interrupted_quickbuy_product].andand.name %>
+
+        <%= render :partial => "shared/devel_bar_ab" %>
+        <%= render :partial => "shared/devel_bar_origins", :locals => { :session_sql_id => session_sql_id } %>
+        <%= render :partial => "shared/devel_bar_session" %>
+
+
+    </div>  
+<% end -%>
+
+<script>
+
+    $(document).ready( function () {
+  //        hi_pushdown_content("#devel_bar");
+       }
+    );
+
+      $('#toggle_ab').click(function() {
+      $('#ab_test_view').toggle('slow', function() {
+        // Animation complete.
+      });
+    });
+
+      $('#toggle_session').click(function() {
+      $('#session_view').toggle('slow', function() {
+        // Animation complete.
+      });
+    });
+
+      $('#toggle_origins').click(function() {
+      $('#origins_view').toggle('slow', function() {
+        // Animation complete.
+      });
+    });
+
+    $('#close_devel_bar').click(function(a) {
+       hi_pushup_content("#devel_bar");
+       $("#devel_bar").toggle();
+       return false;
+    });
+
+
+</script>
+

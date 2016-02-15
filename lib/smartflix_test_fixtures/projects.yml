@@ -1,0 +1,6 @@
+project1:
+  id: 1
+  customer_id: 1
+  title: "my project #1"
+  status: 1
+  inspired_by_id: nil

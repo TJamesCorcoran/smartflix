@@ -1,0 +1,50 @@
+    <p>
+    The charge in question was to replace DVDs that <%= @disputed_order.customer.full_name %> rented and did not return.
+    </p>
+
+
+    <p>
+    The customer agreed in advance that he/she would pay for the
+    replacement of any unreturned DVDs.  The agreement details will be
+    presented further down.
+    </p>
+
+
+    <p>
+    <h2>A timeline of events:</h2>
+    </p>
+
+    <ul>
+    <% @order_to_items.keys.each do |unreturned_order| %>
+       <li> On <%= unreturned_order.orderDate %> the customer clicked a checkbox stating that "I have read and agreed to the terms and conditions." and rented
+           <ul>
+               <% @order_to_items[unreturned_order].each do |line_item | %>
+
+                  <li style="list-style: disc outside;" > '<%= line_item.product.name %>' (this DVD has a purchase price of <%= line_item.product.purchase_price.to_f.currency %>)
+               <% end %>
+           </ul>
+
+       <li> 
+       <% @order_to_items[unreturned_order].each do |line_item | %>
+         <li> On <%= line_item.shipment.dateOut %> we shipped '<%= line_item.product.name %>' (with a serial number sticker <%= line_item.copy.sticker_id %>) to the customer
+         <li> On <%= line_item.lateMsg1Sent %> we emailed the customer and noted that the DVD was late, and asked for its return.  The DVD was not returned, nor did we get a response to our email.
+         <li> On <%= line_item.lateMsg2Sent %> we emailed the customer a second time and again asked for its return.  The DVD was not returned, nor did we get a response to our email.
+       <% end %>
+    <% end %>
+
+  <li> On <%= (@disputed_order.orderDate - 4)  %> (approximately) because the DVD(s) were unreturned and we had other customers waiting for them, we purchased replacement copies.
+
+  <li> On <%= @disputed_order.orderDate %>, <b>because we never once heard from the customer in response to any of our emails, we charged the customer - as per his/her earlier agreement - a total of <%= @disputed_order.total_price.currency %></b>.  Note that the charge is a bit higher than the list price of the DVD(s) in question, because - as per the customer agreement - we charge
+  the taxes and shipping we pay plus a $10 fee to cover the cost of restocking.
+  </ul>
+
+  We did not want to charge the customer for the DVD(s) - we asked for them back multiple times.  If the customer had responded to any of our emails, we could have taken care of matters earlier, without a charge.
+
+  It is only because the customer did not return the DVD(s), and ignored all of our emails, that we were forced to purchase replacement copies and exercise the clause of the terms and conditions that the customer agreed to.
+
+  <h2>The terms and conditions that the customer agreed to</h2> can be found at
+  http://smartflix.com/store/conditions and read, in part:
+
+  <blockquote>
+     <%= render :partial => "shared/conditions_for_chargeback_response" %>
+  </blockquote>

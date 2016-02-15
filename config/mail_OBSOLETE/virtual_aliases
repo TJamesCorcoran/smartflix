@@ -1,0 +1,5 @@
+# After any edits run
+#   postmap /etc/postfix/virtual_mailboxes /etc/postfix/virtual_aliases 
+#
+
+xyz_other	xyz	

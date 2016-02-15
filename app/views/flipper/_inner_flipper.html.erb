@@ -1,0 +1,35 @@
+<div class="inner_flipper <%= "state-#{state}" %>" id="flipper<%= id %>" style="<%= Promotion.find(id).css %>">
+  <% promo = Promotion.find( id ) %>
+  <% if promo.ab_test_name.blank? || ab_test(promo.ab_test_name) == promo.ab_test_alternative.to_sym %>
+    <% page = PromotionPage.find( state ) if state.is_a?(Integer) %>
+    <%= content %>
+    <% if state == 'minimized' %>
+      <% unless promo.maximize_button.blank? %>
+        <a href="/flipper/minimize/<%= id %>" class="minimize" onclick="remote('/flipper/minimize/<%= id %>'); return false;">
+          <%= promo.maximize_button %>
+        </a>
+      <% end %>
+    <% else %>
+      <% unless promo.minimize_button.blank? %>
+        <a href="/flipper/minimize/<%= id %>" class="minimize" onclick="remote('/flipper/minimize/<%= id %>'); return false;">
+          <%= promo.minimize_button %>
+        </a>
+      <% end %>
+      <% unless promo.previous_button.blank? or ( promo.hide_previous_on_first_page? and page.first_page? ) %>
+        <a href="/flipper/previous/<%= id %>" class="previous" onclick="remote('/flipper/previous/<%= id %>'); return false;">
+          <%= promo.previous_button %>
+        </a>
+      <% end %>
+      <% unless promo.next_button.blank? or ( promo.hide_next_on_last_page? and page.last_page? ) %>
+        <a href="/flipper/next/<%= id %>" class="next" onclick="remote('/flipper/next/<%= id %>'); return false;">
+          <%= promo.next_button %>
+        </a>
+      <% end %>
+    <% end %>
+    <% unless promo.close_button.blank? %>
+      <a href="/flipper/close/<%= id %>" class="close" onclick="remote('/flipper/close/<%= id %>'); return false;">
+        <%= promo.close_button %>
+      </a>
+    <% end %>
+  <% end %>
+</div>

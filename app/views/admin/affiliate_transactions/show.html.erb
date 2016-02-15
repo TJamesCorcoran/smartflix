@@ -1,0 +1,33 @@
+
+
+<table border=0>
+<tr><td><b>name</b></td><td><%= @affiliate_transactions[0].affiliate_customer.email %> </td></tr>
+<tr><td><b>referrals</b></td><td><%= @affiliate_transactions[0].affiliate_customer.referrals.size %> </td></tr>
+<tr><td><b>due</b></td><td><%= number_to_currency(@affiliate_transactions[0].affiliate_customer.referral_fee_owed)  %> </td></tr>
+
+<tr>
+    <% columns = AffiliateTransaction.columns.reject { |col| col.name == 'affiliate_customer_id' }
+       columns. each do |col| %>
+    <td><b><%= col.name %></b></td>
+    <% end %>
+<tr>
+
+<% @affiliate_transactions.each do |trans| %>
+<tr>
+<% columns.each do |col| %>
+<td> <%=
+if col.name == 'amount'
+   number_to_currency(trans.send(col.name))
+elsif col.name == 'referred_customer_id' && ! trans.send(col.name).nil?
+   link_to trans.referred_customer.email, :controller => :customers, :action => :show, :id => trans.referred_customer_id
+else
+   trans.send(col.name)
+end
+ %></td>
+<% end %>
+</tr>
+<% end %>
+
+</table>
+
+

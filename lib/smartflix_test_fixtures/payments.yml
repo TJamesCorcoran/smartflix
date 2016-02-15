@@ -1,0 +1,200 @@
+
+#----------
+#   ShippingTest
+#----------
+
+customer_with_no_history:
+  payment_id: 6000
+  order_id:   6000
+  complete:   0
+  successful: 0
+
+customer_with_order:
+  payment_id: 6100
+  order_id:   6100
+  complete:   1
+  successful: 1
+
+#--------------------
+# shippable
+
+single_univ_customer_2:
+  payment_id: 7110
+  order_id:   7110
+  complete:   1
+  successful: 1
+
+triple_univ_customer_2_o1:
+   payment_id: 7130
+   order_id: 7130
+   complete:   0
+   successful: 0
+
+triple_univ_customer_2_o2:
+   payment_id: 7140
+   order_id: 7140
+   complete:   1
+   successful: 1
+
+prune_none_recent:
+   payment_id: 7200
+   order_id: 7200
+   complete:   1
+   successful: 1
+
+#----------
+#   university tests
+#----------
+
+univ_order_current:
+   payment_id: 9000
+   order_id:   9000
+   created_at: 2013-04-01 
+   complete:   1
+   successful: 1
+
+univ_order_none_recent:
+   payment_id: 9001
+   order_id:   9001
+   created_at: 2008-01-01
+   complete:   1
+   successful: 1
+
+# univ_order_none:   ... no payments at all!
+#   payment_id: 9002
+
+
+univ_order_recent_but_no_successful:
+   payment_id: 9003
+   order_id:   9003
+   created_at: 2013-04-01
+   complete:   0
+   successful: 0
+
+#----------
+#   orders tests
+#----------
+
+univ_payed_up_yes:
+   order_id: 9500
+   complete: 1
+   successful: 1
+   updated_at: 2009-03-02
+
+univ_payed_up_outofdate:
+   order_id: 9501
+   complete: 1
+   successful: 1
+   updated_at: 2009-02-02
+
+univ_payed_up_recent_failure_1:
+   order_id: 9502
+   complete: 0
+   successful: 0
+   updated_at: 2009-03-02
+
+univ_payed_up_recent_failure_2:
+   order_id: 9502
+   complete: 0
+   successful: 0
+   updated_at: 2009-03-02
+
+
+toreplace_order_mixed_univ1:
+   order: toreplace_order_mixed_univ1
+   complete: 1
+   successful: 1
+   updated_at: 2009-03-02
+
+toreplace_order_mixed_univ_bar:
+   order: toreplace_order_mixed_univ_bar
+   complete: 1
+   successful: 1
+   updated_at: 2009-03-02
+
+# order_test :: test_univ_fee_amount_to_charge_not_univ
+
+test_univ_fee_amount_to_charge_not_payed_full:
+  order: test_univ_fee_amount_to_charge_not_payed_full
+  amount: 30.00
+  amount_as_new_revenue: 30.00
+  complete: 0
+  successful: 0
+
+test_univ_fee_amount_to_charge_not_payed_discount:
+  order: test_univ_fee_amount_to_charge_not_payed_discount
+  amount: 15.00
+  amount_as_new_revenue: 15.00
+  complete: 0
+  successful: 0
+
+test_univ_fee_amount_to_charge_not_payed_full_failed_to_charge:
+  order: test_univ_fee_amount_to_charge_not_payed_full_failed_to_charge
+  amount: 30.00
+  amount_as_new_revenue: 30.00
+  complete: 1
+  successful: 0
+
+test_univ_fee_amount_to_charge_not_payed_discount_failed_to_charge:
+  order: test_univ_fee_amount_to_charge_not_payed_discount_failed_to_charge
+  amount: 15.00
+  amount_as_new_revenue: 15.00
+  complete: 1
+  successful: 0
+
+test_univ_fee_amount_to_charge_payed_full:
+  order: test_univ_fee_amount_to_charge_payed_full
+  amount: 30.00
+  amount_as_new_revenue: 30.00
+  complete: 1
+  successful: 1
+
+test_univ_fee_amount_to_charge_payed_discount:
+  order: test_univ_fee_amount_to_charge_payed_discount
+  amount: 15.00
+  amount_as_new_revenue: 15.00
+  complete: 1
+  successful: 1
+
+test_univ_fee_amount_to_charge_not_univ:
+  order: test_univ_fee_amount_to_charge_not_univ
+  amount: 9.99
+  amount_as_new_revenue: 9.99
+  complete: 1
+  successful: 1
+
+
+#----------
+#   credit_card_tests
+#----------
+
+cc_one_status_declined_1:
+  credit_card_id: 600
+  message: "This transaction has been declined"
+
+cc_no_one_status_expired_1:
+  credit_card_id: 601
+  message: "The credit card has expired"
+
+cc_one_status_gateway_1:
+  credit_card_id: 602
+  message: "Payment gateway was unavailable or timed out"
+
+cc_one_status_addrnomatch_1:
+  credit_card_id: 603
+  message: "Neither street address nor zip/postal match billing information"
+
+cc_one_status_addrnomatch_1:
+  credit_card_id: 603
+  message: "Neither street address nor zip/postal match billing information"
+
+cc_two_status_addrnomatch_expired_1:
+  created_at: "2001-01-01"
+  credit_card_id: 604
+  message: "The credit card has expired"
+
+
+cc_two_status_addrnomatch_expired_2:
+  created_at: "2001-01-02"
+  credit_card_id: 604
+  message: "Neither street address nor zip/postal match billing information"

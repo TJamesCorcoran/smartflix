@@ -1,0 +1,19 @@
+<table border=0>
+  <tr>
+    <% if (@class.first.respond_to?(:name)) ||
+          (@class.methods.include?("name_column_equiv") && @class.name_column_equiv) %>
+        <td>
+          <%= form_tag( {:action => 'index'}, {:method => :get} ) do %>
+            <%= text_field_tag 'search_str'  %>
+            <%= submit_tag 'Search name' %>
+          <% end %>
+        </td>
+    <% end %>
+    <td>
+      <%= form_tag( {:action => 'index'}, {:method => :get} ) do %>
+        <%= text_field_tag 'search_id'  %>
+        <%= submit_tag 'Search  id' %>
+      <% end %>
+    </td>
+  </tr>
+</table>

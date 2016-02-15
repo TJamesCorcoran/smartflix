@@ -1,0 +1,4 @@
+
+<td class="form_label">I want to learn:</td>
+<td><%= select(:university, :university_id, [["Please select one", 0]] + @univs.sort_by{|u| u.name}.map { |u| [u.name.gsub!("University", ""), u.id]}, :class => "select_input") %></td>
+

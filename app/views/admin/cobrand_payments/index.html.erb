@@ -1,0 +1,18 @@
+<h1>Listing cobrand_payments</h1>
+
+<table>
+  <tr>
+  </tr>
+  
+<% for cobrand_payment in @cobrand_payments %>
+  <tr>
+    <td><%= link_to 'Show', cobrand_payment_path(cobrand_payment) %></td>
+    <td><%= link_to 'Edit', edit_cobrand_payment_path(cobrand_payment) %></td>
+    <td><%= link_to 'Destroy', cobrand_payment_path(cobrand_payment), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New cobrand_payment', new_cobrand_payment_path %>

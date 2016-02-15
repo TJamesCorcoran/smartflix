@@ -1,0 +1,11 @@
+<h1>
+  advanced data
+</h1>
+<div class="customer-admin">
+    (<a href="#" onclick="$('relations_int').hide(); return false;">hide</a> / 
+    <a href="#" onclick="$('relations_int').show(); return false;">show</a>)
+
+    <div id="relations_int" style="display:none;">
+        <%= render(:partial => 'admin/shared/show_relations', :locals => { :item => @customer, :reject => [ :ratings,  :recommended_products, :upsell_offers, :reviews, :email_campaigns, :ebay_auctions, :posts, :recent_orders, :payments, :recommended_categories, :uncancelled_line_items, :projects, :cart, :survey_answers, :wiki_page_versions, :project_updates, :affiliate_transactions, :email_preferences, :wiki_pages, :campaigns_sent_to_customers, :potential_shipments, :scheduled_emails, :line_items, :newsletter_recipients, :favorite_project_links, :abandoned_basket_email, :billing_address, :orders, :favorite_projects, :affiliate_payment_transactions, :account_credit, :comments, :uncancelled_and_actionable_and_unshipped_line_items, :shipped_line_items, :line_items_shipped_not_returned, :shipping_address, :uncancelled_and_actionable_line_items] })  %>
+    </div>
+</div>

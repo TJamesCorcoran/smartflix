@@ -1,0 +1,216 @@
+<%# The buttons get their own location in the layout -%>
+
+<% @right_sidebar = capture do -%>
+  <div style="margin-bottom:20px;">
+     <% if SmartFlix::Application::FIRST_MONTH_FREE %>
+               Try it for <span class='rental_price_product'>free!</span>
+     <% else %>
+             <p>
+                 Try it with our <br>
+                 100% money-back<br>
+                 no questions asked<br>
+                 60-day guarantee!
+             </p>
+     <% end %>
+  </div>
+  <%= single_add_to_cart_button_for(@product) %>
+<% end -%>
+
+<% @supress_recently_viewed = true %>
+
+
+<div class="vid-desc">
+
+  <h1 class="title"><%= @product.listing_name %></h1>
+
+  <%= large_image_for( @product, :SlideShow) %>
+
+<script> 
+  /* we load javascript libraries after page content (as per YSlow suggestion), so queue this up with an 'onload' */
+  onload='setupSlideShow([ <%= @university.products.map { |product| "\"#{image_url_for(product, :size => :large)}\"" }.join(",") %> ]  );'
+</script>
+
+    <% # XYZ FIX P3: duplicate copy - see also railscart/lib/newsletter_templates.yaml
+    %>
+
+
+     <% cache(:action_suffix => 'univ_description') do %>
+         <%   #====================           
+              #  Your Custom Univ
+              #      special case
+              #====================
+         %>
+         <% if @product.extra_custom_text_in_view? %>
+             <p>
+             <%= @university.name %> is unlike anything you've seen before - it's
+                a program in which you yourself design the course of study by selecting 
+                DVDs from our website.
+                </p>
+
+                <p>Our DVDs have been created by some of the most 
+                talented artists and craftsmen in their fields. We ship you 3 DVDs per 
+                month - keep them as long as you want, with no late charges! When you're 
+                ready for more, mail those DVDs back to us, and we'll send you the next 
+                3 DVDs (you get up to 3 new DVDs each month)."
+             </p>
+
+         <% else %>
+             <p>
+             <%= @university.name %> is unlike anything you've seen before - it's
+             a complete program of
+             <%=
+               ret = @university.university_curriculum_elements.size
+               ret > 0 ? ret : ""
+              %> DVDs from the most
+             talented artists and craftsmen in the field.  We ship you 3 DVDs per month - keep them as long as you
+             want, with no late charges!  When you're ready for more, mail
+             those DVDs back to us, and we'll send you the next 3 DVDs (you get up to 
+             3 new DVDs each month). 
+             </p>
+          <% end %>
+
+         <p> With exciting, informative, well shot videos 
+<%  if @university.products.any? %>
+
+    from names like <%= @university.top_authors.map(&:name).to_sentence %> 
+
+<% else %>
+    that you pick from the thousands we offer and
+<% end %>
+
+         that you can
+         keep as long as you want, the ability to cancel at any time,
+         <b>and</b> with a low monthly price of just
+     <% end %>
+
+     <% if @product.price == @product.full_price %>
+        <%= @product.price.currency %>
+     <% else %>
+         <% if SmartFlix::Application::FIRST_MONTH_FREE %>
+            <%= @product.price.currency %> for the first month, and 
+            <%= @product.full_price.currency %> thereafter
+         <% else %>
+           <%= @product.full_price.currency %>
+         <% end %>
+     <% end %>
+, this is a bargain that
+	 you can't afford to miss!  </p> <!-- ' -->
+
+
+  <h2 class="title">Commonly asked questions about <%= @university.name %></h2>
+
+  <%= render :partial => 'shared/univ_faq', :locals => { :name => @university.name, :price => @product.price.currency} %>
+
+
+  <center> 
+  <%= single_add_to_cart_button_for(@product) %>
+</center>
+
+<%= render :partial => "shared/tweet_about_video", :locals => {:product => @product } %>
+
+<h2 class="title">What's in <%= @university.name %> ?<br>
+  ...click each for more info!</h2><!-- ' -->
+
+	<script type="text/javascript">
+      var now_open = "none"
+    </script>
+
+
+
+    <% 
+     all_univ_items  = @university.products
+
+     shipped_univ_items   = @university.products & (@customer.andand.products_shipped || [])
+     unshipped_univ_items = @university.products - (@customer.andand.products_shipped || [])
+    %>
+
+     <% if shipped_univ_items.any? %>
+       <h3>You've already seen these, so we won't send them:</h3>
+       <%= render :partial => 'univ_element_list', :locals => { :products => shipped_univ_items } %>
+
+       <h3>You haven't seen yet, so you'll get:</h3>
+       <%= render :partial => 'univ_element_list', :locals => { :products => unshipped_univ_items } %>
+     <% else %>
+       <% cache(:action_suffix => 'univ_contents') do  %>
+         <%= render :partial => 'univ_element_list', :locals => { :products => all_univ_items } %>
+       <% end %>
+     <% end %>
+
+
+  <center>  <%= single_add_to_cart_button_for(@product) %></center>
+
+  <% cache(:action_suffix => 'univ_misc') do %>
+      <% listing_description_for(@product) do |heading, body, minutes| -%>
+        <% if heading -%>
+          <h3><%= heading %></h3>
+        <% end -%>
+        <p class="listing-description"><%= body %></p>
+        <% if minutes && minutes > 10 -%>
+          <p>(about <%= minutes %> minutes)</p>
+        <% end -%>
+      <% end -%>
+
+      <% if @product.date_added -%>
+        <p>
+        This video was added to our catalog on <%=  @product.date_added.strftime("%B %d, %Y") %> in
+        <%= @product.categories.map { |cat| link_to_category cat, cat.full_path_text }.to_sentence %>.
+        </p>
+      <% end -%>
+
+
+      <% if false && product.wiki_pages.any? %>
+        <p>
+          You might be interested in some other information related to this topic
+          <ul>
+          <% wiki_pages.sort_by { rand }[0,5].each do |wiki_page| %>
+            <li><%= link_to(h(wiki_page.name), wiki_page_url(wiki_page)) %></li>
+          <% end %>
+          </ul>
+        </p>
+      <% end %>
+
+
+      <% if @product.product_recommendations.size > 0 -%>
+        <h2>Customers who rented this DVD also rented</h2>
+        <ul class="also-rented">
+          <% @product.product_recommendations.each do |rec_product| -%>
+            <li><%= link_to_product rec_product %></li>
+          <% end -%>
+        </ul> 
+      <% end -%>
+
+      <p>
+
+      <div id="vid-rating">
+        <% approved_reviews = @product.reviews.select { |r| r.approved? } -%>
+        <a name="reviews"></a>
+        <h2>Customer Reviews</h2>
+
+        <p><%= link_to 'Write a review!', {:action => :review, :id => @product}, :class => 'write-review' %></p>
+
+        <% approved_reviews.each do |r| -%>
+          <div class="review">
+            <div class="header">
+              <div class="rating">
+                <span class="content"><%= rating_image r.rating %></span>
+              </div>
+              <div class="reviewer">
+                <span class="label">Reviewer:</span>
+                <span class="content"><%= r.customer ? r.customer.display_name : 'UNKNOWN' %></span>
+              </div>
+            </div>
+            <blockquote><%= html_paragraphs(r.review) %></blockquote>
+          </div>
+        <% end -%>
+
+        <% unless approved_reviews.empty? -%>
+          <p><%= link_to 'Write a review!', {:action => :review, :id => @product}, :class => 'write-review' %></p>
+        <% end -%>
+      </div>
+
+
+      <%= affiliate_link @product %>
+   <% end %>
+</div>
+
+

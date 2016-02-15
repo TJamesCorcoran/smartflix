@@ -1,0 +1,5 @@
+li_id     = "#line_item_<%= @line_item.id %>";
+button_id = "#button_<%= @line_item.id %>";
+$(button_id).hide();
+$(li_id).append("<%= escape_javascript( render( :partial => "report_problem" ) ) %>");
+$(li_id).effect("highlight", {}, 4000);

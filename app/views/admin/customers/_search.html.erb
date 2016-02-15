@@ -1,0 +1,16 @@
+<table border=0>
+  <tr>
+    <td>
+      <%= form_tag( {:action => 'index'}, {:method => :get} ) do %>
+        <%= text_field_tag 'search_str'  %>
+        <%= submit_tag 'Search by email or name fragment' %>
+      <% end %>
+    </td>
+    <td>
+      <%= form_tag( {:action => 'show'}, {:method => :get} ) do %>
+        <%= text_field_tag 'id'  %>
+        <%= submit_tag 'Search by customer id' %>
+      <% end %>
+    </td>
+  </tr>
+</table>

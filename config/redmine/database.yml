@@ -1,0 +1,8 @@
+production:
+  adapter: mysql2
+  database: XXX
+  host: XXX
+  port: 
+  username: XXX
+  password: XXX
+  encoding: utf8

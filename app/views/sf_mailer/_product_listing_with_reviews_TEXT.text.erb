@@ -1,0 +1,26 @@
+<% ActionView::Base.send(:include, ApplicationHelper)
+   ActionView::Base.send(:include, EmailHelper)
+ -%>
+<%# Parameters: 
+  #  products is an array of Product
+  #  token
+  #  ctcode
+ -%>
+
+<% products.each do |product| -%>
+
+<%= product.name %>
+<%= "-" * product.name.size %>
+
+<%= word_wrap(product.summary(450), :line_width => 70) %>...
+
+<% if product.reviews_n_star(4).select {|rating| rating.review }.any? %>
+Featured Customer Review:
+<%= product.reviews_n_star(5).first.andand.summary(130) || product.reviews_n_star(4).first.andand.summary(130)  %>
+<% end %>
+
+Read more:      http://www.smartflix.com/store/video/<%= product.id %>
+
+
+<% end -%>
+

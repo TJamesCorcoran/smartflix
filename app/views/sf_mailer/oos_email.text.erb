@@ -1,0 +1,44 @@
+Hi <%= @customer.first_name %>,
+
+Thank you for your order!
+
+Despite having multiple copies of our more popular videos, unfortunately
+these video(s):
+
+  <% @unfulfilled_titles.each do |title| %>
+    * <%= title.name -%>
+  <% end %>
+
+can not ship out immediately.  Usually this is because videos are out
+of stock right, but sometimes it's because one video is out of stock,
+and another video follows that in a sequence (you don't want us to
+ship you Advanced Super Duper Dog Washing if we aren't going to ship
+you Basic Dog Washing at the same time, or earlier!).
+
+Videos come back from customers every single day, and, because SmartFlix
+is growing rapidly, we place multiple orders with our vendors each week.
+Thus, we expect that your titles should be in stock pretty soon: most
+videos come back within a week.
+
+As soon as one or more of your videos are in stock they will be
+shipped out to you, and you will be alerted by email that they are on
+the way.  If you ordered multiple videos, don't worry - we won't wait
+until everything is in stock (of course, we'll make sure that we don't
+ship sets of videos out of order!).  We'll gladly eat the extra
+postage to get you each of your videos as soon as possible.
+
+NOTE: there is *NO* need to replace your order; your order remains on
+file, and we will ship it ASAP.
+
+We apologize for this delay, and thank you for patience.
+
+
+Your friends at SmartFlix.com
+
+
+--
+http://SmartFlix.com/
+Web's Biggest How-To DVD Rental Store
+
+
+This email was sent to <%= @customer.email %>

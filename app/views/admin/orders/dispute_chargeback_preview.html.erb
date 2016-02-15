@@ -1,0 +1,90 @@
+
+<%
+ #----------
+ #  print buttons 
+ #----------
+%>
+
+<% if ! @employee.andand.authority_chargeback %>
+   You are not logged in, or do not have authority to view this page.
+<% else %>
+    <table border=0>
+    <tr>
+          <% if @disputed_order.chargeback_disputes.empty? %>
+               <td>
+                 <%= button_to 'record',           {:controller => "admin/orders", :action => :dispute_chargeback_record, :id => @disputed_order.id, :person_id => session[:employee_number] } %>
+               </td>
+          <% else %>
+              <td>
+                This chargeback was already disputed:
+                <ul>
+                   <% @disputed_order.chargeback_disputes.each do |dispute| %>
+                      <li><%= dispute.created_at %>
+                   <% end %>
+                </ul>
+              </td>
+
+          <% end %>
+          <td>
+            <%= button_to 'just print', {:controller => "admin/orders", :action => :dispute_chargeback_record, :id => @disputed_order.id}, :onclick => %Q{  window.print(); return(false); } %>
+          </td>
+    </tr>
+    </table>
+<% end # authority_chargeback %>
+
+
+<div style="margin-left:20px;">
+
+  <h2>Challenge of Chargeback</h2>
+
+     <p>
+     Dear Sirs,
+     </p>
+
+     <p>
+     Customer <%= @disputed_order.customer.full_name %> has initiated a chargeback for <%= @disputed_order.total_price.currency %>.
+     </p>
+
+     <p>
+     This was a valid charge, and <b>we challenge the validity of this chargeback and ask for the <%= @disputed_order.total_price.currency %> to be returned to our account.</b>
+     </p>
+
+
+     <% if @disputed_order.late? %>
+        <%= render :partial => "dispute_chargeback_late" %>
+     <% elsif @disputed_order.lost? %>
+        <%= render :partial => "dispute_chargeback_lost" %>
+     <% else %>
+       <p>
+       XYZFIX P3: unknown order type - neither late nor lost
+       </p>
+     <% end %>
+
+
+
+   <h2>Privacy Note</h2>
+      <p style="font-size:xx-small;">
+      We note that according to the Video Privacy Protection Act (18
+      U.S.C. 2710) disclosure of details about what videos a customer has
+      rented are restricted, but the above details are provided under the
+      following clause: 
+      </p>
+
+
+      <p style="font-size:xx-small;">
+      ... information may be released ... to any person if the disclosure is incident to the ordinary course
+      ofbusiness of the video tape service provider ...
+      </p>
+
+  <h2>Next steps</h2>
+
+    <p>Please cancel the chargeback and refund us the <%= @disputed_order.total_price.currency %>.   Thank you,</p>
+
+    <p style="margin-top:30px;">
+      (signed by <%= @employee.full_name %> for SmartFlix.com on <%= Date.today %>) _____________________________________  
+    </p>
+
+  </div>
+
+
+</div>

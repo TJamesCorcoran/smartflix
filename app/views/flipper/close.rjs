@@ -1,0 +1,1 @@
+page.remove "flipper#{@promo.id}"

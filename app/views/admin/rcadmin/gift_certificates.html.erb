@@ -1,0 +1,29 @@
+<h1>Manage Gift Certificates</h1>
+<%= javascript_include_tag :defaults %>
+
+<p><%= link_to 'Create new gift certificate', :action => 'create_gift_certificate' %></p>
+
+<%# Order of display is inverted %>
+<%= links_to_previous_next(@gift_certificate_pages, :invert => true) %>
+
+<p>&nbsp;</p>
+
+<table cellpadding="3" border="0">
+  <tr>
+    <th align="left">Created</th>
+    <th align="left">Code</th>
+    <th align="left">Amount</th>
+    <th align="left">Used?</th>
+    <th align="left">Used By</th>
+  </tr>
+  <% @gift_certificates.each do |gc| -%>
+    <tr>
+      <td valign="top"><%= gc.created_at.to_date %></td>
+      <td valign="top"><%= gc.code %></td>
+      <td valign="top"><%= number_to_currency(gc.amount) %></td>
+      <td align="center" valign="top"><%= gc.used ? 'YES' : 'NO' %></td>
+      <% customer_link = gc.used_by_customer ? link_to(h(gc.used_by_customer.email), :action => 'customer', :id => gc.used_by_customer) : '' %>
+      <td align="left" valign="top"><%= customer_link %></td>
+    </tr>
+  <% end -%>
+</table>

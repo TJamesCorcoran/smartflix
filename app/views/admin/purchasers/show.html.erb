@@ -1,0 +1,30 @@
+
+<table border=0>
+
+<% for column in Purchaser.columns %>
+<tr>
+<th align=left>  <%= column.name %> </th>
+<td align=left> <%= @purchaser.send(column.name)  %> </td>
+</tr>
+<% end %>
+
+</table>
+
+<h1>Purchases </h1>
+
+Truncated to the most recent:
+
+<ul>
+<% vols = @purchaser.vendor_order_logs.reject{|x| x.quant < 0}.sort_by { |x| x.orderDate }
+   mysize = ( vols.size > 40) ? 40 : vols.size
+   vols = vols[ (-1 * mysize), mysize ]
+   if (vols.nil?) then vols = [] end
+   vols.each do |vv|  %>
+<li> <%= vv.orderDate %> : <%= vv.quant %> of <%= link_to vv.product.name, :controller=>:products, :action=>:show, :id=>vv.product.id %>
+<%   end %>
+<%= if (0 == vols.size) then "none" end %>
+</ul>
+
+
+<%= link_to 'Edit', :action => :edit, :id => @purchaser %> |
+

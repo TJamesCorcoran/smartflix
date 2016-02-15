@@ -1,0 +1,16 @@
+  <% columns. each do |col| %>
+    <tr>
+       <th align=left><%= col.name %></th>
+       <td>
+           <% if @class.respond_to?(:fields_that_get_text_areas) && 
+                 @class.fields_that_get_text_areas.include?(col.name) %>
+             <%= f.text_area(col.name) %>
+           <% else %>
+             <%= f.text_field(col.name) %>
+           <% end %>
+       </td>
+
+       <td><%= col.type.to_s %></td>
+       <td><font color="red"><%= "required" if my_class.methods.include?("advice_fields_required") && my_class.advice_fields_required.andand.include?(col.name) %></td>
+    </tr>
+   <% end %>

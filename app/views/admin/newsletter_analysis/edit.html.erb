@@ -1,0 +1,67 @@
+
+<div id="images">
+  <form id="image_upload" action="<%= url_for(:action => 'image_upload') %>" enctype="multipart/form-data" target ="upload_iframe" method="post" onchange="submit();">
+    <%= hidden_field_tag 'id', @newsletter.id %>
+    <%= file_field_tag 'image', :size => 20 %>
+  </form>
+
+  <div id="image_panel">
+    <%= render :partial => 'image_panel', :locals => { :newsletter => @newsletter } %>
+  </div>
+</div>
+
+<%= form_for :newsletter, @newsletter do |form| %>
+  <%= form.text_field :title, :class => "title_field" %>
+  <div class="style">
+    <label for="style_wrap">Wrapped</label>
+    <%= form.radio_button :style, 'wrap' %>
+    <label for="style_plain">Plain</label>
+    <%= form.radio_button :style, 'plain' %>
+  </div>
+  <%= form.text_area :html, :rows => 17, :cols => 80 %>
+  <%= submit_tag %>
+<% end %>
+
+
+<pre style="float:right">
+Insertions:
+
+{{first_name}}
+{{full_name}}
+{{email}}
+{{customer_id}}
+{{email_preferences_url}}
+</pre>
+
+
+<%= 
+    # if these buttons fail, make sure that the addrs below are present in the database
+    # (either production or devel depending)
+    send_test_button 'Send Test to XYZ', 'xyz_97@smartflix.com' %>
+<%= send_test_button 'Send Test to XXX', 'xxx@technicalvideorental.com' %>
+<%= send_test_button 'Send Test to DF', 'dan@smartflix.com' %>
+<%= send_test_button 'Send Test to Angela', 'angela.pickard@gmail.com' %>
+<%= send_test_button 'Send Test to Marketing', 'marketing@smartflix.com' %>
+
+<%= button_to 'SEND TO 10%', {:action => :send_to_all, :id => @newsletter.id, :percent => 10}, :onclick => %Q{ return confirm_send(); } %>
+<%= button_to 'SEND TO ALL', {:action => :send_to_all, :id => @newsletter.id}, :onclick => %Q{ return confirm_send(); } %>
+
+<iframe id="upload_iframe" name="upload_iframe" style="display: none;"></iframe>
+
+
+<% content_for('head') do -%>
+  <%= stylesheet_link_tag 'newsletter' %>
+  <%= javascript_include_tag 'sanskrit' %>
+  <%= javascript_include_tag 'newsletter' %>
+  <script type="text/javascript">
+    Event.observe(window,'load',function() {
+      if($('newsletter_style_wrap').checked) new Sanskrit($('newsletter_html'));
+      Event.observe('newsletter_style_wrap','change', function(e) {
+        new Sanskrit($('newsletter_html'));
+      });
+      Event.observe('newsletter_style_plain','change', function(e) {
+        Sanskrit.editors.last().unreplaceTextarea();
+      });
+    });
+  </script>
+<% end -%>

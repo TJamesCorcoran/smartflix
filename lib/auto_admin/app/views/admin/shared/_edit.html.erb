@@ -1,0 +1,21 @@
+<div style="float:right; background-color:#ccc; min-width:400px; min-height:400px;padding:20px;">
+   <%= yield :sidebar %> 
+</div>
+
+<h1>Edit <%= @item.class %>
+   <% if @item.methods.include?("name") %>
+     : <%= @item.name %>
+   <% end %>
+</h1>
+
+  <%= 
+   # note the 'as' here. This might not be the right solution.  The goal is to deal 
+   # w SF derived classes 'billing address' and 'shipping address'.  If we don't do this
+   # the form is built incorrectly, and the controller can't pull out the data.
+   # 
+   form_for @item, :as => @item.class.arel_table.name.singularize, :url => { :action => 'update', :id => @item.id} do |f| %>
+    <%= render( :partial => 'admin/shared/form', :locals => { :f => f } ) %>
+  <%= submit_tag "Update" %>
+<% end %>
+
+<%= link_to 'Back', :action => 'index' %>

@@ -1,0 +1,68 @@
+<div class="tell-a-friend-title">
+  <div class="tell-a-friend-title-close">
+    <%= link_to 'X', '#', :class => 'lbAction', :rel => 'deactivate' %>
+  </div>
+  Tell a friend about <%= @product ? 'this video' : 'SmartFlix.com' %>
+
+</div>
+
+<div id="tell-a-friend" class="tell-a-friend">
+
+  <div id="tell-a-friend-errors"></div>
+
+  <p>
+  <% if @product %>
+    <%= small_image_for(@product) %>
+    Tell a friend about <%= @product.name %> by <%= @product.author.name %>
+  <% else %>
+    Tell a friend about SmartFlix.com
+  <% end %>
+  </p>
+  <p>
+  (We will never share their address with anyone!)
+  </p>
+
+
+  <% form_tag :url => url_for(:remote =>true, :action => 'send_message') do %>
+    <% if @product %>
+      <%= hidden_field_tag :product_id, @product.id %>
+    <% end %>
+    <table>
+      <tr>
+        <td class="left">From:</td>
+        <td class="right"><%= @customer.email %></td>
+      </tr>
+      <tr>
+        <% default = 'Type email addresses here, separated with spaces' %>
+        <td class="left">To:</td>
+        <td class="right">
+          <%= text_area_tag :to, default, :onfocus => "TextOnFocus(this, '#{default}')",
+                                          :onblur => "TextOnBlur(this, '#{default}')",
+                                          :style => 'color: #808080;', :rows => 3, :cols => 35 %>
+        </td>
+      </tr>
+      <tr>
+        <% if @product %>
+          <% default = "Hey, I found this video (#{@product.name}) at SmartFlix.com and thought you'd find it interesting." %>
+        <% else %>
+          <% default = "Hey, I just found SmartFlix.com and I thought you'd find it interesting. They rent all kinds of how-to and instructional videos." %>
+        <% end %>
+        <td class="left">Message:</td>
+        <td class="right">
+          <%= text_area_tag :message, default, :rows => 5, :cols => 35 %>
+        </td>
+      </tr>
+    </table>
+
+    <div id="tell-a-friend-sending" class="buttons" style="display: none">
+      <p><%= image_tag('roller.gif') %> <strong>Sending...</strong></p>
+    </div>
+
+    <div id="tell-a-friend-buttons" class="buttons">
+      <% onclick = "$('tell-a-friend-buttons').hide();$('tell-a-friend-sending').show();" %>
+      <%= Button.new( "send", { :class => :orange, :method => :submit, :onclick => onclick})  %>
+    </div>
+
+  <% end %>
+
+</div

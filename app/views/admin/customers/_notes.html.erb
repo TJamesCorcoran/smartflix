@@ -1,0 +1,34 @@
+<h1>notes</h1>
+
+<div class="customer-admin" >
+  (<a href="#" onclick="$('notes_int').hide(); return false;">hide</a> / 
+  <a href="#" onclick="$('notes_int').show(); return false;">show</a>)
+
+    <div id="notes_int">
+      <% if @customer.notes.empty? %>
+         <i>no notes yet</i>
+      <% else %>
+          most recent note first:
+          <% @customer.notes.reverse.each do |note| %>
+            <div style="border: 1px solid black; margin:5px;">
+              <b><%= note.created_at.strftime("%Y-%m-%d %H:%M:%S") %> - <%= Person[note.employee_id].full_name %></b>
+              <br><br>
+              <%= note.note %>
+            </div>
+        <% end %>
+      <% end %>
+
+      New note:
+      <% if @employee.nil? %>
+           <font color="red">must be logged in to add note</font>
+      <% else %>             
+          <div style="border: 1px solid black; margin:5px;">
+            <%= form_tag( {:action => 'add_note'}, {:method => :post} ) do %>
+              <%= text_area_tag 'text', "", { :cols => 80, :row => 5} %>     
+              <%= hidden_field_tag 'id', @customer.id %>     
+              <%= submit_tag "Create" %>
+            <% end %>
+          </div>
+      <% end %>             
+  </div>
+</div>

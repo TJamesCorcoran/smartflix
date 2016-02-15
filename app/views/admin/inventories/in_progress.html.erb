@@ -1,0 +1,77 @@
+<h1>Inventory: In Progress </h1>
+
+
+<table border=0>
+  <tr>
+      <!-- progress meter -->
+      <td width=200px valign=top>
+        <table border=0>
+          <tr>
+           <td>From:</td>
+           <td> <%= Copy.id_to_sticker(session[:inventory][:start_id]) %></td>
+          </tr>
+          <tr>
+           <td>To:</td>
+           <td> <%= Copy.id_to_sticker(session[:inventory][:end_id]) %></td>
+          </tr>
+          <tr>
+           <td>Next:</td>
+           <td><div id="next_expected"><%= Copy.id_to_sticker(@expected_id) %></div></td>
+          </tr>
+        </table>
+      </td>
+
+
+      <!-- scan -->
+      <td width=200px valign=top>
+        <div id="scan">
+          <%= form_tag( {:action => :scan_dvd }, { :remote => true })  do %>
+            Scan barcode: <%= text_field_tag :barcode %>
+          <% end %>
+        </div>
+      </td>
+
+      <!-- 1-buttons -->
+       <td width=200px valign=top>
+          <div id="buttons_one" style="display:none;">
+            <div id="question_one" > </div>
+Skipped one DVD. <br> 
+"Yes" - Actually missing<br>
+"No" - I screwed up; let me take that back.
+
+  <%= form_tag( { :action => :missing_button }, {:remote => true})  do %>
+                <%= submit_tag "DVD is Missing" %>
+             <% end %>
+             <%= form_tag({ :action => :one_misfiled_button}, {:remote => true })  do %>
+                 <%= submit_tag "It's here, just in the wrong place" %>
+              <% end %>
+           </div>
+       </td>
+
+      <!-- many-buttons -->
+       <td width=200px valign=top>
+          <div id="buttons_many" style="display:none;">
+            <div id="question_many"> </div>
+Skipped some DVDs. <br> 
+"Yes" - Actually missing<br>
+"No" - I screwed up; let me take that back.
+<%= form_tag({ :action => :missing_button }, { :remote => true})  do %>
+                <%= submit_tag "Yes" %>
+             <% end %>
+             <%= form_tag({ :action => :one_misfiled_button }, { :remote => true }) do %>
+                 <%= submit_tag "No" %>
+              <% end %>
+           </div>
+       </td>
+
+      <!-- done --> 
+       <td>
+         <%= button_to "Inventory Done",  { :action => :done}, { :method => 'post'} %>
+       </td>
+
+  </tr>
+</table>
+
+<div id="ajax_feedback_goes_here">
+
+</div>

@@ -1,0 +1,89 @@
+<%= render 'university_mailer/header' %>
+
+<p>Dear <%= h(@customer.full_name) %>,
+</p>
+
+<p>
+Based on customer requests, we just added a new video to
+<%= @university.name %>.  Because most customers want to get all of the
+DVDs in a university, we've added this to your subscription.
+</p>
+
+<p>
+Here's the description of the video:
+</p>
+
+<p  style="margin-left:50px;">
+    <%= @product.name %> by <%= @product.author.name %>
+</p>
+
+<p style="margin-left:50px;">
+<%= word_wrap(@product.summary(400), :line_width => 60).gsub(/^/, " " *4) %>
+</p>
+
+<p>
+...but if you don't want this DVD, you can remove it this page:
+</p>
+
+<p>
+     <%= link_to("remove a DVD", :host => WEB_SERVER, :only_path => false, :controller => :customer, :action => :university_status) %>
+</p>
+
+
+<p>Just scroll to the bottom of the "DVDs yet to be sent" list, find the
+DVD, and click "cancel".
+</p>
+
+<p>
+Speaking of changing the items in your queue, you can also go anywhere
+on the website and add new videos to your university by clicking an
+"add to queue" button.  For example, to add Arc Welding to your
+university, go here and click the "add to queue" button.
+</p>
+
+<p>
+     <%= link_to("Arc Welding", :host => WEB_SERVER, :only_path => false, :controller => :store, :action => :video, :id => 11) %>
+</p>
+
+<p>
+And, as a reminder, you can change the rate at which you get DVDs at
+this page:
+</p>
+
+<p>     <%= link_to("change the rate at which you get DVDs",  :host => WEB_SERVER, :only_path => false, :controller => :customer, :action => :change_plan) %>
+</p>
+
+<p>
+If you ever have a question, a suggestion, or a comment, please contact
+us at
+</p>
+
+<p>
+   info@smartflix.com
+</p>
+
+<p>
+We read every single customer email, and we look forward to making you
+as satisfied with our service as the thousands of others who've rented
+from us since 2002.
+</p>
+
+<p>
+Sincerely,
+</p>
+
+<p>
+Xxx , President
+</p>
+
+<%= @university.name %><br/>
+http://smartflix.com<br />
+
+<p>
+This email address was given to us by you or by one of our customers. If
+you did not signup for an account, or feel that you have received this
+email in error, please send an email to info@smartflix.com
+</p>
+
+
+<%= render 'university_mailer/footer' %>

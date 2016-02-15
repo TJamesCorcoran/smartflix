@@ -1,0 +1,121 @@
+<%# Mix in the cart helper module, just for this view %>
+<% self.extend(CartHelper) %>
+
+<div class="box">
+
+<% if @customer -%>
+
+<%
+  def add_token_to_url(url)
+	url.merge(:token => OnepageAuthToken.create_token(@customer, 1, url))
+  end
+
+  unsubscribe_url   = add_token_to_url({ :controller => 'customer', :action => 'email_prefs' })
+  account_info_url  = add_token_to_url({ :controller => 'customer', :action => 'account_info' })
+  password_url      = add_token_to_url({ :controller => 'customer', :action => 'password' } )
+  shipping_addr_url = add_token_to_url({ :controller => 'customer', :action => 'address', :id => @customer.shipping_address_id } )
+  billing_addr_url  = add_token_to_url({ :controller => 'customer', :action => 'address', :id => @customer.billing_address_id } )
+  credit_card_url   = add_token_to_url({ :controller => 'customer', :action => 'manage_cc' } )
+%>
+
+<p>
+  <%= link_to 'Change email preferences', unsubscribe_url   %> |
+  <%= link_to 'Change account info',      account_info_url  %> |
+  <%= link_to 'Change password',          customer_password_change_url  %> |
+  <%= link_to 'Change shipping addr',     shipping_addr_url %> |
+  <%= link_to 'Change billing addr',      billing_addr_url  %> |
+  <%= link_to 'Change credit cards',      credit_card_url  %>
+</p>
+
+<p>
+<%= @customer.full_name %><br>
+<%= @customer.email %>
+</p>
+
+<p>
+Current credit: <%= number_to_currency(@customer.credit) %><br>
+Current credit months: <%= @customer.credit_months %>
+</p>
+
+<p>
+ <strong>Link</strong>: <%= link_to "more admin", :controller => "admin/customers", :action => :show, :id => @customer %>
+</p>
+
+
+<p>
+Ship rate: <%= @customer.ship_rate.to_s %>
+</p>
+
+<%= form_tag :action => 'credit_customer_account', :id => @customer do %>
+  <p>
+  Credit account:
+  <%= text_field_tag :amount -%>
+  <%= hidden_field_tag :customer_id, @customer.id -%>
+  <%= Button.new( "apply", { :class => :orange, :method => :submit })%>
+  </p>
+<% end %>
+
+<% [@customer.shipping_address, @customer.billing_address].each do |address| -%>
+<div class="address">
+<%=  render :partial => 'shared/address', :locals => { :address => address, :link_to_edit => false } %>
+</div>
+<% end -%>
+<div class="clear"></div>
+
+
+<h4>Orders</h4>
+<%= render :partial => 'customer_orders', :locals => { :customer => @customer, :orders => @customer.orders } %>
+
+<h4>Shopping Cart</h4>
+<% if @customer.cart -%>
+	<table width=60%><tr><td>
+	<%= cart_display_for(@customer.cart, :items_to_buy, { :style => :summary, :display_total => true }) %>
+	</td></tr></table>
+<% else -%>
+    <i>no items</i>
+<% end -%>
+<br><br>
+
+<h4>Saved items</h4>
+<% if @customer.cart -%>
+	<table width=60%><tr><td>
+	<%= cart_display_for(@customer.cart, :items_saved, { :style => :summary, :display_total => false }) %>
+	</td></tr></table>
+<% else -%>
+    <i>no items</i>
+<% end -%>
+
+
+<h4>Browsed</h4>
+(<a href="#" onclick="$('urltracks_table').hide(); return false;">hide</a> / 
+<a href="#" onclick="$('urltracks_table').show(); return false;">show</a>)
+
+<table  id="urltracks_table" border=0>
+  <% @customer.url_tracks.each do |url| %>
+    <tr>
+      <td><%= url.created_at%></td>
+      <td><%= url.path %></td>
+    </tr>
+  <% end %>
+</table>
+
+<h4>Ratings and Reviews</h4>
+<table cellpadding="4">
+<tr><th>Product</th><th>Rating</th><th>Approved</th><th>Review</th></tr>
+<% @customer.ratings.each do |rating| -%>
+<tr>
+<td><%= link_to_product rating.product %></td>
+<td align="center"><%= rating.rating %></td>
+<td align="center"><%= rating.approved ? 'X' : '' %></td>
+<td><%= rating.review %></td>
+</tr>
+<% end -%>
+</table>
+
+<% else -%>
+
+???
+
+<% end -%>
+
+</div>

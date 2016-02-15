@@ -1,0 +1,14 @@
+<h1>Editing magazine</h1>
+
+<%= error_messages_for :magazine %>
+
+<%= form_for(:magazine, :url => magazine_path(@magazine), :html => { :method => :put }) do |f| %>
+    <%= render :partial => 'form' %>
+
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', magazine_path(@magazine) %> |
+<%= link_to 'Back', magazine_path %>

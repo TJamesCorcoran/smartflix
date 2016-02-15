@@ -1,0 +1,29 @@
+<% if @your_votes && @your_votes.any? %>
+  <p>Thanks for voting! You voted for:</p>
+  <%= render :partial => 'contest_entry', :collection => @your_votes %>
+<% else %>
+  <%= javascript_include_tag 'contest' %>
+  <% form_tag({:action => 'vote',
+               :id     => @contest},
+              {:id => 'voting_form'}) do %>
+
+    <div id="entries">
+
+      <% @contest.entries.each do |entry| %>
+        <%= render :partial => 'contest_entry', :object => entry, :locals => { :allow_voting => true } %>
+      <% end %>
+
+      <div id="submit-section">
+        <% if @voter_email %>
+          <%= hidden_field_tag :voter_email, @voter_email %>
+        <% else %>
+          <label>E-mail:</label>
+          <%= text_field_tag  :voter_email, @voter_email %>
+        <% end %>
+        <%= submit_tag "Submit Your Votes!", :class => 'button' %>
+      </div>
+
+    </div>
+  
+  <% end %>
+<% end %>

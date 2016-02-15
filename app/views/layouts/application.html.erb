@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>SmartFlix</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <%= render :partial => 'shared/html_header' %>
+</head>
+
+  <body id="<%= params[:controller] %>_<%= params[:action] %>" class="<%= params[:controller] %>">
+
+    <%= render :partial => 'shared/devel_bar' %>
+    <%= render :partial => 'shared/devel_vs_prod' %>
+    <%= render :partial => 'shared/top_nav' %>
+
+    <div id=<%= @show_right_sidebar ? "container" : "container-2col" %>>
+
+      <% unless @supress_left_nav %>
+        <%= render :partial => 'shared/left_sidebar' %>
+      <% end %>
+
+
+      <div id="center" class="column">
+          <div id="flipper"></div>
+
+        <%= render :partial => 'shared/message' %>
+
+        <%# COMPLETED ABTEST: should we show the security badge in the middle right of the page? -%>
+        <%# RESULT: Yes, appears to increase conversion rate by 5 to 7 percent -%>
+        <%= render :partial => 'shared/scanalert', :locals => { :divid => 'smartflix-secure' } unless @right_sidebar %>
+
+        <% if @primary_univ_order &&
+              @primary_univ_order.live &&
+              ! @primary_univ_order.univ_fees_good_enough? 
+         %>
+            <%= render :partial => "customer/university_error", :locals => { :order => @primary_univ_order } %>
+        <% end %>
+
+        <%= yield %>
+      </div>
+
+      <% if @show_right_sidebar %>
+        <%= render :partial => 'shared/right_sidebar' %>
+      <% end %>
+
+    </div>
+
+    <%= render :partial => 'shared/footer' %>
+  </body>
+</html>

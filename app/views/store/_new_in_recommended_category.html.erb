@@ -1,0 +1,8 @@
+<% if customer && !customer.recommended_categories.empty? %>
+  <% category = customer.recommended_categories.sort_by { rand }.first -%>
+  <div class="category-listing-section">
+    <h1 class="rent-dvds-like">Rent New <%= link_to_category category %> DVDs, like</h1>
+    <%= render :partial => 'product_listing', :locals => { 
+      :products => category.listable_products.sort_by(&:date_added).last(2) } %>
+    </div>
+  <% end %>

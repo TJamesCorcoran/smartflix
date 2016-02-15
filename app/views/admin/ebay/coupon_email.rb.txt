@@ -1,0 +1,34 @@
+Hi there,
+
+Thanks for bidding on the eBay auction for a Smartflix free rental
+coupon...and congratulations on winning!
+
+The coupon code you've won is 
+
+ <%= code %>
+
+and you can use it to rent <%= title_text %> or any other title!
+
+It's simple to use.  Just
+
+1)  go to http://smartflix.com 
+2)  shop (you can find <%= title_text %> at <%= title_url %>
+3)  and at check out, type in your coupon code to get $9.99 off your first rental.
+
+As you know, we stock thousands of how-to DVDs on everything from
+metalworking to knitting, from automotive airbrushing to juggling.
+
+If you can't find something you need, just type it into our convenient
+search box on the top right-hand corner of every SmartFlix page. We add
+new DVDs all the time, so please come back regularly and check out our
+new arrivals.
+
+If you have any questions at all, please send us a note and ask!
+
+Thanks, 
+
+Your friends at SmartFlix.com
+
+--
+http://SmartFlix.com/
+Web's Biggest How-To DVD Rental Store

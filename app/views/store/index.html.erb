@@ -1,0 +1,15 @@
+<%= render :partial => 'shared/discount_banner' %>
+
+<%= render :partial => 'shared/new_customer_widget', :locals => { :partial_customer_for_funnel => @partial_customer_for_funnel  } %>
+
+<% if @customer && !@customer.recommended_products.empty? && !@customer.recommended_categories.empty? -%>
+   <%= frontpage_widgets %w(recommended_videos) %>
+   <%= frontpage_widgets %w(featured_categories) %>
+<% else -%>
+   <%= render :partial => 'featured_categories', :locals => { :customer => @customer } %>
+<% end -%>
+
+<div class="category-listing-section">
+  <h1 class="rent-dvds-like">Or rent any of our thousands of other how-to videos, like</h1>
+  <%= render :partial => 'product_listing', :locals => { :products => @featured_products } %>
+</div>

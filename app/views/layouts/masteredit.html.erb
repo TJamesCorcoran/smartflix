@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title><%= controller_name %> - <%= controller.action_name %></title>
+
+  <%= stylesheet_link_tag 'admin_all' ,'newsletters' %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+
+
+  <%# XXXFIX P3: Move this? Single use layout... %>
+  <script type="text/javascript">
+	soundManager.debugMode = false; // disable debug output
+	soundManager.url = '/flash/soundmanager2.swf'; // path to movie
+	soundManager.onload = function() {
+	  soundManager.createSound('success','/sounds/SuccessSound.mp3');
+	  soundManager.createSound('failure','/sounds/FailureSound.mp3');
+	}
+  </script>
+
+  <%= yield :head %>
+</head>
+
+<body>
+
+<div style="background-color:#cff">
+  <table border=0>
+
+    <%# Every page gets messages, if set -%>
+    <%= render :partial => 'shared/message' %>
+
+    <tr>
+      <td colspan=2>
+        <%= render :partial => 'shared/devel_vs_prod' %>
+      </td>
+   </tr>
+
+    <tr  style="background-color:#99ff99">
+      <td>
+        bugs:
+      </td>
+      <td>
+         <%= link_to "submit new", "http://trac.smartflix.com/newticket" %> |
+         <%= link_to "unassigned", "http://trac.smartflix.com/query?status=accepted&status=assigned&status=closed&status=new&status=reopened&order=priority&col=id&col=summary&col=type&col=priority&col=milestone&col=component&owner=somebody" %> |
+         <%= link_to "susanc", "http://trac.smartflix.com/query?status=accepted&status=assigned&status=closed&status=new&status=reopened&order=priority&col=id&col=summary&col=type&col=priority&col=milestone&col=component&owner=susanc" %> |
+         <%= link_to "dfoskett", "http://trac.smartflix.com/query?status=accepted&status=assigned&status=closed&status=new&status=reopened&order=priority&col=id&col=summary&col=type&col=priority&col=milestone&col=component&owner=dfoskett" %> |
+         <%= link_to "xyz", "http://trac.smartflix.com/query?status=accepted&status=assigned&status=closed&status=new&status=reopened&order=priority&col=id&col=summary&col=type&col=priority&col=milestone&col=component&owner=xyz" %> 
+      </td>
+    </tr>
+
+
+    <tr style="background-color:#fcf">
+      <td>
+       <%= link_to "SF", "http://smartflix.com" %> /
+       <%= link_to "jobs", "http://jobstatus.smartflix.com" %> /
+        admin:
+      </td>
+      <td>
+        <%= link_to 'Home',                     :controller => "rcadmin", :action => 'index' %> |
+        <%= link_to 'Reviews',                  admin_reviews_url %> (<%= "#{Rating.unapproved_reviews().size} need approval" %> ) |
+        <%= link_to 'Coupons',                  :controller => "rcadmin", :action => 'coupons' %> |
+        <%= link_to 'Create new coupon',        :controller => "rcadmin", :action => 'create_coupon' %> |
+        <%= link_to "Gift Certs",               :controller=>"giftcerts", :action=>"index" %>  |
+        <%= link_to 'Manage Contests',          :controller => "rcadmin", :action => 'contests' %> 
+      </td>
+    </tr>
+
+
+
+    <tr>
+      <td>
+        videos and related:
+      </td>
+      <td>
+        <%= link_to "Customer",  :controller=>"customers", :action=>"index" %> |
+        <%= link_to "Product",  :controller=>"products", :action=>"index" %> |
+        <%= link_to "Author", :controller=>"authors", :action=>"index" %> |
+        <%= link_to "Vendor",  :controller=>"vendors", :action=>"index" %> |
+        <%= link_to "ProductSet",    :controller=>"product_sets", :action=>"index" %> |
+        <%= link_to "ProductBundle",    :controller=>"product_bundles", :action=>"index" %> |
+        <%= link_to "Category",    :controller=>"categories", :action=>"index" %> |
+        <%= link_to "Copy",    :controller=>"copies", :action=>"index" %> |
+        <%= link_to "Order",    :controller=>"orders", :action=>"index" %> |
+        <%= link_to "Payment",    :controller=>"payments", :action=>"index" %> |
+        <%= link_to "Shipment",    :controller=>"shipments", :action=>"index" %> |
+        <%= link_to "University",    :controller=>"universities", :action=>"index" %> 
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        backoffice:
+      </td>
+      <td>
+        <span style="background-color:yellow;">
+        <%= link_to "Timesheets",    :controller=>"persons", :action=>"index" %> |
+        <b><%= link_to "Shipping",   :controller=>"shipments", :action=>"ship" %></b> |
+        <b><%= link_to "Returns",    :controller=>"copies", :action=>"returns" %></b> |
+        <b><%= link_to "Polishing",  :controller=>"purchasings", :action=>"polishable" %></b>
+        </span> |
+        <%= link_to "Purchasing",    :controller=>"purchasings", :action=>"index" %> |
+        <%= link_to "Purchasers",    :controller=>"purchasers", :action=>"index" %> |
+        <%= link_to "Affiliates",    :controller=>"affiliate_transactions", :action=>"index" %> |
+        <%= link_to "Inventory",    :controller=>"inventories", :action=>"index" %>  |
+        <%= link_to "UspsPostageForms",    :controller=>"usps_postage_forms", :action=>"index" %> 
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        Marketing: 
+      </td>
+      <td>
+        (Newsletter: <%= link_to 'write',              :controller => "newsletters", :action => 'index' %> |
+                     <%= link_to "analysis",       :controller=>"newsletter_analysis", :action=>"index"  %> ) |
+        <%= link_to "Campaigns",    :controller=>"campaigns", :action=>"index" %>  |
+    	<%= link_to "job openings", :controller => :job_openings, :action => :index %>
+      </td>
+    </tr>
+    <tr>
+       <td>
+        adwords:
+       </td>
+       <td>
+        <%= link_to "campaigns",   :controller=>"adwords_campaigns", :action=>"index" %> |
+        <%= link_to "groups",      :controller=>"adwords_groups", :action=>"index" %> |
+        <%= link_to "ads",         :controller=>"adwords_ads", :action=>"index" %> |
+        <%= link_to "keywords",    :controller=>"adwords_keywords", :action=>"index" %> 
+      </td>
+
+      <td>
+        <%= link_to "Wiki","http://wiki.smartflix.com/" %> 
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        finance:
+      </td>
+
+      <td>
+        <% if @employee.andand.authority_finance %>
+            <%=  link_to "Sales Tax",    :controller=>"sales_taxes", :action=>"index" %> |
+            <%=   link_to "Cobrand",    :controller=>"cobrands", :action=>"index" %> |
+            <%=   link_to "Affiliate",    :controller=>"affiliate_transactions", :action=>"index" %> |
+            <%=   link_to "Depreciation",    :controller=>"video_assets", :action=>"index" %> 
+        <% else %>
+            <i>please log in to view these options</i>
+        <% end %>
+      </td>
+
+    </tr>
+
+    <tr>
+      <td>
+        engineering:
+      </td>
+      <td>
+        <span style="background-color:yellow;">
+        <%= link_to "Job Status","http://job.smartflix.com/" %>
+        </span> |
+        <%=  link_to "Stats",    :controller=>"stats", :action=>"index" %>  |
+        <%=  link_to "AB Test",    :controller=>"ab_tests", :action=>"index" %>  (
+        <%=  link_to "AB Test stats",    :controller=>"stats", :action=>"ab_test" %> ) |
+
+      </td>
+
+      <td>
+        <%= if (@employee.nil?)
+          (".... " + link_to( "not logged in", :controller => :persons, :action => :index)).html_safe
+        else
+        (".... " + link_to( @employee.full_name, :controller => :persons, :action => :show, :id =>@employee) + " ( " + link_to( "logout", :controller => :persons, :action => :logout) + " )").html_safe
+        end
+        %>
+      </td>
+    </tr>
+
+  </table>
+</div>
+
+<p style="color: red; font-size:large;"><%= flash[:error] %></p>
+<p style="color: green; font-size:large;"><%= flash[:notice] %></p>
+
+<%= yield  %>
+
+
+<script type="text/javascript">
+  document.forms[0].elements[0].focus()
+</script>
+
+</body>
+</html>

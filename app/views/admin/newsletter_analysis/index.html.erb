@@ -1,0 +1,39 @@
+<%= render :partial => 'admin/shared/showdata'  %>
+
+
+<table class="sortable" id="newsletters">
+        <tr>
+            <th align=right  width=50px>id</th>
+            <th              width=400px>newsletter</th>
+            <th              width=50px>sent ?</th>
+            <th              width=250px>created_at</th>
+			<% if  (params[:showdata]) %>
+                <th align=right  width=50px>recipients</th>
+				<th align=right  width=50px>orders</th>
+				<th align=right  width=50px>%</th>
+				<th align=right  width=50px>revenue</th>
+            <% end %>
+        </tr>
+
+        <% @newsletters.each do |newsletter| -%>
+        <tr>
+			<td align=right><%= newsletter.id %></td>
+			<td>            <%= link_to newsletter.headline, :action => 'edit', :id => newsletter.id %> (<%= link_to 'status', :action => 'status', :id => newsletter.id %>)</td>
+		    <td align=right>
+                   <% if newsletter.recipients.any? %>
+                       <font color="green">yes</font>
+                   <% else %>
+                       <font color="red">no</font>
+                   <% end %>
+            </td>
+            <td><%= newsletter.created_at %></td>
+			<% if  (params[:showdata]) %>
+  			    <td align=right><%= newsletter.recipients.size  %></td>
+				<td align=right><%= newsletter.orders.size %></td>
+				<td align=right><%=  format("%0.2f",newsletter.recipients.size == 0 ? 0.0 : 100.0 * newsletter.orders.size / newsletter.recipients.size)  %> %</td>
+				<td align=right><%= number_to_currency(newsletter.value)  %></td>
+            <% end %>
+    	</tr>
+		<% end -%>
+</table>
+

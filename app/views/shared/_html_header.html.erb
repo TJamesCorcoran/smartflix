@@ -1,0 +1,34 @@
+
+    <%# Set up an appropriate page title, if a default is not given -%>
+    <% @title ||= generate_page_title() -%>
+    <title><%= @title %></title>
+
+    <link rel="shortcut icon" href="/images/favicon.ico" />
+
+
+
+    <meta name="authors" content="SmartFlix" />
+
+      <% @description ||= generate_page_description() -%>
+    <meta name="description" content="<%= @description %>" />
+
+    <% @keywords ||= generate_page_keywords() -%>
+    <meta name="keywords" content="<%= @keywords %>" />
+
+    <%# XXXFIX P3: Are we missing any other SEO things? -%>
+
+    <!--[if IE 6]>
+      <script type="text/javascript">
+        var isIE6 = true;
+      </script>
+    <![endif]-->
+
+
+    <!--[if IE 6]>
+          <%= stylesheet_link_tag 'new_ie6.css' %>
+    <![endif]-->
+    <!--[if IE 7]>
+        <%= stylesheet_link_tag 'new_ie7.css' %>
+    <![endif]-->
+
+

@@ -1,0 +1,20 @@
+<table cellpadding="3">
+<tr>
+<th>ID</th><th>Name</th><th>Email</th><th>Total Orders</th>
+<% if @show_origin -%>
+<th>Referer</th><th>First URI</th>
+<% end -%>
+</tr>
+<% @customers.each do |customer| -%>
+<tr>
+<td><%= link_to "#{customer.id}", :controller => 'customers', :action =>'show', :id => customer.id %></td>
+<td><%= h(customer.full_name) %></td>
+<td><%= h(customer.email) %></td>
+<td><%= number_to_currency(customer.orders.inject(0.0) { |sum, o| sum + o.total }) %></td>
+<% if @show_origin -%>
+<td><%= h(customer.origins[0].referer.gsub(/http:\/\//, '').gsub(/\/.*/, '')) if customer.origins && customer.origins[0].andand.referer %></td>
+<td><%= h(customer.origins[0].andand.first_uri) if customer.origins %></td>
+<% end -%>
+<% end -%>
+</tr>
+</table>

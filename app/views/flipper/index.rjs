@@ -1,0 +1,8 @@
+@promotions.each do |promo|
+  # COMPLETED ABTEST: do we show a site promotion for first time visitors?
+  # RESULT: first_time_flipper is not helpful, the promotion is turned off
+
+  if promo[:promobj].ab_test_name.blank? || ab_test(promo[:promobj].ab_test_name) == promo[:promobj].ab_test_alternative.to_sym 
+    page.insert_html :bottom, 'flipper', :partial => 'flipper', :locals => promo
+  end
+end

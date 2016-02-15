@@ -1,0 +1,37 @@
+<% if session[:firsttimer_box_hide].nil? && session[:customer_id].nil? %>
+
+  <div id="new_customer_widget_success"></div>
+  <div id="new_customer_widget_error"></div>
+
+
+  <div class="new_customer_widget" id="new_customer_widget_initial" >
+      <div class="new_customer_widget_title">
+
+   	      <div class="new_customer_widget_title_right">
+			<%= link_to "X",  customer_ajax_hide_firsttimer_box_url, :remote => true %>
+          </div>
+
+          <div class="new_customer_widget_title_left">
+			  <h1>First Time Visitor Reward! </h1>
+		  </div>
+      </div>
+
+      <div class="new_customer_widget_body">
+		  <p>
+		  Because you are a first time visitor, you are eligible for a special reward.
+
+		  Please sign in and to get a free newsletter with tips on the projects you want to do.
+		  </p>
+
+		  <p>We will never send you spam, or share your email address with <i>anyone</i>.</p>
+
+		  <%= form_tag(customer_ajax_set_email_addr_url, :remote =>true) do %>
+			<%= text_field_tag :email, "enter your email address here",  :onclick =>"this.value=''; this.style['color']='black'; this.onclick=false;", :size=>30, :class=>"email" %>
+			<%= submit_tag "Yes, I want the reward!" %>
+		  <% end %>
+
+        </div>
+    </div>
+
+
+<% end %>

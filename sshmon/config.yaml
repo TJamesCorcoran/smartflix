@@ -1,0 +1,11 @@
+--- 
+:host2.smartflix.com: 
+  :forwards: 
+    :mysql: 
+      :local_port: 23306
+      :remote_port: 3306
+      :host: localhost
+  :connection: 
+    :keys: 
+    - /home/autorun/.ssh/nopasswd
+    :username: tvr

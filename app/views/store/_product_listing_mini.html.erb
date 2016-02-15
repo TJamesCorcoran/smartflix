@@ -1,0 +1,16 @@
+<div class="mini-product">
+    <%= link_to_product product %>
+    <div class="clear"></div>
+    <%= link_to_product product, tiny_image_for(product) %>
+
+    <% if display_queue_buttons? %>
+         <%= queue_button_for(product) %>
+    <% else %>
+        <% if product.product_set_member? -%>
+          <%= single_add_to_cart_button_for(product.product_set, :product_listing => true) %>
+        <% else %>
+          <%= single_add_to_cart_button_for(product, :product_listing => true) %>
+        <% end -%>
+    <% end -%>
+
+</div>

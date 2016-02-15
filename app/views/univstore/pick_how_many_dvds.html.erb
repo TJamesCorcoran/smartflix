@@ -1,0 +1,56 @@
+<div id="dvd-qty">
+
+  <h1>Customize your Subscription</h1>
+
+  <!-- <%= @univ_choice.name %> -->
+
+    <div id="qty-desc">
+
+      <p>Let us know how many DVDs you'd like each month.</p>
+
+
+    </div>
+
+    <div id="qty-choices">
+
+      <h2>How many <b><%= @univ_choice.name.gsub!("University", "") %></b> DVDs do you want per month?</h2>
+
+      <%= form_tag :action => 'pick_how_many_dvds' do -%>
+           <% 
+              options = nil
+              testbranch = ab_test(:univ_funnel_permonth_choices, session)
+              options = case  testbranch
+              when :a123: [ 1,2,3]
+              when :b234: [ 2,3,4]
+              when :c1236: [ 1,2,3,6]
+              when :d2368: [ 2,3,6,8]
+              when :e368: [ 3,6,8]
+              when :default: [ 3,6,8]
+              else raise "error in A/B test - #{testbranch}"
+              end
+          %> 
+           <% options.each do |n| %>
+              <div class="dvd_choice_<%= n %>">
+                <span class="dvd_row"><%= radio_button_tag 'how_many', n, (n == 3) %> 
+                  <% if SmartFlix::Application::FIRST_MONTH_FREE %>
+                    <%= n %> DVDs - free trial - additional months are <%= (@univ_choice.subscription_charge_for_n(n)).html_currency(true) %>
+                  <% else %>
+                    <%= n %> DVDs - additional months are <%= (@univ_choice.subscription_charge_for_n(n)).html_currency(true) %>
+                  <% end %>
+                </span>
+              </div>
+           <% end %>
+
+      <table class="how_many_dvds">
+        <tr>
+        <td class="form_label" id="secure_server_lock_white">Secure server:</td>
+        <td><%= submit_tag "Continue", :class => "submit_button" %></td>
+        </tr>
+      </table>
+
+
+      <% end %>
+
+  </div>
+
+</div>

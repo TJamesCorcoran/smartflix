@@ -1,0 +1,33 @@
+
+<h1>Ebay Coupons</h1>
+
+<%= form_tag ( {:action => 'index'}, {:method => :get} ) do %>
+	<%= text_field_tag  'search_str'  %>
+	<%= submit_tag 'Search by auction date, issue date, email addr, or ebay item ID' %>
+<% end %>
+
+<table border=0  class="sortable" id="ebay_items">
+	<tr>
+	<% EbayAuction.columns.each do |column| %>
+		<th>		<%= column.name	%></th>
+	<% end %>
+	</tr>
+
+	<% @items.each do |item| %>
+    <tr>
+        <%  EbayAuction.columns.each do |column| %>
+	    	<td><%= if column.name == "cat_id"
+					    link_to Category.find_by_catID(item.cat_id).andand.description, :controller => :categories, :action =>:show, :id => item.cat_id
+                    elsif column.name == "email_addr"
+                        if Customer.find_by_email(item.email_addr).nil?
+                            item.email_addr
+                        else
+ 					       link_to item.email_addr, :controller => :customers, :action =>:show, :id => Customer.find_by_email(item.email_addr).id
+                        end
+                    else
+                        item.send(column.name)
+                    end %></td>
+    	<% end %>
+    </tr>
+    <% end %>
+</table>

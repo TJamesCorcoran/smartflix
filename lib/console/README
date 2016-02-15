@@ -1,0 +1,32 @@
+Console
+=======
+
+Console is just a bunch of little utility functions that make working with the Rails console more of a pleasure than it already is.
+
+
+Example
+=======
+
+Find record with ID=1:
+Model[1]
+
+Find all records with IDs between 1 and 4:
+Model[1..4]
+
+Find first 4 records with IDs greater than or equal to 1:
+Model[1,4]
+
+Find first record:
+Model.first
+
+Find last record:
+Model.last
+
+Find first record that attribute _foo_='bar':
+Model.first(:foo => 'bar')
+
+Find last record that attribute _foo_='bar':
+Model.last(:foo => 'bar')
+
+
+Copyright (c) 2007 Tyler McMullen, released under the MIT license

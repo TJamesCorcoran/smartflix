@@ -1,0 +1,3 @@
+$("#ajax_feedback_goes_here").append("<span style='color:red;'>ERROR <%= @sticker %> - <%= @msg %></span><br>");
+$("#sticker").val("");
+soundManager.play('failure');

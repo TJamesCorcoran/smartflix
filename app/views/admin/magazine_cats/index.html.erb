@@ -1,0 +1,72 @@
+
+<%= form_tag( {:action => 'index'}, {:method => :get} ) do %>
+  <%= text_field_tag  'search_str'  %>
+  <%= submit_tag 'Search by MagazineCat text' %>
+<% end %>
+
+<table border=0><tr><td>
+<h1>
+MagazineCat list</h1></td><td>
+(<%= link_to 'unfiltered', :action => 'list' %>)</td></tr></table>
+<hr>
+<%=
+ link_to 'Previous page', { :page => @magazinecat_pages.current.previous } if @magazinecat_pages.current.previous  %> <%= link_to 'Next page', { :page => @magazinecat_pages.current.next } if @magazinecat_pages.current.next %> 
+<hr>
+<table>
+
+
+
+<tr>
+<th></th><th></th>
+<%
+rejected_columns = /^(street|city|state|zip)$/
+ for column in MagazineCat.content_columns.reject { |c| c.name =~ rejected_columns } %>
+<th>
+<%=
+
+            if (column.name == "catID") 
+			    "category"
+            else
+				column.name
+			end
+%>
+</th>
+<% end %>
+</tr>
+  
+<% for magazinecat in @magazinecat %>
+  <tr>
+    <td><%= link_to 'Show', magazine_cat_path(magazinecat) %></td>
+    <td><%= link_to 'Edit', edit_magazine_cat_path(magazinecat) %></td>
+<!--    <td><%= link_to 'Destroy', magazine_cat_path(magazinecat), :confirm => 'Are you sure?', :method => :delete %></td>
+-->
+
+<% for column in MagazineCat.content_columns.reject  { |c| c.name =~ rejected_columns } %>
+<td>
+<%=
+
+            if (column.name == "url") 
+			    link_to magazinecat.url, magazinecat.url
+			elsif (column.name == "catID") 
+				if (magazinecat.catID.nil?)
+					""
+				else
+					link_to Category.find(magazinecat.catID).description, :controller=>"categories", :action=>"show", :id=>magazinecat.catID 
+
+				end
+            else
+				magazinecat.send(column.name) 
+			end
+%>
+</td>
+<% end %>
+</tr>
+<% end %>
+</table>
+
+<br />
+<hr>
+<%= link_to 'Previous page', { :page => @magazinecat_pages.current.previous } if @magazinecat_pages.current.previous  %> <%= link_to 'Next page', { :page => @magazinecat_pages.current.next } if @magazinecat_pages.current.next %> 
+<hr>
+<br />
+<%= link_to 'New magazinecat', new_magazine_cat_path %>

@@ -1,0 +1,65 @@
+An overview of the advertising campaign process in SmartFlix
+------------------------------------------------------------
+
+0) admin goes here
+
+     https://smartflix.com/admin/campaigns
+
+  creates a campaign with initial_uri regexp of 
+
+  	 ct=zzz
+
+1) new cust arrives at site with url
+
+   	   http://smartflix.com/?ct=zzz
+
+2) app/controllers/application_controller.rb 
+
+	   include TrackOrigin
+
+	   before_filter :track_origin_and_redirect
+
+   referencing code in
+ 
+       vendor/plugins/track_origin/lib/track_origin.rb
+
+   this ends up creating a database entry in the 'origins' table, like
+   this:
+
+	  +-----------+---------+---------------+--------------+------------+-------------+---------------------+
+	  | origin_id | referer | first_uri     | first_coupon | session_id | customer_id | updated_at          |
+	  +-----------+---------+---------------+--------------+------------+-------------+---------------------+
+	  |   7298160 | NULL    | /?ct=zzz      | NULL         |   41601490 |        NULL | 2011-04-20 15:41:33 |
+	  +-----------+---------+---------------+--------------+------------+-------------+---------------------+
+	  1 row in set (0.00 sec)
+
+    Note that the cf=zzz in the first_uri field
+
+3) admin navigates to 
+
+        https://smartflix.com/admin/campaigns/show/1
+
+   which calls 
+
+        app/controllers/admin/campaigns_controller.rb
+
+		def profit
+		  cust_profit = actual_revenue_multiplier * customers.inject(0.0) { |val, cust | val += cust.profit}  
+		  begin
+		  cust_profit - fixed_cost.to_f - (customers.size * unit_cost)
+		  rescue
+			raise "#{self.id} : #{cust_profit} - #{fixed_cost} - (#{customers.size} * #{unit_cost})"
+		  end
+		end
+
+   which calls
+
+         app/models/campaign.rb
+
+		   def customers
+		       Customer.find_by_sql("select * from customers c,
+                    		       origins co where c.customer_id =
+                   		           co.customer_id and " + sql_regexp_stub)
+		   end
+
+    with the list of customers we can then figure profits

@@ -1,0 +1,25 @@
+<% my_class = @item.class %>
+
+<table border=0>
+  <tr>
+   <td><h2>Basic data</h2></td>
+  </tr>
+
+  <%= render :partial => "admin/shared/form_sub", 
+             :locals =>  { :my_class => my_class, 
+                           :f => f,
+                           :columns =>  my_class.content_columns.reject {|c| c.name == "updated_at" || 
+                                                                             c.name == "created_at" ||
+                                                                             c == my_class.primary_key} } %>
+
+  <tr>
+   <td><h2>Relations data</h2></td>
+  </tr>
+
+  <%= render :partial => "admin/shared/form_sub", 
+             :locals => { :my_class => my_class, 
+                          :f => f,
+                          :columns =>  (my_class.columns - my_class.content_columns).reject {|c| c.name == my_class.primary_key} } %>
+
+
+</table>

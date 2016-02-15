@@ -1,0 +1,21 @@
+
+<h1>Videos You'll Love</h1>
+
+
+<% if @recommendations.empty? %> <p> We're sorry - we don't have
+   recommendations for you ... but surf around the website some, then
+   come back here, and we'll have some recommendations based on the
+   things you look at!  </p> <% else %>
+
+    <p>
+      <%= @customer.first_name %>, we've got <%= @recommendations.size %> suggestions for you:
+    </p>
+
+    <div class="category-listing-section">
+      <%= render :partial => 'store/product_listing', 
+                 :locals => { :products => @recommendations, 
+                              :r_controller => "customer",
+                              :r_action => "recommendations"} %>
+    </div>
+
+<% end %>

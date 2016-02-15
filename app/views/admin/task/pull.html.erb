@@ -1,0 +1,7 @@
+<%= button_to 'Pull', '', { :method => 'post', :confirm => "Are you sure you want to do a pull?" } %>
+<% if @result -%>
+<h2>Results</h2>
+<pre>
+<%= @result %>
+</pre>
+<% end -%>

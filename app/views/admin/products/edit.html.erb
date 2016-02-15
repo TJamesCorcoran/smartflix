@@ -1,0 +1,12 @@
+<h1>Editing Video</h1>
+
+<%= error_messages_for :video %>
+
+<%= form_for(:video, :url => { :action => :update, :id => @product }, :html => { :method => :put }) do |f| %>
+    <%= render :partial => 'form' %>
+
+    <%= submit_tag "Update" %>
+<% end %>
+
+<%= link_to 'Show', product_path(@product) %> |
+<%= link_to 'Back', product_path %>

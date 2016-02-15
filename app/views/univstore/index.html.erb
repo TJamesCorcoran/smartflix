@@ -1,0 +1,78 @@
+<div id="right_col">
+   <%= render :partial => 'signup', :locals => { :customer => @customer } %>
+</div>
+
+<div id="uni-info">
+
+ <%= render :partial => "big_image", :locals => { :id => 8} %>
+
+
+  <div id="how_it_works_box">
+    <h1>What skill do you want to learn?</h1>
+
+    <p>Learn a new skill or improve a new one, with a subscription
+    to how-to DVDs.  Choose from <%= @univs.count %> different areas.
+    </p> 
+
+    <h1>3 DVDs per month, no late fees</h1>
+
+    <p> We ship you 3 how-to DVDs in your area of interest - keep them as long as you want, with
+    no late charges!  When you're ready for more, mail those DVDs back to
+    us, and we'll send you the next 3 DVDs.
+    </p>
+
+    <p>
+    (Want more or less DVDs?  We can do that too!)
+    </p>
+
+    <% if SmartFlix::Application::FIRST_MONTH_FREE %>
+       <h1>Free Trial!</h1>
+    <% else %>
+       <h1>Money back guarantee!</h1>
+    <% end %>
+
+    <p>
+    <% if SmartFlix::Application::FIRST_MONTH_FREE %>
+       We're sure that you'll love SmartFlix  Try it for a month and love it ... or cancel and get your money back.
+    <% else %>
+       We're so sure that you'll love SmartFlix that we'll give you a month for free.  Try it and love it ... or cancel.  Either way, it's free!
+    <% end %>
+    <p>
+
+    <p>After that, a subscription tailored to your interests costs just
+    <%= University.base_plan_price.to_f.currency %><sup>*</sup> - and we've got options to lower that price to a
+    super-affordable   <%= University.min_plan_price.to_f.currency %>  per month.</p>
+  <!--
+   <p> Between a
+         <% if SmartFlix::Application::FIRST_MONTH_FREE %>
+            free trial,
+         <% else %>
+         <% end %>
+   a money back guarantee trial, our cancel-at-any-time policy, and
+   our legendary customer support, this is a bargain that you can't
+   afford to miss! 
+   </p>
+  -->
+
+    <p class="fine_print">
+       * a few topics cost a bit more at <%= University.max_plan_price.to_f.currency %>
+    </p>
+  </div>
+
+</div>
+
+<%= render :partial => 'testimonials' %>
+
+<div id="upNext" style="right: -410px;">
+</div>
+
+
+<% # the layout loads JS libs; place our JS lower in the page -%>
+ <% content_for :javascript_footer do %> 
+  <script  type="text/javascript"> 
+         duration = 3500;
+        /* initialise fader by hiding image object first */
+        /* addEvent(window,'load',fadeInit) */
+  </script>
+<% end %> 
+

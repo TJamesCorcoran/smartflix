@@ -1,0 +1,10 @@
+coupon1:
+  coupon_id: 1
+  code: 'LE_COOP'
+  amount: 1.55
+  start_date: <%= Date.today %>
+  end_date: <%= Date.today + 5 %>
+  new_customers_only: 0
+  single_use_only: 0
+  active: 1
+  created_at: <%= DateTime.now %>

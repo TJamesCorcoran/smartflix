@@ -1,0 +1,26 @@
+<%= error_messages_for 'vendor' %>
+
+<!--[form:vendors]-->
+<p><label for="vendor_name">Name</label><br/>
+<%= text_field 'vendor', 'name'  %></p>
+
+<p><label for="email">email</label><br/>
+<%= text_field 'vendor', 'emailAddr'  %></p>
+
+<p><label for="vendor_mood_id">mood</label><br/>
+<%
+if (@vendor.vendor_mood_id == 0)
+	@vendor.vendor_mood_id = 2
+end
+%>
+<%=
+@moods = VendorMood.find(:all, :order => "vendor_mood_id" ).map {|x| [ x.moodText, x.vendor_mood_id ]  }
+select(:vendor, :vendor_mood_id, @moods)
+%></p>
+
+<p><label for="notes">notes</label><br/>
+<%= text_area 'vendor', 'notes'  %></p>
+
+
+<!--[eoform:vendors]-->
+

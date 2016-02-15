@@ -1,0 +1,61 @@
+
+<table border=0>
+  <tr>
+    <td><h1>Customers</h1></td>
+    <td><%= render(:partial => "search") %></td>
+  </tr>
+  <tr>
+    <td>(<%= link_to 'unfiltered', :action => 'index' %>), </td>
+  </tr>
+</table>
+
+(see also <A href="https://smartflix.com/rcadmin">rcadmin</a>)
+
+<hr>
+<h1>
+<%= "#{@charge_type.to_s}, #{@fday.to_s} - #{@lday.to_s}" if @fday %>
+</h1>
+
+
+<%= link_to "orders that match same criteria", :controller => :orders, :action => :index, :source => params[:source], :fday => params[:fday], :lday => params[:lday] %>
+<br>
+
+<%= @customers.size %> customers
+
+
+<table class="sortable" id="customer_list">
+
+<tr>
+  <% columns = ["customer_id", "email"] %>
+  <% columns.each do |column|  %>
+	  <th><%= column %> </th>
+  <% end %>
+  <th>first</th>
+  <th>last</th>
+  <th>from_site</th>
+  <th>revenue</th>
+</tr>
+
+  
+<% @customers.each do |customer| %>
+  <tr>
+  <% columns.each do |column| %>
+  <td>
+    <%=
+            if (column == "email") 
+                link_to customer.email, :action => :show, :id => customer.id
+            else
+				customer.send(column) 
+			end
+    %>
+  </td>
+  <% end %>
+  <td><%= customer.shipping_address.first_name %></td>
+  <td><%= customer.shipping_address.last_name %></td>
+  <td><%= customer.referer_domains.andand.join("<br>") %></td>
+  <td><%= customer.revenue.currency %></td>
+
+</tr>
+<% end %>
+</table>
+

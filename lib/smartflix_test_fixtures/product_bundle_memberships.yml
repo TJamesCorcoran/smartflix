@@ -1,0 +1,46 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+bundle_membership_1_1:
+  product_bundle_membership_id: 1
+  product_bundle_id: 1
+  product_id: 2
+bundle_membership_1_2:
+  product_bundle_membership_id: 2
+  product_bundle_id: 1
+  product_id: 4
+bundle_membership_1_3:
+  product_bundle_membership_id: 3
+  product_bundle_id: 1
+  product_id: 5
+
+
+bundle_membership_2_1:
+  product_bundle_membership_id: 4
+  product_bundle_id: 2
+  product_id: 2
+bundle_membership_2_2:
+  product_bundle_membership_id: 5
+  product_bundle_id: 2
+  product_id: 3
+bundle_membership_2_3:
+  product_bundle_membership_id: 6
+  product_bundle_id: 2
+  product_id: 4
+bundle_membership_2_4:
+  product_bundle_membership_id: 7
+  product_bundle_id: 2
+  product_id: 5
+
+
+ 
+bundle_membership_3_1:
+  product_bundle_membership_id: 8
+  product_bundle_id: 3
+  product_id: 7
+bundle_membership_3_2:
+  product_bundle_membership_id: 9
+  product_bundle_id: 3
+  product_id: 9
+bundle_membership_3_3:
+  product_bundle_membership_id: 10
+  product_bundle_id: 3
+  product_id: 10

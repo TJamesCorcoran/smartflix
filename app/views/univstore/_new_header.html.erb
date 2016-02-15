@@ -1,0 +1,42 @@
+<%= render :partial => 'shared/devel_bar' %>
+
+
+<div id="header">
+  <div id="sf-logo">
+    <%= link_to image_tag('univstore/logo_banner.jpg', :size => '850x60', :alt => 'SmartFlix'), :controller => :univstore, :action => :index %>
+  </div>
+</div>
+
+
+<%  unless  supress_nav %>
+  <div id="topnavbar">
+    <div id="topnavlinks">
+
+
+      <div class="topnavlink">
+         <% if SmartFlix::Application::FIRST_MONTH_FREE %>
+           <%= link_to_or_text "Start Your Free Trial", :action => :index %>
+         <% else %>
+           <%= link_to_or_text "Start Your Trial", :action => :index %>
+         <% end %>
+      </div>
+
+
+      <div class="topnavlink">
+         <%= link_to_or_text "What do you want to learn?", :action => :all %>
+      </div>
+
+
+      <div class="topnavlink, signin_link">
+        <% if @customer.andand.full_customer? %>
+          <%= link_to "#{@customer.display_name_posessive} SmartFlix account", :controller => :customer, :action => :university_status %> 
+        <% else %>
+          <%= link_to "member sign in", :controller => :customer, :action => :university_status %> 
+        <% end %>
+      </div>
+
+
+    </div>
+  </div>
+<% end %>
+

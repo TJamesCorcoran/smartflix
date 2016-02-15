@@ -1,0 +1,66 @@
+<div class="text-content">
+
+  <%= render :partial => 'customer_nav' %>
+
+  <h1>Your <%= @order.university.name %> plan </h1>
+
+
+  <%= onepage_auth_hidden_field %> 
+
+   <div id="success_field"></div>
+   <div id="error_field">  </div>
+
+
+  <table border=0 id="change_plans">
+    <tbody>
+       <% @plans.keys.sort.each do |num_dvds| %>
+          <tr id="plan_<%= num_dvds %>" 
+              class=<%= @current_rate == num_dvds ? "selected_plan" : "other_plan" %> 
+           >
+             <td class="change_plan_left">
+                  <% if @current_rate == num_dvds %>
+                     <span class="current_plan_text">
+                       You are currently on this plan.
+                     </span>
+                     <br>
+                  <% end %>
+                  <span class="plan_text">
+                     <span class="plan_text_num">
+                       <%= num_dvds %>
+                     </span>
+                     <%= "dvd".pluralize_conditional(num_dvds) %>
+                  </span>
+                  <%= image_tag("#{num_dvds}_dvd.png", :alt => "#{num_dvds} dvd plan") %>
+             </td>
+             <td class="change_plan_right">
+
+                <%= radio_button_tag :num_dvds, num_dvds, ( @current_rate == num_dvds ) %>
+                <script>
+                     $("#num_dvds_<%= num_dvds %>").click( function () { $.ajax( { type: 'GET',
+  dataType: "script",
+  url : "<%= customer_change_plan_url( :order_id => @order, :num_dvds => num_dvds) %>" }); } );
+                </script>
+
+                 
+
+                 <span class="plan_price">
+                   <%= number_to_currency(@plans[num_dvds]) %>
+                 </span>   
+                 per month
+                 <br>
+                 <span class="plan_commentary"> 
+                    <% if num_dvds == 3 %>
+                      Our most popular plan -  <%= number_to_currency(@plans[num_dvds] / num_dvds) %> per DVD.
+                    <% elsif num_dvds == 8 %>
+                      The best bargain - just <%= number_to_currency(@plans[num_dvds] / num_dvds) %> per DVD!
+                    <% end %>
+                 </span>
+             </td>
+          </tr>
+       <% end %>
+    </tbody>
+  </table>
+
+  <%= link_to "Back to my #{ @order.university.name } page", :action => :university_status %>
+
+</div>

@@ -1,0 +1,34 @@
+<% last_good_payment = order.most_recent_payment_good %>
+
+<% if order.line_items_unshipped_and_uncancelled.empty? %>
+    <div class="univ_done">
+        <div class="univ_done_inner">
+            <p>There are no more DVDs in the university.</p>
+            <p>Please <%= link_to 'tell us what DVDs we should add!', :controller => 'store', :action => 'suggest' %>, or
+               <%= link_to 'contact us', :controller => 'store', :action => 'contact_us' %> with any questions.</p>
+        </div>
+    </div>
+<% elsif ! order.univ_fees_current? %>
+
+  <% if @customer.valid_cards.any? && ! order.univ_any_payments? %>
+    <div class="univ_good">
+        <div class="univ_good_inner">
+           <p>Thanks for signing up!</p>
+
+           <p>We'll get your subscription started ASAP!</p>
+        </div>
+    </div>
+
+   <% else %>
+      <%= render :partial => "university_error", :locals => { :last_good_payment => last_good_payment,
+                                                              :order => order,
+                                                              :verbose => local_assigns[:verbose]} %>
+  <% end %>
+
+<% else %>
+      <%= render :partial => "university_good", :locals => { :last_good_payment => last_good_payment,
+                                                              :order => order,
+                                                              :verbose => local_assigns[:verbose]} %>
+<% end %>
+
+

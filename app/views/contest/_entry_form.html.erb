@@ -1,0 +1,75 @@
+<div class="contest-entry-form">
+  <h2>Enter the contest:</h2>
+  <p>
+  We'd love to see what you've created - please show us!
+  </p>
+  <% form_tag({:action    => 'enter',
+               :id        => @contest},
+              {:multipart => true,
+               :id        => "entry-form",
+               :enctype   => "multipart/form-data"}) do %>
+
+
+    <% if @customer %> 
+          <%= hidden_field :contest_entry, :first_name %>
+          <%= hidden_field :contest_entry, :last_name %> 
+
+         <% token = OnepageAuthToken.create_token(@customer, 10, :action => :enter) %>
+         <%= hidden_field_tag('token', token) if params[:token] %>
+
+    <% else %>
+      <div id="name-section">
+          <label for="contest_entry_first_name">First name:</label>
+          <%= text_field :contest_entry, :first_name %>
+          <br />
+          <label for="contest_entry_last_name">Last name:</label>
+          <%= text_field :contest_entry, :last_name %>
+          <br />
+      </div>
+    <% end %>
+
+
+    <div id="project-section">
+      <label for="contest_entry_title">Title:</label>
+      <%= text_field :contest_entry, :title %>
+      <br />
+      <label for="contest_entry_description">Description:</label>
+      <%= text_area :contest_entry, :description, :rows => 5 %>
+      <br />
+    </div>
+
+
+
+    <div id="photo-section">
+      <label>Photo 1:</label>
+      <%= file_field_tag "photos[]" %>
+      <br />
+      <label>Photo 2:</label>
+      <%= file_field_tag "photos[]" %>
+      <br />
+      <label>Photo 3:</label>
+      <%= file_field_tag "photos[]" %>
+      <% if @customer %>
+         <%= submit_tag 'Submit Entry', :class => 'button' %>
+      <% end %>
+    </div>
+    <% if !@customer %>
+      <div id="customer-section">
+        <h2>Already a SmartFlix customer?</h2>
+        <label for="login_email">E-mail:</label>
+        <%= text_field_tag "login_email" %>
+        <br />
+        <label for="login_password">Password:</label>
+        <%= password_field_tag "login_password" %>
+        <br />
+        <h2>New to SmartFlix?</h2>
+        <label for="register_email">Email:</label>
+        <%= text_field_tag "register_email" %>
+        <%= submit_tag 'Submit Entry', :class => 'button' %>
+
+      </div>
+    <% end %>
+    <label></label>
+    <%= submit_tag 'Submit Contest Entry', :class => 'orange button' %>
+  <% end %>
+</div>

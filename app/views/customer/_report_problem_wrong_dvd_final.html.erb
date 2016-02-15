@@ -1,0 +1,16 @@
+<% if (@line_item && @replacement_order) -%>
+
+    <p>
+    Thanks for letting us know about the problem, we'll send a replacement
+    ASAP! Please send back the video you just reported a problem with as
+    soon as you can.
+    </p>
+
+    <p>
+    Your replacement order number is
+    <%= link_to "#{@replacement_order.id}", :action => 'order', :id => @replacement_order.id %>
+    </p>
+
+    <%= report_problem_close(:done) %>
+
+<% end -%>

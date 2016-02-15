@@ -1,0 +1,20 @@
+<table border=0>
+<tr>
+  <td width=400px>
+	  <%= form_tag( {:action => 'index'}, {:method => :get} ) do %>
+			<%= text_field_tag  'order_id'  %><br>
+			<%= submit_tag 'Search by orderID' %>
+	  <% end %>
+  </td>
+  <td>
+
+	<%= form_tag( {:action => 'index'}, {:method => :get} ) do %>
+	<table border=0>
+		<tr><th>amount</th><td><%= text_field_tag  'amount'  %></td></tr>
+		<tr><th>yyyy-mm-dd</th><td><%= text_field_tag  'date'  %></td></tr>
+		<tr><td colspan=2<td>  <%= submit_tag 'Search by amount and date (may take 20 sec)' %></td></tr>
+	</table>
+    <% end %>
+  </td>
+</tr>
+</table>

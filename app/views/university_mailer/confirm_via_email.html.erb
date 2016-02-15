@@ -1,0 +1,40 @@
+<%# Reset password uses a single text email template, no HTML -%>
+Hi <%= h(@customer_full_name) %>,
+
+You're just seconds away from signing up for <%= @smartflix_U_name -%>
+- we just need you to click one link.
+
+
+<% if @cc_last_four %>
+If you want to sign up with credit card ending in
+
+   (XXXX-XXXX-XXXX-<%= @cc_last_four %>)
+
+and shipping address:
+
+   <%= @shipping_addr %>
+
+just click
+
+<%= @lastCC_url %>
+
+If you want to use a different credit card, click
+
+<%= @newCC_url %>
+<% else %>
+Please click here to confirm and tell us where we should ship your DVDs:
+
+<%= @newCC_url %>
+<% end %>
+
+
+As soon as click the link, we'll send you the first DVDs that make up
+a veritable warehouse full of knowledge.  The patient mentors and
+tutors on these DVDs will share with you every secret, technique,
+concept, and experience they have.  If you want to learn what
+separates a master from someone who barely knows how to pick up the
+tools, you need this hand holding, step-by-step, short cut!
+
+
+
+The <%= @smartflix_U_name -%> Team

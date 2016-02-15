@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<title>SmartFlix.com - Videos you are interested in</title>
+<link rel= "shortcut icon" href= "http://smartflix.com/images/favicon.ico" />
+<meta http-equiv= "Content-Type" content= "text/html; charset= utf-8">
+<style type= "text/css">
+  body {margin: 0px; padding: 0px;}
+</style>
+</head>
+<body margin= "0" padding= "0">
+  <div style = "background-color: #848284; margin: 0px; padding: 0px; padding-bottom: 20px; padding-top: 20px; font-family: georgia, serif; text-align: center;">
+  <div style = "background-color: white; width: 740px; margin-bottom: 40px; padding-bottom: 0px; text-align:left; margin: 0px auto; border:1px solid black;">
+    <div style =  "width:740px; background-color: #eceadd; padding-top: 20px; padding-bottom: 20px;">
+      <div style = "margin-left:20px; margin-right:0px;">
+      <a href= "http://smartflix.com"><img border= "0" src= "http://smartflix.com/images/new_logo.jpg"></a>
+      </div>
+    </div>
+  <div style =  "background-color:#107089; height:30px; width:740px;">
+    <p style =  "color:white; font-size:0.75em; margin-top:0px; padding-top: 8px; padding-left:20px; font-family: verdana, sans bold;">What do you want to learn today?</p>
+  </div>
+  <div style =  "margin-left: 20px; margin-right: 20px; width: 700px;">
+
+    <p>
+      Hi <%= @customer.full_name.andand.titleize %>,
+    </p>
+
+
+    <p>
+      We appreciate you dropping by SmartFlix!  You probably looked at a lot
+      of cool videos, and we wanted to remind you that over <%=
+      ((Customer.count / 10000 ) * 10000).commify %> other folks have learned about <%=
+      (@toprated_titles_by_cat.keys.map(&:good_human_name) << "other how-to skills").to_sentence  %>
+    </p>
+    <p>
+      The vast majority of these DVDs are in stock, ready to be shipped right out to you!
+    </p>
+
+
+    <% # XYZFIX P2: we're ignoring the @toprated_titles_by_cat ...      %>
+    <% @browsed_titles_by_cat.keys.each do |cat| %>
+        <h2><%= cat.name %></h2>
+        <% @titles = @browsed_titles_by_cat[cat] + @toprated_titles_by_cat[cat] %>
+        <%= render :partial => 'mailer/product_listing_with_reviews', :locals => {:products => @titles, :token => @token, :ctcode => @ctcode }
+        %>
+    <% end %>
+
+
+
+    As you know, most of our DVDs are just $9.99 for the first week (and a
+    whole lot less for optional additional weeks!), and we cover shipping
+    both ways. <p>
+
+    Sincerely,<br>
+    Your friends at SmartFlix</p>
+    <p>
+
+  </div>
+  <div style = "margin-bottom:20px;">&nbsp;</div>
+  <div style =  "width: 740px; background-color: #F4F4F2;">
+  <div style =  "width: 700px; font-family: verdana, sans bold; color: #8F8F8F; font-size: 12px;  padding-top: 20px; padding-bottom: 20px; margin-left:20px; margin-right: 20px; margin-bottom:0px;">
+    <p>
+      We hope you enjoyed receiving this message. However, if you'd rather <!-- ' -->
+      not receive future e-mails like this one, please visit our email
+      preferences page:
+    </p>
+    <p>
+     <% pref_token = OnepageAuthToken.create_token(@customer, 3, :controller => 'customer', :action => 'email_prefs') %>
+     <a href="http://<%= SMARTFLIX_SmartFlix::Application::WEB_SERVER %>/customer/email_prefs?token=<%= pref_token %>">http://SmartFlix.com/customer/email_prefs?token=<%= pref_token %></a>
+    </p>
+    <p>
+      This email was sent to <%= @customer.email %>
+    </p>
+  </div>
+
+</body>
+</html>
+

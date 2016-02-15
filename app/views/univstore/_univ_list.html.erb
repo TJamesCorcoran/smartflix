@@ -1,0 +1,43 @@
+<h1>
+  What do you want to learn?
+</h1>
+
+<p> Whether you want to master <b>Oil Painting</b>, or <b>Metalworking</b>, or 
+  <b>Woodworking</b> or any of a dozen other skills - we've got a
+  subscription for you.  </p>
+
+<p>
+    Each one gives you DVDs from the most talented
+    teachers the field.  We ship you 3 DVDs per month -
+    <span class="highlight">keep them as long as you want</span>, with  <span class="highlight">no late charges!</span>
+
+    With most subscriptions  <span class="highlight">just $<%= University.base_plan_price.to_f %></span>, this is a bargain that
+    you can't afford to miss!<!-- ' -->
+</p> 
+
+
+<div>
+
+<% half = @univs.size / 2 %>
+
+  <div class="unilist-col-1">
+    <ul>
+      <% @univs[0,half].each do |univ| %>
+         <li class="uni-list"><%= link_to univ.name, { :action => :one , :univ_id => univ.id }, { :class => "uni-link" } %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="unilist-col-2">
+    <ul>
+      <% if @univs[half,half] 
+          @univs[half,half].each do |univ| %>
+            <li class="uni-list"><%= link_to univ.name, { :action => :one, :univ_id => univ.id} , { :class => "uni-link" } %>
+          <% end  %>
+      <% end  %>
+    </ul>
+  </div>
+</div>
+
+<div class="clear"></div>
+

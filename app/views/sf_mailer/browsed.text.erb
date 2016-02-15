@@ -1,0 +1,35 @@
+Hi <%= @customer.full_name.andand.titleize %>,
+
+We appreciate you dropping by SmartFlix!  You probably looked at a lot
+of cool videos, and we wanted to remind you that over <%=
+((Customer.count / 10000 ) * 10000).commify %> other folks have learned about <%=
+(@toprated_titles_by_cat.keys.map(&:good_human_name) << "other how-to skills").to_sentence  %>
+
+The vast majority of these DVDs are in stock, ready to be shipped right out to you!
+
+
+<% # XYZFIX P2: we're ignoring the @toprated_titles_by_cat ...      %>
+<% @browsed_titles_by_cat.keys.each do |cat| %>
+  <%= cat.name %>
+  <%= "-" * cat.name.size %>
+<% @titles = @browsed_titles_by_cat[cat] + @toprated_titles_by_cat[cat] %>
+<%= render :partial => 'mailer/product_listing_with_reviews_TEXT', :locals => {:products => @titles, :token => @token, :ctcode => @ctcode }  %>
+<% end %>
+
+As you know, most of our DVDs are just $9.99 for the first week (and a
+whole lot less for optional additional weeks!), and we cover shipping
+both ways.
+
+Sincerely,
+
+Your friends at SmartFlix
+
+We hope you enjoyed receiving this message. However, if you'd rather 
+not receive future e-mails like this one, please visit our email
+preferences page:
+
+<% pref_token = OnepageAuthToken.create_token(@customer, 3, :controller => 'customer', :action => 'email_prefs') %>
+http://SmartFlix.com/customer/email_prefs?token=<%= pref_token %>
+
+This email was sent to <%= @customer.email %>
+

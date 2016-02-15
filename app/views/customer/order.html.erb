@@ -1,0 +1,82 @@
+<div class="text-content">
+<% if @order -%>
+  <h1>Order #<%= @order.id %></h1>
+  <strong>Order date: <%= @order.listing_date %></strong>
+  <%# Admin controller use only -%>
+  <% if (params[:controller] == 'rcadmin') -%>
+        <br>
+        <strong>Customer: <%= link_to @order.customer.andand.email || "none", :action => 'customer', :id => @order.customer_id %></strong>
+  <% end -%>
+  <% if @order.university %>
+      <p>
+      This is your <b><%= @order.university.name %></b> order - every DVD in the university is listed here.
+      As you return DVDs, we ship you new DVDs from this list, at a rate of up to <%= @order.univ_dvd_rate %> per month.
+      </p>
+  <% end %>
+
+  <p>
+  <table width="100%">
+  <tr>
+      <th align="left"><strong>Product</strong></th>
+      <th align="left"><strong>Price</strong></th>
+      <th align="left"><strong>Status</strong></th>
+      <th align="left"><strong>Shipping</strong></th>
+      <th align="left"><strong>Report Problems</strong></th>
+  </tr>
+
+  <%# Keep track of current set for spacer row %>
+  <% current_set = nil -%>
+  <% @order.line_items.each do |li| -%>
+    <%# Spacer row if this is a singleton or the first item in a set (not necessarily ordinal 1 if 3+4 were rented! -%>
+    <% if (!li.product.product_set_member? || (li.product.product_set_member? && li.product.product_set != current_set)) -%>
+      <% current_set = li.product.product_set -%>
+      <tr><td colspan="4">&nbsp;</td></tr>
+    <% end -%>
+    <tr id="line_item_<%= li.id %>">
+      <td>
+      <%# Links are to base product if it's a set, and we include the disc number %>
+      <% if(li.product.product_set_member?) -%>
+      <%= link_to_product li.product.product_set.first %>  (disc <%= li.product.product_set_ordinal %>)
+      <% else -%>
+      <%= link_to_product li.product %>
+      <% end -%>
+      </td>
+      <%# Only display a price if it's non-zero -%>
+      <td><%= number_to_currency_if_positive(li.price) %></td>
+      <%# Display shipment status -%>
+      <td>
+         <%= li.status_text %>
+      </td>
+      <td>
+         <% if li.status_text == "pending" && ! li.order.university %>
+             <%= li.wait_text        %>
+         <% end %>
+      </td>
+      <td>
+          <% if li.children_lis.any? %>
+            problem reported<br>
+            <%= link_to "replacement order ##{li.children_lis.first.order.id}", :action => :order, :id =>li.children_lis.first.order %>
+          <% elsif li.cancelled? %>
+             CANCELLED
+          <% else %>
+            <%= render :partial => 'customer/report_problem_button', :locals => { :li => li } %>
+          <% end %>
+       </td>
+    </tr>
+    <tr>
+      <td colspan="4"><div id="<%= dom_id(li) %>" class="problemReportBox" style="display:none;"></div></td>
+    </tr>
+  <% end -%>
+  </table>
+  </p>
+  <p>
+  <% @order.price_modifiers.each do |pm| -%>
+  <strong><%= h(pm.display_string) %>:</strong> <%= number_to_currency(pm.amount) %><br>
+  <% end -%>
+  <strong>Free shipping:</strong> <%= number_to_currency(0.0) %><br>
+  <strong>Order total:</strong> <%= number_to_currency(@order.total) %><br>
+  <strong>Payment method:</strong> <%= @order.payment_method %><br>
+  <strong>Order Status:</strong> <%= @order.report_status_for_display %>
+  </p>
+<% end -%>
+</div>

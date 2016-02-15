@@ -1,0 +1,6 @@
+class ShippingAddress < Address
+  has_one :customer
+  def display_type
+    'Shipping Address'
+  end
+end

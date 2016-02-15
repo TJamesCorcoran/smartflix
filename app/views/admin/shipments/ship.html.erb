@@ -1,0 +1,97 @@
+<h1> Ship!</h1>
+
+<div id="shipping_stats">
+    <%= @shipments.size %> packages, <%= @shipments.map(&:potential_items).flatten.size %> items
+    (calculated at <%= (@shipments.first && @shipments.first.created_at.strftime("%a %Y-%m-%d %I:%M %p")) || "n/a" %>)
+
+</div>
+
+<table border=0>
+  <tr>
+	<td  width=400px>
+      <!-- **************************************** -->
+      <!--      print all                           -->
+      <!-- **************************************** -->    
+
+      <%= button_to "print all", "http://#{SmartFlix::Application::BACKEND_URL}/admin/shipments/print?redirect_url=#{request.url.split("?")[0]}"   %>
+
+
+ 
+      <!-- **************************************** -->
+      <!--      scan out                            -->
+      <!-- **************************************** -->    
+  
+      <%= form_tag(admin_scan_out_url, :remote => true) do %>
+        Scan barcode: <%= text_field_tag :barcode %>
+      <% end %>
+
+
+      <!-- **************************************** -->
+      <!--      recalc                              -->
+      <!-- **************************************** -->    
+
+      <%= button_to "recalc", {:action =>:recalc }, :confirm => "Really want to recalc?" %>
+
+
+
+
+    </td>
+	<td valign=top>
+	  <% if ! @last_shipment.nil? %>
+        Last shipment:<br>
+        <%= link_to @last_shipment.id, :action=>:show, :id => @last_shipment.shipment_id %>
+	  <% end %>
+	</td>	
+	<td></td>
+	<td></td>
+  </tr>
+</table>
+
+<table border=0>
+<tr><td>
+  <table class="sortable" id="shipments">
+    <tr>
+       <th >first</th>
+       <th >last</th>
+       <th width=400px >address</th>
+       <th>copies</th>
+       <th><!-- button  --></th>
+       <th><!-- button  --></th>
+       <th><!-- button  --></th>
+    </tr>
+
+  <% @shipments.each do |shipment| %>
+     <tr id="<%= shipment.barcode %>">
+       <% if shipment.customer.shipping_address %>
+          <td><%= shipment.customer.shipping_address.first_name %></td>
+          <td><%= shipment.customer.shipping_address.last_name %></td>
+          <td width=400px><%= shipment.customer.shipping_address.to_s.gsub(/\n/, "<br>").html_safe %></td>
+          <td>
+              <%= shipment.potential_copies.map{|item| link_to item.copy.sticker_id, :controller => :copies, :action =>:show, :id =>item.copy.id }.join("<br> ").html_safe %>
+              <%= shipment.potential_gift_certs.map{|item| item.gift_cert.andand.name }.join("<br> ").html_safe %>
+          </td>
+
+          <td>
+              <%= button_to "ship", admin_scan_out_url( :barcode => shipment.barcode), :confirm => "Really want to ship one?", :remote=>true %>
+          </td>
+
+          <td>
+              <%= button_to "print", "http://#{SmartFlix::Application::BACKEND_URL}/admin/shipments/print?print_id=#{shipment.id}&redirect_url=#{request.url.split("?")[0]}"   %>
+          </td>
+
+          <td>
+              <%= button_to "cancel", {:action =>:cancel, :id => shipment.id}, :confirm => "Really want to CANCEL ?" %>
+          </td>
+
+
+        <% else %>
+          <td> ERROR on shipment <%= shipment.id %></td>
+        <% end %>
+
+     </tr>
+  <% end %>
+  </table>
+
+</td><td valign=top>
+        <div id="ajax_feedback"></div>
+</td></tr></table>

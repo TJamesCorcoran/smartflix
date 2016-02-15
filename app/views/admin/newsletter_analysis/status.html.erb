@@ -1,0 +1,61 @@
+<h3>Status for <%= @newsletter.title %></h3>
+<p>(this page refreshes itself every 5 seconds)</p>
+<table>
+  <tr>
+    <td colspan="2"><strong>Blog</strong></td>
+  </tr>
+  <tr>
+    <td>Posted to blog?</td>
+    <td><%= @newsletter.posted_to_blog? ? '<span style="color: green;">Yes</span>' : '<span style="color: red;">No</span>' %></td>
+  </tr>
+  <tr>
+    <td colspan="2"><strong>Image Push</strong></td>
+  </tr>
+  <tr>
+    <td>Images pushed to server?</td>
+    <td><%= @newsletter.images_pushed? ? '<span style="color: green;">Yes</span>' : '<span style="color: red;">No</span>' %></td>
+  </tr>
+  <tr>
+    <td colspan="2"><strong>Email</strong></td>
+  </tr>
+  <tr>
+    <td>Recipients calculation</td>
+    <td><%= case
+           when (@newsletter.newsletter_recipient_assemble.nil?):                     '<span style="color: red;">unstarted</span>'
+           when (@newsletter.newsletter_recipient_assemble.done_assembling == true):    '<span style="color: green;">done</span>'
+           when (Time.now - @newsletter.newsletter_recipient_assemble.updated_at) < 30: "<b><span style='color: yellow; background-color:black;'>in progress</span><b>: #{@newsletter.newsletter_recipient_assemble.num_assembled}"
+           else                                                                         '<span style="color: red;">undead / zombie</span>'
+           end
+  %></td>
+  </tr>
+  <tr>
+    <td>Total Recipients</td>
+    <td><%= total = @newsletter.newsletter_recipients.size %></td>
+  </tr>
+  <tr>
+    <td>Sent to</td>
+    <td><%= sent = @newsletter.newsletter_recipients.find_all_by_status('sent').size %> (<%= total > 0 ? (sent.to_f / total.to_f * 100).to_i : 0 %>%)</td>
+  </tr>
+  <tr>
+    <td>Not Sent to</td>
+    <td><%= unsent = @newsletter.newsletter_recipients.find_all_by_status('unsent').size %> (<%= total > 0 ? (unsent.to_f / total.to_f * 100).to_i : 0 %>%)</td>
+  </tr>
+  <tr>
+    <td>Failed to send</td>
+    <td><%= failed = @newsletter.newsletter_recipients.find_all_by_status('failed').size %> (<%= total > 0 ? (failed.to_f / total.to_f * 100).to_i : 0 %>%)</td>
+  </tr>
+</table>
+<%= button_to 'Make It Stop!', :action => 'kill', :id => @newsletter.id %>
+
+<br><br>
+back to <%= link_to 'Edit', :action => :edit, :id => @newsletter.id %> page
+
+<% content_for('head') do -%>
+  <script type="text/javascript">
+    window.onload = function() {
+      window.setTimeout(function(){
+        window.location.reload( false );
+      }, 5000)
+    }
+  </script>
+<% end -%>

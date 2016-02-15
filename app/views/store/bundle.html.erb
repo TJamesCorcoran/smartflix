@@ -1,0 +1,32 @@
+<%= render :partial => "column_right" %>
+
+<h1 class="bundle"><%= @product.name %></h1>
+<%= link_to "(How do bundles work?)", {:controller => 'help', :action => 'video_bundles'}, :class => 'bundle_help' %>
+<p class="bundle"><%= html_paragraphs(@product.description) %></p>
+<% @product.products.each do |product| %>
+
+<div class="vid-desc">
+
+  <% base_product = product.product_set_member? ? product.product_set.first : product -%>
+
+  <% if product == base_product -%>
+    <%= link_to_product base_product, large_image_for(base_product) %>
+  <% else -%>
+    <%= image_tag 'large_blank.gif', :class => 'vidcap' %>
+  <% end -%>
+
+
+  <h2><%= link_to_product base_product, "#{product.name}" %></h2>
+
+  <p>
+    <% if base_product.author -%>
+    ...with
+    <%= link_to_author base_product.author %>
+    <% end -%>
+  </p>
+
+  <p><%= product.summary(300) %>... <%= link_to_product(base_product, 'Read More') %></p>
+    
+</div>
+
+<% end -%>

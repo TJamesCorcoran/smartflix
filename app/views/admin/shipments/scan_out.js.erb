@@ -1,0 +1,5 @@
+$("#ajax_feedback").append("<span style='color:green;'>shipment <%= @barcode %> to <%= @potential_ship.customer.full_name %></span><br>");
+$("#barcode").val("");
+$("tr#<%= @barcode %>").remove();
+$('shipping_stats').html("<%= PotentialShipment.count %> packages");
+soundManager.play('success');

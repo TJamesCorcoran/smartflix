@@ -1,0 +1,13 @@
+<h1>New email_campaign</h1>
+
+<%= error_messages_for :email_campaign %>
+
+<%= form_for(:email_campaign, :url => email_campaigns_path) do |f| %>
+  <%= render :partial => 'form', :object => f, :locals => { :reduced_frequency => [nil,nil]} %>
+
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', email_campaigns_path %>

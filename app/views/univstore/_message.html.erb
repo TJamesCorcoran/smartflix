@@ -1,0 +1,7 @@
+<% if flash[:message] -%>
+  <div class="error-box">
+    <span class="error-span">
+       <%= h(flash[:message]) %>
+    </span>
+  </div>
+<% end -%>

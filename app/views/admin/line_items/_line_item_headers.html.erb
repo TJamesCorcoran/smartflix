@@ -1,0 +1,28 @@
+	<tr>
+		<th width=140px><!-- where in list --></th>
+		<th><!-- cancel button --></th>
+		<th><!-- univ doesnt count button --></th>
+		<th><!-- grace button --></th>
+		<th><!-- defect / reship --></th>
+
+        <th>type</th>
+        <th>order date</th>
+        <th>payment</th>
+		<% columns.each do |lic| %>
+          <th> <%= 
+              if lic.human_name == "Overduegracegranted"
+                 "grace granted"
+              elsif lic.human_name == "Wrongitemsent"
+                 "wrong item?"
+              elsif lic.human_name.match(/([0-9])sent$/)
+                 lic.human_name.gsub(/[0-9]sent/, " #{$1} sent").gsub(/Latemsg/, "Late msg")
+              elsif lic.human_name == "Pricepaid"
+				  "Price"
+              elsif lic.human_name == "live"
+				  "live?"
+              else
+				  lic.human_name.gsub(/id$/, "")
+              end %>
+          </th>
+        <% end %>
+	</tr>

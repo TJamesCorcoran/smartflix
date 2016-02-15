@@ -1,0 +1,15 @@
+<div class="text-content">
+  <%= render :partial => 'customer_nav' %>
+
+  <h1> 
+     University Payment Details ( <%= link_to "back to your queue" , :action => :university_status %>)
+  </h1>
+
+  <% if @univ_order.live? %>
+      <%= render :partial => 'university_payment_status',
+                 :locals => { :order => @univ_order, :verbose => true} %>
+  <% else %>
+      <%= render :partial => 'university_cancelled', :locals => { :order => @univ_order } %>
+  <% end %>
+
+</div>

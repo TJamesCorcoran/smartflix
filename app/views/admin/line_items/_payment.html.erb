@@ -1,0 +1,19 @@
+<%
+       payment_bgcolor = 
+            if payment.complete?
+               payment.successful ?  "fff" : "f00"
+            else
+               "ff0"
+            end
+       %>
+<div style="background:#<%= payment_bgcolor %>">
+   <% text = ""
+      if verbose
+         text = "#{payment.created_at.strftime("%Y-%m-%d")} //  #{payment.amount.to_f} (  #{payment.id} )"
+      else
+         text = payment.id.to_s
+      end
+    
+   %>
+          <%= link_to text, :controller => :payments, :action => :show, :id => payment.id %>
+</div>

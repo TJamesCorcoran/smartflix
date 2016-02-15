@@ -1,0 +1,80 @@
+<%= render :partial => 'html_header' %>
+
+<p>Hi there,</p>
+
+<p>We're glad you signed up for a SmartFlix.com account!</p>
+<% if @cart.cart_items.size.zero? then %>
+
+<p>As you know, we stock thousands of how-to DVDs on everything from
+metalworking to knitting, from automotive airbrushing to juggling.</p>
+
+<p>If you can't find something you need, just type it into our convenient
+search box on the top right-hand corner of every SmartFlix page. We add
+new DVDs all the time, so please come back regularly and check out our
+new arrivals.</p>
+
+<% else %>
+
+<% unless ( (to_buy_items = @cart.to_buy).blank? ) %>
+<p>We did notice that you left some items un-rented in your shopping cart. Did you mean to rent:</p>
+  <ul>
+    <% to_buy_items.each do |i| -%>
+      <li><%= i.product.name %></li>
+    <% end -%>
+  </ul>
+<% end %>
+
+<% unless ( (wish_list_items = @cart.wishlist).blank? ) %>
+<p>There were some videos left in your saved items list:</p>
+  <ul>
+    <% wish_list_items.each do |i| -%>
+      <li><%= i.product.name %></li>
+    <% end -%>
+  </ul>
+<% end %>
+
+<p>We know these DVDs interest you. (Heck, they interest us!) So we figure
+the check-out process might not have looked straightforward. But, rest
+assured, we're here to help!</p>
+
+<p>Checkout takes just three simple steps:</p>
+  <ol>
+    <li>go to
+      <p><a href="https://smartflix.com/customer/login">https://smartflix.com/customer/login</a></p>
+    </li>
+    <li>login using your email address 
+      <p><%= @customer.email %></p>
+    </li>
+    <li>click "checkout"</li>
+  </ol>
+<p>That's it! </p>
+
+<% end %>
+
+<p>So come back to SmartFlix.com, the DVDs will be waiting for you in
+your shopping cart when you get back. But, if you don't rent them soon,
+someone else may.</p>
+
+<p>If you have any questions at all, please send us a note and ask!</p>
+
+<p>Thanks, </p>
+
+<p>Your friends at SmartFlix.com</p>
+
+<p>
+--<br>
+http://SmartFlix.com/<br>
+Web's Biggest How-To DVD Rental Store<br>
+</p>
+
+<p>
+-----------------------------------------------------------------<br>
+We hope you enjoyed receiving this message. However, if you would<br>
+rather not receive future e-mails like this one, please visit our<br>
+email preferences page:<br>
+<% email_url = @customer.email_preferences_url -%>
+<a href="<%= email_url %>"><%= email_url %></a><br>
+This email was sent to <%= @customer.email %><br>
+-----------------------------------------------------------------<br>
+</p>
+<%= render :partial => 'html_footer' %>

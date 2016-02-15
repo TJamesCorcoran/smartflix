@@ -1,0 +1,27 @@
+<h1>shopping cart</h1>
+<div class="customer-admin">
+    (<a href="#" onclick="$('cart_int').hide(); return false;">hide</a> / 
+    <a href="#" onclick="$('cart_int').show(); return false;">show</a>)
+
+    <div id="cart_int" style="display:none;">
+        <h2>Cart</h2>
+        <% if @customer.cart -%>
+            <table width=60%><tr><td>
+            <%= cart_display_for(@customer.cart, :items_to_buy, { :style => :summary, :display_total => true }) %>
+            </td></tr></table>
+        <% else -%>
+            <i>no items</i>
+        <% end -%>
+        <br><br>
+
+        <h2>Saved items</h2>
+        <% if @customer.cart -%>
+            <table width=60%><tr><td>
+            <%= cart_display_for(@customer.cart, :items_saved, { :style => :summary, :display_total => false }) %>
+            </td></tr></table>
+        <% else -%>
+            <i>no items</i>
+        <% end -%>
+      </div>
+   </div>
+</div>

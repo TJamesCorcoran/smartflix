@@ -1,0 +1,14 @@
+state1:
+  state_id: 1
+  name: 'Alabama'
+  code: 'AL'
+
+ma:
+  state_id: 32
+  name: Massachusetts
+  code: MA
+
+nj:
+  state_id: 41
+  name: New Jersey
+  code: NJ

@@ -1,0 +1,19 @@
+#  brand:   SF
+#  machine: smartflix.com 
+
+# to run by hand in development:
+#     rails runner script/job_runner <task>
+#
+
+
+
+# min     hr   day  month    weekday  command
+# ----    ---- ---- -------- -------  --------
+
+  15        1  *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh  db_purge  
+  15        2  *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh  db_dump  
+  15        3  *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh  website_rebuild_search
+  15        4  *    *    * /home/smart/rails/sfw/current/script/bash_runner.sh  sweep_cache  
+
+
+

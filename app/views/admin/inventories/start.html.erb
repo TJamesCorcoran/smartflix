@@ -1,0 +1,17 @@
+<h1>Inventory: Start</h1>
+
+<% if @suggest_start %>
+  We recommend that you start inventory at <%= Copy.id_to_sticker(@suggest_start) %>.
+<% else %>
+  No inventory is necessary right now, but feel free to do one anyway, to freshen up the data.
+<% end %>
+
+<%= form_for( admin_inventory_start_url :html => { :method => :post }) do |f| %>
+
+	start: <%= text_field 'inventory', 'startID'  %><br>
+	end: <%= text_field 'inventory', 'endID'  %><br>
+
+    <%= submit_tag "Start" %>
+
+<% end %>
+

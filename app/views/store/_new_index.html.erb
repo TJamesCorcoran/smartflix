@@ -1,0 +1,26 @@
+<% if @customer && !@customer.recommended_products.empty? && !@customer.recommended_categories.empty? -%>
+
+<% case ab_test(:homepage_flux, session) -%>
+<% when :abc -%>
+  <%= frontpage_widgets %w(recommended_videos videos_in_wishlist featured_categories) %>
+<% when :def -%>
+  <%= frontpage_widgets %w(new_in_recommended_category videos_by_recent_author available_in_recommended_category) %>
+<% when :abc_def -%>
+  <%= frontpage_widgets %w(recommended_videos videos_in_wishlist featured_categories),
+                        %w(new_in_recommended_category videos_by_recent_author available_in_recommended_category) %>
+<% when :def_abc -%>
+  <%= frontpage_widgets %w(new_in_recommended_category videos_by_recent_author available_in_recommended_category),
+                        %w(recommended_videos videos_in_wishlist featured_categories) %>
+<% when :original, :default -%>
+  <%= frontpage_widgets %w(recommended_videos) %>
+  <%= frontpage_widgets %w(featured_categories) %>
+<% end -%>
+
+<% else -%>
+  <%= render :partial => 'featured_categories', :locals => { :customer => @customer } %>
+<% end -%>
+
+<div class="category-listing-section">
+  <h1 class="rent-dvds-like">Or rent any of our thousands of other how-to videos, like</h1>
+  <%= render :partial => 'product_listing', :locals => { :products => @featured_products } %>
+</div>

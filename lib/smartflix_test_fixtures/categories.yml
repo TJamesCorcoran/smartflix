@@ -1,0 +1,37 @@
+category1:
+  category_id: 1
+  name: 'Category1'
+  description: 'Description of category 1'
+  parent_id: 0
+category2:
+  category_id: 2
+  name: 'Category2'
+  description: 'Description of category 2'
+  parent_id: 1
+category3:
+  category_id: 3
+  name: 'Category3'
+  description: 'Description of category 3'
+  parent_id: 1
+
+#----------------------------------------------------------------------
+#   railscart integration tests
+#----------------------------------------------------------------------
+
+wood_cat:
+  category_id: 10
+  name: 'Wood A'
+  description: 'Description'
+  parent_id: 1
+
+metal_cat:
+  category_id: 11
+  name: 'Wood B'
+  description: 'Description'
+  parent_id: 1
+
+paint_cat:  # note: no matching univ
+  category_id: 12
+  name: 'Wood C'
+  description: 'Description'
+  parent_id: 1

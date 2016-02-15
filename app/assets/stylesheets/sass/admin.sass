@@ -1,0 +1,1461 @@
+//------------------------------------------------------------
+// NOTE: if this is a .css file, it is a GENERATED file, created
+//        from a .sccs file. 
+//
+// DO NOT EDIT the .css file by hand
+//
+// regenerate file:
+//    sass public/stylesheets/admin.scss:public/stylesheets/admin.css
+//
+// ...or set up a daemon to do it:
+//    sass --watch public/stylesheets/admin.scss:public/stylesheets/admin.css
+//------------------------------------------------------------ 
+
+//----------
+// SASS variables, etc.
+//  (see http://sass-lang.com/tutorial.html)
+//---------- 
+
+$button_orange_bg: #ff6b00
+$button_orange_color: #ffffff
+
+//---
+// color
+//-- 
+
+a.orange,
+button.orange, 
+input.orange 
+  background-color: $button_orange_bg
+  color: $button_orange_color
+
+ 
+
+
+body  
+  background-color: #fff 
+  color: #333 
+
+
+body, 
+p,
+ol, 
+ul, 
+td 
+  font-family: verdana, arial, helvetica, sans-serif
+  font-size: 13px
+  line-height: 18px
+
+
+pre 
+  background-color: #eee
+  padding: 10px
+  font-size: 11px
+
+
+a  
+  color: #000 
+
+a:visited  
+  color: #666 
+
+a:hover  
+  color: #fff 
+  background-color: #000 
+
+
+.fieldWithErrors 
+  padding: 2px
+  background-color: red
+  display: table
+
+
+#errorExplanation 
+  width: 400px
+  border: 2px solid red
+  padding: 7px
+  padding-bottom: 12px
+  margin-bottom: 20px
+  background-color: #f0f0f0
+
+
+#errorExplanation h2 
+  text-align: left
+  font-weight: bold
+  padding: 5px 5px 5px 15px
+  font-size: 12px
+  margin: -7px
+  background-color: #c00
+  color: #fff
+
+
+#errorExplanation p 
+  color: #333
+  margin-bottom: 0
+  padding: 5px
+
+
+#errorExplanation ul li 
+  font-size: 12px
+  list-style: square
+
+
+div.uploadStatus 
+  margin: 5px
+
+
+div.progressBar 
+  margin: 5px
+
+
+div.progressBar div.border 
+  background-color: #fff
+  border: 1px solid grey
+  width: 100%
+
+
+div.progressBar div.background 
+  background-color: #333
+  height: 18px
+  width: 0%
+
+
+td.vendor 
+  background-color: #ffc
+
+
+td.light 
+  background-color: #fff
+
+
+td.dark 
+  background-color: #ddd
+
+
+td.buynow 
+  font-weight: bold
+
+
+table.sortable a.sortheader 
+  text-decoration: none
+
+table.sortable a.sortheader:hover 
+  color: #FC7905 // orange 
+
+table.sortable span.sortarrow 
+  color: black
+  text-decoration: none
+
+
+// university, rental, late fees, replacement, etc. 
+//
+//
+
+span.univ 
+  background-color: #9ff
+
+
+
+
+// Affiliate Links 
+div.affiliate_link 
+  margin: 15px 0
+  clear: both
+
+div.affiliate_link h4 
+  margin: 2px
+
+
+// Flipper 
+
+.flipper 
+  border: 3px solid #80A4CB
+  width: 685px
+  background-color: #FFF
+  margin: 0 0 10px 0
+  padding: 0 0 0 10px
+  position: relative
+
+.flipper .close 
+  position: absolute
+  font-size: 11px
+  right: 10px
+  top: 2px
+
+
+
+
+// ALA stuff with some additions 
+
+.address 
+  float: left
+  margin-right: 40px
+  margin-top: -10px
+
+
+.comment 
+  margin-left: 10px
+  margin-right: 100px
+  margin-top: 30px
+  font-size: .75em
+  line-height: 1.6em
+  color: Black	
+
+
+.comment p 
+  font-size: 1em
+  margin-bottom: 0px
+
+
+.customer-name 
+  margin-left: 10px
+  margin-top: 3px
+  font-size: .75em
+  line-height: 1.6em
+  color: Black
+  font-weight: bolder
+
+
+.category-listing-section 
+  clear: both
+
+
+.shopping-cart 
+  vertical-align: middle
+
+
+.text-content 
+  max-width: 800
+  padding-right: 20px
+
+
+.text-content blockquote 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.6em
+  color: Black	
+
+
+a:hover 
+  color: orange
+
+
+ol 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.6em
+  color: Black	
+
+
+ol li p 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif
+  font-size: 1.0em
+  line-height: 1.6em
+  color: Black	
+
+
+ul li 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.6em
+  color: Black	
+
+
+ul li a 
+  font-weight: bolder
+
+
+body 
+  min-width: 660px 
+  margin-bottom: 0px
+  margin-left: 0px
+  margin-right: 0px
+  margin-top: 0px
+  padding-left: 0px
+  padding-right: 0px
+  padding-top: 0px
+  padding-bottom: 0px
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif
+  color: Black	
+
+
+#container 
+  padding-left: 220px   // LC width 
+  padding-right: 220px  // RC width 
+  padding-top: 0px
+
+
+#container-2col 
+  padding-left: 220px   // LC width 
+  padding-right: 40px   // RC width 
+  padding-top: 0px
+
+
+
+#container .column 
+  position: relative
+  float: left
+
+
+#container-2col .column 
+  position: relative
+  float: left
+
+
+#center 
+  width: 100%
+
+  
+
+#left 
+  width: 220px    // LC width 
+  right: 220px    // LC width 
+  margin-left: -100%
+
+  
+
+#left-2col 
+  width: 220px    // LC width 
+  right: 220px    // LC width 
+  margin-left: -100%
+
+  
+
+#right 
+  width: 220px           // RC width 
+  margin-right: -220px   // RC width 
+
+  
+
+#right-2col 
+  width: 0px         // RC width 
+  margin-right: 0px  // RC width 
+
+  
+
+#footer 
+  clear: both
+
+  
+
+// my stuff 
+
+#header 
+  background-image: url('/images/banner_bg.gif')
+  min-height: 90px
+
+  
+
+img 
+  text-decoration: none
+  border: 0
+
+  
+
+#sf-logo 
+  padding-left: 20px
+  padding-top: 20px
+
+  
+
+
+.rent-button 
+  margin-bottom: 10px
+
+  
+
+
+.vid-desc     // this is essential, as it turns out 
+  position: relative
+  float: left
+
+  
+
+// here's how we do the vidcaps 
+
+.vidcap 
+  width: 198px
+  height: 198px
+  float: left
+
+  
+
+// typography 
+
+h1 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 18px
+  line-height: 22px
+  color: black
+  margin-top: 0px
+
+  
+
+.rent-dvds-like 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 1.1em
+  line-height: 1.3em
+  margin-bottom: 1.2em
+  color: black
+  margin-top: 0em
+
+  
+
+h2 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 14px
+  line-height: 16px
+  color: black
+
+  
+
+
+#vid-rating h2,
+#trivia-title 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 16px
+  line-height: 22px
+  color: orange
+  margin-top: 0px
+  font-weight: bolder
+
+  
+
+#vid-rating h3 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 13px
+  line-height: 18px
+  margin-top: 0px
+  font-weight: bolder
+  
+
+
+p 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.6em
+  color: Black	
+
+  
+
+
+p.faq-question 
+  font-weight: bolder
+  
+
+p.faq-answer 
+  margin-left: 28px
+
+  
+
+
+// side columns   
+
+#sidenav-wrap,
+#rent-wrap 
+  padding-right: 20px
+  padding-left: 20px
+
+  
+
+#sidenav-box,
+#rent-box 
+  background-image: url('/images/sidenav_bg.gif')
+  padding-left: 20px
+  margin-top: 0px
+  padding-top: 15px
+  padding-bottom: 10px
+  margin-bottom: 20px
+  
+
+#sidenav-box a,
+#sidenav-box a:visited 
+  text-decoration: none
+  color: black
+  
+
+#sidenav-box a:hover 
+  text-decoration: none
+  color: orange
+  
+
+#sidenav-box-header,
+#rent-box-header 
+  width: 180px
+  height: 33px
+  background-image: url('/images/column_header_bg.gif')
+  margin-bottom: 0px
+  padding-bottom: 0px
+
+  
+
+#sidenav-box-header h1,
+#rent-box-header h1  
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 16px
+  line-height: 18px
+  color: black
+  margin-top: 0px
+  margin-bottom: 0px
+  padding-bottom: 0px
+  padding-top: 7px
+  padding-left: 20px
+
+  
+
+#sidenav-box ul 
+  list-style: none // custom bullets - removes standard bullet 
+  margin-left: 0px
+  margin-top: 0px
+  padding-left: 1em
+  padding-right: 1em
+  padding-top: 15px
+  padding-bottom: 15px
+  text-indent: -1em
+
+  
+
+#sidenav-box ul li 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1em
+  color: Black
+  margin-top: 0px
+  padding-top: 0px
+  padding-bottom: 10px	
+
+  
+
+#rent-box p 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.6em
+  color: Black
+  margin-top: 0px
+  padding-top: 0px
+  padding-bottom: 10px	
+
+  
+
+#this-subcat 
+  font-weight: bolder
+  color: orange
+
+  
+
+#nav-box1 ul ul ul li:before 
+  content: "\00BB \0020" // custom bullets 
+
+  text-indent: -2em
+
+  
+
+
+#sidenav-box p,
+#sidenav-box div 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1em
+  color: Black
+  margin-top: 0px
+  padding-top: 0px
+  padding-bottom: 0px
+  padding-right: 20px
+
+  
+
+#sidenav-box p a 
+  text-decoration: none
+
+  
+
+div#sidenav-box div.indented-cat 
+  padding-left: 20px
+
+  
+
+#selected-cat 
+  font-weight: bolder
+  color: orange
+  
+
+#selected-cat a,
+#selected-cat a:visited 
+  text-decoration: none
+  color: orange
+  
+
+#bullet 
+  margin-left: -0.9em
+  color: orange
+  font-weight: bolder
+  font-size: 1.2em
+
+  
+
+
+// top nav stuff 
+
+
+#navbar 
+  height: 30px
+  background-color: red
+
+  
+
+#bluebar 
+  height: 30px
+  background-image: url('/images/tab_bar_bg.gif')
+
+  
+
+#white-graf 
+  float: left
+
+  
+
+#bluebar p 
+  margin-top: 0px
+  padding-top: 3px
+  padding-bottom: 0px
+  padding-left: 20px
+  color: white
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-weight: bolder
+
+  
+
+#bluebar #searchbox 
+  position: relative
+  float: right
+  padding-right: 40px
+
+  color: white
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-weight: bolder
+  font-size: .75em
+  line-height: 1.6em
+
+  
+
+.search-field 
+  height: 17px
+  border: 1px solid #5D83A7
+  background-color: #E0EEEF
+  margin-top: 6px
+  color: black
+  font-size: 12px
+  
+
+#search-field 
+  position: relative
+  float: left
+  padding-right: 10px
+
+  
+
+#search-title 
+  position: relative
+  float: left
+  padding-right: 10px
+  padding-top: 5px
+
+  
+
+
+#search-go 
+  position: relative
+  float: left
+  padding-top: 5px
+
+  
+
+#tab-wrap 
+  height: 20px
+  background-image: url('/images/banner_bg.gif')
+
+  
+
+#tabs 
+  padding-right: 40px
+  margin-left: 300px
+  position: relative
+  float: right
+  width: 600px
+  height: 28px
+  background-image: url('/images/banner_bg.gif')
+
+  
+
+.tab 
+  float: left
+  margin-right: 3px
+  height: 28px
+  width: 115px
+  text-align: center
+  background: url(/images/tab.gif) top left no-repeat
+  
+
+.tab a 
+  color: white
+  text-decoration: none
+  font-weight: bold
+  font-size: 13px
+  line-height: 28px
+  
+
+.tab.active 
+  background: url(/images/active_tab.gif) top left no-repeat
+  
+
+
+// breadcrumb nav & account links 
+
+#links 
+  padding-top: 10px // this is also a containing block for the floats 
+
+  
+
+#breadcrumb-nav 
+  padding-left: 38px
+  margin-top: 0px
+  padding-top: 0px
+  margin-bottom: 15px
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: .75em
+  position: relative
+  float: left
+  min-width: 240px
+  
+
+#account-nav 
+  position: relative
+  float: right
+  margin-top: 0px
+  padding-top: 0px
+  padding-right: 40px
+  margin-bottom: 15px
+
+  
+
+#account-nav p 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: .75em
+  margin-top: 0px
+  padding-top: 0px
+
+  
+
+#help 
+  color: red
+
+  
+
+#vid-trivia,
+#vid-rating 
+  margin-top: 30px
+
+  
+
+#vid-rating img 
+  vertical-align: middle
+  margin-left: 10px
+
+  
+
+
+// item area 
+
+.vidcap-sm 
+  width: 109px
+  height: 109px
+  float: left
+
+  
+
+.vidcap-tn 
+  width: 75px
+  height: 75px
+  float: left
+
+  
+
+
+
+img.new-overlay 
+  width: 109px
+  height: 109px
+  float: left
+  margin-left: -109px
+  
+
+#buy-together strong 
+  margin-bottom: 10px
+  color: orange
+
+  
+
+
+
+#subcat-title h1 
+  margin-top: 0px
+  padding-top: 0px
+
+  
+
+#subcat-title p 
+  margin-top: -12px
+  padding-top: 0px
+
+  
+
+#subcat-items .item h2 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 12px
+  line-height: 16px
+  color: black
+  margin-top: 0px
+  margin-bottom: 0px
+  padding-bottom: 0px
+
+  
+
+#subcat-items .item p 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.2em
+  color: black
+  
+
+.rent-buttons p 
+  margin-bottom: 25px
+  
+
+.rent-buttons form 
+  margin-bottom: 5px
+  
+
+// positioning mess 
+
+
+div.bundle 
+  height: 129px
+  width: 570px
+  position: relative
+  float: left
+  padding: 5px 10px 10px 130px
+  background: url(/images/bundle_and_background.jpg) top left no-repeat
+  
+div.bundle p 
+  line-height: 1.4em
+  margin-bottom: 7px
+  margin-top: 7px
+  
+.bundle .help 
+  float: right
+  font-size: 10px
+  margin-right: 10px
+  
+.bundle_help 
+  float: left
+  font-size: 10px
+  margin: 5px 0 0 10px
+  
+h1.bundle 
+  float: left
+  
+p.bundle 
+  clear: left
+  
+.item 
+  height: 115px
+  width: 340px
+  position: relative
+  float: left
+  padding-bottom: 20px
+  padding-right: 10px
+
+  
+
+.button-float p 
+  position: relative
+  float: left
+  padding-top: 0px
+  padding-bottom: 0px
+  margin-top: 0px
+  margin-bottom: 0px
+
+  
+
+.item-button 
+  position: relative
+  float: left
+  padding-right: 3px
+  
+
+// category page stuff 
+
+#subcat-wrapper 
+  background-image: url('/images/sidenav_bg.gif')
+  padding: 20px
+  margin-bottom: 20px
+  
+
+.clear 
+  clear: both
+  display: block
+  height: 1px
+  overflow: hidden
+  padding: 0px
+  margin-top: 0px
+  margin-left: 0px
+  margin-right: 0px
+
+  
+
+#subcat-container-header 
+  height: 33px
+  width: 690px
+  background-image: url('/images/subcat_header_bg.gif')
+  margin-bottom: 0px
+  padding-bottom: 0px
+
+  
+
+#subcat-container-header h2 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 16px
+  line-height: 18px
+  color: black
+  margin-top: 0px
+  margin-bottom: 0px
+  padding-bottom: 0px
+  padding-top: 7px
+  padding-left: 20px
+
+  
+
+#subcat-list p 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.1em
+  color: Black
+  margin-top: 0px
+  padding-top: 0px
+  padding-bottom: 0px
+  padding-right: 20px
+  position: relative
+  float: left
+
+  
+
+#item-sample-container 
+  position: relative
+  float: left
+
+  
+
+#subcat-container 
+  position: relative
+  float: left
+  width: 690px
+
+  
+
+
+// checkout page stuff   
+
+// start header section duplicated with ck- prepended in case we want to change stuff just for this page 
+
+#ck-header 
+  background-image: url('/images/banner_bg.gif')
+  min-height: 70px
+
+  
+
+#ck-sf-logo 
+  padding-left: 20px
+  padding-top: 15px
+
+  
+
+
+#ck-bluebar 
+  height: 20px
+  background-image: url('/images/tab_bar_bg.gif')
+
+  
+
+#ck-white-graf 
+  float: left
+
+  
+
+#ck-bluebar p 
+  margin-top: 0px
+  padding-top: 3px
+  padding-bottom: 0px
+  padding-left: 20px
+  color: white
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-weight: bolder
+
+  
+
+#ck-bluebar #ck-searchbox 
+  position: relative
+  float: right
+  padding-right: 40px
+
+  color: white
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-weight: bolder
+  font-size: .75em
+  line-height: 1.6em
+
+  
+
+.ck-search-field 
+  height: 12px
+  border: 1px solid white
+  background-color: #84B5D3
+  margin-top: 6px
+
+  
+
+#ck-search-field 
+  position: relative
+  float: left
+  padding-right: 10px
+
+  
+
+#ck-search-title 
+  position: relative
+  float: left
+  padding-right: 10px
+  padding-top: 5px
+
+  
+
+
+#ck-search-go 
+  position: relative
+  float: left
+  padding-top: 5px
+
+  
+
+// end duplicate header stuff 
+
+#ck-content 
+  margin-top: 20px
+
+  
+
+.ck-column-left 
+  background-image: url('/images/checkout_column_left_bg.gif')
+  height: 33px
+  width: 520px
+
+  
+
+.ck-column-right 
+  background-image: url('/images/checkout_column_right_bg.gif')
+  height: 33px
+  width: 350px
+
+  
+
+.ck-column-left h1, 
+.ck-column-right h1 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 16px
+  line-height: 18px
+  color: black
+  margin-top: 0px
+  margin-bottom: 0px
+  padding-bottom: 0px
+  padding-top: 7px
+  padding-left: 20px
+
+  
+
+#ck-checkout,
+#ck-shopping-cart 
+  position: relative
+  float: left
+  margin-left: 20px
+  margin-bottom: 40px
+
+  
+
+
+#ck-checkout 
+  width: 520px
+
+  
+
+#ck-shopping-cart 
+  width: 350px
+
+  
+
+#ck-checkout-box,
+#ck-shopping-cart-box 
+  background-image: url('/images/sidenav_bg.gif')
+  padding-left: 20px
+  padding-right: 20px
+  padding-top: 20px
+  padding-bottom: 20px
+
+  
+
+#ck-checkout-box h1, 
+#ck-shopping-cart-box h1 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 16px
+  line-height: 18px
+  color: black
+  padding-top: 20px
+
+  
+
+#ck-headline-first 
+  margin-top: -20px
+
+  
+
+#ck-headline-first-2 
+  margin-top: 0px
+
+  
+
+#ck-table-container 
+  padding-top: 20px
+  padding-right: 20px
+  padding-bottom: 20px
+
+  
+
+#ck-table-container 
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.6em
+  color: Black
+
+  
+
+#ck-table 
+  width: 310px
+
+  
+
+
+// XXX pieces 
+.box 
+  border: solid thin black
+  padding: 5px
+  margin: 5px
+  background-color: white
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.4em
+  color: Black
+  
+
+.box-float 
+  float: left
+  margin-right: 40px
+  position: relative
+  
+
+.box p 
+  font-size: 1em
+  line-height: 1.4em
+  
+
+.error-box 
+  margin-top: 20px
+  margin-bottom: 20px
+  
+
+.ck-error-box 
+  margin-top: 20px
+  margin-left: 20px
+  margin-bottom: 20px
+  
+
+.error-span 
+  padding: 10px
+  border: solid 4px #80A4CB
+  background-color: yellow
+  font-weight: bolder
+  
+
+.problemReportBox 
+  border: solid 2px #80A4CB
+  padding: 5px
+  margin-bottom: 20px
+  
+
+.fieldWithErrors 
+  
+.fieldWithErrors input, 
+.fieldWithErrors select,
+.fieldWithErrors textarea 
+  background-color: #FFD0D0
+  
+.errorExplanation 
+  border: solid thin black
+  padding: 5px
+  margin: 5px
+  background-color: #FFFFB0
+  
+// ie hacks 
+
+
+
+// IE7 fix  
+
+//#container-2col > #left-2col 
+//  left: -220px // -LC width for others 
+//  margin-left: expression(
+//  document.all.center.offsetWidth * -1 +
+//  parseFloat(document.all.center.currentStyle.paddingLeft)
+//  ) // Fix for IE7 
+//  
+//
+//#container > #left 
+//  left: -220px // -LC width for others 
+//  margin-left: expression(
+//  document.all.center.offsetWidth * -1 +
+//  parseFloat(document.all.center.currentStyle.paddingLeft) +
+//  parseFloat(document.all.left.currentStyle.paddingLeft) +
+//  parseFloat(document.all.left.currentStyle.paddingRight)
+//  ) // Fix for IE7 
+//  
+
+div.gc_header 
+  font-size: 0.9em
+  
+
+div.gc_entry 
+  margin-top: 25px
+  
+
+div.gc_image 
+  float: left
+  margin-right: 15px
+  
+
+div.gc_description 
+  font-size: 0.8em
+  margin-bottom: 5px
+  width: 650px
+  
+
+br.gc_clear 
+  clear: both
+  
+
+div#scan-alert-a 
+  float: right
+  margin-top: -9px
+  margin-bottom: 6px
+  
+
+div#scan-alert-b 
+  float: right
+  margin-top: -9px
+  margin-bottom: -54px
+  
+
+
+// Submenus 
+div#sidenav-box  
+  padding-left: 15px 
+
+div#sidenav-box p  
+  margin-left: 10px 
+
+div#sidenav-box.alt  
+  padding-left: 0 
+
+div#sidenav-box div  
+  padding: 5px 0 5px 0 
+
+div#sidenav-box.alt div.menu-head 
+  position: relative
+  display: block
+  padding: 2px 0 3px 2px
+  
+div#sidenav-box.alt div.menu-head a,
+div#sidenav-box.alt div.menu-head div.name 
+  display: block
+  padding: 4px 8px
+  position: relative
+  z-index: 2
+  font-size: 12px
+  
+div#sidenav-box.alt div#selected-cat 
+  display: block
+  padding: 4px 4px 4px 16px
+  
+
+div#sidenav-box.alt div.menu-head:hover 
+  padding: 0
+  border-top: 2px solid #c6c4b9
+  border-left: 2px solid #c6c4b9
+  border-bottom: 3px solid #929188
+  
+div#sidenav-box.alt div.menu-head:hover a,
+div#sidenav-box.alt div.menu-head:hover div.name 
+  background-color: #e3e1d4
+  
+div#sidenav-box.alt div.menu-head a:hover 
+  color: blue
+  font-weight: bold
+  text-decoration: underline
+  
+div#sidenav-box.alt div.menu-head a.nolink:hover 
+  color: black
+  font-weight: normal
+  text-decoration: none
+  
+div#sidenav-box.alt div.menu-head:hover div.subcat-menu, 
+div.subcat-menu:hover 
+  display: block
+  
+div#sidenav-box.alt div.menu-head div.subcat-menu 
+  position: absolute
+  background-color: #e3e1d4
+  left: 168px
+  top: -2px
+  
+div#sidenav-box.alt div.subcat-menu 
+  display: none
+  z-index: 1
+  border-left: none
+  padding-right: 0 !important
+  width: 255px
+  border-top: 2px solid #c6c4b9
+  border-left: 2px solid #c6c4b9
+  border-right: 3px solid #929188
+  border-bottom: 3px solid #929188
+  
+div#sidenav-box.alt div.subcat-menu ul 
+  padding: 0 !important
+  margin-bottom: 0
+  
+div#sidenav-box.alt div.subcat-menu ul li  
+  padding: 0 !important 
+
+div#sidenav-box.alt div.subcat-menu ul li a 
+  font-size: 12px
+  line-height: 1.3em
+  font-weight: normal
+  display: block
+  padding-top: 3px !important
+  padding-bottom: 3px !important
+  padding-left: 25px !important
+  
+
+
+// Category Listing 
+
+div.category-column 
+  float: left
+  width: 300px
+  
+div.parent-category 
+  padding: 10px 0
+  font-size: 12px
+  
+div.parent-category a 
+  font-weight: bold
+  display: block
+  padding-bottom: 5px
+  
+div.parent-category div.children a 
+  font-weight: normal
+  display: block
+  padding: 0 0 0 10px
+  
+
+
+div#sidenav-box-header h1 a 
+  color: black
+  text-decoration: none
+  
+div#sidenav-box-header h1 a:hover 
+  text-decoration: underline
+  
+
+
+
+// Can't find what you're looking for? 
+
+div#help-find 
+  clear: left
+  float: left
+  padding: 15px
+  margin: 20px 0 20px 70px
+  background-color: #eef6ff
+  border: 2px solid gray
+  
+label.help-search  
+  font-size: 12px 
+
+div.rcadminnav 
+  background-color: #cff  
+  
+
+div.customer-admin
+  
+  margin-left: 30px
+  margin-top: 20px
+  background-color: #f8f8f8 
+  
+
+div.univ_detail 
+  border: 1px solid #666
+  
+
+div.univ_detail_header
+  
+  background-color: #aaa 
+  
+
+span.ud_block,
+div.ud_block 
+  padding: 4px
+  font-size: 12px
+  background: yellow 
+  color: black
+  border: 2px solid #000000
+  
+div.ud_block 
+  float: right
+  
+
+//--------------------
+//
+// CC warning
+//
+// --------------------
+//
+
+div.cc_warning
+  border: 3px solid #ff0000
+  padding: 10px
+  margin-left: 20px
+  max-width: 550px
+  margin-bottom: 20px
+  background-color: #ffcccc
+  
+// timesheets
+table.timesheet,
+table.timesheet tr,
+table.timesheet tr td
+  border: 1px solid black

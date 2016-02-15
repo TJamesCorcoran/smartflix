@@ -1,0 +1,43 @@
+<%= @customer.full_name %> / <%= link_to @customer.email, :action => :show, :id => @customer %>:
+
+<h2>Here's the status on your not-yet-shipped items</h2>
+
+<% lis = @customer.uncancelled_and_actionable_and_unshipped_line_items %>
+
+<% if lis.any? %>
+   <% lis.sort_by(&:dateOrdered).each do |li| %>
+     <% position, live_copies =li.where_in_list_and_num_copies %>
+     <% live_copies_instock = li.product.num_live_copies_instock %>
+
+     <p>
+     <% if position %>
+
+         For '<%= li.product.name %>' you are <%= (position + 1).ordinal %>
+         in line, with <%= live_copies %> copies in circulation <% if
+         live_copies_instock > 0 %> (and <%= live_copies_instock %> in
+         stock!)<%end%>.  <% if live_copies > 0 %>Assuming that dvds each
+         rotate in and out in about two weeks, our best guess is that
+         we'll ship the DVD in around <%= li.product.get_delay(position)
+         %> days.<% else %>Right now we have zero live copies of this DVD.
+         Our purchasing manager is working to buy more copies.  If you
+         want to cancel your order for a full refund, we'll be happy to do
+         that.<% end %>
+      <% else %>
+
+         For <%= li.product.name %>, you do not have an active order, likely because the payment did not go through.
+
+      <% end %>
+      </p>
+   <% end %>
+
+<% else %>
+   <p>
+   It looks like at this point all of your items have shipped! 
+   <% lis_in_field = @customer.lis_in_field %>
+   <% if lis_in_field.any? %>
+       Currently we show the following items as being out in the field for you: 
+       <%= lis_in_field.map{|li| li.product.name }.join(",") %>.
+   <% end %>
+   </p>
+<% end %>
+

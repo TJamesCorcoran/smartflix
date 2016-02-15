@@ -1,0 +1,6 @@
+<span style="background:#ff6">
+show me the [
+<%=  ! (params[:showdata]) ? "simple" : link_to("simple", :overwrite_params => { :showdata => false } )  %> |
+<%=  (params[:showdata]) ? "data" : link_to("data", :overwrite_params => { :showdata => true } )  %> 
+] view.
+</span>

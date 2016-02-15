@@ -1,0 +1,576 @@
+#----------
+#  old XXX stuff
+#----------
+bob_line_item:
+  line_item_id: 1
+  order_id: 1
+  product_id: 1
+  price: 9.99
+non_bob_line_item:
+  line_item_id: 2
+  order_id: 2
+  product_id: 2
+  price: 9.99
+bob_shipped_line_item_1:
+  line_item_id: 3
+  order_id: 3
+  product_id: 3
+  price: 9.99
+  shipment_id: 3
+  copy_id: 9003
+bob_shipped_line_item_2:
+  line_item_id: 4
+  order_id: 3
+  product_id: 4
+  price: 9.99
+  shipment_id: 4
+  copy_id: 9004
+bob_not_shipped_line_item:
+  line_item_id: 5
+  order_id: 3
+  product_id: 5
+  price: 9.99
+  shipment_id: nil
+bob_returned_line_item:
+  line_item_id: 6
+  order_id: 3
+  product_id: 6
+  price: 9.99
+  shipment_id: 6
+  copy_id: 9006
+  dateBack: <%= Date.today - 2 %>
+bob_not_late_line_item:
+  line_item_id: 7
+  order_id: 3
+  product_id: 7
+  price: 9.99
+  shipment_id: 7
+  copy_id: 9007
+#----------
+# TVRM
+
+#----------------------------------------------------------------------
+#   copy test
+#----------------------------------------------------------------------
+
+
+lis_exist_li:
+  line_item_id: 1003
+  product_id: 1003
+  copy_id: 1003
+
+# Note that there is no object for copy 1004
+#
+# This is on purpose.
+
+#----------
+
+return_to_stock_already_instock:
+  copy_id: 1050
+  shipment_id: 1050
+  dateBack: "2005-01-01"
+
+return_to_stock_outstock:
+  copy_id: 1051
+  shipment_id: 1051
+
+return_to_stock_damaged:
+  copy_id: 1052
+  shipment_id: 1052
+
+return_to_stock_autorepair:
+  copy_id: 1053
+  shipment_id: 1053
+
+
+#----------------------------------------------------------------------
+#   ??? test
+#----------------------------------------------------------------------
+
+tobuy_1_copy:
+  line_item_id: 2000
+  product_id: 2000
+  copy_id: 2000
+
+
+#----------------------------------------------------------------------
+#   title test
+#----------------------------------------------------------------------
+
+overdue_copy:
+  line_item_id: 3000
+  copy_id: 3000
+  product_id: 3000
+
+
+#----------------------------------------------------------------------
+#   LineItemTest
+#----------------------------------------------------------------------
+
+# warn_no_lateMsg_already_sent:
+#      line_item_id: 5000
+#      order_id:    5000
+#      shipment_id: 5000
+#      copy_id:     5000
+#  #    dateBack:   "2005-01-01"
+#      lateMsg1Sent: "2005-01-10"
+
+
+warn_no_is_back:
+    line_item_id: 5001
+    order_id:    5001
+    shipment_id: 5001
+    copy_id:     5001
+    dateBack:   "2005-01-01"
+
+warn_no_is_badcopy:
+    line_item_id: 5002
+    order_id:    5002
+    shipment_id: 5002
+    copy_id:     5002
+
+warn_no_no_shipment:
+    line_item_id: 5003
+    order_id:    5003
+    # NOTE: no shipment_id
+    # NOTE: no copy_id
+
+warn_no_back_already:
+    line_item_id: 5004
+    order_id:    5004
+    shipment_id: 5004
+    copy_id:     5004
+    dateBack:   "2005-01-09"
+
+warn_yes:
+    line_item_id: 5005
+    order_id:    5005
+    shipment_id: 5005
+    copy_id:     5005
+
+
+warn_no_univ:
+    line_item_id: 5006
+    order_id:    5006
+    shipment_id: 5006
+    copy_id:     5006
+
+
+#----------
+# shared between line_item tests and overdue_engine tests
+
+charge_yes_first:
+    line_item_id: 5010
+    order_id:    5010
+    shipment_id: 5010
+    copy_id:     5010
+    product_id:    5010
+    lateMsg1Sent: "2005-01-10"
+
+# we already charged a late fee?
+# so what!  it's been a week ... charge it again!
+charge_yes_older_charge:
+    line_item_id: 5011
+    order_id:    5011
+    shipment_id: 5011
+    copy_id:     5011
+    product_id:    5011
+    lateMsg1Sent: "2005-01-10"
+
+# this represents the late charge for the above LI
+# 
+charge_yes_older_charge_thecharge:
+    line_item_id: 5012
+    order_id:    5012
+    shipment_id: 5012
+    copy_id:     5011
+    parent_line_item_id: 5011
+
+# we already charged a late fee?
+# well, it's recent (in the future, actually!), so charge it again
+charge_no_just_charged:
+    line_item_id: 5013
+    order_id:    5013
+    shipment_id: 5013
+    copy_id:     5013
+
+# this represents the late charge for the above LI
+# 
+charge_no_just_charged_thecharge:
+    line_item_id: 5014
+    order_id:    5014
+    shipment_id: 5014
+    copy_id:     5013
+    parent_line_item_id: 5013
+
+
+# a lineitem that we want to charge for, but CC has expired 
+
+charge_expired_cc:
+    line_item_id: 5020
+    order_id:    5020
+    shipment_id: 5020
+    copy_id:     5020
+    product_id:    5020
+    lateMsg1Sent: "2005-01-10"
+
+#----------------------------------------------------------------------
+#   ShippingTest
+#----------------------------------------------------------------------
+
+# customer has previously ordered
+# the first item in a set, but has not
+# received it.  This means that
+# we can't ship him the second item in the set
+# (if he HAD NOT ordered the first item, then we could short circuit
+# the dependency test!)
+customer_with_no_history:
+   line_item_id: 6000
+   order_id:    6000
+   product_id:    6030
+
+
+customer_with_order_li_1:
+   order_id:    6100
+   line_item_id: 6110
+   product_id:    6010
+   live: 1
+
+customer_with_order_li_2:
+   order_id:    6100
+   line_item_id: 6120
+   product_id:    6020
+   live: 1
+
+customer_with_order_li_2b:
+   order_id:    6100
+   line_item_id: 6122
+   product_id:    6022
+   live: 1
+
+customer_with_order_li_2c:
+   order_id:    6100
+   line_item_id: 6123
+   product_id:    6023
+   live: 1
+
+customer_with_order_li_3z:
+   order_id:    6100
+   line_item_id: 6130
+   product_id:    6030
+   live: 1
+
+customer_with_order_li_4:
+   order_id:    6100
+   line_item_id: 6131
+   product_id:    6031
+   live: 1
+
+customer_with_order_li_5:
+   order_id:    6100
+   line_item_id: 6141
+   product_id:    6041
+   live: 1
+
+customer_with_order_li_6:
+   order_id:    6100
+   line_item_id: 6142
+   product_id:    6042
+   live: 1
+
+customer_with_order_li_7:
+   order_id:    6100
+   line_item_id: 6143
+   product_id:    6043
+   live: 1
+
+customer_with_order_li_8:
+   order_id:    6100
+   line_item_id: 6150
+   product_id:    6050
+   live: 0
+
+customer_with_order_li_9:
+   order_id:    6100
+   line_item_id: 6151
+   product_id:    6051
+   live: 1
+
+# conflicts with above - earlier orderDate
+customer_with_dibs_li_9:
+   order_id: 6200
+   line_item_id: 6152
+   product_id:    6051
+   live: 1
+
+#----------
+# customer / university / shipping testing
+
+# no
+non_univ_customer_li0:
+   line_item_id: 7000
+   order_id: 7000
+   shipment_id: 7000
+
+non_univ_customer_li1:
+   line_item_id: 7001
+   order_id: 7000
+   shipment_id: 7000
+
+# single
+single_univ_customer_l0:
+   line_item_id: 7010
+   order_id: 7010
+   shipment_id: 7010
+  
+single_univ_customer_l1:
+   line_item_id: 7011
+   order_id: 7010
+   shipment_id: 7010
+
+# triple
+triple_univ_customer_o0_l0:
+   line_item_id: 7020
+   order_id: 7020
+   shipment_id: 7020
+   #  
+triple_univ_customer_o1_l0:
+   line_item_id: 7030
+   order_id: 7030
+   shipment_id: 7030
+triple_univ_customer_o1_l1:
+   line_item_id: 7031
+   order_id: 7030
+   shipment_id: 7030
+   #
+triple_univ_customer_o2_l0:
+   line_item_id: 7040
+   order_id: 7040
+   shipment_id: 7020
+
+#--------------------
+# shippable
+
+single_univ_customer_2_l0:
+   order_id: 7110
+   line_item_id: 7110
+   shipment_id: 7110
+  
+single_univ_customer_2_l1:
+   order_id: 7110
+   line_item_id: 7111
+   shipment_id: 7110
+
+#--
+
+triple_univ_customer_2_o0_l0:
+   line_item_id: 7120
+   order_id: 7120
+   shipment_id: 7120
+  
+#
+
+triple_univ_customer_2_o1_l0:
+   line_item_id: 7130
+   order_id: 7130
+   shipment_id: 7130
+
+triple_univ_customer_2_o1_l1:
+   line_item_id: 7131
+   order_id: 7130
+   shipment_id: 7130
+
+triple_univ_customer_2_o2_l0:
+   line_item_id: 7140
+   order_id: 7140
+   shipment_id: 7120
+
+#----------
+# pruning
+#
+# the items in this order are unshipped;
+# in shipping_test.rb we try to ship them all
+# and prune
+
+prune_none_recent_l0:
+   line_item_id: 7200
+   order_id: 7200
+   product_id: 7200
+
+prune_none_recent_l1:
+   line_item_id: 7201
+   order_id: 7200
+   product_id: 7201
+
+prune_none_recent_l2:
+   line_item_id: 7202
+   order_id: 7200
+   product_id: 7202
+
+prune_none_recent_l3:
+   line_item_id: 7203
+   order_id: 7200
+   product_id: 7203
+
+prune_none_recent_l4:
+   line_item_id: 7204
+   order_id: 7200
+   product_id: 7204
+
+prune_none_recent_l5:
+   line_item_id: 7205
+   order_id: 7200
+   product_id: 7205
+
+prune_throttled:
+   line_item_id: 7300
+   order_id: 7300
+   product_id: 7300
+
+# li utility func tests
+
+utility_cancelled:
+  line_item_id: 8000
+  order_id:    8000
+  product_id:    8000
+  shipment_id: nil
+  live: false
+  created_at: "2008-02-15"
+  updated_at: "2008-02-20"
+
+utility_infield:
+  line_item_id: 8001
+  order_id:    8001
+  product_id:    8001
+  shipment_id: 8001
+  live: true
+  created_at: "2008-02-15"
+  updated_at: "2008-02-15"
+
+utility_unshipped:
+  line_item_id: 8002
+  order_id:    8002
+  product_id:    8002
+  shipment_id: 8002
+  live: true
+  created_at: "2008-02-15"
+  updated_at: "2008-02-20"
+
+utility_back:
+  line_item_id: 8003
+  order_id:    8003
+  product_id:    8003
+  shipment_id: 8003
+  dateBack:   "2008-02-20"  
+  live: true
+  created_at: "2008-02-15"
+  updated_at: "2008-02-20"
+
+# test_live_university
+
+univ_order_a:
+  line_item_id: 8100
+  order_id:    8100
+  shipment_id: 8100
+  dateBack:   "2008-01-07"
+  live: true
+
+univ_order_b:
+  line_item_id: 8101
+  order_id:    8100
+  shipment_id: 8101
+  dateBack:   "2008-01-14"
+  live: true
+
+univ_order_c:
+  line_item_id: 8102
+  order_id:    8100
+  live: false
+  updated_at:  "2008-01-20"
+
+univ_order_d:
+  line_item_id: 8103
+  order_id:    8100
+  live: false
+  updated_at:  "2008-01-20"
+
+univ_order_e:
+  line_item_id: 8104
+  order_id:    8100
+  live: false
+  updated_at:  "2008-01-20"
+
+univ_order_f:
+  line_item_id: 8105
+  order_id:    8100
+  live: false
+  updated_at:  "2008-01-20"
+
+#----------------------------------------------------------------------
+#   orders tests
+#----------------------------------------------------------------------
+
+#----------
+# in shipment 'univ'
+toreplace_order_univ_a:
+  order:     toreplace_order_univ
+  live: true
+  product_id:  1
+  shipment_id:  toreplace_order_univ
+
+toreplace_order_univ_b:
+  order:     toreplace_order_univ
+  live: true
+  product_id:  2
+  shipment:  toreplace_order_univ
+
+#----------
+# in shipment 'regular'
+toreplace_order_regular_a:
+  order:    toreplace_order_regular
+  live: true
+  product_id:  1
+  shipment:  toreplace_order_regular
+
+toreplace_order_regular_b:
+  order:  toreplace_order_regular
+  live: true
+  product_id:  2
+  shipment:  toreplace_order_regular
+
+
+#----------
+# in shipment 'mixed'
+toreplace_order_mixed_a:   # regular
+  order:     toreplace_order_mixed_reg
+  live: true
+  product_id:  1
+  shipment:  toreplace_order_mixed_ship
+
+toreplace_order_mixed_b:   # regular
+  order:     toreplace_order_mixed_reg
+  live: true
+  product_id:  2
+  shipment:  toreplace_order_mixed_ship
+
+
+toreplace_order_mixed_c:    # univ 1
+  order:     toreplace_order_mixed_univ1
+  live: true
+  product_id:  3
+  shipment:  toreplace_order_mixed_ship
+
+
+toreplace_order_mixed_d:    # univ 1
+  order:     toreplace_order_mixed_univ1
+  live: true
+  product_id:  4
+  shipment:  toreplace_order_mixed_ship
+
+
+toreplace_order_mixed_e:    # univ 2
+  order:   toreplace_order_mixed_univ_bar
+  live: true
+  product_id:  5
+  shipment: toreplace_order_mixed_ship
+

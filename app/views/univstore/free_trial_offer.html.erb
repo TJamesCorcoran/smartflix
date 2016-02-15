@@ -1,0 +1,22 @@
+<div id="free_trial_box">
+
+<% if SmartFlix::Application::FIRST_MONTH_FREE %>
+    <h1>Free Trial Offer</h1>
+    <p>Try a SmartFlix subscription for a month.  If you don't like
+   it, cancel, and we'll never charge you.</p>
+<% else %>
+    <h1>Try SmartFlix</h1>
+    <p>
+    Try a SmartFlix subscription for a month.  If you don't like
+    it, cancel, and we'll never charge you again.
+    </p>
+<% end %>
+     
+
+</div>
+
+<div id="right_col">
+   <%= render :partial => 'signup', :locals => { :customer => @customer } %>
+</div>
+
+<%= render :partial => 'testimonials' %>

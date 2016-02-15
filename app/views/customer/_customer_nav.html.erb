@@ -1,0 +1,17 @@
+<%# Allow customer to change email preferences, account info, and password -%>
+
+<div class="customer_nav">
+
+  <%= link_to_or_text "Where's my stuff?", :action => 'wheres_my_stuff' %> |
+
+  <%= link_to_or_text 'University', :action => 'university_status' %> |
+
+  <%= link_to_or_text 'Credit Cards', :action => 'manage_cc' %>  |
+
+  <%= link_to_or_text 'Address  Book', :action => 'account_info' %> |
+
+  <%= link_to_or_text 'Change password', :action => 'password_change' %> |
+
+  <%= link_to_or_text 'E-mail', :action => 'email_prefs' %> 
+
+</div>

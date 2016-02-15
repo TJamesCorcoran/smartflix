@@ -1,0 +1,14 @@
+if (@line_item)
+  button_id = dom_id(@line_item, 'button')
+  item_id = dom_id(@line_item)
+  if (params[:cancel])
+    page.show(button_id)
+    page.hide(item_id)
+  else
+    page.hide(button_id)
+    page.show(item_id)
+    # Different partial, depending on which problem, set in controller
+    page.replace_html(item_id, :partial => @partial)
+    page.visual_effect :highlight, item_id, :duration => 2.0
+  end
+end

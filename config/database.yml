@@ -1,0 +1,46 @@
+# SMARTFLIX
+#
+development:
+  adapter:    mysql2
+  encoding:   utf8
+  reconnect:  false
+  database:   railscart_development
+  pool:       5
+  username:   root
+  password:
+  host:       localhost
+  socket:     /var/run/mysqld/mysqld.sock
+
+test:
+  adapter:    mysql2
+  encoding:   utf8
+  reconnect:  false
+  database:   railscart_test
+  pool:       5
+  username:   root
+  password:
+  socket:     /var/run/mysqld/mysqld.sock
+
+stage:
+  adapter:    mysql2
+  encoding:   utf8
+  reconnect:  false
+  database:   smart_railscart
+  pool:       5
+  username:   smart_railscart
+  password:   XXX
+  host:       XX.XX.XX.XX
+  port:       XX
+  socket:     /var/run/mysqld/mysqld.sock
+
+production:
+  adapter:    mysql2
+  encoding:   utf8
+  reconnect:  false
+  database:   smart_railscart
+  username:   smart_railscart
+  pool:       5
+  password:   XXX
+  host:       XX.XX.XX.XX
+  port:       XX
+  socket:     /var/run/mysqld/mysqld.sock

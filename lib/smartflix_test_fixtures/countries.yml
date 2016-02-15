@@ -1,0 +1,7 @@
+canada:
+  country_id: 38
+  name: Canada
+
+us:
+  country_id: 223
+  name: United States

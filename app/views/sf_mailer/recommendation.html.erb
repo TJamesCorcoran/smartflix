@@ -1,0 +1,150 @@
+<html>
+
+<head>
+<title>SmartFlix.com Recommendations</title>
+<style type="text/css">
+/* item area */
+
+.vidcap-sm {
+	width : 109px;
+	height : 109px;
+	float : left;
+	border: 0;
+}
+
+.item h2 {
+
+	font-family : Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size : 12px;
+	line-height : 16px;
+	color : black;
+	margin-top : 0px;
+	margin-bottom : 0px;
+	padding-bottom : 5px;
+
+}
+
+.item p {
+	font-family : "Lucida Sans Unicode", "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	font-size : .75em;
+	line-height : 1.2em;
+	color : black;
+	margin: 0;
+	padding: 3px 0;
+}
+
+.button-float {
+  margin-top: 5px;
+  float: left;
+}
+.button-float img {
+  border: 0;
+}
+
+
+/* positioning mess */
+
+
+.item {
+  height : 115px;
+	width : 500px;
+	padding-bottom : 20px;
+	padding-right : 10px;
+}
+
+.item-button {
+  float : left;
+	padding-right : 3px;
+}
+
+.item form {
+  padding: 0;
+  margin: 0;
+  display: inline;
+}
+</style>
+</head>
+
+<!-- COMMON HEADING -->
+
+<body bgcolor="#f2f2f2" link="#6776B7" alink="#6776B7" vlink="#6776B7" text="#000000">
+<div align="center"> 
+<table width="620" border="0" cellspacing="0" cellpadding="0" bgcolor="white"> 
+<tr>
+<td width="8" height="8"><img src="http://smartflix.com/images/email_tl.gif" width="10" height="10" border="0"></td>
+<td width="604" height="8" style="border-top:solid 2px #B5B5B5"><img src="http://smartflix.com/images/email_spacer.gif" width="1" height="1" border="0"></td>
+<td width="8" height="8"><img src="http://smartflix.com/images/email_tr.gif" width="10" height="10" border="0"></td>
+</tr>
+<tr>
+<td width="8" style="border-left: solid 2px #B5B5B5"><img src="http://smartflix.com/images/email_spacer.gif" width="1" height="1" border="0"></td>
+<td width="604">
+
+<!-- EMAIL MAIN CONTENT -->
+
+<a href="http://smartflix.com/"><img src="http://smartflix.com/images/email_logo.jpg" border="0"></a>
+
+<p>
+
+<font face="Verdana,Arial,sans-serif">
+
+Hi <%= @customer.full_name.titleize %>,<p>
+
+We're trying to get to know you better, and we've come up with some
+recommendations for you based on the videos you've previously rented
+from us. Other customers who've rented similar videos to you have rented
+these titles:
+
+</font>
+
+<p>
+
+<table cellpadding="10" width="100%">
+<%= render :partial => 'product_listing', :locals => {:products => @products, :token => @token}%>
+<tr><td colspan="2">
+<hr width="100%" size="1" noshade="noshade" style="border-top: 2px dashed #B5B5B5;">
+</td></tr>
+
+</table>
+
+<font face="Verdana,Arial,sans-serif">
+
+As you know, most of our DVDs are just $9.99, and we cover shipping both
+ways. So please stop by again and see what else we have in stock.
+We hope you enjoyed these recommendations and found them useful!<p>
+
+Sincerely,<br>
+Your friends at SmartFlix<p>
+
+<a href="http://SmartFlix.com">website</a><br>
+
+&nbsp;<p>
+
+<hr width="100%" size="1" noshade="noshade" style="border-top: 2px solid #B5B5B5;">
+
+We hope you enjoyed receiving this message. However, if you'd rather
+not receive future e-mails like this one, please visit our email
+preferences page:<p>
+
+<% pref_token = OnepageAuthToken.create_token(@customer, 3, :controller => 'customer', :action => 'email_prefs') %>
+<a href="http://SmartFlix.com/customer/email_prefs?token=<%= pref_token %>">http://SmartFlix.com/customer/email_prefs?token=<%= pref_token %></a>
+
+<p>
+
+This email was sent to <%= @customer.email %>
+
+</font>
+
+<!-- COMMON FOOTER -->
+
+</td>
+<td width="8" style="border-right: solid 2px #B5B5B5"><img src="http://smartflix.com/images/email_spacer.gif" width="1" height="1" border="0"></td>
+</tr>
+<tr>
+<td width="8" height="8"><img src="http://smartflix.com/images/email_bl.gif" width="10" height="10" border="0"></td>
+<td width="604" height="8" style="border-bottom:solid 2px #B5B5B5"><img src="http://smartflix.com/images/email_spacer.gif" width="1" height="1" border="0"></td>
+<td width="8" height="8"><img src="http://smartflix.com/images/email_br.gif" width="10" height="10" border="0"></td>
+</tr>
+</table>
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<div class="project-summary">
+  <div class="header">
+    <h3><%= link_to h(project_summary.title), project_summary %> by <%= link_to_customer(project_summary.customer) %></h3>
+  </div>
+  <%= project_thumbnail_link_to_project(project_summary) %>
+
+  <% if @customer && @customer.projects_admin? %>
+	<div class="ud_block">
+	  <%= link_to project_summary.customer.id, rcadmin_customer_url(project_summary.customer.id) %><br>
+	  <%= project_summary.customer.email %>
+	</div>
+  <% end %>
+
+  <p><strong>Description:</strong> <%= h(project_summary.updates.first.text) %></p>
+  <br class="clear"/>
+  <p class="project-comment-link"><%= link_to pluralize(project_summary.comments.count, 'comment'), project_url(project_summary, :anchor => 'comments') %></p>
+</div>

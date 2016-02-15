@@ -1,0 +1,12 @@
+<h1>Editing cobrands</h1>
+
+<%= error_messages_for :cobrands %>
+
+<%= form_for(:cobrands, :url => cobrands_path(@cobrands), :html => { :method => :put }) do |f| %>
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', cobrands_path(@cobrands) %> |
+<%= link_to 'Back', cobrands_path %>

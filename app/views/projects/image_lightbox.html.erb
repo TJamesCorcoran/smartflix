@@ -1,0 +1,11 @@
+<div class="tell-a-friend-title">
+  <div class="tell-a-friend-title-close">
+    <%= link_to 'close', '#', :class => 'lbAction', :rel => 'deactivate' %>
+  </div>
+  Project Image
+</div>
+
+<div id="tell-a-friend" class="tell-a-friend">
+  <%= link_to content_tag(:div, image_tag(@photo.public_filename), :align => 'center'), '#', :class => 'lbAction', :rel => 'deactivate' %>
+  <%= link_to 'Close', '#', :class => 'lbAction', :rel => 'deactivate' %>
+</div>

@@ -1,0 +1,101 @@
+Purpose
+=======
+
+1) store where a customer FIRST comes from
+2) see how profitable click-through codes are
+
+NOTE: the latter bit works well in conjunction w
+  a) online advertising
+  b) print advertising
+  c) our newsletter tool
+
+
+Installation
+============
+
+0) requirements
+---------------
+
+install
+		 vendor/plugins/robot_test
+
+define
+        EMAIL_FROM_BUGS     = 'outgoing@smartflix.com'  # don't put in full name; exception notifier chokes despite actionmailerback
+		SITE_ABBREV      = 'SF' # or 'HI'...
+
+
+1) miscellaneous
+----------------
+
+in 
+   config/environment.rb
+defined
+  * EMAIL_TO_BADDATA
+  * EMAIL_TO_DEVELOPER
+  * EMAIL_FROM_BUGS
+  * SITE_ABBREV
+
+2) models
+---------
+
+add to your customer model
+
+   has_many :origins, :order => 'id'
+
+add to your orders model
+
+   class Order
+
+     belongs_to :campaign, :order => 'id'              #<---
+
+      def Order.for_cart(cart, campaign = nil)
+             ...
+             order = Order.new(:campaign => campaign)   #<---
+             ...
+	  end
+
+	  def booked_revenue()     ...    end    #<---
+      def realized_revenue()   ...    end    #<---
+	  def booked_profit()      ...    end    #<---
+	  def realized_profit()    ...    end    #<---
+			 
+
+3) views
+--------
+?
+
+4) CSS
+------
+?
+
+5) controllers
+--------------
+
+ add to your app/controllers/application.rb
+       include TrackOrigin
+       before_filter :track_origin_and_redirect
+
+ add to your app/controllers/cart_controller.rb
+
+       include TrackOrigin
+       
+	   Order.for_cart( ....  , current_campaign)
+
+  if you have another way 
+
+6) database
+-----------
+	* (cd db/migrations ; ln -s ../../vendor/plugins/track_origin/db/migrate/1181055620_create_origins.rb)
+	* rake db:migrate
+
+admin usage
+===========
+
+1) make sure to create campaigns in db before sending them out in ct codes
+
+
+BUGS
+====
+
+* need tests!
+* are we doing anything smart with affiliates (codes = ct=af[0-9]+) ?

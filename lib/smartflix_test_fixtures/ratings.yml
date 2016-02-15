@@ -1,0 +1,50 @@
+rating1:
+  rating_id: 1
+  product_id: 1
+  customer_id: 1
+  rating: 4
+  created_at: <%= Date.today - 101 %>
+  review: 'It was ok, not bad at all'
+  approved: true
+rating2:
+  rating_id: 2
+  product_id: 1
+  customer_id: 1
+  rating: 5
+  created_at: <%= Date.today - 102 %>
+  review: 'It was good, not just ok'
+  approved: true
+rating3:
+  rating_id: 3
+  product_id: 2
+  customer_id: 1
+  rating: 4
+  created_at: <%= Date.today - 102 %>
+  review: <%= nil %>
+  approved: true
+rating4:
+  rating_id: 4
+  product_id: 2
+  customer_id: 1
+  rating: 3
+  created_at: <%= Date.today - 103 %>
+  review: 'Decent video'
+  approved: true
+
+product_univstub_1:
+  rating_id: 5
+  product_id: 100
+  customer_id: 1
+  rating: 5
+  created_at: <%= Date.today - 103 %>
+  review: 'Univstub review - 5 stars'
+  approved: true
+
+product_univstub_2:
+  rating_id: 6
+  product_id: 100
+  customer_id: 1
+  rating: 4
+  created_at: <%= Date.today - 103 %>
+  review: 'Univstub review - 4 stars'
+  approved: true

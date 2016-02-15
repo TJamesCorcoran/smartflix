@@ -1,0 +1,46 @@
+<% if @customer.full_name.empty_is_nil -%>
+Dear <%= h(@customer.full_name) %>,
+<% end -%>
+
+
+Welcome to SmartFlix!
+
+If you haven't already done so, please try a month long 100% FREE
+trial of our subscription service.  Learn about exactly what YOU want
+to learn about: oil painting, metalworking, welding, or anything else!
+
+To learn more about a free, no-strings attached trial go here:
+
+    <%= univstore_all_url(:host => WEB_SERVER) %>
+
+As a reminder: you can log in to your account at any time
+
+  * Email:    <%= @customer.email %>
+<% if @password -%>
+  * Password: <%= @password %>
+<% end -%>
+
+and you can reset your password here:
+
+  <%= customer_password_reset_url(:host => WEB_SERVER) %>
+
+If you ever have a question, a suggestion, or a comment, please contact
+us at info@smartflix.com
+
+We read every single customer email, and we look forward to making you
+as satisfied with our service as our other <%= Customer.count %>
+customers since 2002.
+
+Sincerely,
+
+Xxx , President
+
+
+
+----------
+
+This email address was given to us by you or by one of our customers. If
+you did not signup for an account, or feel that you have received this
+email in error, please send an email to info@smartflix.com 
+
+

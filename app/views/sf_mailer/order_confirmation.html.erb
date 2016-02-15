@@ -1,0 +1,79 @@
+<%= render :partial => 'header' %>
+
+Order Confirmation from SmartFlix<p>
+
+<%= h(@order.customer.full_name) %>,<p>
+
+Thanks for renting from us today!<p>
+
+The following are the details of your order:<p>
+
+Order Number: <%= @order.id %><br>
+Date Ordered: <%= @order.listing_date %><br>
+Detailed Invoice: <a href="<%= @url %>"><%= @url %></a><p>
+
+<hr>
+
+<p>
+
+<b>Items ordered:</b><p>
+
+<%# XXXFIX P2: Use a template (order)? Also, handle set stuff -%>
+<ul>
+<% @order.line_items.each do |li| -%>
+<%# Only display a price if it's non-zero -%>
+<li><%= li.product.name %> <%= (li.price > 0.0) ? "(#{number_to_currency(li.price)})" : '' %><br>
+<% end -%>
+</ul
+<p>
+
+Sub-Total: <%= number_to_currency(@order.sub_total) %><br>
+<% @order.price_modifiers.each do |pm| -%>
+<%= h(pm.display_string) %>: <%= number_to_currency(pm.amount) %><br>
+<% end -%>
+Free Shipping: <%= number_to_currency(0.00) %><br>
+Total: <%= number_to_currency(@order.total) %><br>
+
+<p>
+
+<b>Delivery Address</b>
+<p>
+<%# XXXFIX P2: Big time use a template here, and in text version, and use h() for everything -%>
+<% addr = @order.customer.shipping_address -%>
+<%= h(addr.first_name) %> <%= h(addr.last_name) %><br>
+<%= h(addr.address_1) %><br>
+<% if addr.address_2.length > 0 -%>
+<%= h(addr.address_2) %><br>
+<% end -%>
+<%= h(addr.city) %>, <%= h(addr.state_code) %> <%= h(addr.postcode) %><br>
+<%= h(addr.country_name) %>
+
+<p>
+
+<b>Billing Address</b>
+<p>
+<% addr = @order.customer.billing_address -%>
+<%= addr.first_name %> <%= addr.last_name %><br>
+<%= addr.address_1 %><br>
+<% if addr.address_2.length > 0 -%>
+<%= addr.address_2 %><br>
+<% end -%>
+<%= addr.city %>, <%= addr.state_code %> <%= addr.postcode %><br>
+<%= addr.country_name %>
+
+<p>
+
+<b>Payment Method</b>
+<p>
+<%= @order.payment_method %>
+
+<hr>
+
+<%# XXXFIX P2: Common disclaimer in template -%>
+This email address was given to us by you or by one of our customers. If
+you feel that you have received this email in error, please send an
+email to info@smartflix.com
+
+<%= 
+@customer = @order.customer
+render :partial => 'footer' %>

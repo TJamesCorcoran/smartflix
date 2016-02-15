@@ -1,0 +1,6 @@
+<%# We swap the words previous and next, since the order of display is inverted %>
+<%= links_to_previous_next(@order_pages, :invert => true) %>
+
+<p>
+
+<%= render :partial => 'order_table' %>

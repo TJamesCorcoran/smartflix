@@ -1,0 +1,246 @@
+bob:
+  customer_id: 1
+  email: bob@bob.com
+  first_name: Bob
+  last_name: Bonanza
+  hashed_password: <%= "#{Customer.hash_password('password', '00')}" %>
+  shipping_address_id: 1
+  billing_address_id: 2
+  affiliate: 0
+joe:
+  customer_id: 2
+  email: joe@joe.com
+  first_name: Joe
+  last_name: Bonanza
+  hashed_password: <%= "#{Customer.hash_password('password', '00')}" %>
+  shipping_address_id: 1
+  billing_address_id: 2
+  affiliate: 1
+robq:
+  customer_id: 3
+  email: Rob@Quincunx.com
+  first_name: Robert
+  last_name: Quincunx
+  hashed_password: <%= "#{Customer.hash_password('password', '00')}" %>
+  shipping_address_id: 1
+  billing_address_id: 2
+  affiliate: 0
+four:
+  customer_id:   4
+  email:      test4@nowhere.com
+  first_name: Test Customer
+  last_name:  Four
+  hashed_password: <%= "#{Customer.hash_password('password', '00')}" %>
+  shipping_address_id: 1
+  billing_address_id: 2
+  affiliate: 0
+five:
+  customer_id:   5
+  email:      chuck@nothinghappens.net
+  first_name: Test Customer
+  last_name:  Five
+  hashed_password: <%= "#{Customer.hash_password('password', '00')}" %>
+  shipping_address_id: 1
+  billing_address_id: 2
+  affiliate: 0
+
+partial:
+  customer_id: 6
+  email: partial@partial.com
+  hashed_password: <%= "#{Customer.hash_password('password', '00')}" %>
+
+manage_cc_test:
+  first_name: "Manage"
+  last_name: "CreditCardGuy"
+  customer_id: 7
+  email: managecctest@smartflix.com
+  hashed_password: <%= "#{Customer.hash_password('password', '00')}" %>
+  shipping_address_id: 10
+  billing_address_id: 11
+
+manage_cc_test_two:
+  first_name: "Manage"
+  last_name: "CreditCardGuy"
+  customer_id: 8
+  email: managecctest@smartflix.com
+  hashed_password: <%= "#{Customer.hash_password('password', '00')}" %>
+  shipping_address_id: 10
+  billing_address_id: 11
+
+
+#------------------------------
+# tvr-m
+#
+
+tyler:
+  email: "tyler@smartflix.com"
+  shipping_address_id: 1
+  notes: ""
+  emailBouncedP: 0
+  throttleP: 0
+  updated_at: <%= Time.now.to_s(:db) %>
+  hashed_password: <%= "#{Customer.hash_password('password', '00')}" %>
+
+travis:
+  email: "xyz@smartflix.com"
+  customer_id: 999
+  shipping_address_id: 1
+  notes: ""
+  emailBouncedP: 0
+  throttleP: 0
+  updated_at: <%= Time.now.to_s(:db) %>
+  hashed_password: <%= "#{Customer.hash_password('password', '00')}" %>
+
+pete:
+  email: "xxx@smartflix.com"
+  shipping_address_id: 1
+  notes: ""
+  emailBouncedP: 0
+  throttleP: 0
+  updated_at: <%= Time.now.to_s(:db) %>
+  hashed_password: <%= "#{Customer.hash_password('password', '00')}" %>
+
+one_at_a_time:
+  customer_id: 2000
+  email: "bob@smartflix.com"
+  ship_rate: 1
+
+previous_customer:
+  customer_id: 2001
+  email: "previous_customer_who_rented_dvds@smartflix.com"
+  ship_rate: 1
+
+
+overdue_cust:
+  customer_id: 3000
+  email: "bob_jones@smartflix.com"
+  ship_rate: 1
+
+cust_with_cc_0:
+  customer_id: 4000
+  email: "0@smartflix.com"
+
+cust_with_cc_1:
+  customer_id: 4001
+  email: "1@smartflix.com"
+
+cust_with_cc_2:
+  customer_id: 4002
+  email: "2@smartflix.com"
+
+cust_with_cc_3:
+  customer_id: 4003
+  email: "3@smartflix.com"
+
+cust_with_cc_4:
+  customer_id: 4004
+  email: "4@smartflix.com"
+
+
+#----------
+# shared between line_item tests and overdue_engine tests
+
+cust_brrr:
+    email: brrr@smartflix.com
+    customer_id: 5000
+    shipping_address_id: 1
+    billing_address_id: 1
+
+charge_yes_first: 
+    email: testuser@smartflix.com
+    customer_id: 5010
+    shipping_address_id: 1
+    billing_address_id: 1
+
+charge_yes_older: 
+    email: guy@smartflix.com
+    customer_id: 5011
+    shipping_address_id: 2
+    billing_address_id: 2
+
+charge_expired_cc:
+    email: expired@smartflix.com
+    customer_id: 5020
+    shipping_address_id: 5020
+    billing_address_id: 5021
+
+#----------------------------------------------------------------------
+#   ShippingTest
+#----------------------------------------------------------------------
+
+customer_with_no_history:
+   customer_id: 6000
+   email: customer_6000@smartflix.com
+
+customer_with_order:
+   customer_id: 6100
+
+customer_with_dibs:
+   customer_id: 6200
+
+#----------
+# customer / university / shipping testing
+
+non_univ_customer:
+   customer_id: 7000
+
+single_univ_customer:
+   customer_id: 7010
+
+triple_univ_customer:
+   customer_id: 7020
+
+
+non_univ_customer_2:
+   customer_id: 7100
+
+#--------------------
+# shippable
+
+single_univ_customer_2:
+   customer_id: 7110
+
+triple_univ_customer_2:
+   customer_id: 7120
+
+
+#----------
+# pruning
+
+prune_none_recent:
+   customer_id: 7200
+
+prune_throttled:
+   customer_id: 7300
+   throttleP: 1
+
+#----------
+# test_any_chance_of_working
+
+cc_no_statuses_live:
+  customer_id: 598
+
+cc_no_statuses_expired:
+  customer_id: 599
+
+cc_one_status_declined:
+  customer_id: 600
+
+cc_one_status_expired:
+  customer_id: 601
+
+cc_one_status_gateway:
+  customer_id: 602
+
+cc_one_status_addrnomatch:
+  customer_id: 603
+
+cc_two_status_addrnomatch_expired:
+  customer_id: 604
+
+#----------------------------------------------------------------------
+#   orders tests
+#----------------------------------------------------------------------
+toreplace_order:
+  email: aaa@smartflix.com
+

@@ -1,0 +1,32 @@
+Use enum_field in a model in order to cleanly set up a mapping from
+constants to strings; here's an example that sets up an enum on the
+status field:
+
+class Project < ActiveRecord::Base
+
+  enum_field :status, { :constant => :SOMEDAY,       :select => "Planning on it someday", :display => "Future" },
+                      { :constant => :JUST_STARTING, :select => "Just getting started",   :display => "Starting" },
+                      { :constant => :IN_PROGRESS,   :select => "Work in progress",       :display => "In Progress" },
+                      { :constant => :FINISHED,      :select => "Finished!",              :display => "Finished" }
+
+end
+
+This sets the SOMEDAY constant to 1, the JUST_STARTING constant to 2,
+the IN_PROGRESS constant to 3, etc. within the STATUS module of the
+Project class (ie Project::STATUS::SOMEDAY).
+
+Given a project object, there are now new methods
+
+  project.status_select returns "Planning on it someday", "Just getting
+  started", etc as appropriate to match the actual value set
+
+  project.status_display returns "Future", "Starting", etc as
+  appropriate to match the actual value set
+
+There are also new methods on the Project class
+
+  Project.status_selects returns an associative array mapping the select
+  strings to constant values, useful in creating a select box
+
+  Project.status_displays returns an associative array mapping the
+  display strings to constant values, useful in creating a select box

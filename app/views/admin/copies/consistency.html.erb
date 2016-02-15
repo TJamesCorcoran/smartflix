@@ -1,0 +1,35 @@
+<h1><%= link_to "List copies", :action => :index %> / Copy Consistency Problems</h1>
+
+<%= @in_and_out_not_one.size + @lost_and_here.size %> problems:
+
+<table border=0 class="sortable" id="copies">
+  <tr>
+    <th>copy</th>
+    <th>error</th>
+    <th>times out</th>
+    <th>inStock</th>
+    <th>status</th>
+  </tr>
+
+  <% @in_and_out_not_one.each do |copy| %>
+  <tr>
+     <td><%= link_to copy.sticker_id, :action => :show, :id => copy %></td>
+     <td>in + out != 1</td>
+     <td><%= copy.times_out %></td>
+     <td><%= copy.inStock %></td>
+     <td><%= copy.death_type.name %></td>
+  </tr>
+  <% end %>
+
+  <% @lost_and_here.each do |copy| %>
+  <tr>
+     <td><%= link_to copy.sticker_id, :action => :show, :id => copy %></td>
+     <td>lost, yet believed to be in house</td>
+     <td><%= copy.times_out %></td>
+     <td><%= copy.inStock %></td>
+     <td><%= copy.death_type.name %></td>
+  </tr>
+  <% end %>
+
+</table
+>lo

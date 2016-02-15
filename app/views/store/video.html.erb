@@ -1,0 +1,10 @@
+<%= render :partial => 'shared/new_customer_widget', :locals => {  } %>
+
+<%= 
+if @product.is_a?(UnivStub)
+  render :partial => 'univ_stub'
+else
+  render :partial => 'new_video'
+end
+ %>
+

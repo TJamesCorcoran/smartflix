@@ -1,0 +1,4 @@
+<h1>Ebay Auction</h1>
+
+<%= render(:partial => 'admin/shared/show_basicdata', :locals => { :item => @ebay_auction, :partials => {} })  %>
+<%= render(:partial => 'admin/shared/show_relations', :locals => { :item => @ebay_auction, :reject => [] })  %>

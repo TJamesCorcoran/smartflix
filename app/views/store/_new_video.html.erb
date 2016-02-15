@@ -1,0 +1,133 @@
+<%= render :partial => "column_right" %>
+
+<% if false -%>
+    <%= render :partial => 'shared/discount_banner' %>
+<% end -%>
+
+<div class="vid-desc">
+
+  <h1 class="title"><%= @product.listing_name %></h1>
+
+  <p class="with-author">
+  <% if @product.author -%>
+    ...with
+    <%= link_to_author @product.author %>
+  <% end -%>
+  </p>
+
+  <%= large_image_for(@product) %>
+
+  <% if @customer.andand.admin? %>
+	<div class="ud_block">
+	  <%= link_to "admin", :controller => "admin/products", :action =>:show, :id => @product.id %><br>
+	</div>
+  <% end %>
+
+  <%# Almost a wash, but going with All Ratings displayed -- if ab_test(:redesign_ratings) == :five_star %>
+  <% if false %>
+    <%= link_to(rating_image(@product.avg_rating, :large), 
+                :anchor => 'reviews') if @product.avg_rating && @product.avg_rating.round == 5 %>
+  <% else %>
+    <%= link_to(rating_image(@product.avg_rating, :large), :anchor => 'reviews') if @product.avg_rating %>
+  <% end %>
+
+
+  <%= link_to 'Review this video!', {:action => :review, :id => @product}, :class => 'write-review' %>
+
+  <% listing_description_for(@product) do |heading, body, minutes| -%>
+    <% if heading -%>
+      <h3><%= heading %></h3>
+    <% end -%>
+    <p class="listing-description"><%= body %></p>
+    <% if minutes && minutes > 10 -%>
+      <p>(about <%= minutes %> minutes)</p>
+    <% end -%> 
+  <% end -%>
+
+  <% if @product.date_added -%>
+    <p>
+    This video was added to our catalog on <%=  @product.date_added.strftime("%B %d, %Y") %> in
+    <%= @product.categories.map { |cat| link_to_category cat, cat.full_path_text }.to_sentence %>.
+    </p>
+  <% end -%>
+
+  <% wiki_pages = [] # @product.wiki_pages
+  %>
+  <% if wiki_pages.any? %>
+    <p>
+      You might be interested in some other information related to this topic
+      <ul>
+      <% wiki_pages.sort_by { rand }[0,5].each do |wiki_page| %>
+        <li><%= link_to(h(wiki_page.name), wiki_page_url(wiki_page)) %></li>
+      <% end %>
+      </ul>
+    </p>
+  <% end %>
+
+  <p>
+  <strong>Product availability:</strong> <%= @product.wait_text %>
+  </p>
+  <p>
+
+
+  <% if false -%>
+    <%= render :partial => 'store/rent_together', :locals => { :product => @product } %>
+  <% end -%>
+
+  <% if @product.id == 92 %>
+      <h2>Video Review</h2>
+      <div style="margin:20px;">
+        <%= render :partial => "video_review", :locals => {:product => @product } %>
+      </div>
+  <% end %>
+
+  <%= render :partial => "shared/tweet_about_video", :locals => {:product => @product } %>
+
+
+
+  <% if @product.product_recommendations.size > 0 -%>
+    <h2>Customers who rented this DVD also rented</h2>
+    <ul class="also-rented">
+      <% @product.product_recommendations.each do |rec_product| -%>
+        <li><%= link_to_product rec_product %></li>
+      <% end -%>
+    </ul> 
+  <% end -%>
+
+  <p>
+
+  <div id="vid-rating">
+    <% approved_reviews = @product.reviews.select { |r| r.approved? } -%>
+    <a name="reviews"></a>
+    <h2>Customer Reviews</h2>
+
+    <p><%= link_to 'Write a review!', {:action => :review, :id => @product}, :class => 'write-review' %></p>
+
+    <% approved_reviews.each do |r| -%>
+      <div class="review">
+        <div class="header">
+          <div class="rating">
+            <span class="content"><%= rating_image r.rating %></span>
+          </div>
+          <div class="reviewer">
+            <span class="label">Reviewer:</span>
+            <span class="content"><%= r.customer.andand.display_name
+#? link_to_customer(r.customer) : 'UNKNOWN'
+ %></span>
+          </div>
+        </div>
+        <blockquote><%= html_paragraphs(r.review).html_safe %></blockquote>
+      </div>
+    <% end -%>
+
+    <% unless approved_reviews.empty? -%>
+      <p><%= link_to 'Write a review!', {:action => :review, :id => @product}, :class => 'write-review' %></p>
+    <% end -%>
+  </div>
+
+
+  <%= affiliate_link @product %>
+
+</div>
+
+

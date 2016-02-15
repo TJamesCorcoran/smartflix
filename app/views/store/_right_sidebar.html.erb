@@ -1,0 +1,30 @@
+<%
+  #----------
+  # The buttons get their own location in the layout 
+  #----------
+-%>
+<% @right_sidebar = capture do -%>
+  <% if @customer.andand.admin? %>
+	<div class="ud_block">
+	  <%= link_to "admin", :controller => "admin/products", :action =>:show, :id => @product.id %><br>
+	</div>
+    <br/ class="clear">
+  <% end %>
+
+  <% if false && (@product.days_backorder > 30)  %>
+    <div style="font-size:smaller; padding:5px; margin:5px; margin-right:15px; margin-bottom:15px; background-color:#ffb; border-color:#000; border-style:solid; border-width:2px;">
+      NOTE: this product is backordered 30 or more days
+    </div>
+  <% end %>
+
+  <%= customer_rented_or_review(@product) %>
+  <%= all_add_to_cart_buttons_for(@product) %>
+
+<% end -%>
+
+<% if @product.universities.any? %>
+  <% @right_sidebar_univ = capture do -%>
+    <%= render :partial => 'or_sub_to_a_univ', :locals => { :product => @product } %>
+  <% end %>
+<% end %>
+

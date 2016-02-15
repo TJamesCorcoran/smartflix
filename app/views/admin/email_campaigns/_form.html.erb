@@ -1,0 +1,34 @@
+<p>
+  <b>Name</b><br />
+  <%= form.text_field :name %>
+</p>
+
+<p>
+  <b>Template</b><br />
+  <%= form.text_field :template_file %>
+</p>
+
+<p>
+  <b>Email type</b><br />
+  <%= form.select :email_preference_type_id, EmailPreferenceType.find(:all).map{|pref| [pref.form_tag, pref.id] } %>
+</p>  
+
+<p>
+  <b>Run Every</b><br />
+  <%= text_field_tag 'frequency_reduced', reduced_frequency[1].to_s, { :size => 5 } %>
+  <%= select_tag 'frequency_units', frequency_units(reduced_frequency[0]) %>
+</p>
+
+<p>
+  <b>Subject</b><br />
+  <%= form.text_field :subject %>
+</p>
+
+<p>
+  <b>Finder</b><br />
+  <%= form.text_area :finder, {:cols => '80'} %>
+  <br />
+  <input type="button" value="Test" onclick="new Ajax.Updater('test_finder','../email_campaigns/test_finder', { parameters: {finder: $('email_campaign_finder').value, id: <%= @email_campaign.id || "'new'" %>} });">
+  <input type="button" value="Clear Test Data" onclick="$('test_finder').innerHTML = ''">
+  <div id="test_finder"></div>
+</p>

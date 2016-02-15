@@ -1,0 +1,24 @@
+<h1> Return! </h1>
+
+
+
+<table border=0>
+<tr>
+<td width=400px valign=top>
+  <%= form_tag admin_return_one_url, :remote => true do %>
+    Scan barcode: <%= text_field_tag :sticker %>
+  <% end %>
+
+
+</td>
+<td>
+	<%= 
+	copy = Copy.new
+	  render(:partial => "admin_panel_shippers",   :locals => { :copy => copy }) %>
+</td>
+</tr>
+</table>
+
+<div id="ajax_feedback_goes_here">
+
+</div>

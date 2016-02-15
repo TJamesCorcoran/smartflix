@@ -1,0 +1,4 @@
+<h3>Payments</h3>
+       <% order.payments.each do |payment| %>
+           <%= render :partial => "admin/line_items/payment", :locals => { :payment => payment, :verbose => true } %>         
+       <% end %>

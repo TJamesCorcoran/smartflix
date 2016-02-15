@@ -1,0 +1,149 @@
+<%
+ #----------------------------------------
+ # show the data
+ #----------------------------------------
+%>
+
+<%
+# AbTest[70].compare(:true, :false)
+# => #<OpenStruct
+#                 conversion_difference=0.0,
+#                 conversion_lower_confidence=0.0,
+#                 conversion_upper_confidence=0.0,
+#
+#                 value_difference=29.5255,
+#                 value_lower_confidence=19.7353,
+#                 value_upper_confidence=39.3157>
+# 
+#                 overall_difference=1.15922654102866,
+#                 overall_lower_confidence=0.774844915586965,
+#                 overall_upper_confidence=1.54360816647036,
+#
+# AbTest[70].ab_test_options.methods ....
+#  
+#                  attempts             - number of folks who got this option
+#                  average              - average revenue delivered per customer who saw this
+#                  average_of_converted - average revenue delivered per customer who saw this AND CONVERTED
+#                  conversion_rate      - fraction of folks seeing this option who converted
+#                  conversions
+#                  total_value          - total revenue delivered by people who saw this
+#                  variance
+#                  variance_of_converted
+%>
+
+<table border=0>
+  <tr>
+     <th></th>
+     <th></th>
+     <th colspan=4 style="background:#ccc;">raw option data</th>
+     <th colspan=3 style="background:#ccc;">conv comp</th>
+     <th colspan=3 style="background:#ccc;">value comp</th>
+     <th colspan=3 style="background:#ccc;">overall comp</th>
+  <tr>
+
+  <tr>
+     <th>test</th>
+     <th>option</th>
+
+     <th>visitors</th>
+     <th>convs</th>
+     <th>rate</th>
+     <th>value</th>
+
+     <% ["conv", "value", "overall"].each  do |concept| %>
+     <%      ["low", "center", "high"].each  do |extreme| %>
+           <th>
+             <%= "#{extreme}" %>
+           </th>
+     <% end  %>
+     <% end  %>
+  </tr>
+
+
+  <tr>
+  <% @result_tests.each do |test| %>
+    <tr>
+       <td><!- test -->
+          [<%= test.id %>]<%= test.name %> <%= "[INACTIVE]" unless test.active %>
+       </td>
+    </tr>
+         <%  base_option = test.ab_test_options[0]
+             test.ab_test_options.each do |option|
+                   is_base = option == base_option %>
+              <tr><td></td>
+                  <td> <!- option -->
+                    [ <%= option.id %>]
+                    <%= option.name %> <%= "[BASE]" if is_base %>
+                  </td>
+
+                  <%  #----------
+                      # raw data
+                      #----------
+                  %>
+
+                  <td>  <!- occurances -->
+                     <%= option.attempts %>
+                  </td>
+                  <td>  <!- conversions -->
+                     <%= option.conversions %>
+                  </td>
+                  <td> 
+                     <%= option.conversion_rate.nan? ? "nan" : (option.conversion_rate.round(4) * 100) %>
+                  </td>
+                  <td> 
+                     <%= option.average.nan? ? "nan" : (option.average.round(2)) %>
+                  </td>
+
+                  <%  #----------
+                      # diff data
+                      #----------
+                  %>
+                  <% diff = test.compare(base_option.name.to_sym, option.name.to_sym) %>
+
+                  <% ["conversion", "value", "overall"].each  do |concept| %>
+                    <% 
+                        decorator = concept == "overall" ? " %" : ""
+
+                        low = diff.andand.send("#{concept}_lower_confidence")
+                        high = diff.andand.send("#{concept}_upper_confidence")
+
+
+                        color = if is_base
+                                     "white"
+                                elsif high.andand < 0.0
+                                     "#fcc"
+                                elsif low.andand > 0.0
+                                     "#cfc"
+                                else
+                                     "#ffc"
+                                end
+                    %>
+                    <%      ["lower_confidence", "difference", "upper_confidence"].each  do |extreme| %>
+                      <td style="background-color:<%= color %>;">
+                          <% value = is_base ? nil : diff.andand.send("#{concept}_#{extreme}").andand.round(4) %>
+                          <%= value.nil? ? nil : (value.to_s + decorator) %>
+                      </td>
+                    <% end %>
+                  <% end %>
+
+              </tr>
+          <% end %>
+
+  <% end %>
+</table>
+
+<%
+ #----------------------------------------
+ # show the form
+ #----------------------------------------
+%>
+
+<%= form_tag( {:action => 'ab_test'}, {:method => :post} ) do %>
+  <div style="float:right;">
+    <%= submit_tag "Update" %>
+  </div>
+  <% @tests.each do | test | %>
+    <%= check_box_tag("tests[#{test.name}]") %> [<%= test.id %>]  <%= test.name %><%= "[INACTIVE]" unless test.active %><br>
+  <% end %>
+
+<% end %>

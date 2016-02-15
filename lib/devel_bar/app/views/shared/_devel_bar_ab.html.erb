@@ -1,0 +1,41 @@
+<div id="ab_test_view" style="display:none; margin-left:10px;">
+  AB test visitor ID: <%= session[:ab_test_visitor_id] || "nil" %><br>
+  <% abt_h = get_all_settings() || {} %>
+  <% if abt_h.any? %>
+    <ul style="list-style-type:disc; list-style-position: inside; margin-left:10px;">
+<table class=sortable>
+<tr>
+  <th><li></th>
+  <th>id</th>
+  <th>test</th>
+  <th>cur val</th>
+  <th></td>
+</td>
+         <% abt_h.keys.sort_by(&:id).each do |tt| %>
+             <% next if tt.nil? %>
+             <% next unless tt.active? %>
+             <% oo = abt_h[tt] %>
+<tr>
+    <td><li></td>
+    <td>[ <%= link_to tt.id, admin_ab_test_url(tt)  %>]</td>
+    <td><%= tt.name %></td>
+    <td><%= oo.name %></td>
+    <td>
+             [ 
+                 <% tt.ab_test_options.each { |alt| %> 
+                     <% if alt.name == oo.name %>
+                           <%= alt.name %>,
+                     <% else %>
+                        <%= link_to alt.name, admin_devel_bar_set_ab_test_url(:test_name => tt.name, :option_name => alt.name) %>, 
+                     <% end %>
+                  <% } %> ]
+    </td>
+</tr>
+      <% end %>
+</table>
+    </ul>
+  <% else %>
+     <i>no AB tests</i>
+  <% end %>
+</div>
+

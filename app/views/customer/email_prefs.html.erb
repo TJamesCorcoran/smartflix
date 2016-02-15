@@ -1,0 +1,37 @@
+<%# XXXFIX P3: Bug, on account page click 'edit' on an address, use browser back button, visit email prefs page, hit 'back' -%>
+<div class="text-content">
+
+  <%= render :partial => 'customer_nav' %>
+
+
+<h2>Change your email address</h2>
+
+
+<div class="email_preferences">
+  <%= form_for @customer, :url => customer_email_prefs_url do  |form| -%>
+    <%= onepage_auth_hidden_field %> 
+    <table>
+      <tr>
+        <td align="right">Email address:</td>
+        <td><%= form.text_field :email, :size => 30 %></td>
+      </tr>
+     </table>
+    <%= Button.new( :update, { :class => :orange, :method => :submit }) %>
+  <% end -%>
+</div>
+
+<h2>Change what emails we send you</h2>
+<div class="email_preferences">
+  <%= form_for @customer,  :url => customer_email_prefs_url do -%>
+    <p>
+    <%   @preferences.each do |p| -%>
+      <%=    check_box_tag "email_preference[#{p.email_preference_type.form_tag}]", 1, p.send_email %>
+      <strong><%=    p.email_preference_type.name %></strong> (<%= p.email_preference_type.description %>)
+      </p>
+      <p>
+      <%   end -%>
+      <%= onepage_auth_hidden_field %>
+      <%= Button.new( "update", { :class => :orange, :method => :submit}) %>
+   <% end -%>
+  </p>
+</div>

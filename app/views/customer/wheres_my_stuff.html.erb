@@ -1,0 +1,110 @@
+<div class="text-content">
+
+  <%= render :partial => 'customer_nav' %>
+
+  <%= onepage_auth_hidden_field %> 
+
+  <%= render :partial => 'payment_problems' %>
+
+  <%= render :partial => 'payment_uncharged' %>
+
+  <div class="wheres_my_stuff">
+  <h1>Non-university orders</h1>
+
+  <h2>Unshipped Items</h2>
+    <% lis = @customer.uncancelled_and_unshipped_line_items_payment_good %>
+    <% if lis.any? %>
+       <ul>
+         <% lis.sort_by(&:dateOrdered).each do |li| %>
+           <li>
+             <%= li.product.name %> - will ship in about <%= li.wait_text %> days.
+           </li>
+<%
+ #position, live_copies =li.where_in_list_and_num_copies 
+ # live_copies_instock = li.product.num_live_copies_instock 
+ # you are <XX= (position + 1).ordinal XX> in line, with <XX= live_copies XX> copies in circulation <XX if live_copies_instock > 0 XX> (and <XX= live_copies_instock XX> in stock!)<XXendXX>.  <XX if live_copies > 0 XX>Assuming that dvds each rotate in and out in about two weeks, our best guess is that we'll ship the DVD in around <XX= li.product.get_delay(position) XX> days.<XX else XX>Right now we have zero live copies of this DVD.  Our purchasing manager is working to buy more copies.  If you want to cancel your order for a full refund, we'll be happy to do that.<XX end XX>
+%> 
+
+         <% end %>
+       </ul>
+    <% else %>
+       <p>
+         It looks like at this point all of your items have shipped! 
+       </p>
+    <% end %>
+
+  <p>
+  <%= link_to 'Show all orders', :action => 'order_history' %>
+  </p>
+
+  </div>
+
+
+  <div class="wheres_my_stuff">
+    <h2>DVDs out with you </h2>
+     <% lis_in_field = @customer.lis_in_field_for_sf %>
+     <% if lis_in_field.any? %>
+         <p>(You may have already mailed these back, but we don't have them yet.)</p>
+         <p>
+          Currently we show the following items as being out in the field for you: 
+         </p>
+         <% in_field = lis_in_field %>
+
+         <% if in_field.empty? %>
+              <p><i>none</i></p>
+         <% else %>
+             <table border=0>
+              <% in_field.each do |li| %>
+                <tr>
+                  <td>
+                     <ul> 
+                         <li><%= li.product.name %>  </li>
+                     </ul> 
+                  </td>
+                  <td>
+                    <%= render :partial => 'report_problem_button', :locals => { :li => li } %>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                     <div id="<%= dom_id(li) %>" class="problemReportBox" style="display:none;">
+                     </div>
+                  </td>
+                </tr>
+              <% end -%>
+            </table>
+          <% end %>
+     <% elsif @customer.lis_in_field_for_univ.any? %>
+         <p>
+         You've got DVDs out from a SmartFlix University; <%= link_to "get more details here", :action => :university_status %>.
+         <p>
+     <% else %>
+         <p>
+           Looks like everything you've rented has been received back.
+           Why not subscribe to a <%= link_to "SmartFlix University", :controller => :store, :action => :universities %>
+           so that you've always got some fresh how-to DVDs on hand?
+         </p>
+     <% end %>
+
+
+
+  </div>
+
+
+  <div class="wheres_my_stuff">
+  <h2>Want us to ship you items faster or slower?</h2>
+
+  <p>Change your shipping rate!</p>
+
+  <%= form_for @customer, :url => customer_wheres_my_stuff_url do |form| -%>
+    <table>
+      <tr>
+        <td align="right">Shipping Rate:</td>
+        <td><%= form.select :ship_rate, [2,4,6,8] %> videos per week</td>
+      </tr>
+    </table>
+              <%= Button.new( "update", { :class => :orange, :method => :submit }) %>
+  <% end -%>
+  </div>
+
+</div>

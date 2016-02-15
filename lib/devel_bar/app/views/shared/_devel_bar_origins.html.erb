@@ -1,0 +1,11 @@
+<div id="origins_view" style="display:none; margin-left:10px;">
+  Origin
+  <% if @origin %>
+    <ul style="list-style-type:disc; list-style-position: inside; margin-left:10px;">
+         <li><%= @origin.first_uri %> // <%= @origin.first_coupon %>
+    </ul>
+  <% else %>
+     <i>no origins</i>
+  <% end %>
+</div>
+

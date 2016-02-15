@@ -1,0 +1,28 @@
+	<div class="ud_block">
+
+	<p>
+	<h2>Update the status</h2>
+	<%= form_for(:copy, :url => { :action => "update_status" }) do |f| %>
+        
+		<%= hidden_field_tag :employee_number , session[:employee_number] %>
+
+		<table border=0>
+		<tr>
+			<% if @copy.nil? %>
+					<td>copy_id:</td><td><%= text_field_tag :id %></td>
+                   	<%= hidden_field_tag :return_action , :returns %>
+			<%  
+              else %>
+					<%= hidden_field_tag :id , @copy.id %>
+			<% end  %>
+        </tr>
+		<tr><td>status:</td><td><%=	select(:status, nil, DeathLog::STATES_TEXT_TO_CODE)  %></td></tr>
+		<tr><td>(optional) note:</td><td><%= text_field_tag :note  %> </td></tr>
+		<tr><td><%= submit_tag "Update status" %></td></tr>
+		</table>
+	<% end %>
+	</p>
+
+    </div>
+
+

@@ -1,0 +1,210 @@
+
+
+<%
+#  inputs that we get from the controller:
+#      @form_options   - user selectable items that can be turned on or off via the form
+#      @data_rows      - an array, with one entry for each row to display, in order.  
+#                          [ [ "row-1 title", { interval1 -> value1 , interval2 -> value2 } ],
+#                            [ "row-2 title", { interval1 -> value1 , interval2 -> value2 } ],
+#                            [ "row-3 title", { interval1 -> value1 , interval2 -> value2 } ] ... ]
+#
+#      @data_format    - an array, with one entry for each row to display.
+#                          { :row1-symbol => { :indent=>1, :display_heading=>"row-1", :name=>:row1-symbol => ... },
+#                            :row2-symbol => { :indent=>1, :display_heading=>"row-2", :name=>:row2-symbol => ... },
+#                            :row2-symbol => { :indent=>1, :display_heading=>"row-2", :name=>:row2-symbol => ... } 
+#                           ... }
+#
+#      @period         - days?  months? etc.
+#      @num_intervals  - how many columns (days / months / whatever )
+#      @confidence     - statistical confidence interval
+
+%>
+
+
+
+<table class="stats" cellpadding="3">
+   <tr>
+     <th></th>
+		<%
+
+		   # 1) Generate the keys that we'll use to iterate left-to right
+		   #
+		   # 2) crank out the column headers
+
+		   keys = ([] << @data_rows[0].andand[1].andand.keys).flatten.select {|x| x }
+
+			col_headers = keys.sort.map { |key|
+					  case @period
+					  when 'year':    key.strftime('%Y')  + "<br>" + key.to_s
+					  when 'month':   key.strftime('%h')  + "<br>" + key.to_s
+					  when '2month':  key.strftime('%h')  + "<br>" + key.to_s
+					  when 'quarter': key.strftime('%h')  + "<br>" + key.to_s
+					  when '1':       key.strftime('%a')  + "<br>" + key.to_s
+					  else            key.to_s
+					  end 
+			} 
+
+			col_headers.each do |header|
+	     	%>
+    		<th align=left><%= header %>    </th>
+		    <% end %>
+		</tr>
+
+    <%
+
+		   # 3) for each row, iterate left to right and output data using formatting info
+
+    rowcolor = "#E0E0E0"
+
+    @data_rows.each do |h|
+      rowTitle = h[0]
+      flipColorP = 1
+      indent_px = 0
+
+      # Back in the controller, if we specified something as indented, we passed that info
+      # to here by prefixing the rowTitle with one or more asterisks.  At this pt,
+      # convert that to indent styling, and remove the asterisks.
+
+      if rowTitle.match(/^(\*+)/)
+        indent_px = 35 * $1.size
+        rowTitle.gsub!(/\*/, '')
+      end
+
+      rowcolor = (rowcolor == "#FFFFFF") ? "#E0E0E0" : "#FFFFFF" if (1 == flipColorP)
+
+	   rowSym = rowTitle.to_sym_clean
+
+     %>
+      <tr bgcolor="<%= rowcolor %>">
+         <td><div style="margin-left:<%= indent_px %>px;"><%= rowTitle %></div></td>
+			<%
+			keys.sort.each_with_trailing_and_leading do |key, last_key, next_key |
+
+			  if (h[1].has_key?(key) && h[1][key]) 
+				if rowTitle.match(/growth/)
+				  color =  (! h[1][key].nil? && h[1][key] < 0 ) ? "red" : "black" 
+				else
+				  color =  (! h[1][key].nil? && ! h[1][last_key].nil? && h[1][key] < h[1][last_key] ) ? "red" : "black" 
+				end
+
+				formater = h[2]
+                value = h[1][key] 
+                display_text = (formater == "currency" ? value.currency_nocents : (formater % value)) if value != ""
+              else
+                display_text = ""
+              end
+
+              if @data_format[rowSym].nil?
+                    # nothing
+              elsif @data_format[rowSym][:controller].nil?.not
+                 ah = { :controller => @data_format[rowSym][:controller],
+                        :action => @data_format[rowSym][:action],
+                        :fday => key,
+                            # XYZFIX P4: it's ugly to calculate lday here - do it back in the controller
+                        :lday => (next_key.nil? ? nil : next_key - 1)
+                       }.merge(@data_format[rowSym][:action_args])
+                display_text = link_to display_text, ah
+              else
+                    # nothing
+              end
+			%>          
+            <td class="<%= color %>"><%= display_text %></td>
+       <%   end  %>
+      </tr>
+   <%   end  %>
+</table>
+
+<p>
+
+
+
+<form name='options_form'>
+	<%
+	  # Break the buttons up into columns...but then some of the columns may begin with
+	  # indented buttons, which stinks.  So: move items from the top of one list to the end of the previous.
+	  # 
+
+#	  index_of_first_ab = @form_options.index(@form_options.detect {|key| key.to_s.match(/^abTest/)})
+#	  form_options_regular = @form_options[0 .. (index_of_first_ab - 1) ]
+#	  form_options_ab  = @form_options[index_of_first_ab .. -1 ]
+
+      form_options_regular = @form_options
+      form_options_ab = []
+
+      groups = form_options_regular.divide(4)
+      groups.each_with_index do |group, index|
+        next if index == 0   #  ... || group.map { |onegroup| @data_format[onegroup][:indent] }.detect{|x| x== 0}.nil?
+		loop do
+          # NOTE: it may be that in our quest to reunite all the
+          # indented items, we've used up everything available in this
+          # column.
+          break if  group.empty?  ||  @data_format[group[0]][:indent] == 0
+
+		  groups[index - 1] << group.shift 
+		end 
+		groups[index] = group
+      end
+
+	  # Build in reverse so we get the parent last so we can do javascripty check
+	  checkboxes = []
+	  children = []
+	  
+      ii = -1
+
+      groups.each do |group|
+		ii += 1
+		checkboxes[ii] = []
+
+	    group.reverse.each do |name|
+  
+		  next if @data_format[name][:display_heading].nil?
+		  
+		  checked = " checked" if params[name] == 'on'
+		  boxstring = ''
+		  onchange = ''
+		  if @data_format[name][:indent] != 0
+		    children << name.to_s
+			boxstring << ("&nbsp;&nbsp;&nbsp;&nbsp;" * @data_format[name][:indent])
+		  else
+			if children.size > 0
+			  actions = children.map { |c| "document.options_form.#{c}.checked=document.options_form.#{name}.checked" }
+			  onchange = " onchange='#{actions.join(';')};'"
+			end
+		    children = []
+  		  end
+		  boxstring << "<input type=checkbox name=#{name.id2name}#{checked}#{onchange}>#{@data_format[name][:display_heading]}</input><br>"
+		  checkboxes[ii] << boxstring
+	    end
+      end
+   %>
+
+
+
+    <table border=0>
+      <tr>
+        <td>
+		  Period: <input name=p value=<%= @period %>></input><br>
+		  Count: <input name=n value=<%= @num_intervals %>></input><br>
+		  Confidence: <input name=c value=<%= @confidence %>></input><br>
+        </td>
+        <td valign=top>
+	      <input type=submit value=Submit>
+        </td>
+      </tr>
+      <tr>
+        <% checkboxes.each_with_index do |subgroup, index| %>
+           <% style =  (index == (checkboxes.size - 1)) ? "" : "" %>
+           <td valign=top style="<%= style %>;"> <%= subgroup.reverse.join("\n")  %> </td>
+        <% end %>
+      </tr>
+      <tr>
+        <td colspan=4>
+        </td>
+        <td valign=top>
+	      <input type=submit value=Submit>
+        </td>
+       </tr>
+    </table>
+	
+</form>
+

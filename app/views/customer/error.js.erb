@@ -1,0 +1,4 @@
+$("#error_field").html("<div class='univ_on_hold'><div class='univ_on_hold_inner'><%= @error_str %></div></div>");
+$('html, body').animate({
+	scrollTop: $("#error_field").offset().top
+}, 500);

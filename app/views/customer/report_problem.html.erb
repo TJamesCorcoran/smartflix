@@ -1,0 +1,26 @@
+<% if @line_item -%>
+
+<div class="text-content">
+
+<h1>Report Problem</h1>
+
+<p>
+Report a problem for <strong><%= @line_item.product.listing_name %>
+<% if @line_item.product.product_set_member? -%>
+<%=  "(Disc ##{@line_item.product.product_set_ordinal})" %>
+<% end -%>
+</strong>
+</p>
+
+<%# Empty DIV that javascript can operate on, usually inline in the -%>
+<%# orders view but there's a small chance we can be on this page with -%>
+<%# javascript turned on -%>
+<div id="<%= dom_id(@line_item, 'button') %>" style="display:none;"></div>
+
+<div id="<%= dom_id(@line_item) %>">
+<%= render :partial => @partial %>
+</div>
+
+</div>
+
+<% end -%>

@@ -1,0 +1,79 @@
+<% # partial args: products (array of 2 products)
+ %>
+
+
+<% if products.size == 2 %>
+
+
+  <div class="postcheckout_header">
+	<%= image_tag "img_stop.gif" %>
+	<h1>STOP!  You've rented a great DVD ...</h1>
+	<h2> Now lock in savings on other things you need to know!</h2>
+
+	<p>
+	Choose one of our massively discounted how-to DVDs to help you learn
+	more skills, get better at a craft, save money in the shop, and
+	advance your career! 
+	</p>
+
+	<p> ...and don't worry about getting too many DVDs at once - we'll space them out for you!
+	</p>
+
+	<p> ( If neither of these choices appeals to you, click "continue to another offer" or click "view your order history" below.)
+    </p>
+
+  </div>
+
+  <% if flash[:upsell_success] %>
+      <h1> 
+        <font color="green"><%= flash[:upsell_success]%></font>
+      </h1> 
+  <% end -%>
+
+  <table border=0>
+  <tr><td>
+	  <%= render :partial => 'postcheckout_listing_single', :locals => { :product => products[0], :page => page } %>
+  </td><td >
+   ... or ...
+  </td><td>
+	  <%= render :partial => 'postcheckout_listing_single', :locals => { :product => products[1], :page =>page  } %>
+  </td></tr></table>
+
+
+
+  <% if final_page %>
+	  <div class="postcheckout_header">
+	  Those are all the special deals we have this time!
+	  </div>
+  <% else %>
+	  <div class="postcheckout_header">
+	  No thanks.  <%= link_to "Continue to another offer", :action =>:postcheckout_show, :page => page + 1 %>, or just <%= link_to "view your order history", :controller =>:customer %>.
+	  </div>
+  <% end %>
+
+
+<% else %>
+
+  <% if flash[:upsell_success] %>
+      <%=      "<font color=\"green\">#{flash[:upsell_success]}</font>"%><p> 
+  <% end -%>
+
+	<div class="postcheckout_header">
+
+  <h2>Thanks for shopping with SmartFlix !</h2>
+
+
+	<p>
+	We just have a few after-checkout offers for you ... and when they're gone, they're gone!
+	</p>
+
+	<p>
+	We've confirmed your orders by email, and your DVDs will ship shortly.
+	</p>
+
+	<%= render :partial => 'linkto_order_history' %>
+
+	</div>
+
+<% end %>
+

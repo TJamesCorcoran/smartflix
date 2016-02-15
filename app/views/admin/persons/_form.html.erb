@@ -1,0 +1,74 @@
+<table border=0>
+
+    <tr><td>employee number</td><td><%= @person.employee_number  %></td></tr>
+
+	<tr><td>first</td><td>
+	<%= text_field 'person', 'name_first'  %></td></tr>
+
+	<tr><td>last</td><td>
+	<%= text_field 'person', 'name_last'  %></td></tr>
+
+	<tr><td>email addr</td><td>
+	<%= text_field 'person', 'emailaddr'  %></td></tr>
+
+	<tr><td>employee ?</td><td>
+	<%=    radio_button 'person', 'employeeP',  true %>yes
+	<%=    radio_button 'person', 'employeeP',  false %>no
+	</td></tr>
+
+	<tr><td>hourly ?</td><td>
+	<%=    radio_button 'person', 'hourlyP', true %>yes
+	<%=    radio_button 'person', 'hourlyP', false %>no
+	</td></tr>
+
+	<tr><td>start date ?</td><td>
+	<%= date_select("person", "start_date", :start_year => Date.today.year, :use_month_numbers => false, :discard_day => false, :include_blank => false) %>
+	</td></tr>
+
+	<tr><td>fob_id</td><td>
+	<%= text_field 'person', 'fob_string'  %></td></tr>
+
+	<tr><td>phonenum</td><td>
+	<%= text_field 'person', 'phonenum'  %></td></tr>
+
+	<tr><td>shirt_size</td><td>
+	<%= text_field 'person', 'shirt_size'  %></td></tr>
+
+	<tr><td>password</td><td>
+	<%= text_field 'person', 'password', :value => ""  %></td></tr>
+
+<% Person.content_columns.select {|col| col.name.match(/^email_/) }.each do |col| %>
+
+	<tr><td class="dark"><%= col.name %> ?</td><td class="dark">
+	<%=    radio_button 'person', col.name,  true %>yes
+	<%=    radio_button 'person', col.name,  false %>no
+    </tr>
+
+<% end %>
+
+<% Person.content_columns.select {|col| col.name.match(/^authority_/) }.each do |col| %>
+
+	<tr><td class="light"><%= col.name %> ?</td><td class="light">
+	<%=    radio_button 'person', col.name,  true %>yes
+	<%=    radio_button 'person', col.name,  false %>no
+    </tr>
+
+<% end %>
+
+
+<% if (session[:employee_number].nil?)
+    person = Person.new
+else
+     person = Person.find(session[:employee_number])
+end
+
+   if person.authority_timesheet %>
+
+	<tr><td>end_date</td><td>
+	<%= text_field 'person', 'end_date'  %></td></tr>
+
+
+<% end %>
+
+
+</table>

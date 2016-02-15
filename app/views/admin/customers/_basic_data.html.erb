@@ -1,0 +1,11 @@
+<h1>basic data</h1>
+<div class="customer-admin">
+  <%= render(:partial => 'admin/shared/show_basicdata', 
+             :locals => { :item => @customer, 
+                          :partials => { :billing_address_id => "admin/addresses/compact_from_id",
+                                         :shipping_address_id => "admin/addresses/compact_from_id"
+                                       }
+                         } )  %>
+
+</div>
+

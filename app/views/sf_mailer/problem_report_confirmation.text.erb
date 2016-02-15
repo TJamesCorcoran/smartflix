@@ -1,0 +1,23 @@
+<%= h(@customer.full_name) %>,
+
+We've received your online problem report for
+
+<% product = @line_item.product -%>
+<%# XXXFIX P2: Some common code here, grep for 'Disc #' -%>
+  <%= "#{product.listing_name}#{product.product_set_member? ? " (Disc ##{product.product_set_ordinal})" : ""}" %>
+
+<% if @replacement_order -%>
+We're sending a replacement to you ASAP! Your replacement order number
+is <%= @replacement_order.id %>.
+<% else -%>
+Thanks for letting us know about the issue, <%= SmartFlix::Application::SITE_NAME %> customer support
+has been notified.
+<% end -%>
+
+Thanks,
+The SmartFlix Team
+
+<%# XXXFIX P2: Common footer in template -%>
+--
+http://SmartFlix.com/
+Web's Biggest How-To DVD Rental Store

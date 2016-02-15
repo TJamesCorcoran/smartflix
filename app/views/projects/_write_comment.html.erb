@@ -1,0 +1,12 @@
+<%# Only logged in customers can write comments %>
+<% if @customer %>
+  <h3>Add a comment:</h3>
+  <%= form_for(Comment.new(:parent => parent)) do |form| %>
+    <%= form.hidden_field :parent_id %>
+    <%= form.hidden_field :parent_type %>
+    <p><%= form.text_area :text, :rows => 6, :cols => 50 %></p>
+    <p><%= form.submit 'Submit Comment' %></p>
+  <% end %>
+<% else %>
+  <p><%= link_to 'Log in or sign up to add your comment', url_for(:controller => 'customer', :action => 'login') %></p>
+<% end %>

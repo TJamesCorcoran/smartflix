@@ -1,0 +1,26 @@
+<h1>Shipment Info</h1>
+<table border=0>
+<tr>
+<td>
+
+<table border=0>
+<% for column in Shipment.columns %>
+<tr><td> <b>
+    <%= column.human_name %>:</b></td><td> <%=
+
+       @shipment.send(column.name)
+
+%>
+</td></tr>
+<% end %>
+<tr><td><b>customer:</b></td><td><%=
+customer = @shipment.line_items[0].order.customer
+link_to "#{customer.id} : #{customer.full_name}", :controller=>:customers, :action=>:show, :id=>@shipment.line_items[0].order.customer.id %></td></tr>
+</table>
+
+
+<h1>Contains</h1>
+
+<%= render(:partial => "admin/line_items/line_item_all", :object => @shipment.line_items) %>
+
+<%= link_to 'Back', :action =>:index %>

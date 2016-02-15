@@ -1,0 +1,9 @@
+<div class="contests">
+  <div class="contests-left">
+    <p>Here's you're entry! If it looks good to you,
+    <%= link_to "you're done!", :action => 'show', :id => @contest %>
+    Otherwise, you can make changes below.</p>
+    <%= render :partial => 'contest_entry', :object => @contest_entry %>
+    <%= render :partial => 'edit_form' %>
+  </div>
+</div>

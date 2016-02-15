@@ -1,0 +1,153 @@
+visa-success:
+  month: 4
+  last_four: "0027"
+  brand: "visa"
+  encrypted_number: "GXfHwx1NGW42/S9J5EAP1lIdOIR0+NLaVyJlNR7jh3VkYmiec+KyNYlYmrl7Ut6mQiqo+9C7ml8PxsO3FH5wYcThkMBh4I545zU92bpm5FKDjAEInfI0oCxLr7qwoRVgJY4fxAeuCaz8TSVXZvAG5vpWPc2/N6JnY1qTYUDlqr6GkUaUez+Ld9XI84GbnDq+bmK8KLzplqrR82YfQ0AacDC9bBfATL7zTMs98hKQs0dJPrsZG/EamglAYLq1HIcwdrlvNjM1WYOVCRYGrB6kth+Wp7ygNjJb4iS3eDMAF6SjWvuuRkkVMGERQ8qoLjsrOs5buyC3hVtazaBVVe1HkQ=="
+  credit_card_id: 5
+  customer_id: 3
+  year: 2020
+  first_name: "Robert"
+  last_name: "Quincunx"
+
+
+manage_cc_test_a:
+  year: 2020
+  month: 12
+  last_four: "1111"
+  brand: "visa"
+  customer_id: 7
+  first_name: "AAAAAA"
+  last_name:  "BBBBBB"
+
+
+manage_cc_test_b:
+  year: 2020
+  month: 12
+  last_four: "22222"
+  brand: "visa"
+  customer_id: 7
+  first_name: "AAAAAA"
+  last_name:  "BBBBBB"
+
+
+manage_cc_test_c:
+  year: 2020
+  month: 12
+  brand: "visa"
+  customer_id: 7
+  first_name: "AAAAAA"
+  last_name:  "BBBBBB"
+
+
+manage_cc_test_d:
+  year: 2020
+  month: 12
+  brand: "visa"
+  customer_id: 8
+  last_four: "3333"
+  first_name: "AAAAAA"
+  last_name:  "BBBBBB"
+
+
+#----------
+# TVRM
+
+
+
+cust_with_cc_1_a:
+  customer_id: 4001
+  month: 6
+  year:  1998
+
+cust_with_cc_2_a:
+  customer_id: 4002
+  month: 3
+  year:  <%= Date.today.year - 1 %>
+
+
+cust_with_cc_2_b:
+  customer_id: 4002
+  month: 3
+  year:  <%= Date.today.year + 1 %>
+
+cust_with_cc_3_a:
+  customer_id: 4003
+  month: 01
+  year:  2011 # past
+
+cust_with_cc_3_b:
+  customer_id: 4003
+  month: 02
+  year:  2013 # past
+
+cust_with_cc_3_c:
+  customer_id: 4003
+  month: 03
+  year:  2016  # in future
+
+cust_with_cc_4_c:
+  customer_id: 4004
+  month: 03
+  year:  2013
+
+cust_with_cc_4_b:
+  customer_id: 4004
+  month: 02
+  year:  2012
+
+cust_with_cc_4_a:
+  customer_id: 4004
+  month: 01
+  year:  2011
+
+#----------
+# shared between line_item tests and overdue_engine tests
+
+charge_yes_first:
+  customer_id: 5010
+  month: 01
+  year:  2011
+
+
+#----------
+# test_any_chance_of_working
+
+cc_no_statuses_live:
+  customer_id: 598
+  month: 01
+  year: <%= Date.today.year + 2 %>
+
+cc_no_statuses_expired:
+  customer_id: 599
+  month: 01
+  year: 1900
+
+cc_one_status_declined:
+  customer_id: 600
+  credit_card_id: 600
+  month: 01
+  year: 2100
+
+cc_one_status_expired:
+  customer_id: 601
+  credit_card_id: 601
+  month: 01
+  year: 2100
+
+cc_one_status_gateway:
+  customer_id: 602
+  credit_card_id: 602
+  month: 01
+  year: <%= Date.today.year + 2 %>
+
+cc_one_status_addrnomatch:
+  customer_id: 603
+  credit_card_id: 603
+  month: 01
+  year: 2100
+
+cc_two_status_addrnomatch_expired:
+  customer_id: 604
+  credit_card_id: 604
+  month: 01
+  year: 2100

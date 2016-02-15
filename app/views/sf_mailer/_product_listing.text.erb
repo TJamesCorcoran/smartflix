@@ -1,0 +1,24 @@
+<%# Parameter: products is an array of Product -%>
+
+<% products.each do |product| -%>
+
+  <div class="item">
+    <a href="http://www.smartflix.com/store/video/<%= product.id %>"><%= email_small_image_for(product) %></a>
+    <h2><a href="http://www.smartflix.com/store/video/<%= product.id %>"><%= product.name %></a></h2>
+
+    <% summary_length = product.listing_name.size > 60 ? 90 : 120 -%>
+    <p class="product-listing-summary">
+      <%= product.summary(summary_length) %>...
+      <a href="http://www.smartflix.com/store/video/<%= product.id %>">Read more</a>
+    </p>
+    <div class="button-float">
+      <% if product.product_set_member? -%>
+        <%= email_add_to_cart_button(product.product_set, token, :product_listing => true) %>
+      <% end -%>
+      <%= email_add_to_cart_button(product, token, :product_listing => true) %>
+    </div>
+    <br style="clear:left">
+  </div>
+
+<% end -%>
+

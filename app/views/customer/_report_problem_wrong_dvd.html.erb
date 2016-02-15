@@ -1,0 +1,20 @@
+<%= form_tag( customer_report_problem_3_url(@line_item.id), :remote => true ) do -%>
+
+    <%=  hidden_field_tag 'reship', 'yes' %>
+
+    <p>Sorry about the mixup!</p>
+
+    <%# XXXFIX P3: Test this error message, make sure it's sensible -%>
+    <%= error_messages_for :problem, :header_tag => :strong %>
+
+    <p>Please enter the barcode number on the DVD we sent by mistake:
+    <%= text_field_tag 'wrong_copy_id' %>
+    </p>
+
+    <%=  hidden_field_tag 'problem_type', h(@problem_type) %>
+
+    <%= report_problem_back(:back) %>
+
+    <%= Button.new( "continue", { :class => :orange, :method => :submit })%>
+
+<% end -%>

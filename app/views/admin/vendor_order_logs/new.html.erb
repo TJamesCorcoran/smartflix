@@ -1,0 +1,11 @@
+<h1>New vendor_order_log</h1>
+
+<%= error_messages_for :vendor_order_log %>
+
+<%= form_for(:vendor_order_log, :url => vendor_order_logs_path) do |f| %>
+  <p>
+    <%= submit_tag "Create" %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', vendor_order_logs_path %>

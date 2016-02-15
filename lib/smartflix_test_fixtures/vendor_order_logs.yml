@@ -1,0 +1,23 @@
+# Note that there is no object for copy 1000
+#
+# This is on purpose.
+
+lastvol_positive_vol:
+  product_id: 1001
+  orderDate: 2007-01-01
+  quant: 2
+
+noinvord_vol:
+  product_id: 1002
+  orderDate: 2007-01-01
+  quant: -2
+
+lis_exist_vol:
+  product_id: 1003
+  orderDate: 2007-01-01
+  quant: -2
+
+success_vol:
+  product_id: 1004
+  orderDate: 2007-01-01
+  quant: -2

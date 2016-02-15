@@ -1,0 +1,12 @@
+
+
+<% if @your_entry %>
+  <p>You're entered in the current cool project contest, "<%= @contest.title %>". Here's what your entry looks like:</p>
+  <%= render :partial => 'contest_entry', :object => @your_entry %>
+  <p>Want to win the contest?  Get more votes by putting a "vote for my project" link on your Facebook profile or blog:</p>
+  <%= render :partial => 'contest_entry_widget', :locals => { :contest_entry => @your_entry } %>
+<% else %>
+  <%= render :partial => 'contest' %>
+  <%= render :partial => 'ping_form' %>
+  <%= render :partial => 'entry_form' %>
+<% end %>

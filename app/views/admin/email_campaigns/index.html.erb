@@ -1,0 +1,23 @@
+<h1>Listing email_campaigns</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Template file</th>
+    <th>Last run</th>
+  </tr>
+  
+<% for email_campaign in @email_campaigns %>
+  <tr>
+    <td><%=h email_campaign.name %></td>
+    <td><%=h email_campaign.template_file %></td>
+    <td><%=h email_campaign.last_run %></td>
+    <td><%= link_to 'Edit', edit_email_campaign_path(email_campaign) %></td>
+    <td><%= link_to 'Destroy', email_campaign_path(email_campaign), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New email_campaign', new_email_campaign_path %>

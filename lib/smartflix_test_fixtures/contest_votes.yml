@@ -1,0 +1,50 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one_votes_for_self_in_one:
+  contest_vote_id:               1
+  voter_email:      bob@bob.com
+  contest_entry_id: 1
+
+one_votes_for_two_in_one:
+  contest_vote_id:               2
+  voter_email:      bob@bob.com
+  contest_entry_id: 2
+
+one_votes_for_three_in_one:
+  contest_vote_id:               3
+  voter_email:      bob@bob.com
+  contest_entry_id: 3
+
+two_votes_for_self_in_one:
+  contest_vote_id:               4
+  voter_email:      joe@joe.com
+  contest_entry_id: 2
+
+two_votes_for_four_in_two:
+  contest_vote_id:               5
+  voter_email:      joe@joe.com
+  contest_entry_id: 5
+
+three_votes_for_four_in_two:
+  contest_vote_id:               6
+  voter_email:      Rob@Quincunx.com
+  contest_entry_id: 5
+
+five_votes_for_four_in_two:
+  contest_vote_id:               7
+  voter_email:      chuck@nothinghappens.net
+  contest_entry_id: 5
+
+two_votes_for_four_in_three:
+  contest_vote_id:               8
+  voter_email:      joe@joe.com
+  contest_entry_id: 7
+
+three_votes_for_four_in_three:
+  contest_vote_id:               9
+  voter_email:      Rob@Quincunx.com
+  contest_entry_id: 7
+
+five_votes_for_four_in_three:
+  contest_vote_id:               10
+  voter_email:      chuck@nothinghappens.net
+  contest_entry_id: 7

@@ -1,0 +1,15 @@
+</div>
+
+  <% if defined?(@customer) %>
+  <div style = "width: 700px; background-color: #F4F4F2; padding: 5px 20px 5px 20px; clear:both;">
+    <p style = "font-family: verdana, sans bold; color: #8F8F8F; font-size: 12px;">
+    This email was sent to <%= @customer.email %>. <%=  link_to("Click here", customer_email_prefs_url(:host => WEB_SERVER, :token => @token)) %> to change your email preferences.
+    </p>
+  </div>
+  <% end %>
+
+</div>
+</div>
+</body>
+</html>
+

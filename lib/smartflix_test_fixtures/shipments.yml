@@ -1,0 +1,189 @@
+#----------
+#  old XXX stuff
+#----------
+
+bob_shipped_line_item_1:
+  shipment_id: 3
+  dateOut: <%= Date.today - 10 %>
+bob_shipped_line_item_2:
+  shipment_id: 4
+  dateOut: <%= Date.today - 10 %>
+bob_returned_line_item:
+  shipment_id: 6
+  dateOut: <%= Date.today - 10 %>
+bob_not_late_line_item_status:
+  shipment_id: 7
+  dateOut: <%= Date.today - 1 %>
+
+#----------------------------------------------------------------------
+#   copy test
+#----------------------------------------------------------------------
+
+#----------
+
+return_to_stock_already_instock:
+  shipment_id: 1050
+  dateOut: "2004-12-01"
+
+return_to_stock_outstock:
+  shipment_id: 1051
+  dateOut: "2004-12-01"
+
+return_to_stock_damaged:
+  shipment_id: 1052
+  dateOut: "2004-12-01"
+
+return_to_stock_autorepair:
+  shipment_id: 1053
+  dateOut: "2004-12-01"
+
+
+#----------------------------------------------------------------------
+#   LineItemTest
+#----------------------------------------------------------------------
+warn_no_lateMsg_already_sent:
+    shipment_id:  5000
+    dateOut:     "2005-01-01"
+
+warn_no_is_back:
+    shipment_id:  5001
+    dateOut:     "2005-01-01"
+
+warn_no_is_badcopy:
+    shipment_id:  5002
+    dateOut:     "2005-01-01"
+
+
+# no shipment!
+#
+#warn_no_no_shipment:
+#    shipment_id:  5003
+
+warn_no_back_already:
+    shipment_id:   5004
+    dateOut:      "2005-01-01"
+
+warn_yes:
+    shipment_id:  5005
+    dateOut:     "2005-01-01"
+
+warn_no_univ:
+    shipment_id:  5006
+    dateOut:     "2005-01-01"
+
+#----------
+
+charge_yes_first:
+    shipment_id:   5010
+    dateOut:     "2005-01-01"
+
+charge_yes_older_charge:
+    shipment_id:   5011
+    dateOut:     "2005-01-01"
+
+charge_yes_older_charge_thecharge:
+    shipment_id:   5012
+    dateOut:     "2005-02-01"
+
+charge_no_just_charged:
+    shipment_id:   5013
+    dateOut:     "2005-02-01"
+
+charge_no_just_charged_thecharge:
+    shipment_id:   5014
+    dateOut:     "2090-02-01"
+
+charge_expired_cc:
+    shipment_id:   5020
+    dateOut:     "1990-02-01"
+
+#----------
+# customer / university / shipping testing
+
+# non
+non_univ_customer:
+   shipment_id: 7000
+   dateOut:  "2008-02-17"
+
+# single
+single_univ_customer:
+   shipment_id: 7010
+   dateOut:  "2008-02-17"
+ 
+# triple
+triple_univ_customer_o0_l0:
+   shipment_id: 7020
+   dateOut:  "2008-02-17"
+
+triple_univ_customer_o1_l0:
+   shipment_id: 7030
+   dateOut:  "2008-02-17"
+
+#--------------------
+# shippable
+
+# non
+non_univ_customer_2:
+   shipment_id: 7100
+   dateOut:  "2008-02-17"
+
+# single
+single_univ_customer_2:
+   shipment_id: 7110
+   dateOut:  "2008-02-17"
+ 
+# triple
+triple_univ_customer_2_o0_l0:
+   shipment_id: 7120
+   dateOut:  "2008-02-17"
+
+triple_univ_customer_2_o1_l0:
+   shipment_id: 7130
+   dateOut:  "2008-02-17"
+
+
+# li utility func tests
+
+# intentionally does not exist
+#
+#utility_cancelled:
+#  shipment_id:    8000
+#
+
+utility_infield:
+  shipment_id:    8001
+  dateOut:  "2008-02-17"
+
+# intentionally does not exist
+#
+#utility_unshipped:
+#  shipment_id:    8002
+
+utility_back:
+  shipment_id:    8003
+  dateOut:  "2008-02-18"
+
+
+# test_live_university
+
+univ_order_a:
+  shipment_id:    8100
+  dateOut:  "2008-01-05"
+
+univ_order_a:
+  shipment_id:    8101
+  dateOut:  "2008-01-10"
+
+
+#----------------------------------------------------------------------
+#   orders tests
+#----------------------------------------------------------------------
+
+toreplace_order_univ:
+  dateOut:  "2008-01-10"
+
+toreplace_order_regular:
+  dateOut:  "2008-01-10"
+
+toreplace_order_mixed_ship:
+  dateOut:  "2008-01-10"

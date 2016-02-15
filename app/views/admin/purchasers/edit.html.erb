@@ -1,0 +1,13 @@
+<h1>Editing purchaser</h1>
+
+<%= error_messages_for :purchaser %>
+
+<%= form_for(:purchaser, @purchaser, :html => { :method => :put }) do |f| %>
+    <%= render :partial => 'form' %>
+
+    <%= submit_tag "Update" %>
+<% end %>
+
+<%= link_to 'Show', :action => :show, :id => @purchaser %> |
+
+

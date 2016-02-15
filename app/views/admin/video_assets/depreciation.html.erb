@@ -1,0 +1,14 @@
+<%= link_to "back to index", :action => :index %>
+
+<table>
+
+    <% ii = 0
+       @depreciation.keys.sort.each do |month| 
+         ii+= 1 %>
+      <tr>
+        <td><%= ii %></td>
+        <td> <%= month %>        </td>
+        <td>           <%= @depreciation[month] %>        </td>
+      </tr>
+    <% end %>
+</table>

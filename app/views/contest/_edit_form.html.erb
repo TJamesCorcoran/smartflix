@@ -1,0 +1,38 @@
+<% form_tag({:action    => 'edit',
+             :id        => @contest_entry},
+            {:multipart => true,
+             :id        => "edit-form",
+             :enctype   => "multipart/form-data"}) do %>
+    <div id="name-section">
+      <label for="contest_entry_first_name">First name:</label>
+      <%= text_field :contest_entry, :first_name %>
+      <br />
+      <label for="contest_entry_last_name">Last name:</label>
+      <%= text_field :contest_entry, :last_name %>
+      <br />
+    </div>
+    <div id="project-section">
+      <label for="contest_entry_title">Project title:</label>
+      <%= text_field :contest_entry, :title %>
+      <br />
+      <label for="contest_entry_description">Description:</label>
+      <%= text_area :contest_entry, :description, :rows => 5 %>
+      <br />
+    </div>
+    <div id="photo-section">
+      <p>Note: any photos you submit below will replace your entry's current
+        photos.  If you want to keep the photos above, leave this section
+        blank.</p>
+      <label>Photo 1:</label>
+      <%= file_field_tag "photos[]" %>
+      <br />
+      <label>Photo 2:</label>
+      <%= file_field_tag "photos[]" %>
+      <br />
+      <label>Photo 3:</label>
+      <%= file_field_tag "photos[]" %>
+      <br />
+    </div>
+    <%= submit_tag 'Submit Changes', :class => 'button' %>
+    <%= submit_tag "It Looks Good, I'm Done!", :class => 'button', :name => 'commit_and_finish' %>
+<% end %>

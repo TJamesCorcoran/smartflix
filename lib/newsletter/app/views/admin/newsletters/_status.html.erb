@@ -1,0 +1,4 @@
+<div class="timestamp">details at <%= Time.now %></div>
+<div class="total"><%= @newsletter.recipients.count %> of <%= @newsletter.total_recipients %> sent</div>
+<div class="sent"><%= @newsletter.count_sent %> sent</div>
+<div class="fail"><%= @newsletter.count_failed %> failed</div>

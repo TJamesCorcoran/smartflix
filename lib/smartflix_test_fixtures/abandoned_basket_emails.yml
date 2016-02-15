@@ -1,0 +1,4 @@
+one:
+  tabe_id: 1
+  customer_id: 1
+  date_sent: <%= 1.years.ago.to_s(:db) %>

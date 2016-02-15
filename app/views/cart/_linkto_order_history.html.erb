@@ -1,0 +1,11 @@
+  <p>
+  Please visit your
+  <%= link_to 'Order History', :controller => 'customer', :action => 'order_history' %>
+  for information on previous orders.
+  </p>
+
+  <p> We will ship you no more than <%= @customer.andand.ship_rate || 4  %> DVDs at
+  a time.  You can adjust this figure (your "ship rate") by going
+  <%= link_to "to your account info page", :controller => :customer, :action => :account_info %>
+
+  </p>

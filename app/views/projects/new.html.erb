@@ -1,0 +1,20 @@
+<div class="new-project">
+
+  <h1>Create A SmartFlix Project Page</h1>
+
+  <p>A Project Page lets you show off your projects to friends, family,
+  and the rest of the world. Whether you've already finished, or are
+  just about to get started, a project page is great way to document
+  what you're working on.</p>
+
+  <p>Give your project a name, add some images, and write a
+  description. You can always change it later. If this is a project
+  you're just starting or in the middle of, you can add updates to your
+  project page as you continue working on your project, with new images
+  and text to track your progress.</p>
+
+  <%= render :partial => 'project_form', :locals => { :type => :create } %>
+
+  <p><%= link_to 'Back', projects_url %></p>
+
+</div>

@@ -1,0 +1,16 @@
+Note purchase:
+<%= form_for(:purchasings, :url => {:controller => "purchasings", :action =>:update}, :html => { :method => :put }) do |f| %>
+    <%= fields_for ( "purchaser") do |purch| -%>
+         <%= purch.select( :purchaser_id, @purchasers)  %> 
+    <% end %>
+
+    <%= fields_for("tobuy" + product_id.to_s) do |tb| %>
+       <%= tb.select(:quant, @quant_choices)  %>
+    <% end %>
+
+      <%= hidden_field_tag :r_controller, r_controller %>
+      <%= hidden_field_tag :r_action, r_action %>
+      <%= hidden_field_tag :r_id, r_id %>
+
+    <%= submit_tag "Update" %>
+<% end %>

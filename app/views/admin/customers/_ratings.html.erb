@@ -1,0 +1,19 @@
+<h1>ratings and reviews</h1>
+<div class="customer-admin" >
+  (<a href="#" onclick="$('ratings_int').hide(); return false;">hide</a> / 
+  <a href="#" onclick="$('ratings_int').show(); return false;">show</a>)
+
+  <div id="ratings_int" style="display:none;">
+    <table cellpadding="4">
+      <tr><th>Product</th><th>Rating</th><th>Approved</th><th>Review</th></tr>
+      <% @customer.ratings.each do |rating| -%>
+        <tr>
+        <td><%= link_to_product rating.product %></td>
+        <td align="center"><%= rating.rating %></td>
+        <td align="center"><%= rating.approved ? 'X' : '' %></td>
+        <td><%= rating.review %></td>
+        </tr>
+      <% end -%>
+    </table>
+  </div>
+</div>

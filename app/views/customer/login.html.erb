@@ -1,0 +1,84 @@
+<% if (Rails.env != 'production') -%>
+  <p>
+    <font color="red">
+       In devel use any customer addr and password <%= SmartFlix::Application::FAKE_DEVEL_PASSWORD %>
+    </font>
+  </p>
+<% end %>
+
+
+<% if @customer.nil? || @customer.full_customer? -%>
+
+  <h1>Existing Customers</h1>
+
+  <%= form_tag do -%>
+
+	<p>
+	<table>
+
+	  <tr>
+	  <td>Email:</td>
+	  <td><%= text_field_tag :email, h(params[:email] || @logged_in_email) %></td>
+	  </tr>
+
+	  <tr>
+	  <td>Password:</td>
+	  <td><%= password_field_tag :password, h(params[:password]) %></td>
+	  </tr>
+
+	</table>
+	</p>
+
+	<%= Button.new( "login", :class => :orange, :size =>"med", :method => :submit).to_s %>
+
+  <% end -%>
+
+  <p><%= link_to 'Forgot your password?', customer_password_reset_url %></p>
+
+<% end -%>
+
+
+
+<h1>New Customer</h1>
+<%= error_messages_for :invalid_customer, :object_name => 'new customer', :header_tag => :strong %>
+
+<%= form_for @invalid_customer || Customer.new, :url => {:action => :new_customer} do |form| -%>
+    <p>
+    <table>
+
+        <tr>
+        <td>Email:</td>
+        <td><%= form.text_field :email, :size => 40 %></td>
+        </tr>
+
+        <tr>
+        <td>Password:</td>
+        <td><%= form.password_field :password, :size => 40 %></td>
+        </tr>
+
+        <tr>
+        <td>Confirm:</td>
+        <td><%= form.password_field :password_confirmation, :size => 40 %></td>
+        </tr>
+
+    </table>
+    </p>
+
+    <h2>Address</h2>
+
+    <%= error_messages_for :invalid_address, :object_name => 'new address', :header_tag => :strong %>
+
+    <p>
+    <%= fields_for :address, @invalid_address do |addr_form| -%>
+    <%=  render :partial => 'address_form', :locals => { :form => addr_form, :address => @invalid_address } %>
+    <% end -%>
+    </p>
+
+    <p>
+    E-mail notifications:
+    <%= check_box_tag 'email_notifications', 1, true %>
+    </p>
+
+    <%= Button.new( "new account", :class => :orange, :size => :med, :method => :submit).to_s %>
+
+<% end -%>

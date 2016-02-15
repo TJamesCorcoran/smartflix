@@ -1,0 +1,22 @@
+
+<h1>Oreilly Category list</h1>
+
+<table>
+  
+<% for oreilly_category in @oreilly_categories %>
+  <tr>
+    <td><%= link_to 'Edit', edit_oreilly_category_path(oreilly_category) %></td>
+
+  <% for column in OreillyCategory.columns.reject{|x| x.name == "site"} %>
+<td>
+<%=
+
+            if (column.name == "name") 
+			    oreilly_category.display_name
+            elsif (column.name == "cat_id") 
+                oreilly_category.category.nil? ? "" : link_to(oreilly_category.category.full_name, :controller=>:categories, :action=>:show, :id=>oreilly_category.cat_id)
+            else
+				oreilly_category.send(column.name) 
+			end
+%>
+</td><% end %></tr><% end %></table>

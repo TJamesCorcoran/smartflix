@@ -1,0 +1,33 @@
+smartflix:
+  vendor_id: 1
+  vendor_mood_id: 1
+  name: "Smartflix.com"  
+
+#----------------------------------------------------------------------
+#   copy test
+#----------------------------------------------------------------------
+nobox:
+  vendor_id: 1010
+  vendor_mood_id: 2
+
+box:
+  vendor_id: 1011
+  vendor_mood_id: 2
+
+hostile:
+  vendor_id: 1012
+  vendor_mood_id: 1
+
+handout:
+  vendor_id: 1013
+  vendor_mood_id: 2
+
+
+#----------------------------------------------------------------------
+#   title test
+#----------------------------------------------------------------------
+
+tobuy_vendor:
+  vendor_id: 2000
+  vendor_mood_id: 3
+

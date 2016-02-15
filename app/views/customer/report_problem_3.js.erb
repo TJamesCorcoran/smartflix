@@ -1,0 +1,9 @@
+li_id     = "#line_item_<%= @line_item.id %>";
+$(li_id).html("<td>Your problem has been reported.  We apologize for the problem.\
+                   <% if @new_order %>\
+                          Your new order is #<%= @new_order.id %>\
+                   <% end %>\
+               </td>");
+$(li_id).effect("highlight", {}, 4000);
+
+

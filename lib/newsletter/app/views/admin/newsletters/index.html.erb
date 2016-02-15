@@ -1,0 +1,35 @@
+<div id="newsletter_editor">
+
+  <%= link_to 'Index (last 10)', :action => :index, :class => 'index' %> |
+  <%= link_to 'Full Index (all)', :action => :index, :full => true %> 
+
+
+  <h1>Newsletters</h1>
+
+  <%= link_to 'New Newsletter',  :action => :new %>
+
+  <table id="newsletters" class="sortable">
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Category</th>
+      <th>Recipients</th>
+      <th>Sent</th>
+      <th>Failed</th>
+      <th></th>
+    </tr>
+    <% @newsletters.each do |newsletter| %>
+      <tr>
+        <td><%= link_to newsletter.id, :action => :edit, :id => newsletter %></td>
+        <td><%= link_to newsletter.headline, :action => :edit, :id => newsletter %></td>
+        <td><%= newsletter.newsletter_category.andand.name %></td>
+        <td class="total"><%= newsletter.total_recipients %></td>
+        <td class="sent"><%= newsletter.count_sent %></td>
+        <td class="failed"><%= newsletter.count_failed %></td>
+        <td><%= link_to 'Preview', :action => :show, :id => newsletter %></td>
+<!--        <td><%= link_to 'Status', :action => :status, :id => newsletter %></td> -->
+      </tr>
+    <% end %>
+  </table>
+</div>
+

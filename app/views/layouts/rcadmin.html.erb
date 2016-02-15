@@ -1,0 +1,31 @@
+<%= doctype %>
+<html>
+
+
+<body>
+
+<%# Every page gets messages, if set -%>
+<%= render :partial => 'shared/message' %>
+
+<div class="box">
+
+    <div class="rcadminnav">
+    <%= link_to 'Home',                     :controller => "rcadmin", :action => 'index' %> |
+    <%= link_to 'Reviews',                  :controller => "rcadmin", :action => 'reviews' %> (<%= "#{Rating.unapproved_reviews().size} need approval" %> ) |
+    <%= link_to 'Coupons',                  :controller => "rcadmin", :action => 'coupons' %> |
+    <%= link_to 'Create new coupon',        :controller => "rcadmin", :action => 'create_coupon' %> |
+    <%= link_to 'Manage Gift Certificates', :controller => "rcadmin", :action => 'gift_certificates' %> |
+    <%= link_to 'Manage Contests',          :controller => "rcadmin", :action => 'contests' %>  |
+    <%= link_to 'Newsletters',              :controller => "newsletters", :action => 'index' %> 
+    </div>
+
+
+    <%# Insert page content -%>
+    <%= yield %>
+
+    <div class="clear"></div>
+
+    </div>
+
+</body>
+</html>

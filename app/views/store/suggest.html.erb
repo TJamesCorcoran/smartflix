@@ -1,0 +1,83 @@
+<div class="text-content">
+
+<h1>Suggest a Video</h1>
+
+<% if @mail_sent -%>
+
+<p>Your message has been successfully sent.</p>
+
+<p>Our purchasing person, Susan C., will try to respond to your
+suggestion within two weeks.</p>
+
+<p>If you use a spam-fighting tool on your mailbox, please make sure
+that you can receive emails from the address 
+<%= SmartFlix::Application::SF_OBFUSCATED_CONTACT_EMAIL.html_safe %>
+</p>
+
+<p>Thanks for your suggestion!</p>
+
+<% else -%>
+
+<p>Want to suggest a new video for us? This is the place!</p>
+
+<p>NOTE: This email is not read by customer service employees; just by
+the purchasing department. If you have a problem please look through our
+<%= link_to 'help', :controller => 'help', :action => '' %>
+pages (which include links to the form for contacting customer support).</p>
+
+<%# XXXFIX P2: change message, mentions 'saved' -%>
+<%= error_messages_for :suggestion, :header_tag => :strong %>
+
+<%= form_for :suggestion, :url => { :action => :suggest} do |form| -%>
+
+<table border=0>
+  <tr>
+    <td>
+      Full name:
+    </td>
+    <td>
+      <%= form.text_field :name %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Email address:
+    </td>
+    <td>
+      <%= form.text_field :email %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Video title:
+    </td>
+    <td>
+      <%= form.text_field :title %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      Where to buy (if known):
+    </td>
+    <td>
+      <%= form.text_field :where_to_buy %>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+    </td>
+    <td>
+                  <%= Button.new( "send", { :class => :orange, :method => :submit}) %>
+    </td>
+  </tr>
+</table>
+
+<% end -%>
+
+<% end -%>
+
+</div>

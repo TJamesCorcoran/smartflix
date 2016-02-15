@@ -1,0 +1,10 @@
+$("#new_customer_widget_initial").remove();
+
+<% if @errors.nil? %>
+  $("#new_customer_widget_success").html("<%= escape_javascript(render(:partial => "new_customer_widget_success")) %>");
+  $("#new_customer_widget_error").remove();
+  $("#new_customer_widget_success").hide("fade", {}, 4000);
+<% else %>
+  $("#new_customer_widget_error").html("<%= escape_javascript(render(:partial => "new_customer_widget_error", :locals => { :errors => @errors })) %>");
+  $("#new_customer_widget_error").hide("fade", {}, 4000);
+<% end %>

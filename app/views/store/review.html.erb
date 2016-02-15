@@ -1,0 +1,88 @@
+<div class="text-content">
+
+  <h1>Write a review</h1>
+
+  <p>Review product <b><%= @product.listing_name %>:</b></p>
+
+  <%= error_messages_for :new_rating, :object_name => 'new review', :header_tag => :strong %>
+
+  <%= form_for @new_rating do |form| -%>
+
+     <p>
+        <%= form.text_area :review, :cols => 80, :rows => 10 %>
+     </p>
+
+      <p>
+        Rating:
+        <strong>BAD</strong>
+        <% (1..5).each do |rating| -%>
+          <%= form.radio_button :rating, rating %>
+        <% end -%>
+        <strong>GOOD</strong>
+      </p>
+
+
+
+    <%# Insert the onepage auth token in the post if it's present %>
+    <%= onepage_auth_hidden_field %>
+
+    <input type="hidden" name="hl" value="en"></input>
+
+    <% if ! @univ_upsell %>
+        <%= Button.new( :submit_review, :class => :orange, :method => :submit) %>
+    <% else %>
+         <div class="univ_upsell_review">
+             <p>
+               <h2>     If you enjoyed <span class="inline_h2 inline_red"><%= @product.name %></span>...<br>
+                 ...you might really like <span class="inline_h2 inline_red"><%= @univ_upsell.name %></span>.
+               </h2>
+             </p>
+
+             <p>
+               <%= @univ_upsell.name %> is unlike anything you've seen before - it's
+               a complete program of <span class="highlight"><%=
+               @univ_upsell.university_curriculum_elements.size %> DVDs from the most
+               talented artists and craftsmen in the field.</span>  We ship you 3
+                DVDs per month - <span class="highlight">keep them as long as you
+               want, with no late charges!</span>  When you're ready for more, mail
+               those DVDs back to us, and we'll send you the next 3 DVDs (you get up to 3 new DVDs each month). 
+             </p>
+
+             <p> 
+               With exciting, informative, well shot videos from names like
+               <%= @univ_upsell.top_authors.map(&:name).to_sentence %> that you can
+               <span class="highlight">keep as long as you want, cancel at any time</span>,
+               <b>and</b> with a low monthly price of <span class="highlight">just <%=
+               @univ_upsell.subscription_charge_for_n(3).currency %></span>, this is a bargain that
+               you can't afford to miss!  <!-- ' -->
+             </p> 
+
+
+            <input type="hidden" name="univ_id" value=<%= @univ_upsell.id %> ></input>
+
+
+            <table border=0>
+              <tr>
+
+                <td>
+                  <%= univ_sub_button @univ_upsell.univ_stub, {:value => "with-univ-sub",
+                  :button_text => "submit review and try #{@univ_upsell.name} risk free",
+                  :submit_review => true} %>
+                </td>
+                <td>
+                  <center>
+                  or 
+                  </center>
+                </td>
+                <td>
+
+                  <%= Button.new( "submit review" , :class => :orange, :method => :submit) %>
+                </td>
+
+              </tr>
+            </table>
+         </div>
+    <% end -%>
+  <% end -%>
+
+</div>

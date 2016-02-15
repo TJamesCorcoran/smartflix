@@ -1,0 +1,9 @@
+<h1>Category Info</h1>
+
+<%= render(:partial => 'admin/shared/show_basicdata', :locals => { :item => @category, :partials => {}   })  %>
+<%= render(:partial => 'admin/shared/show_relations', :locals => { :item => @category, :reject => [:customers, :cat_to_dropin_literatures] })  %>
+
+
+<%= link_to 'Edit',  :action => :show, :id =>  @category %> |
+<%= link_to 'Back',  :action => :index %>
+

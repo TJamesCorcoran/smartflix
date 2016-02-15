@@ -1,0 +1,14 @@
+<h1>All Categories</h1>
+<div class="category-column">
+  <% @categories.each_with_index do |cat,i| -%>
+    <%= "</div><div class=\"category-column\">" if i > @categories.size / 2 -%>
+    <div class="parent-category">
+      <%= link_to cat.name, :action => 'category', :id => cat.id %>
+      <div class="children">
+        <% cat.children.each do |cc| -%>
+          <%= link_to cc.name, :action => 'category', :id => cc.id %>
+        <% end -%>
+      </div>
+    </div>
+  <% end -%>
+</div>

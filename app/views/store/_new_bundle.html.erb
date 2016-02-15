@@ -1,0 +1,14 @@
+<div class="bundle">
+  <h2>
+    <%= link_to bundle.name, :action => 'bundle', :id => bundle.id %>
+  </h2>
+  <%= image_tag('bundle.png') %>
+  <%= link_to "What is this?", {:controller => 'help', :action => 'video_bundles'}, :class => 'help' %>
+
+  <p><%= bundle.summary 170 %>... <%= link_to 'Read more', :controller => 'store', :action => 'bundle', :id => bundle %></p>
+  <div class="button-float">
+    <p></p>
+    <%= single_add_to_cart_button_for(bundle) %>
+  </div>
+</div>
+

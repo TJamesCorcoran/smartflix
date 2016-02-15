@@ -1,0 +1,14 @@
+<% ActionView::Base.send(:include, ApplicationHelper)
+   ActionView::Base.send(:include, EmailHelper)
+%>
+
+<% if @customer.first_name.andand.empty_is_nil -%>
+<%= h(@customer.first_name.capitalize) %>,
+
+<% end -%>
+<% if @ab_body == :chatty %>
+<%=  render :partial => "sf_mailer/univ_comeback/text/univ_comeback_chatty"             , :locals => { :univ => @univ, :abtvid => @abtvid, :token => @token } %>
+<% else raise "error - unknown #{@ab_body}" %>
+<% end %>
+
+<%= render :partial => 'footer', :locals => { :univ => @univ, :abtvid => @abtvid, :token => @token, :customer => @customer } %>

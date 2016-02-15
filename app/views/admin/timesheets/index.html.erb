@@ -1,0 +1,41 @@
+
+<h1>Timesheet Summary, week of <%= @key_day.strftime("%d %b %Y") %></h1>
+
+<table border=1>
+<th width=100px>last</th><th width=100px>first</th><th width=100px>week 1</th><th width=100px>week 2</th><th width=100px>total</th>
+
+<h2> Hourly employees / contractors with timesheets </h2>
+<%  bg = 0
+    @timesheets.each do |ts|
+	ts2 = ts.next_week  %>
+<tr>
+<td  style="background-color:<%= (bg == 1) ? "#fff":"#ddd" %>;">	<%= link_to ts.person.name_last, :controller=>:persons, :action=>:show, :id=>ts.person.id  %></td>
+<td  style="background-color:<%= (bg == 1) ? "#fff":"#ddd" %>;">	<%= ts.person.name_first %></td>
+<td  style="background-color:<%= (bg == 1) ? "#fff":"#ddd" %>;">	<%= ts.hours.to_s %></td>
+<td  style="background-color:<%= (bg == 1) ? "#fff":"#ddd" %>;">	<%= ts2.hours.to_s %></td>
+<td  style="background-color:<%= (bg == 1) ? "#fff":"#ddd" %>;">	<%= (ts.hours + ts2.hours).to_s %></td>
+</tr>
+
+<%
+  bg = (bg + 1) % 2
+ end %>
+</table>
+
+<h2>Salaried employees</h2>
+<table border=1>
+<tr><th width=100px>last</th><th width=100px>first</th></tr>
+<% bg = 0
+  @salaried.each do |pp| %>
+<tr>
+<td  style="background-color:<%= (bg == 1) ? "#fff":"#ddd" %>;">	<%= link_to pp.name_last, :controller=>:persons, :action=>:show, :id=>pp.id   %></td>
+<td  style="background-color:<%= (bg == 1) ? "#fff":"#ddd" %>;">	<%= pp.name_first %></td>
+
+</tr>
+<%
+  bg = (bg + 1) % 2
+  end
+%>
+</table>
+
+
+<%= link_to "back", :controller=>:persons, :action=>:index   %>

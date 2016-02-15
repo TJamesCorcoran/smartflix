@@ -1,0 +1,108 @@
+<% content_for :sidebar do %> 
+
+  <table>
+      <tr>
+           <th>created:</th>
+           <td> <%= @item.created_at %></td>
+      </tr>
+      <tr>  
+            <th>last result at:</th>
+            <td> <%= last = @item.last_result_at %></td>
+            <td> (  
+                     <%= last ? distance_of_time_in_words(last.to_time, Time.now) : "N/A" %>
+                     )</td>
+      </tr>
+      <tr>
+          <% duration_days = ( (last.andand.to_date || Date.today) - @item.created_at.to_date).to_i * 1.0 %>
+          <th>duration (days):</th>
+          <td><%= duration_days %></td>
+      </tr>
+  </table>
+
+  <h1><% if @item.active %> 
+         <span style="color:green;">ACTIVE</span>
+      <% else %>
+         <span style="color:green;">off</span>
+      <% end %>
+  </h1>
+
+
+  <table border=0 class="sorttable abt_data" id="results">
+
+
+    <tr>
+      <th></th>
+      <th colspan=4 class="top">raw</th>
+      <th colspan=2 class="top">confidence</th>
+      <th colspan=3 class="top">vs. base</th>
+    </tr>
+
+    <tr>
+       <th>option</th>
+       <th class="light">attempts</th>
+       <th class="light">conversions</th>
+       <th class="light">rate</th>
+       <th class="light">avg value</th>
+
+<!--       <th>error</th> -->
+       <th>p</th>
+       <th>converged ? (95%)</th>
+
+       <th class="light">rate</th>
+       <th class="light">value</th>
+       <th class="light">r * v</th>
+
+    </tr>
+
+
+  <% total_attempts = total_conversions = 0
+     best           = @item.best_option
+     base_rate      = @item.ab_test_options.first.conversion_rate
+     base_avg_val   = @item.ab_test_options.first.avg_value
+   %>
+
+  <% @item.ab_test_options.each do |opt| %>
+     <% total_attempts += opt.attempts
+        total_conversions += opt.conversions 
+                   
+        converged = opt.converged?(@item.ab_test_options[0])
+     %>
+
+     <tr class="<%= 'best_ab_option' if opt == best %>">
+        <td><%= opt.name %></td>
+        <td class="light"><%= opt.attempts.commify %></td>
+        <td class="light" ><%= opt.conversions.commify %></td>
+        <td class="light"><%= sprintf("%7.5f%%", opt.conversion_rate * 100) %></td>
+        <td class="light"><%= sprintf("%8.4f", opt.avg_value) %></td>
+<!--        <td>&plusmn;<%= sprintf("%7.5f%%", opt.std_error * 100) %></td> -->
+        <td ><%= sprintf("%7.5f", opt.p_value(@item.ab_test_options[0])) %></td>
+        <td class="<%= converged ? 'converged_yes' : 'converged_no'  %>"><%= converged  %></td>
+     
+
+
+        <td class="light"><%= sprintf("x%4.1f", a = (opt.conversion_rate / base_rate)) %></td>
+        <td class="light"><%= sprintf("x%4.1f", b = (opt.avg_value  / base_avg_val)) %></td>
+        <td class="light"><%= sprintf("%8.4f", a * b) %></td>
+
+     </tr>
+  <% end %>
+
+  <tr>
+     <th>totals: </th>
+     <th><%= total_attempts.commify %> </th>
+     <th><%= total_conversions.commify %> </th>
+  </tr>
+
+  <tr>
+
+     <th>per day:</th>
+     <th><%= sprintf("%4.1f", (total_attempts / duration_days)) %> </th>
+     <th><%= sprintf("%4.1f", (total_conversions / duration_days)) %> </th>
+  </tr>
+
+  </table>
+<% end %>
+
+
+
+<%= render(:partial => 'admin/shared/show', :locals => { :item => @item } )  %>

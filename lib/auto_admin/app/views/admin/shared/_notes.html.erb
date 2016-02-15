@@ -1,0 +1,27 @@
+<h1>Notes</h1>
+<div class="ud_deep_indent"> 
+    <%
+      # for acts_as_notable plugin
+    %>
+    <% if @item.notes.empty? %>
+         <i>no notes yet</i>
+      <% else %>
+          most recent note first:
+          <% @item.notes.reverse.each do |note| %>
+            <div style="border: 1px solid black; margin:5px; padding:5px; max-width:550px;">
+              <b><%= note.created_at.strftime("%Y-%m-%d %H:%M:%S") %> - <%= Person[note.employee_id].full_name if note.employee_id > 0 %></b>
+              <br><br>
+              <%= note.note.gsub(/\n/, "<br>") %>
+            </div>
+        <% end %>
+      <% end %>
+
+      New note:
+      <div>
+        <% form_tag( {:action => 'add_note'}, {:method => :post} ) do %>
+          <%= text_area_tag 'text', "", { :cols => 80, :row => 5} %>     
+          <%= hidden_field_tag 'id', @item.id %>     
+          <%= submit_tag "Create" %>
+        <% end %>
+      </div>
+</div>

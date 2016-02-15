@@ -1,0 +1,14 @@
+<div class="box">
+  <%= link_to 'Create Promotion', :action => 'promotion' %>
+  <table cellpadding="3">
+  <tr><th>Tagline</th><th>On?</th><th></th></tr>
+  <% @promotions.each do |promo| -%>
+  <tr>
+    <td><%= link_to promo.tagline, :action => 'promotion', :id => promo.id %></td>
+    <td><%= promo.on? %></td>
+    <td><%= link_to "Edit Pages", :action => 'promotion_pages', :id => promo.id %></td>
+    <td><%= link_to "Delete", {:action => 'promotion', :id => promo.id}, :method => :delete %></td>
+  </tr>
+  <% end -%>
+  </table>
+</div>

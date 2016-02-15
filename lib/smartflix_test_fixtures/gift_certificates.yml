@@ -1,0 +1,19 @@
+gc1:
+  code: 'LE_GIFT'
+  amount: 1.33
+  used: 0
+  created_at: <%= DateTime.now %>
+
+gc_univ:
+  code: 'UNIV_GIFT'
+  amount: 0
+  univ_months: 2
+  used: 0
+  created_at: <%= DateTime.now %>
+
+gc_dollars:
+  code: 'DOLLARS_GIFT'
+  amount: 30
+  univ_months: 0
+  used: 0
+  created_at: <%= DateTime.now %>

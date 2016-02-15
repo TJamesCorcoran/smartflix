@@ -1,0 +1,15 @@
+<% @project_update.images.each do |image| %>
+  <div class="deletable-image">
+    <%= project_thumbnail(image) %><br/>
+    <% delete_url = { :controller => 'project_updates', :action => 'delete_image', :id => image.id } %>
+    <% delete_confirm = 'Are you sure you want to delete this image?' %>
+    <p>[<%= link_to 'Delete Image', :remote => true, :url => delete_url, :confirm => delete_confirm, :update => "update-#{@project_update.id}" %>]</p>
+  </div>
+<% end %>
+<br class="clear" />
+<% form_for(@project_update, :html => { :multipart => true }) do |form| %>
+  <%= render :partial => 'update_photo_form' %>  
+  <p><%= form.text_area :text, :rows => 6, :cols => 50 %></p>
+  <%= hidden_field_tag :project_id, project.id if defined?(project) && project %>
+  <p><%= form.submit type.to_s.capitalize %></p>
+<% end %>

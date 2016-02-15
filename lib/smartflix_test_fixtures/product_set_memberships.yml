@@ -1,0 +1,149 @@
+psm1:
+  product_set_membership_id: 1
+  product_id: 4
+  product_set_id: 1
+  ordinal: 2
+psm2:
+  product_set_membership_id: 2
+  product_id: 5
+  product_set_id: 1
+  ordinal: 1
+psm3:
+  product_set_membership_id: 3
+  product_id: 9
+  product_set_id: 2
+  ordinal: 1
+psm4:
+  product_set_membership_id: 4
+  product_id: 10
+  product_set_id: 2
+  ordinal: 2
+
+
+savings_sm_1:
+  product_set_membership_id: 20
+  product_set_id: 20
+  product_id: 20
+  ordinal: 1
+
+savings_sm_2:
+  product_set_membership_id: 21
+  product_set_id: 20
+  product_id: 21
+  ordinal: 2
+
+savings_sm_3:
+  product_set_membership_id: 22
+  product_set_id: 20
+  product_id: 22
+  ordinal: 3
+
+
+
+
+savings_sm_31:
+  product_set_membership_id: 31
+  product_set_id: 30
+  product_id: 31
+  ordinal: 1
+
+savings_sm_32:
+  product_set_membership_id: 32
+  product_set_id: 30
+  product_id: 32
+  ordinal: 2
+
+savings_sm_33:
+  product_set_membership_id: 33
+  product_set_id: 30
+  product_id: 33
+  ordinal: 3
+
+
+#----------
+# TVRM
+
+
+#----------------------------------------------------------------------
+#   smartflix_adwords_test
+#----------------------------------------------------------------------
+
+fishstar_member:
+   product_id: 4040
+   product_set_id:   4040
+   ordinal: 1
+
+squidstar_member_1:
+   product_id: 4050
+   product_set_id:   4050
+   ordinal: 1
+
+squidstar_member_2:
+   product_id: 4060
+   product_set_id:   4050
+   ordinal: 2
+
+#----------------------------------------------------------------------
+#   ShippingTest
+#----------------------------------------------------------------------
+
+setA_withpreconds_item1:
+  product_set_id:   6020
+  product_id: 6020
+  product_set_membership_id: 6020
+  ordinal: 1
+
+setA_withpreconds_item2:
+  product_set_id:   6020
+  product_id: 6021
+  product_set_membership_id: 6021
+  ordinal: 2
+
+setA_withpreconds_item3:
+  product_set_id:   6020
+  product_id: 6022
+  product_set_membership_id: 6022
+  ordinal: 3
+
+setA_withpreconds_item4:
+  product_set_id:   6020
+  product_id: 6023
+  product_set_membership_id: 6023
+  ordinal: 4
+
+setB_withpreconds_item1:
+  product_set_id:   6030
+  product_id: 6030
+  product_set_membership_id: 6030
+  ordinal: 1
+
+setB_withpreconds_item2:
+  product_set_id:   6030
+  product_id: 6031
+  product_set_membership_id: 6031
+  ordinal: 2
+
+setC_nopreconds_item1:
+  product_set_id:   6040
+  product_id: 6040
+  product_set_membership_id: 6040
+  ordinal: 1
+
+setC_nopreconds_item2:
+  product_set_id:   6040
+  product_id: 6041
+  product_set_membership_id: 6041
+  ordinal: 2
+
+setC_nopreconds_item3:
+  product_set_id:   6040
+  product_id: 6042
+  product_set_membership_id: 6042
+  ordinal: 3
+
+# setC_nopreconds_item4:
+#   product_set_id:   6040
+#   product_id: 6043
+#   product_set_membership_id: 6043
+#   ordinal: 4
+

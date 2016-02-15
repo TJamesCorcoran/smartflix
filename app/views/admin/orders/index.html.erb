@@ -1,0 +1,77 @@
+<h1>Create a new Order</h1>
+
+To create a new order, find the <%= link_to "customer", :controller => :customers, :action=>:index %> and click the "create new order" button on the page.
+
+<h1>List Existing Orders</h1>
+
+<%= render(:partial => "search") %>
+NOTE: XYZFIX P3: does not include sales tax.
+
+<% if @orders.empty?  %>
+      <br><br><br>
+      <div style="padding-left:50px;"><i><h2> no matching orders</h2></i></div>
+<% else %>
+  <table border=0>
+    <tr>
+       <th align=left>number of orders:</th>
+       <td><%= @orders.size %></td>
+    </tr>    
+    <tr>
+       <th align=left>number of customers:</th>
+       <td><%= @orders.map(&:customer).uniq.size %></td>
+    </tr>    
+    <tr>
+       <th align=left>revenue of all these orders:</th>
+       <td><%= @total_revenue.currency %></td>
+    </tr>    
+
+    <tr>
+       <th align=left>revenue of all these customers on and after this date:
+       <td><%= @total_revenue_after_this_date.currency %></td>
+    </tr>    
+
+	<tr><th align=left><%= link_to "customers who match same criteria", :controller => :customers, :action => :index, :source => params[:source], :fday => params[:fday], :lday => params[:lday] %>
+        </th>
+    </tr>
+
+	<table class="sortable" id="customer_list">
+	<tr>
+		<% for column in Order.columns %>
+    		<th><%=		    column.name %></th>
+		<% end %>
+        <th>total price</th>
+        <th>total lis</th>
+        <th>live lis</th>
+	</tr>
+
+    <%
+        # XYZFIX P3: rewrite this to use the univ/rental/late
+        # fee/replacement colors in public/stylesheets/scaffold.css
+        @orders.each do |order|
+bgcolor = { :replacement => "f60", :late => "ff6", :regular => "fff", :university => "9ff"}[order.charge_type]
+    %>
+	<tr>
+		<% for column in Order.columns %>
+			<td style="background:#<%= bgcolor %>">
+            <%= 
+            if (column.name == "order_id")
+                link_to order.order_id, :action => :show, :id => order.order_id
+            elsif (column.name == "customer_id")
+                link_to order.customer.email, :controller => :customers, :action => :show, :id => order.customer_id
+            else
+               order.send(column.name)
+            end %>
+           </td>
+		<% end %>
+        <td style="background:#<%= bgcolor %>"><%= number_to_currency(order.total_price) %></td>
+        <td style="background:#<%= bgcolor %>"><%= order.line_items.size %></td>
+        <td style="background:#<%= bgcolor %>"><%= order.line_items_uncancelled.size %></td>
+	</tr>
+	<% end %>
+	</table>
+<% end %>
+
+
+
+
+

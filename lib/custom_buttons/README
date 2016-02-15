@@ -1,0 +1,108 @@
+CustomButtons
+=============
+
+* Written by Tyler.
+* Massively re-written by XYZ.
+
+Install
+-------
+
+1) add to vendor/plugins
+2) write two sets of classes in your CSS file:
+
+	2.1) your "type" classes:
+
+		a.cart_checkout,
+		button.cart_checkout, 
+		input.cart_checkout
+		 {
+		  @include commerce_buttons;
+		  background-color: $button_red_bg;
+		  color:            $button_red_color;
+		  border-color:     $button_red_border;
+		} 
+
+		 a.buy,
+		 button.buy, 
+		 input.buy,
+		 {
+		  background-color: $button_blue_bg;
+		  color:            $button_blue_color;
+		  border-color:     $button_blue_border;
+		} 
+
+	2.2) your "size" classes:
+
+		   /* H */
+	a.huge,
+	button.huge { 
+	  height: 40px;
+	  width: 200px;
+	}
+
+	button.huge span { 
+	  font-size: 120%;
+	}
+
+		   /* S */
+	a.small,
+	button.small { 
+	  height: 20px;
+	  width:  80px;
+	}
+
+	button.small span { 
+	}
+
+3) Create stand-alone buttons in your view like this:
+
+   <%=     Button.new( "button_text",
+                    :type => "checkout",
+                    :size => "small",
+                    :method => :post,  # { :get | :post | :put | :delete | :none | nil },
+                    :url => ... ,
+					:confirm => "are you sure?"
+                  )
+           # NOTE: automatically calls .to_s() func which wraps image with form or href
+     %>
+
+...or in a form like this:
+
+	<% form_for :message, @message do |form| -%>
+		 ...
+		 <%= Button.new( "send", { :class => :admin, :method => :submit}) %>
+	<% end -%>
+
+
+...or create a button image like this:
+
+   <%=     Button.new( ...).button_image     %>
+
+
+CSS is set up so that you can use it for regular submit_tags too!
+
+   <%=     submit_tag :type => "save", :size => "small"   %>
+
+Notes on URL:
+
+ This works:
+      <%= Button.new( step_name, :url=> url_for(:controller =>"admin/solicitation", :action => step_name, :id => @sol.id), :type => :update, :size =>"med_wide" )%>
+
+ This does not:
+      <%= Button.new( step_name, :url=> { :controller =>"admin/solicitation", :action => step_name, :id => @sol.id }, :type => :update, :size =>"med_wide" )%>
+
+
+Bugs
+----
+
+You have to do a bit of CSS hackery to make sure that
+buttons with 
+		:type => :post
+render the same as
+		:type => :get
+
+The former is
+	 span nested in input nested in form
+the latter is 
+	 span nested in a-href
+

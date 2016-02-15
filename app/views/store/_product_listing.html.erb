@@ -1,0 +1,12 @@
+<%# Parameter: products is an array of Product -%>
+<div id="subcat-items">
+
+<% r_controller  = nil   if local_assigns[:r_controller].nil?
+   r_action  = nil   if local_assigns[:r_action].nil?
+ %>
+    <% products.each do |product| -%>
+      <%= render :partial => 'store/new_product_listing_single', 
+                 :locals => { :product => product, :r_controller => r_controller, :r_action => r_action } %>
+    <% end -%>
+
+</div>

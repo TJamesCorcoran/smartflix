@@ -1,0 +1,12 @@
+<h1>
+   line items  (<%= @customer.orders.size %> orders; <%= @customer.uncancelled_line_items.size %> lis)
+</h1>
+<div class="customer-admin">
+
+    (<a href="#" onclick="$('lis_int').hide(); return false;">hide</a> / 
+    <a href="#" onclick="$('lis_int').show(); return false;">show</a>)
+
+    <div id="lis_int" style="display:block;">
+       <%= render :partial => "admin/line_items/line_item_all", :object => @customer.line_items %>
+    </div>
+</div>

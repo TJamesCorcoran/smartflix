@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+# sshmon - start and monitor ssh connections
+#
+# sshmon is used to start and configure one or more ssh connections
+# including port forwarding.  A config.yaml file needs to be created
+# in the root directory of the project.  The format is as follows:
+#
+# ---
+# :server:
+#   :connection:
+#     :keys:
+#     - /location/of/ssh/key
+#     :username: login
+#   :forwards:
+#     :name:
+#       :local_port: 8181
+#       :remote_port: 80
+#       :host: hostname
+#
+# Starting sshmon is as simple as:
+#
+# ./sshmon start
+#
+# You can also use stop, restart, and run, as specified in the Ruby
+# Daemons gem documentation.  sshmon will start two daemonized
+# processes.  One which actually sets up the ssh connections, the
+# other simply to monitor the first.  If something kills the first
+# process, the latter process will restart it.
+
+require 'rubygems'
+require 'daemons'
+require 'net/ssh'
+require 'yaml'
+
+dir = File.expand_path(File.dirname(__FILE__))
+
+options = { :backtrace => true, :log_output => true, :monitor => true }
+Daemons.run_proc(File.dirname(__FILE__) + "/daemon/sshmond", options) do
+  puts "\nStartup at #{Time.now}"
+  servers = YAML::load_file( File.join(dir, "config.yaml") )
+  servers.each do |name,config|
+    puts "Setting up connections to #{name}..."
+    Net::SSH.start(name.to_s, config[:connection]) do |session|
+      config[:forwards].each do |name,forward|
+        puts "  Setting up forward for #{name}"
+        session.forward.local('0.0.0.0', forward[:local_port], forward[:host], forward[:remote_port])
+      end
+      session.loop { true }
+    end
+  end
+end
+

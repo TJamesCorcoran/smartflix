@@ -1,0 +1,14 @@
+ Name: <%= h(@suggestion.name) %>
+Email: <%= h(@suggestion.email) %>
+Title: <%= h(@suggestion.title) %>
+Where: <%= h(@suggestion.where_to_buy) %>
+
+------------------------------------------------------ 
+Office use only:
+
+           Name: <%= h(@suggestion.name) %>
+          Email: <%= h(@suggestion.email) %>
+ Logged in name: <%= @suggestion.customer ? h(@suggestion.customer.full_name) : 'Not logged in' %>
+Logged in email: <%= @suggestion.customer ? h(@suggestion.customer.email) : 'Not logged in' %>
+     IP Address: <%= @suggestion.ip_address %>
+------------------------------------------------------ 

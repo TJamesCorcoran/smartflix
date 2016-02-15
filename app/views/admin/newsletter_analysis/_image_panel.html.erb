@@ -1,0 +1,13 @@
+<% 10.times do |i| -%>
+  <% next unless File.exists?("#{Rails.root}/public/images/newsletters/#{newsletter.id}_#{i}_original.jpg") -%>
+  <div class="image_box">
+    <%= image_tag "/images/newsletters/#{newsletter.id}_#{i}_100.jpg" %>
+    <%= link_to 'tiny', "#", :onclick => onclick_for_image(newsletter,i,"100") %> |
+    <%= link_to 'small', "#", :onclick => onclick_for_image(newsletter,i,"200") %> |
+    <%= link_to 'medium', "#", :onclick => onclick_for_image(newsletter,i,"300") %> |
+    <%= link_to 'large', "#", :onclick => onclick_for_image(newsletter,i,"400") %> |
+    <%= link_to 'original', "#", :onclick => onclick_for_image(newsletter,i,"original") %>
+    <br />
+    <%= link_to 'delete', :remote => true, :url => { :action => 'delete_image', :id => newsletter.id, :ordinal => i } %>
+  </div>
+<% end -%>

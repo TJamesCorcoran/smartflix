@@ -1,0 +1,25 @@
+<h1> VideoAssets: Cumulative </h1>
+<% render(:partial => 'sidebar_content')  %>
+
+<div style="float:right; background-color:#ccc; min-width:400px; min-height:400px;padding:20px;">
+   <%= yield :sidebar %> 
+</div>
+
+<table border=0>
+   <tr>
+      <th width=100px>Acquired</th>
+      <th width=100px>Dollars</th>
+      <th width=100px>Before</th>
+      <th width=100px>After</th>
+    </tr>
+
+    <% @cum.each do | hh | %>
+      <tr>
+         <td><%= link_to hh[:va].acquired, :action => :edit, :id => hh[:va]  %></td>
+         <td align=right>$<%= hh[:va].dollars.commify  %></td>
+         <td align=right>$<%= hh[:before].commify      %></td>
+         <td align=right>$<%= hh[:after].commify       %></td>
+      </tr>
+    <% end %>
+</table>
+

@@ -1,0 +1,41 @@
+# XXXFIX P3: can we build using the migration instead of fixture to get constancy?
+
+damaged_cracked:
+  line_item_problem_type_id: 1
+  form_tag: damaged_cracked
+damaged_not_readable:
+  line_item_problem_type_id: 2
+  form_tag: damaged_not_readable
+damaged_skips:
+  line_item_problem_type_id: 3
+  form_tag: damaged_skips
+damaged_freezes:
+  line_item_problem_type_id: 4
+  form_tag: damaged_freezes
+damaged_sound:
+  line_item_problem_type_id: 5
+  form_tag: damaged_sound
+damaged_other:
+  line_item_problem_type_id: 6
+  form_tag: damaged_other
+wrong_dvd:
+  line_item_problem_type_id: 7
+  form_tag: wrong_dvd
+missing_handout:
+  line_item_problem_type_id: 8
+  form_tag: missing_handout
+late:
+  line_item_problem_type_id: 9
+  form_tag: late
+missing_return_label:
+  line_item_problem_type_id: 10
+  form_tag: missing_return_label
+missing_box:
+  line_item_problem_type_id: 11
+  form_tag: missing_box
+lost_by_customer:
+  line_item_problem_type_id: 12
+  form_tag: lost_by_customer
+lost_paid:
+  line_item_problem_type_id: 13
+  form_tag: lost_paid

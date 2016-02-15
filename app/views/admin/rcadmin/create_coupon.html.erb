@@ -1,0 +1,66 @@
+<h1>Create Coupon</h1>
+
+<% if @coupon_saved -%>
+
+<p>Coupon successfully created!</p>
+
+Code: <%= @coupon.code %><br>
+Amount: <%= number_to_currency(@coupon.amount) %><br>
+New customers only: <%= @coupon.new_customers_only %><br>
+Single use: <%= @coupon.single_use_only %><br>
+Start Date: <%= @coupon.start_date %><br>
+End Date: <%= @coupon.end_date %><br>
+
+<p><%= link_to 'Return', :action => 'coupons' %></p>
+
+<% else -%>
+
+<%= error_messages_for :coupon, :header_tag => :strong %>
+
+<%= form_for :coupon, @coupon do |form| -%>
+
+<table>
+<tr>
+
+<td align="right">Code (leave blank to autogenerate):</td>
+<td><%= form.text_field :code %></td>
+
+</tr><tr>
+
+<td align="right">Amount:</td>
+<td><%= form.text_field :amount, :value =>"2.00" %></td>
+
+</tr><tr>
+
+<td align="right">New customers only:</td>
+<td><%= form.check_box :new_customers_only %></td>
+
+</tr><tr>
+
+<td align="right">Single use</td>
+<td><%= form.check_box :single_use_only, :checked => true %></td>
+
+</tr><tr>
+
+<td align="right">Start Date</td>
+<td><%= date_select :coupon, :start_date %></td>
+
+</tr><tr>
+
+<%# XXXFIX RAILS: Use :default option to date_select when this bugfix (7052) is in rails we use -%>
+<td align="right">End Date</td>
+<td>
+<%= select_year Date.today + 365, :prefix => 'coupon', :field_name => 'end_date(1i)' %>
+<%= select_month Date.today, :prefix => 'coupon', :field_name => 'end_date(2i)' %>
+<%= select_day Date.today, :prefix => 'coupon', :field_name => 'end_date(3i)' %>
+</td>
+
+</tr>
+</table>
+
+<%= submit_tag 'Create' %>
+
+<% end -%>
+
+<% end -%>
+

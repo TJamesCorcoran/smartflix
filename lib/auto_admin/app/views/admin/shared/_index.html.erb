@@ -1,0 +1,19 @@
+
+<div style="float:right; background-color:#ccc; min-width:400px; min-height:100px;padding:20px;">
+   <%= yield :sidebar %> 
+</div>
+
+
+<h1>All <%= @class.to_s.pluralize %></h1>
+<%= will_paginate items %>
+<%= link_to "create new", :action => :new %>
+
+<td><%= render(:partial => "admin/shared/search") %></td>
+
+<% items.reverse! if local_assigns[:reverse] && reverse && items.any? %>
+<% if items.any? %>
+  <%= render(:partial => "admin/shared/index_core", :locals => {:items => items }) %>
+<% else %>
+  no items
+<% end %>
+</td>

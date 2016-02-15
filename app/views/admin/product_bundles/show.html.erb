@@ -1,0 +1,10 @@
+<h1>Product Bundle: <%= @product_bundle.name %></h1>
+<p><strong>Description:</strong> <%= @product_bundle.description %></p>
+<p><strong>Discount Multiplier:</strong> <%= @product_bundle.discount_multiplier %></p>
+<ul>
+  <% @product_bundle.products.each do |product| %>
+    <li><%= product.name %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Back',  :action => :index %>

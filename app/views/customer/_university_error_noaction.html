@@ -1,0 +1,12 @@
+<p>
+  Please <%= link_to "update your credit card", :controller => :customer, :action=>:manage_cc %>.
+</p>
+
+<p>
+   ...or, if you've talked to your bank, and your card
+   (<%= order.most_recent_payment.credit_card.name %>) is working now,
+
+   <%= button_to "try the card again", 
+	   customer_try_card_again_url(order.most_recent_payment.credit_card.id, :r_controller=> params[:controller], :r_action => params[:action]) %>
+</p>
+

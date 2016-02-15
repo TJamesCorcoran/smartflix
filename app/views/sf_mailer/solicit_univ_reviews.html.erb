@@ -1,0 +1,29 @@
+<%= @customer.first_name %>,
+
+You've been enrolled in <%= @univstub.name %> for a while now,
+and we'd like to ask a favor - could you please take a moment to write a
+short review?
+
+  <%= @review_url %>
+
+We see the various SmartFlix Universities as a great tool, the best
+bargain for people who want to learn new skills ... and as the future of the 
+SmartFlix.
+
+As a SmartFlix University customer, you are part of a very important
+new direction for the company, and that's why we bend over backwards
+to make sure that your experience is the best.
+
+If you could take just a moment to do us a favor, we'd really appreciate it.  
+
+Please leave just a few words about your experience with 
+<%= @univstub.name %>: what you learned, how much you like it, if you
+think of it as a way to save money, stay motivated in your hobby, or
+whatever.
+
+  <%= @review_url %>
+
+We here at SmartFlix - xxx, xxx, xxx, xxx, and all the rest -
+really do appreciate it!
+
+<%= render :partial => 'sigblock_and_unsub_footer', :locals => { :customer => @customer.email } %>

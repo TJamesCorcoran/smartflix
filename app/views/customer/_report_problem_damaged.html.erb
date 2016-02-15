@@ -1,0 +1,38 @@
+<h2>
+ STEP ONE: Most DVDs can be made to play with just a bit of work.
+</h2>
+
+<p>
+  <ul class="report_problem">
+     <li>Try cleaning the DVD by wiping it lightly from the hole to the outer edge with windex and a paper towel.</li>
+     <li>Try playing the DVD on anther DVD player.</li>
+  </ul>
+</p>
+
+<h2>
+  STEP TWO: If you still can't get it to work, report the problem here:
+</h2>
+
+
+<%= form_tag customer_report_problem_3_url(@line_item.id), :remote => true do %>
+  <p>
+      <%= radio_button_tag 'problem_type', 'damaged_cracked', true %>It's cracked or physically broken<br>
+      <%= radio_button_tag 'problem_type', 'damaged_not_readable' %>It just doesn't play at all<br>
+      <%= radio_button_tag 'problem_type', 'damaged_skips' %>It skips or stutters<br>
+      <%= radio_button_tag 'problem_type', 'damaged_freezes' %>It freezes part way through<br>
+      <%= radio_button_tag 'problem_type', 'damaged_sound' %>It doesn't have sound<br>
+      <%= radio_button_tag 'problem_type', 'damaged_other' %> Other, give details: <%= text_field_tag 'details', nil, :size => 45 %>
+  </p>
+
+  <p>
+  Should we send a replacement?
+      <%= radio_button_tag 'reship', 'yes', true %> Yes
+      <%= radio_button_tag 'reship', 'no' %> No
+  </p>
+
+
+  <%= report_problem_back(:back) %>
+
+  <%= Button.new( "continue", { :class => :orange, :method => :submit })%>
+
+<% end -%>

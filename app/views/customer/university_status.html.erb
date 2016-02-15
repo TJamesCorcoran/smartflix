@@ -1,0 +1,16 @@
+
+    <%= render :partial => 'customer_nav' %>
+
+    <div id="ajax_feedback_goes_here">
+
+    </div>
+
+
+    <div id="error_field"></div>
+
+    <% if @univ_order.live? %>
+        <%= render :partial => 'university_status_one', :locals => {:order => @univ_order } %>
+    <% else %>
+        <%= render :partial => 'university_cancelled', :locals => { :order => @univ_order } %>
+    <% end %>
+

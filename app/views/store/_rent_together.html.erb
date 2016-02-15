@@ -1,0 +1,8 @@
+<% this, that = @product.rent_together_recommendation()  -%>
+<% if !that.nil? -%>
+<br class="clear"/>
+<p style="color:orange">
+<strong>Rent <%= this.listing_name %> together with: <%= link_to_product that %></strong><br/>
+</p>
+<%= tiny_image_for(this) %> <%=  tiny_image_for(that) %> <%= add_pair_to_cart_button_for(this,that) %> <br class="clear"/>
+<% end # if !that.nil? ... -%>

@@ -1,0 +1,29 @@
+<table border=0>
+<tr>
+  <td><h1>Need Prices (<%= ! params[:overdue].nil? ? "overdue" : "products" %> ) </h1></td>
+  <td>...for <%= @products.size %> products </td>
+</tr>
+</table>
+
+
+<table  border=0>
+	<tr>
+	<th></th>
+	<th>vendor</th>
+	<th>title</th>
+    </tr>
+<%= form_for(:title, :url => {:action =>"write_prices" }, :html => { :method => :put }) do |f| 
+%>
+<% @products.sort_by { |title| title.vendor.name }.each do |title| %>
+    <tr>
+    <td><%= link_to 'Edit', edit_title_path(title) %></td>
+	<td><%= title.vendor.name %>
+	<td><%= title.name %>
+	<td><%= text_field 'title', title.id  %></td>
+    </tr>
+
+<% end %>
+  <tr><td>    <%= submit_tag "Update" %></td></tr>
+<%  end
+ %>
+</table>

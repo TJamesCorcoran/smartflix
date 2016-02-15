@@ -1,0 +1,39 @@
+# f_0:
+#  death_type_id: 0 
+#  name: live                   
+
+
+f_1:
+  death_type_id: 1 
+  name: damaged                
+f_2:
+  death_type_id: 2 
+  name: lost_in_transit        
+f_3:
+  death_type_id: 3 
+  name: internal_error         
+f_4:
+  death_type_id: 4 
+  name: sold                   
+f_5:
+  death_type_id: 5 
+  name: lost_in_house          
+f_6:
+  death_type_id: 6 
+  name: returned_to_vendor     
+f_7:
+  death_type_id: 7 
+  name: wrong_customer         
+f_8:
+  death_type_id: 8 
+  name: scratched_irrevocable  
+f_9:
+  death_type_id: 9 
+  name: lost_and_damaged       
+f_10:
+  death_type_id: 110 
+  name: lost_by_cust_unpaid    
+f_11:
+  death_type_id: 111 
+  name: lost_by_cust_paid      
+

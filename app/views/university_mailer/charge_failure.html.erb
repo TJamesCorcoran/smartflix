@@ -1,0 +1,22 @@
+Hello <%= @customer_first_name %>,
+
+We're writing today about your enrollment in <%= @smartflix_U_name -%>.
+
+Our last attempt to charge the credit card you used 
+(x<%= @cc_last_four -%>) failed with the following error:
+
+    <%= @cc_error_message %>
+
+Please go to https://smartflix.com/customer/manage_cc and update your
+credit card information right now.
+
+If you have any questions, please contact support@smartflix.com.
+
+Your shipments from <%= @smartflix_U_name -%> will be placed on hold
+until this matter is resolved.
+
+Thank you for your attention in this matter, and best regards,
+
+    The <%= @smartflix_U_name -%> team.
+
+This email was sent to <%= @customer_emailAddr %>

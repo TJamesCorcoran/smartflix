@@ -1,0 +1,35 @@
+<h1>Can't find what you're looking for?</h1>
+<br />
+<p>
+  <strong>1.</strong>
+  <strong>
+    SmartFlix has an extensive
+    <%= link_to 'list of categories', :controller => 'store', :action => 'categories' %>
+  </strong> 
+  into which our videos are organized. The box at left lists all of the main 
+  categories.  Most of them also have subcategories filled with videos. Click on 
+  one to view the videos that belong to that category.  You can also view a complete 
+  <%= link_to 'category list', :controller => 'store', :action => 'categories' %>.
+</p>
+  
+<p>
+  <strong>2.</strong>
+  <strong>SmartFlix has a powerful search engine</strong> which you can use to find the
+  video(s) you're looking for.  On the right side of the blue bar above, you can enter
+  your search terms, click "Go", and you'll get back a list of videos matching your search.
+  You can also search using the box below.  You might search for "precision drilling" if 
+  you're looking for videos about using a precision press.  You could also enter "Marko 
+  Djurdjevic" if you're looking for videos created by the artist Marko Djurdjevic.
+  <% form_tag({:controller => 'store', :action => 'search'}, {:class => 'search'}) do %>
+    <label class="help-search">Search Smartflix: </label>
+    <%= text_field_tag :q, nil, :size => 20, :maxlength => 30, :class => 'search-field' %>
+    <%= Button.new 'Submit', :method => :none, :class => :light, :type => :orange %>
+  <% end %>
+</p>
+
+<p>
+  <strong>3.</strong>
+  <strong>You can recommend videos to SmartFlix.</strong> If you just can't find the video
+  you're looking for, and you think we should carry it, feel free to 
+  <%= link_to "let us know", :controller => 'store', :action => 'suggest' %>!
+</p>

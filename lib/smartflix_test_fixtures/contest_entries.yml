@@ -1,0 +1,71 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one_enters_one:
+  contest_entry_id:          1
+  contest_id:  1
+  customer_id: 1
+  title:       Test Entry 1
+  description: Test Customer 1's entry in Test Contest 1
+
+two_enters_one:
+  contest_entry_id:          2
+  contest_id:  1
+  customer_id: 2
+  title:       Test Entry 2
+  description: Test Customer 2's entry in Test Contest 1
+
+three_enters_one:
+  contest_entry_id:          3
+  contest_id:  1
+  customer_id: 3
+  title:       Test Entry 3
+  description: Test Customer 3's entry in Test Contest 1
+
+three_enters_two:
+  contest_entry_id:          4
+  contest_id:  2
+  customer_id: 3
+  title:       Test Entry 4
+  description: Test Customer 3's entry in Test Contest 2
+
+four_enters_two:
+  contest_entry_id:          5
+  contest_id:  2
+  customer_id: 4
+  title:       Test Entry 5
+  description: Test Customer 4's entry in Test Contest 2
+
+one_enters_two:
+  contest_entry_id:          8
+  contest_id:  2
+  customer_id: 1
+  title:       Test Entry 8
+  description: Test Customer 1's entry in Test Contest 2
+
+two_enters_two:
+  contest_entry_id:          9
+  contest_id:  2
+  customer_id: 2
+  title:       Test Entry 9
+  description: Test Customer 2's entry in Test Contest 2
+
+five_enters_two:
+  contest_entry_id:          10
+  contest_id:  2
+  customer_id: 5
+  title:       Test Entry 10
+  description: Test Customer 5's entry in Test Contest 2
+
+
+three_enters_three:
+  contest_entry_id:          6
+  contest_id:  3
+  customer_id: 3
+  title:       Test Entry 6
+  description: Test Customer 3's entry in Test Contest 3
+
+four_enters_three:
+  contest_entry_id:          7
+  contest_id:  3
+  customer_id: 4
+  title:       Test Entry 7
+  description: Test Customer 4's entry in Test Contest 3

@@ -1,0 +1,13 @@
+<% if @employee.andand.authority_edit_copy  %>
+	<div class="ud_block">
+
+		<p>
+		Instock: only click this button when the database consistency checker says that this copy is
+		out multiple times, and you have investigated, and know that the copy is definitely in the drawers.
+		<%= button_to "mark as instock", :action=>"mark_as_in", :id => @copy.id %> 
+		<%= button_to "mark all but last as instock", :action=>"mark_as_in", :id => @copy.id, :all_but_lastP => true %>
+		</p>
+
+    </div>
+<% end %>
+

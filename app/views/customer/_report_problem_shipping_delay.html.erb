@@ -1,0 +1,18 @@
+<p>This item has not yet shipped</p>
+<% if @line_item -%>
+  <p>
+  It will ship <%= @line_item.wait_text %>
+  <% if @line_item.product.product_set_member? && @line_item.product.product_set_ordinal > 1 -%>
+    (unless an earlier item in the set causes additional delays)
+  <% end -%>
+  </p>
+  <% if @line_item.days_delay && @line_item.days_delay > 0 -%>
+    <p>
+    You are <%= (@line_item.where_in_list).ordinalize %> in line to receive a copy,
+    and we have
+    <%= @line_item.product.num_copies %>
+    <%= @line_item.product.num_copies == 1 ? 'copy' : 'copies' %>
+    in circulation
+    </p>
+  <% end -%>
+<% end -%>

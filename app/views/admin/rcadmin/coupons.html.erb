@@ -1,0 +1,26 @@
+<h1>Coupons</h1>
+
+<p><%= link_to 'Create new coupon', :action => 'create_coupon' %></p>
+
+<%= form_tag('javascript:void(0)', :id => 'search_form') do -%>
+
+<p>
+Search through coupons:
+<%= text_field_tag 'q', h(params[:q]) %>
+
+<% {:n => 'For new customers:', :s => 'Single use:', :a => 'Active:'}.each do |tag, label| -%>
+<%= label %>
+<%= select_tag tag, options_for_select(['Any', 'Yes', 'No'], params[tag]) %>
+<% end -%>
+</p>
+
+<%= observe_form :search_form,
+                 :frequency => 0.5,
+                 :update => 'searchResults',
+                 :url => {:action => 'coupons', :results_only => true, :only_path => false} %>
+<% end -%>
+
+<div id="searchResults">
+<%= render :partial => 'coupon_list' %>
+</div>
+

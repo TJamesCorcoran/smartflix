@@ -1,0 +1,26 @@
+Hi <%= @customer.first_name %>,
+
+We just want to remind you that you rented <%= "DVD".pluralize_conditional(@copies.size) %>
+that we haven't received back yet:
+
+<% @copies.each do |cc| %>
+* <%= cc.product.name %> ( copy #<%= cc.sticker_id %> )
+<% end %>
+
+You're welcome to keep these DVDs for as long as you want, but we do
+charge <%= number_to_currency(@weekly_rate) %> per week, or fraction of a
+week (the fee for a few premium dvds is slightly higher).
+
+
+Thank you,
+
+Your friends at SmartFlix.com
+
+
+
+--
+http://SmartFlix.com/
+Web's Biggest How-To DVD Rental Store
+
+
+This email was sent to <%= @customer.email %>

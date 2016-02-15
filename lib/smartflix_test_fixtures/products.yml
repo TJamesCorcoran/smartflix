@@ -1,0 +1,750 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+product1:
+  product_id: 1
+  vendor_id: 1
+  name: 'Product1'
+  description: 'Description of product 1, about boats'
+  price: 9.99
+  date_added: <%= Date.today - 200 %>
+  author_id: 1
+  minutes: 60
+  display: <%= true %>
+  type: Video
+  purchase_price: 69.99
+product2:
+  product_id: 2
+  vendor_id: 1
+  name: 'Product2'
+  description: 'Description of product 2, about boats'
+  price: 9.99
+  date_added: <%= Date.today - 150 %>
+  author_id: 2
+  minutes: 60
+  display: <%= true %>
+  type: Video
+product3:
+  product_id: 3
+  vendor_id: 1
+  name: 'Product3'
+  description: 'Description of product 3, about trees'
+  price: 14.99
+  date_added: <%= Date.today - 120 %>
+  author_id: 2
+  minutes: 60
+  display: <%= true %>
+  type: Video
+product4:
+  product_id: 4
+  vendor_id: 1
+  name: 'Product5 Video2'
+  description: 'Description of product 5 video 2, about trees and boats (made from avocados!)'
+  price: 14.99
+  date_added: <%= Date.today - 110 %>
+  author_id: 2
+  minutes: 60
+  display: <%= true %>
+  type: Video
+product5:
+  product_id: 5
+  vendor_id: 1
+  name: 'Product5 Video1'
+  description: 'Description of product 5 video 1, about trees and boats'
+  price: 14.99
+  date_added: <%= Date.today - 110 %>
+  author_id: 2
+  minutes: 60
+  display: <%= true %>
+  type: Video
+product6:
+  product_id: 6
+  vendor_id: 1
+  name: 'Unavailable Video 6'
+  description: 'Description of product 6, which is not available'
+  price: 22.99
+  date_added: <%= Date.today - 140 %>
+  author_id: 2
+  minutes: 60
+  display: <%= false %>
+  type: Video
+product7:
+  product_id: 7
+  vendor_id: 1
+  name: 'Unavailable Video 7'
+  description: 'Description of product 7, which is not available'
+  price: 22.99
+  date_added: <%= Date.today - 140 %>
+  author_id: 2
+  minutes: 60
+  display: <%= false %>
+  type: Video
+product_unrented:
+  product_id: 8
+  vendor_id: 1
+  name: 'Unrented Video'
+  description: 'Description of unrented video'
+  price: 22.99
+  date_added: <%= Date.today - 140 %>
+  author_id: 2
+  minutes: 60
+  display: <%= true %>
+  type: Video
+product_backordered1:
+  product_id: 9
+  vendor_id: 1
+  name: 'Back-ordered Video 1'
+  description: 'this video is back ordered for 40 days (and 40 nights)'
+  price: 22.99
+  date_added: <%= Date.today - 140 %>
+  author_id: 3
+  minutes: 60
+  display: <%= true %>
+  type: Video
+product_backordered2:
+  product_id: 10
+  vendor_id: 1
+  name: 'Back-ordered Video 2'
+  description: 'this video is back ordered for 40 days (and 40 nights)'
+  price: 22.99
+  date_added: <%= Date.today - 140 %>
+  author_id: 3
+  minutes: 60
+  display: <%= true %>
+  type: Video
+product_backordered3:
+  product_id: 11
+  vendor_id: 1
+  name: 'Back-ordered Video 3 (only a little bit backordered)'
+  description: 'this video is back ordered for 1 day'
+  price: 22.99
+  date_added: <%= Date.today - 140 %>
+  author_id: 4
+  minutes: 60
+  display: <%= true %>
+  type: Video
+
+
+product_noprice:
+  product_id: 15
+  author_id: 5
+  vendor_id: 1
+  price: 9.99
+  display: <%= true %>
+  purchase_price: 0.00
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+savings_product_1:
+  product_id: 20
+  author_id: 5
+  vendor_id: 1
+  price: 9.99
+  purchase_price: 69.99
+  display: <%= true %>
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+savings_product_2:
+  product_id: 21
+  author_id: 5
+  vendor_id: 1
+  price: 9.99
+  purchase_price: 69.99
+  display: <%= true %>
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+savings_product_3:
+  product_id: 22
+  author_id: 5
+  vendor_id: 1
+  price: 9.99
+  purchase_price: 69.99
+  display: <%= true %>
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+savings_product_31:
+  product_id: 31
+  author_id: 5
+  vendor_id: 1
+  price: 9.99
+  purchase_price: 69.99
+  display: <%= true %>
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+savings_product_32:
+  product_id: 32
+  author_id: 5
+  vendor_id: 1
+  price: 9.99
+  purchase_price: 0.00
+  display: <%= true %>
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+savings_product_33:
+  product_id: 33
+  author_id: 5
+  vendor_id: 1
+  price: 9.99
+  purchase_price: 0.00
+  display: <%= true %>
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+product_univstub_1:
+  product_id: 100
+  author_id: 5
+  vendor_id: 1
+  price: 9.99
+  purchase_price: 0.00
+  display: <%= true %>
+  university_id: 1
+  type: UnivStub
+  date_added: <%= Date.today - 200 %>
+
+product_univstub_2:
+  product_id: 101
+  author_id: 5
+  vendor_id: 1
+  price: 9.99
+  purchase_price: 0.00
+  display: <%= true %>
+  university_id: 2
+  type: UnivStub
+  date_added: <%= Date.today - 200 %>
+
+
+university_2_product_1:
+  product_id: 5000
+  author_id: 5
+  vendor_id: 1
+  price: 9.99
+  display: <%= true %>
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+university_2_product_2:
+  product_id: 5001
+  author_id: 5
+  vendor_id: 1
+  price: 9.99
+  purchase_price: 0.00
+  display: <%= true %>
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+university_2_product_3:
+  product_id: 5002
+  vendor_id: 1
+  author_id: 5
+  price: 9.99
+  purchase_price: 0.00
+  display: <%= true %>
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+
+#--------------------
+
+#----------------------------------------------------------------------
+#   ??? test
+#----------------------------------------------------------------------
+
+title1:
+  product_id: 500
+  name: 'Title1'
+  author_id: 5
+  minutes: 60
+  description: 'Description of title 1'
+  vendor_id: 1
+  handout: A
+  price: 9.99
+  display: 1
+  virtual: 0
+  type: Video
+  date_added: <%= Date.today - 200 %>
+
+title2:
+  product_id: 501
+  name: 'Title2'
+  author_id: 5
+  minutes: 60
+  description: 'Description of title 2, about spoons'
+  vendor_id: 1
+  handout: B
+  price: 9.99
+  display: 1
+  virtual: 0
+  type: Video
+  date_added: <%= Date.today - 200 %>
+
+
+#----------------------------------------------------------------------
+#   copy test
+#----------------------------------------------------------------------
+
+novol_title:
+  product_id: 1000
+  author_id: 5
+  name: foo
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+last_vol_was_order_title:
+  product_id: 1001
+  author_id: 5
+  name: foo
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+noinvord_title:
+  product_id: 1002
+  author_id: 5
+  name: foo
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+lis_exist_title:
+  product_id: 1003
+  author_id: 5
+  name: foo
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+success_title:
+  product_id: 1004
+  author_id: 5
+  name: foo
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+#----------
+nobox:
+  product_id: 1010
+  author_id: 5
+  vendor_id: 1010
+  price: 9.99
+  handout:
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+box:
+  product_id: 1011
+  author_id: 5
+  vendor_id: 1011
+  price: 14.99
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+hostile:
+  product_id: 1012
+  author_id: 5
+  vendor_id: 1012
+  price: 9.99
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+handout:
+  product_id: 1013
+  author_id: 5
+  vendor_id: 1013
+  price: 9.99
+  handout: z123
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+#----------------------------------------------------------------------
+#   title test
+#----------------------------------------------------------------------
+
+tobuy_title:
+  product_id: 2000
+  author_id: 5
+  name: foo
+  vendor_id: 2000
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+tobuy_title_univstub:
+  product_id: 2001
+  author_id: 5
+  name: foo univ
+  vendor_id: 2001
+  type: UnivStub
+  university_id: 7010
+  date_added: <%= Date.today - 200 %>
+
+overdue_title:
+  product_id: 3000
+  author_id: 5
+  name: "overdue"
+  vendor_id: 3000
+  purchase_price: 99.00
+  date_added: <%= Date.today - 200 %>
+  type: Video
+
+#----------------------------------------------------------------------
+#   smartflix_adwords_test
+#----------------------------------------------------------------------
+
+dogstar_title:
+    type: Video
+    product_id: 4000
+    author_id: 5
+
+catstar_title:
+    type: Video
+    product_id: 4010
+    author_id: 5
+
+frogstar_title:
+    type: Video
+    product_id: 4020
+    author_id: 5
+
+toadstar_title:
+    type: Video
+    product_id: 4030
+    author_id: 5
+
+fishstar_title:
+    type: Video
+    product_id: 4040
+    author_id: 5
+
+# two titles in a set
+squidstar_title_1:
+    type: Video
+    product_id: 4050
+    author_id: 5
+    name: "squids - here"
+
+squidstar_title_2:
+    type: Video
+    product_id: 4060
+    author_id: 5
+    name: "squids - not here"
+
+
+#----------
+# shared between line_item tests and overdue_engine tests
+
+charge_yes_first:
+    product_id: 5010
+    author_id: 5
+    purchase_price: 50.00
+    type: Video
+
+charge_yes_older_charge:
+    product_id: 5011
+    author_id: 5
+    purchase_price: 90.00
+    type: Video
+
+charge_expired_cc:
+    product_id: 5020
+    author_id: 5
+    purchase_price: 90.00
+    type: Video
+
+#----------------------------------------------------------------------
+#   ShippingTest
+#----------------------------------------------------------------------
+
+noprecond:
+  product_id: 6000
+  author_id: 5
+  type: Video
+
+#----------------------------------------------------------------------
+
+noprecond:
+  product_id: 6010
+  author_id: 5
+  type: Video
+
+setA_withpreconds_item1:
+  product_id: 6020
+  author_id: 5
+  type: Video
+
+setA_withpreconds_item2:
+  product_id: 6021
+  author_id: 5
+  type: Video
+
+setA_withpreconds_item3:
+  product_id: 6022
+  author_id: 5
+  type: Video
+
+setA_withpreconds_item4:
+  product_id: 6023
+  author_id: 5
+  type: Video
+
+
+setB_withpreconds_item1:
+  product_id: 6030
+  author_id: 5
+  type: Video
+
+setB_withpreconds_item2:
+  product_id: 6031
+  author_id: 5
+  type: Video
+
+setC_nopreconds_item1:
+  product_id: 6040
+  author_id: 5
+  type: Video
+
+setC_nopreconds_item2:
+  product_id: 6041
+  author_id: 5
+  type: Video
+
+setC_nopreconds_item3:
+  product_id: 6042
+  author_id: 5
+  type: Video
+
+setC_nopreconds_item4:
+  product_id: 6043
+  author_id: 5
+  type: Video
+
+cancelled_item:
+  product_id: 6050
+  author_id: 5
+  type: Video
+
+other_customer_dibs:
+  product_id: 6051
+  author_id: 5
+  type: Video
+
+
+
+
+#----------
+
+breakup_00:
+  product_id: 6100
+  author_id: 5
+  price: 9.99
+  type: Video
+
+breakup_01:
+  product_id: 6101
+  author_id: 5
+  price: 9.99
+  type: Video
+
+breakup_02:
+  product_id: 6102
+  author_id: 5
+  price: 9.99
+  type: Video
+
+breakup_03:
+  product_id: 6103
+  author_id: 5
+  price: 9.99
+  type: Video
+
+breakup_04:
+  product_id: 6104
+  author_id: 5
+  price: 9.99
+  type: Video
+
+breakup_05:
+  product_id: 6105
+  author_id: 5
+  price: 9.99
+  type: Video
+
+breakup_06:
+  product_id: 6106
+  author_id: 5
+  price: 9.99
+  type: Video
+
+breakup_07:
+  product_id: 6107
+  author_id: 5
+  price: 9.99
+  type: Video
+
+breakup_08:
+  product_id: 6108
+  author_id: 5
+  price: 9.99
+  type: Video
+
+breakup_09:
+  product_id: 6109
+  author_id: 5
+  price: 9.99
+  type: Video
+
+breakup_010:
+  product_id: 6110
+  author_id: 5
+  price: 9.99
+  type: Video
+
+breakup_011:
+  product_id: 6111
+  author_id: 5
+  price: 14.99
+  type: Video
+
+breakup_012:
+  product_id: 6112
+  author_id: 5
+  price: 14.99
+  type: Video
+
+breakup_013:
+  product_id: 6113
+  author_id: 5
+  price: 14.99
+  type: Video
+
+breakup_014:
+  product_id: 6114
+  author_id: 5
+  price: 14.99
+  type: Video
+
+breakup_015:
+  product_id: 6115
+  author_id: 5
+  price: 14.99
+  type: Video
+
+breakup_016:
+  product_id: 6116
+  author_id: 5
+  price: 14.99
+  type: Video
+
+breakup_017:
+  product_id: 6117
+  author_id: 5
+  price: 14.99
+  type: Video
+
+breakup_018:
+  product_id: 6118
+  author_id: 5
+  price: 14.99
+  type: Video
+
+breakup_019:
+  product_id: 6119
+  author_id: 5
+  price: 14.99
+  type: Video
+
+breakup_020:
+  product_id: 6120
+  author_id: 5
+  price: 14.99
+  type: Video
+
+
+#----------
+# pruning
+#
+
+prune_none_recent_l0:
+   product_id: 7200
+   author_id: 5
+   price: 9.99
+   type: Video
+
+prune_none_recent_l1:
+   product_id: 7201
+   author_id: 5
+   price: 9.99
+   type: Video
+
+prune_none_recent_l2:
+   product_id: 7202
+   author_id: 5
+   price: 9.99
+   type: Video
+
+prune_none_recent_l3:
+   product_id: 7203
+   author_id: 5
+   price: 9.99
+   type: Video
+
+prune_none_recent_l4:
+   product_id: 7204
+   author_id: 5
+   price: 9.99
+   type: Video
+
+prune_none_recent_l5:
+   product_id: 7205
+   author_id: 5
+   price: 9.99
+   type: Video
+
+#----------------------------------------------------------------------
+#   railscart integration tests
+#----------------------------------------------------------------------
+
+wood_video: 
+  product_id: 8000
+  name: "Wood"
+  type: Video
+
+metal_video: 
+  product_id: 8001
+  name: "Metal "
+  type: Video
+
+paint_video: 
+  product_id: 8002
+  name: "Paint "
+  type: Video
+
+
+
+#----------------------------------------------------------------------
+#   products test
+#----------------------------------------------------------------------
+
+
+#----------
+# test_copies_needed_ignore_replacement_and_late_fees
+
+copies_needed: 
+  product_id: 1234000
+  name: "Needful thing"
+  type: Video
+
+
+#----
+# for univs
+
+univ_1_a:
+   product_id: 7011
+   author_id: 5
+   price: 9.99
+   type: Video
+
+univ_1_b:
+   product_id: 7021
+   author_id: 5
+   price: 9.99
+   type: Video
+

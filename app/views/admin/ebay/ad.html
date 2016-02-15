@@ -1,0 +1,280 @@
+<div style="width:100%;background-color:gray;padding:0px;margin:0px auto;text-align:center;">
+
+    <div style="width:740px;background-color:white;padding:0px;margin:0px;text-align:left;">
+      <div style="margin:0px;padding:0px;width:720px; background-color:#eceadd; padding:10px 10px;">
+		  <div style="float:right; margin-right:20px;">
+			 <a href="http://smartflix.com">
+			   <img style="margin-left:20px;" border=0 src="http://smartflix.com/images/new_logo.jpg">
+			 </a>
+		  </div>
+		  <h1>DVD: <%= title_text %></h1> 
+
+      </div>
+    </div>
+
+  <div style="width:740px;background-color:white;padding:0px;margin:0px;text-align:left;">
+    <div style="background-color:#107089;height:30px;width:740px;">
+      <p style="color:white;font-size:0.75em;margin-top:0px;padding-top:6px;padding-left:20px;">Just one of the <%= other_titles_num.commify %> videos in the <%= title_cat_name %> category!</p>
+    </div>
+
+        <!--left column-->
+
+        <div style="width:60%;margin:0px;padding:0px;float:left;margin-right:20px;">
+
+          <h2 style="margin-top:20px;margin-left:20px;margin-right:20px;font-family:georgia,serif;font-size:1.2em;line-height:1em;">
+          
+          <p style="margin-right:20px;margin-bottom:20px;font-size:0.75em;font-family:georgia, serif;">
+          You are bidding on 1 week's free rental of the DVD
+          </p>
+
+          <h2 style="margin-left:20px;margin-bottom:20px;font-family:georgia, serif;"> 
+          <span style="background-color:yellow;">
+          <%= title_text %>
+          </span> by <%= title_author %>
+          </h2>
+
+          <p style="margin-left:20px;margin-right:20px;font-size:0.75em;font-family:georgia, serif;">
+		  ...or you can
+           use the coupon to rent any of our <%= title_cat_name %> DVDs, or any of our <%= sitewide_titles_num.commify %> DVDs in any of the
+          <%= sitewide_cats_num -1 %> other categories at
+          <span style="background-color:yellow;">
+           SmartFlix.com - the world's largest rental store for how-to videos since 2003!
+          </span>
+          ...with over
+          <span style="background-color:yellow;">
+          35,000 satisfied customers
+          </span>
+          </p>
+
+
+          <h3 style="margin-left:20px;margin-right:20px;font-family:georgia,serif;font-size:0.85em;line-height:1em;">
+          About the DVD <A href="<%= title_url%>"><%= title_text %></a>:
+          </h3>
+          <div style="margin-left:35px;padding-left:10px; margin-right:20px;font-size:0.75em;font-family:georgia, serif; border-left: 5px solid #107089">
+          <%= title_description %>
+          <%= title_duration.nil? ? "" : "<br><br>Runs about #{title_duration} minutes." %>
+          </div>
+
+           
+
+          <h3 style="margin-left:20px;margin-right:20px;font-family:georgia,serif;font-size:0.85em;line-height:1em;">
+          Other Videos
+          </h3>
+          <p style="margin-left:20px;margin-right:20px;font-size:0.75em;font-family:georgia, serif;">
+          If you've already seen <b><%= title_text %></b>, you can also use the coupon to rent 
+          <span style="background-color:yellow;">
+		  any of the other  <%= title_cat_name %> videos we carry 
+          </span>, like <% ii = 0; other_titles_names.each do |othertitle|
+                     ii += 1
+                     yellowP = (0 == (ii % 5))
+                     style = yellowP ? "background-color:yellow;" : "" %>
+                     <span style="<%= style %>"><%= othertitle %>, </span>
+                  <% end %> etc.!
+          </p>
+
+          <h3 style="margin-left:20px;margin-right:20px;font-family:georgia,serif;font-size:0.85em;line-height:1em;">
+          Other Categories
+          </h3>
+          <p style="margin-left:20px;margin-right:20px;font-size:0.75em;font-family:georgia, serif;">
+          Or, you can rent how-to titles in any of our categories, including:
+          <% ii = 0; sitewide_cats_names.each do |othercat|
+                     ii += 1
+                     yellowP = (0 == (ii % 3))
+                     style = yellowP ? "background-color:yellow;" : "" %>
+                     <span style="<%= style %>"><%= othercat %>, </span>
+                  <% end %> and more!
+          </p>
+
+
+
+          <h3 style="margin-left:20px;margin-right:20px;font-family:georgia,serif;font-size:0.85em;line-height:1em;">
+          About SmartFlix
+          </h3>
+
+          <p style="margin-left:20px;margin-right:20px;font-size:0.75em;font-family:georgia, serif;">
+          SmartFlix is a service that rents video DVDs - just like your corner video store... but we rent the kind of videos that you can't find on every street corner. Videos on running lathes, melting glass, welding steel... cool videos!
+          </p>
+
+          <p style="margin-left:20px;margin-right:20px;font-size:0.75em;font-family:georgia, serif;">
+          Rent online, at any time of day, and get the videos shipped straight to you (with free shipping in both directions!).
+          </p>
+
+          <p style="margin-left:20px;margin-right:20px;font-size:0.75em;font-family:georgia, serif;">
+          <span style="background-color:yellow;">
+          We've been the world-leading renter of how-to videos for over 5 years!
+          </span
+          </p>
+
+          <p style="margin-left:20px;margin-right:20px;font-size:0.75em;font-family:georgia, serif;">
+          We are passionate about customer service, and have the testimonials to back it up. 
+          <span style="background-color:yellow;">
+		  We're not happy unless you're happy!
+          </span>
+		  </p>
+
+          <h3 style="margin-left:20px;margin-right:20px;font-family:georgia,serif;font-size:0.85em;line-height:1em;">
+          The Coupon / What you're bidding on
+          </h3>
+
+          <p style="margin-left:20px;margin-right:20px;font-size:0.75em;font-family:georgia, serif;">
+          When you win this auction we'll get a coupon out to you immediately.  You can then use this coupon to rent <%= title_text %>, or any of our other <%= sitewide_titles_num.commify %> how-to DVDs.
+		  </p>
+
+          <p style="margin-left:20px;margin-right:20px;font-size:0.75em;font-family:georgia, serif;">
+          <span style="color:red;">
+          Please note:
+          </span> 
+          this coupon is valid for first-time renters only; the coupon up for auction will not work for existing customers, nor can an auction winner use more than one coupon either in a single order or across multiple orders. Sorry!)</p>
+          </p>
+
+          <h3 style="margin-left:20px;margin-right:20px;font-family:georgia,serif;font-size:0.85em;line-height:1em;">
+          How it works
+          </h3>
+
+          <ol style="">
+            <li style="margin-right:20px;margin-bottom:20px;font-size:0.75em;font-family:georgia, serif;">From a web page, you select which videos you want to rent, and then click "secure checkout". The coupon you win in this auction entitles you to a free rental.</li>
+            <li style="margin-right:20px;margin-bottom:20px;font-size:0.75em;font-family:georgia, serif;">SmartFlix will send you the video in a cardboard mailer (there is no shipping charge!).</li>
+            <li style="margin-right:20px;margin-bottom:20px;font-size:0.75em;font-family:georgia, serif;">You get to watch the video for one week, then you put the video back in the cardboard mailer and drop it in the mail (no stamps needed!)</li>
+          </ol>
+
+          <h3 style="margin-left:20px;margin-right:20px;font-family:georgia,serif;font-size:0.85em;line-height:1em;">
+          The Fine Print
+          </h3>
+
+          <p style="margin-left:20px;margin-right:20px;font-size:0.55em;font-family:georgia, serif;">
+          Note that Massachusetts residents are responsible for paying sales tax at the time that they rent a DVD.
+          </p>
+
+          <p style="margin-left:20px;margin-right:20px;font-size:0.55em;font-family:georgia, serif;">
+          Note that some DVDs are premium priced rentals, and rent for $14.99 per week. The rental coupon you are bidding on is valued at $9.99, and thus may not cover the complete rental fee if you select a premium DVD.
+          </p>
+
+          <p style="margin-left:20px;margin-right:20px;font-size:0.55em;font-family:georgia, serif;">
+          Shipments to Canada do not include return postage; Canadian customers are responsible for affixing all required postage for return shipment.
+          </p>
+
+          <p style="margin-left:20px;margin-right:20px;font-size:0.55em;font-family:georgia, serif;">
+          Many of the DVDs we rent are DVD+R or DVD-R format. Almost all modern DVD players can play these, but please verify that your DVD player can play these discs before bidding; we can not give refunds to customers who buy a coupon and/or rent a video on a medium that they can not view.
+          </p>
+          <p style="margin-left:20px;margin-right:20px;font-size:0.55em;font-family:georgia, serif;">
+          Every DVD we carry is a legitimate copy, legally purchased either directly or indirectly from the copyright holder, and we are fully willing and able to prove this to eBay personnel.
+          </p>
+          <p style="margin-left:20px;margin-right:20px;font-size:0.55em;font-family:georgia, serif;">
+          Please read our answers to 
+          <a href="http://smartflix.com/help">Frequently Asked Questions</a>.</p>
+          <p style="margin-left:20px;margin-right:20px;font-size:0.55em;font-family:georgia, serif;">
+          The terms and conditions for using the website and the service are 
+          <a href="http://smartflix.com/store/conditions">here</a>. Please do not bid unless you have read them and agree to them.</p>
+          <p style="margin-left:20px;margin-right:20px;font-size:0.55em;font-family:georgia, serif;">
+          The winning bidder will receive the coupon by email with in 48 hours of the auction close.
+          </p>
+          <p style="margin-left:20px;margin-right:20px;font-size:0.55em;font-family:georgia, serif;">
+          The coupon is good for one year from the date of issue.
+          </p>
+          <p style="margin-left:20px;margin-right:20px;font-size:0.55em;font-family:georgia, serif;">
+          The coupon is usable only by first-time customers. If you have already rented from SmartFlix, this coupon WILL NOT work for you. If you bid on and win two coupons, the first one will work for you, but the second one will not. We can not refund fees for coupon purchases; you will have to give the coupon away to a friend or relative, or resell it. Again: PLEASE do not bid if you have already rented from SmartFlix!
+          </p>
+          <p style="margin-left:20px;margin-right:20px;font-size:0.55em;font-family:georgia, serif;">
+          We are a registered Massachusetts company, and have been in business since 2003.
+          </p>
+          <p style="margin-left:20px;margin-right:20px;font-size:0.55em;font-family:georgia, serif;">
+          We pride ourselves on our excellent customer support. You can 
+          <a href="http://smartflix.com/store/contact_us">contact us</a> at any time.</p>
+
+        </div>
+
+        <!--right column-->
+
+        <div style="margin:0px;padding:0px;padding:0px;">
+
+          <img style="margin-top:20px;"  src=<%= title_image_url %> name='primary' width=180 height=180>
+
+          <h3 style="margin-right:20px;font-family:georgia,serif;font-size:0.85em;line-height:1em;">Reviews of <%= title_text %> </h3>
+		  <div style="margin-right:20px;margin-bottom:20px;font-size:0.75em;font-family:georgia, serif;">
+			  <% title_reviews.each do |review_hash| %>
+				   <%= review_hash[:review] %>  
+				   <p>
+				       <span style="background-color:yellow;">
+                       <%= review_hash[:stars] %>  stars!
+                       </span>
+				   </p>
+                   <p>
+				   - <%= review_hash[:custname] %>  
+                   </p>
+			  <% end %>
+          </div>
+
+          <img style="margin-top:20px;"  src="1.jpg" name='SlideShow' width=180 height=180>
+
+          <h3 style="margin-right:20px;font-family:georgia,serif;font-size:0.85em;line-height:1em;">Reviews of other <%= title_cat_name %> videos </h3>
+		  <div style="margin-right:20px;margin-bottom:20px;font-size:0.75em;font-family:georgia, serif;">
+			  <% other_titles_reviews.each do |review_hash| %>
+				   <%= review_hash[:review] %>  
+				   <p>
+				       <span style="background-color:yellow;">
+                       <%= review_hash[:stars] %>  stars!
+                       </span>
+				   </p>
+                   <p>
+				   - <%= review_hash[:custname] %>  
+                   </p>
+
+			  <% end %>
+          </div>
+
+        </div>
+
+<div style="clear:both;">&nbsp;</div>
+
+
+<script>
+
+// (C) 2000 www.CodeLifter.com
+// http://www.codelifter.com
+// Free for all users, but leave in this  header
+// NS4-6,IE4-6
+// Fade effect only in IE; degrades gracefully
+
+// Set slideShowSpeed (milliseconds)
+var slideShowSpeed = 2000
+
+// Duration of crossfade (seconds)
+var crossFadeDuration = 0
+
+// Specify the image files
+var Pic = [ <%= other_titles_img_urls %> ]
+
+
+// =======================================
+// do not edit anything below this line
+// =======================================
+
+var t
+var j = 0
+var p = Pic.length
+
+var preLoad = new Array()
+for (i = 0; i < p; i++){
+   preLoad[i] = new Image()
+   preLoad[i].src = Pic[i]
+}
+
+function runSlideShow(){
+   if (document.all){
+      document.images.SlideShow.style.filter="blendTrans(duration=2)"
+      document.images.SlideShow.style.filter="blendTrans(duration=crossFadeDuration)"
+      document.images.SlideShow.filters.blendTrans.Apply()     
+   }
+   document.images.SlideShow.src = preLoad[j].src
+   if (document.all){
+      document.images.SlideShow.filters.blendTrans.Play()
+   }
+   j = j + 1
+   if (j > (p-1)) j=0
+   t = setTimeout('runSlideShow()', slideShowSpeed)
+}
+runSlideShow();
+
+</script>
+  </div>
+  </div>

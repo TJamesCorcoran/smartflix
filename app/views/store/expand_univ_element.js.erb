@@ -1,0 +1,4 @@
+$("#video-<%= @video.id %>-outer").html("<%= escape_javascript(render(:partial => 'univ_element_list_item', :locals => { :product => @video })) %>");
+// $("#video-<%= @video.id %>-outer").show();
+
+//  render :partial => "univ_element_list_item", :locals => { :product => @video } 

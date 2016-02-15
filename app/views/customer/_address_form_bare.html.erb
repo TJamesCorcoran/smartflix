@@ -1,0 +1,39 @@
+  <tr>
+  <td>First name:</td>
+  <td><%= form.text_field :first_name, :size => 40 %></td>
+  </tr>
+
+  <tr>
+  <td>Last name:</td>
+  <td><%= form.text_field :last_name, :size => 40 %></td>
+  </tr>
+
+  <tr>
+  <td>Street address:</td>
+  <td><%= form.text_field :address_1, :size => 40 %></td>
+  </tr>
+
+  <tr>
+  <td>Address Line 2:</td>
+  <td><%= form.text_field :address_2, :size => 40 %></td>
+  </tr>
+
+  <tr>
+  <td>City:</td>
+  <td><%= form.text_field :city, :size => 40 %></td>
+  </tr>
+
+  <tr>
+  <td>State:</td>
+  <td><%= form.select :state_id, collection_for_select(State, @address.nil?)%></td>
+  </tr>
+
+  <tr>
+  <td>Postal Code:</td>
+  <td><%= form.text_field :postcode, :size => 40 %></td>
+  </tr>
+
+  <tr>
+  <td>Country:</td>
+  <td><%= form.select :country_id, collection_for_select(Country, false, true)%></td>
+  </tr>

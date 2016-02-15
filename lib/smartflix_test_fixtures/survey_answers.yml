@@ -1,0 +1,11 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  survey_answer_id: 1
+  customer_id: 1
+  survey_question_id: 1
+  answer: '9'
+two:
+  survey_answer_id: 2
+  customer_id: 1
+  survey_question_id: 1
+  answer: '3'

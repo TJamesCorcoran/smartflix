@@ -1,0 +1,25 @@
+<table border=0  class="sortable" id="items">
+  <tr>
+    <% items.first.class.columns.each do |column| %>
+      <th>		<%= column.name	%></th>
+    <% end %>
+    </tr>
+
+    <% items.each do |item| %>
+    <tr>
+      <%  items.first.class.columns.each do |column| %>
+      <td>
+      <%= 
+        if (column.name == items.first.class.primary_key) || (column.name == "name")|| (column.name == "code")
+          link_to item.send(column.name), :action => :show, :id => item.id
+        else
+          ret = item.send(column.name)
+          ret = ret[0,100] if ret.is_a?(String)
+          ret
+        end
+       %>
+      </td>
+      <% end %>
+  </tr>
+  <% end %>
+</table>

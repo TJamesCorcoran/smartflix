@@ -1,0 +1,42 @@
+Hi <%= @customer.first_name %>,
+
+As a SmartFlix customer, you're welcome to keep DVDs for as long
+as you want (or send some back earlier, and hang on to others), but we
+do charge <%= number_to_currency(@weekly_rate) %> per week, or fraction of a week
+(the fee for a few premium DVDs is slightly higher).
+
+The following DVDs have been out an extra week, or an extra fraction
+of a week:
+
+<% @copies.each do |cc| %>
+* <%= cc.product.name %> ( copy #<%= cc.sticker_id %> )
+<% end %>
+
+Today we charged your credit card ending in x<%= @last_four %>
+<%= number_to_currency(@price) %> for this extra time.
+
+
+<% if @in_last_chargeable_month %>
+
+Please note that the credit card we have on hand for you is due to
+expire shortly.  Please go to your account page
+
+   http://smartflix.com/manage_cc
+
+and give us a new up-to-date credit card.  If we don't receive one by
+the end of the month, we'll have to charge you for these unreturned DVDs.
+
+<% end %>
+
+Thank you,
+
+Your friends at SmartFlix.com
+
+
+
+--
+http://SmartFlix.com/
+Web's Biggest How-To DVD Rental Store
+
+
+This email was sent to <%= @customer.email %>

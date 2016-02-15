@@ -1,0 +1,11 @@
+$('#error_field').html("");
+
+$("#li_<%= @li.id %>_position").html("1");
+$("#li_<%= @li.id %>").animate({top: "-<%= (50 * (@old_position -1 )) %>"}, 2000);
+$("#li_<%= @li.id %>").effect("highlight", {}, 2000);
+
+<% @modified_lis.each do |mli| %>
+    $("#li_<%= mli.id %>").animate({top: "+50"}, 1);
+    $("#li_<%= mli.id %>_position").html("<%= mli.queue_position %>");
+<% end %>       
+ 

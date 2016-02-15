@@ -1,0 +1,6 @@
+# After any edits run
+#   postmap /etc/postfix/virtual_mailboxes /etc/postfix/virtual_aliases 
+#
+info@heavyink.com    heavyink.com/info
+sales@heavyink.com   heavyink.com/sales
+xyz@heavyink.com    heavyink.com/xyz

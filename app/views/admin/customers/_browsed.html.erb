@@ -1,0 +1,20 @@
+<h1>browsed</h1>
+<div class="customer-admin" >
+  (<a href="#" onclick="$('browsed_int').hide(); return false;">hide</a> / 
+  <a href="#" onclick="$('browsed_int').show(); return false;">show</a>)
+
+  <div id="browsed_int" style="display:none;">
+    <table  id="urltracks_table" border=0>
+      <tr>
+          <th>created_at</th>
+          <th>path</th>
+      </tr>
+      <% @customer.url_tracks.each do |url| %>
+        <tr>
+          <td><%= url.created_at%></td>
+          <td><%= url.path %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

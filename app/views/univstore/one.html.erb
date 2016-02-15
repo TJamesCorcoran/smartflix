@@ -1,0 +1,48 @@
+<div id="right_col">
+  <%= render :partial => 'signup', :locals => { :customer => @customer, :univ => @univ, :supress_show_all =>true } %>
+  <div id="uni-linklist">
+     <%= render :partial => 'univ_list', :locals => { :title_html_tag => "h2" } %>
+  </div>
+
+</div>
+
+
+<div id="uni-info">
+
+  <div class="uni_image">
+    <img src="<%= image_file_for_univ(@univ) %>" width="550px" height="174px" />
+  </div>
+
+  <% cache(:action_suffix => 'univ_description') do %>
+
+      <h1><%= @univ.name %></h1>
+
+      <p><%= @univ.name %> is a rental program of DVDs from the most
+      talented artists and craftsmen in the field.  Keep the DVDs as long as you
+      want, with no late charges!  When you're ready for more, mail
+      them DVDs back, and we'll send you more.</p>
+
+      <p> With exciting, informative, well shot videos from names like
+      <%= @univ.top_authors.map(&:name).to_sentence %> that you can
+      keep as long as you want and the ability to cancel at any time,
+      this is a bargain that you can't afford to miss!</p>
+
+
+
+       <!-- <h2 class="title">What's in <%= @univ.name %> ?<br> -->
+
+       <h2 class="title">What's in <%= @univ.name %> ?</h2>
+
+       <script type="text/javascript">
+         var now_open = "none"
+       </script>
+
+       <%= render :partial => 'univ_element_list', :locals => { :products => @univ.products } %>
+
+   <% end %>
+</div>
+
+<%= render :partial => 'signup', :locals => { :customer => @customer, :univ => @univ, :supress_show_all =>true } %>
+
+<%= render :partial => 'testimonials' %>
+

@@ -1,0 +1,4 @@
+<div class="field">
+  <label for=""><%= name.to_s.humanize %></label>
+  <%= render :partial => type, :locals => { :name => name, :field => field, :idx => idx } %>
+</div>

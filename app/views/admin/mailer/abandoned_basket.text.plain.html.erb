@@ -1,0 +1,72 @@
+Hi there,
+
+We're glad you signed up for a SmartFlix.com account!
+<% if @cart.cart_items.size.zero? then %>
+
+As you know, we stock thousands of how-to DVDs on everything from
+metalworking to knitting, from automotive airbrushing to juggling.
+
+If you can't find something you need, just type it into our convenient
+search box on the top right-hand corner of every SmartFlix page. We add
+new DVDs all the time, so please come back regularly and check out our
+new arrivals.
+
+<% else %>
+
+
+<% unless ( (to_buy_items = @cart.to_buy).blank? ) %>
+We did notice that you left some items un-rented in your shopping cart. 
+Did you mean to rent:
+  <% to_buy_items.each do |i| -%>
+       *  <%= i.product.name %>
+  <% end -%>
+<% end %>
+
+<% unless ( (wish_list_items = @cart.wishlist).blank? ) %>
+There are some videos left in your saved items list:
+  <% wish_list_items.each do |i| -%>
+       *  <%= i.product.name %>
+  <% end -%>
+<% end %>
+
+We know these DVDs interest you. (Heck, they interest us!) So we figure
+the check-out process might not have looked straightforward. But, rest
+assured, we're here to help!
+
+Checkout takes just three simple steps:
+
+   1) go to
+
+        https://smartflix.com/customer/login
+
+   2) login using your email address 
+
+        <%= @customer.email %>
+
+   3) click "checkout"
+
+That's it! 
+
+<% end %>
+
+So come back to SmartFlix.com, the DVDs will be waiting for you in your
+shopping cart when you get back. But, if you don't rent them soon,
+someone else may.
+
+If you have any questions at all, please send us a note and ask!
+
+Thanks, 
+
+Your friends at SmartFlix.com
+
+--
+http://SmartFlix.com/
+Web's Biggest How-To DVD Rental Store
+
+-----------------------------------------------------------------
+We hope you enjoyed receiving this message. However, if you would
+rather not receive future e-mails like this one, please visit our
+email preferences page:
+<%= @customer.email_preferences_url %>
+This email was sent to <%= @customer.email %>
+-----------------------------------------------------------------

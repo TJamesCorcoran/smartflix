@@ -1,0 +1,16 @@
+<div class="contest" id="<%= contest.id %>">
+  <p>
+  The <%= link_to h(contest.title), :action => :show, :id => contest %> contest is
+  <%=  case contest.phase
+     when Contest::ENTRY_PHASE
+       "now accepting entries!"
+     when Contest::VOTING_PHASE
+       "now open for voting!"
+    when Contest::ARCHIVE_PHASE
+       "finished!"
+  end %>
+  </p>
+  <div class="contest-description">
+    <p><%= contest.description %></p>
+  </div>
+</div>

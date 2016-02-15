@@ -1,0 +1,12 @@
+<% if is_admin? ||
+      request.url.match(/admin/) ||  
+      (Rails.env == 'development') 
+-%>
+  <span id="devel_prod"> 
+     <% if (Rails.env == 'production') %>
+       <%= link_to "devel",  request.url.gsub(/smartflix.com/, "localhost:3000").gsub(/https/, "http")  %> | prod
+     <% else %>
+       devel | <%= link_to "prod", request.url.gsub(/localhost:3000/, "smartflix.com")  %>
+     <% end %>
+  </span>
+<% end %>

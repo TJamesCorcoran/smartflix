@@ -1,0 +1,7 @@
+<%# Parameter: customer is a Customer -%>
+<% [customer.shipping_address, customer.billing_address].each do |address| -%>
+<div class="address">
+<%=  render :partial => 'shared/address', :locals => { :address => address, :link_to_edit => true } %>
+</div>
+<% end -%>
+<div class="clear"></div>

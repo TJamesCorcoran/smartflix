@@ -1,0 +1,75 @@
+
+<%= form_tag( {:action => 'index'}, {:method => :get} ) do %>
+  <%= text_field_tag  'search_str'  %>
+  <%= submit_tag 'Search by Person text' %>
+<% end %>
+
+
+<table border=0>
+	<tr>
+		<td><h1>Person list</h1></td>
+		<td>
+		   (<%= link_to 'unfiltered', :action => 'index', :all => true %>)
+		   (<%= link_to 'timesheet overview', {:controller => :timesheets} %>)
+		   (<%= link_to 'new person', :action => :new %>)
+		</td>
+	</tr>
+</table>
+
+
+<hr>
+
+<table border=0 class="sortable" id="persons">
+	<tr>
+	<th></th>
+	<th></th>
+	<th></th>
+	<%
+  	   my_cols_ordered = Person.columns.sort do |a,b| 
+           if    (a.name == "employee_number") then -2 elsif (b.name == "employee_number") then 2
+           elsif    (a.name == "name_last") then -1 elsif (b.name == "name_last") then 1 
+	       elsif (a.name == "name_first") then -1 elsif (b.name == "name_first") then 1 
+           else 0 
+           end
+       end
+        
+	   for column in my_cols_ordered   
+    %>
+		<th>
+			<%= (column.name == "author_id")  ? "author" : column.name %>
+		</th>
+	<% end %>
+	</tr>
+
+
+    <%  cssclass = "dark"
+	    for person in @persons.sort_by { |p| p.id.to_i } 
+             cssclass = ((cssclass == "dark") ? "light" : "dark") 
+    %>
+	  <tr>
+		<td class="<%=cssclass%>"> <%= if person.hourlyP
+					 date = (Date.today + 1 - Date.today.wday)
+					 link_to 'ts', admin_timesheets_show_url(:id => person.person_id, :date => date )
+                 end
+              %></td>
+		<td class="<%=cssclass%>"><%= link_to 'Show', :action =>:show, :id =>person %></td>
+		<td class="<%=cssclass%>"><%= link_to 'Edit', :action => :edit, :id =>person if Person.find_by_person_id(session[:employee_number]).andand.authority_timesheet %></td>
+
+	<% for column in my_cols_ordered %>
+		<td class="<%=cssclass%>">
+		<%=
+
+					if (column.name == "author_id") 
+						person.author.name
+					else
+						person.send(column.name) 
+					end
+		%>
+		</td>
+	<% end %>
+	</tr>
+	<% end %>
+</table>
+
+
+<hr>

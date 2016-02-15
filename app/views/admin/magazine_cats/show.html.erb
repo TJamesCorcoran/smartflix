@@ -1,0 +1,25 @@
+<h1>Magazine Cat Info</h1>
+<table border=0>
+<% for column in MagazineCat.content_columns %>
+<tr><td> <b>
+    <%= column.human_name %>:</b></td><td> <%=
+
+				@magazinecat.send(column.name) 
+
+%>
+</td></tr>
+<% end %>
+</table>
+
+<h1>Magazines in this string code</h1>
+<ul>
+<% 
+#raise @magazinecat.inspect
+@magazinecat.magazines.each do |mag| %>
+<li> ( <%= link_to "edit", :controller=>"magazines", :action=>"edit", :id=>mag.magazine_id	%> ) <%= link_to mag.title, :controller=>"magazines", :action=>"show", :id=>mag.magazine_id	%>  
+<% end %>
+</ul>
+ 
+
+<%=  link_to 'Edit', edit_magazine_cat_path(@magazinecat) %> |
+<%=  link_to 'Back', magazine_cat_path %>

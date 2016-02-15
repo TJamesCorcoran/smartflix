@@ -1,0 +1,21 @@
+<p>Hi <%= @customer.first_name %>, you aren't currently signed up
+for our affiliate program.</p>
+
+<p>In order to sign up, you must accept our affiliate agreement.</p>
+
+<p>The agreement defines commissions, but does not set their value.  The
+value of commissions may change over time, as specified in the
+agreement, but as of today, the commission we offer is $5.00 for every
+new customer that signs up and rents at least one video.</p>
+
+<div class='outlined'>
+<textarea rows='17' cols='70' READONLY="true">
+<%= render :partial => 'agreement_legal' %>
+</textarea>
+</div>
+<p>
+
+<%= form_tag do %>
+<p>Click here to indicate that you accept the above affiliate agreement:</p>
+<%=  submit_tag 'Accept Agreement', :class => 'submit' %>
+<% end %>

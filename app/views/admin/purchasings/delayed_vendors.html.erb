@@ -1,0 +1,26 @@
+<h1>Purchasing: Delayed Vendor Orders</h1>
+
+<h2 style="color:red;">
+<%= @dvo.inject(0){ |sum, io| sum + io.andand.quant_dvd.to_i } %> copies total
+</h2>
+
+
+<table border=0 class="sortable" id="dvo">
+    <tr>
+      <th>copies</th>
+      <th>product id</th>
+      <th>product name</th>
+      <th>date</th>
+      <th>vendor</th>
+    </tr>
+
+    <% @dvo.each do |io| %>
+        <tr>
+          <td style="padding-right:15px;"><%= io.quant_dvd %> copies</td>
+          <td style="padding-right:15px;"><%= io.product.id  if io.product %></td>
+          <td style="padding-right:15px;"><%= io.product.name  if io.product %></td>
+          <td style="padding-right:15px;"><%= io.recent %></td>
+          <td style="padding-right:15px;"><%= io.product.vendor.name if io.product %></td>
+        </tr>
+    <% end %>
+</table>

@@ -1,0 +1,57 @@
+<% if product.is_a?(University) %>
+   <div class="postcheckout_item">  
+     <h2><%= product.name %></h2>
+
+	 <p>
+	 <%= product.name %> is unlike anything you've seen before - it's
+	 a complete program of <%=
+	 product.university_curriculum_elements.size %> DVDs from the most
+	 talents artists and craftsmen in the field.  We ship you 3 DVDs per month - keep them as long as you
+	 want, with no late charges!  When you're ready for more, mail
+	 those DVDs back to us, and we'll send you the next  3 DVDs (you get up to 3 new DVDs each month). 
+     </p>
+
+     <p> With exciting, informative, well shot videos from names like
+	 <%= product.top_authors.map(&:name).to_sentence %> that you can
+	 keep as long as you want and the ability to cancel at any time,
+	 and with a low monthly price of just <%=
+	 product.subscription_charge.currency %>, this is a bargain that
+	 you can't afford to miss!  </p> <!-- ' -->
+
+	  <%= single_add_to_cart_button_for(product, :product_listing => true, :oneclick_checkout => true, :postcheckout_page => page) %>
+   </div>
+
+
+<% else %>
+
+  <div class="postcheckout_item">
+	<h2><%= product.name %></h2>
+	<%= small_image_for(product) %>
+
+	<p>
+	  <%= product.summary(300) %>...
+	</p>
+
+
+
+	<% if product.reviews_n_star(4).select {|rating| rating.review }.any? %>
+
+		  <h3 class="customer_review_header">Featured Customer Review:</h3>
+
+		  <%= h(product.reviews_n_star(5).first.andand.summary(130) ||
+		        product.reviews_n_star(4).first.andand.summary(130))  %>
+
+	<% end %>
+
+	<% if product.product_set_member? -%>
+	  <%= single_add_to_cart_button_for(product.product_set, :product_listing => true, :oneclick_checkout => true, :postcheckout_page => page)
+   %>
+	<% else %>
+	  <%= 
+ single_add_to_cart_button_for(product, :product_listing => true, :oneclick_checkout => true, :postcheckout_page => page)  %>
+	<% end -%>
+
+  </div>
+
+
+<% end %>

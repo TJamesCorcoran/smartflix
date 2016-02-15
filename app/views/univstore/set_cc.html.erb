@@ -1,0 +1,80 @@
+<%= render :partial => "shared/scanalert", :locals => { :divid => 'smartflix-secure' } %>
+
+<div id="set_cc_box">
+
+<h1>Your Payment Information</h1>
+
+<% if SmartFlix::Application::FIRST_MONTH_FREE %>
+   <p>You <strong>will not</strong> be billed during your free trial.
+   </p>
+
+   <p>If you cancel in the first month and return the DVDs, you will <i>never</i> be charged.
+   </p>
+
+   <p>You can cancel any time you want.</p>
+
+<% else %>
+   <p>You can cancel any time you want.  If you don't like your first month, cancel and get a full refund.</p>
+<% end %>
+
+<%= form_tag :action => 'set_cc' do -%>
+    <table class="set_cc" >
+      <tr>
+        <td class="form-label">Credit Card number:</td>
+        <!--<td><%= text_field_tag :number, :class => "text_input" %></td>-->
+        <td><%= text_field_tag :number %></td>
+      </tr>
+      <tr>
+        <td class="form-label">Expiration date:</td>
+        <td><%= select_month(@selected_date ) %>
+            <%= select_year(@selected_date) %></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td>
+
+            <div>
+            <%= check_box_tag :terms, "1", true, {:style => "position:relative; left: -100px; " } %>
+            </div>
+
+            <p id="t_and_c">
+              I have read and agreed to the 
+              <%= link_to "terms and conditions", nil,  :onclick => "$('#terms_and_conditions_text').show(); return(false);" %>
+            </p>
+
+            <div id="terms_and_conditions_text" style="display: none;">
+              <textarea rows="10" READONLY="true" style="width:500px;" >
+                <%= render :partial => 'shared/conditions_text' %>
+              </textarea>
+            </div>
+
+
+        </td>
+      </tr>
+
+<tr>
+  <td class="form_label" id="secure_server_lock_white">Secure server:</td>
+  <td><%= submit_tag "Continue", :class => "submit_button" %></td>
+</tr>
+
+    </table>
+
+<!--    <%= submit_tag "Continue", :class => "submit-button" %>
+    <%= render :partial => 'secure_server' %>-->
+<% end %>
+
+
+<% if (Rails.env != 'production') -%>
+  <p id="cc_production">
+    <font color="red">
+      DEVELOPMENT MODE -- NOT LIVE<br />
+      AMEX success: 370000000000002<br />
+      Discover success: 6011000000000012<br />
+      MC success: 5424000000000015<br />
+      Visa success: 4007000000027<br />
+      Failure: 4222222222222 (set price to desired error code)
+    </font>
+  </p>
+<% end %>
+
+</div>

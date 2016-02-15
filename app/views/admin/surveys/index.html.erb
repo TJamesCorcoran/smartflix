@@ -1,0 +1,45 @@
+<h1>Happiness survey: the unhappy campers</h1>
+
+<% if (session[:employee_number].nil?) %>
+  please log in to view this information
+<% else %>
+number: <%= @failing.size %>
+<br>
+
+<table border=0>
+<tr>
+   <th>date</th>
+   <th>customer</th>
+   <th>survey result</th>
+   <th>orders</th>
+   <th>value</th>
+   <th>survey history</th>
+</tr>
+<% @failing.sort_by { |ff| ff.created_at }.reverse.each do |ff| %>
+<tr>
+<td> <%= ff.created_at.strftime("%d %b %Y") %>
+    <td> <%= link_to ff.customer.email, :controller=>:customers, :action =>:show, :id =>ff.customer.id %></td>
+<td> <%= ff.answer %></td>
+<td><%= ff.customer.orders.size %></td>
+<td align=right> $<%=
+   total_val = 0
+   ff.customer.line_items.reject { |x| x.live == 0}.each do |li|
+      total_val += li.price 
+    end
+   total_val.to_s %> </td>
+<td align=center><%= @customer_history[ff.customer.id].reverse[1..100].join(",") %></td>
+<% @contact_types.each do |ct| %>
+<td>
+<%= 
+   button_to(ct.name, 
+              :controller => :customer_contacts, :action =>:create, :customer_id => ff.customer.id, 
+              :note => "", :survey_answer_id => ff.survey_answer_id,
+              :person_id => session[:employee_number],
+              :contact_type_id => ct.id)
+%>
+</td>
+<% end %>
+</tr>
+<% end %>
+</table>
+<% end %>

@@ -1,0 +1,9 @@
+--- 
+user: smart
+cwd: /home/smart/rails/railscart/current
+port: "8001"
+environment: production
+group: smart
+address: 127.0.0.1
+pid_file: log/mongrel.pid
+servers: 4

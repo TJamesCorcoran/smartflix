@@ -1,0 +1,59 @@
+<div class="text-content">
+
+<h1>Gift Certificate Status</h1>
+
+<% case @gc_state -%>
+<% when :credited -%>
+
+  <p>Hi <%= h(@customer.first_name) %>, your gift certificate of <%=
+  @gc.name %> has been converted to an account credit which you can
+  use at checkout. 
+  </p>
+
+  <p>
+  <b>You currently have <%= @customer.account_credit.to_s %></b>.
+  </p>
+
+<% when :used_by_you -%>
+
+  <p>Hi <%= h(@customer.first_name) %>, this gift certificate is already entered.</p>
+
+  <p>
+  <b>You currently have <%= @customer.account_credit.to_s %></b>.
+  </p>
+
+<% when :used_by_someone_else -%>
+
+  <p>Hi <%= h(@customer.first_name) %>, this gift certificate was
+  previously used by another customer.</p>
+
+  <p>If you think there has been an error, please
+  <%= link_to 'contact us', :controller => 'store', :action => 'contact_us' %>
+  and we'll clear things up.</p>
+
+<% else -%>
+
+  <p>Hi <%= h(@customer.first_name) %>, your gift certificate code could
+  not be found in our records.</p>
+
+  <p>If you think there has been an error, please
+  <%= link_to 'contact us', :controller => 'store', :action => 'contact_us' %>
+  and we'll clear things up.</p>
+
+<% end -%>
+
+
+
+<% case @gc_state -%>
+<% when :credited, :used_by_you -%>
+  <h1>Use your Gift Certificate Now!</h1>
+  <p>
+  Now that you've redeemed your gift certificate, you can use it for absolutely anything here at SmartFlix ... but we suggest that your best value is
+  one of our SmartFlix Universities.  Become an expert in any field!
+  </p>
+
+  <%= render :partial => 'store/product_listing', :locals => { :products => @univ_stubs } %>
+<% end %>
+
+
+</div>

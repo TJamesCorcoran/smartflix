@@ -1,0 +1,93 @@
+address1:
+  address_id: 1
+  first_name: 'Bob'
+  last_name: 'Voot'
+  address_1: '4 Street St.'
+  address_2: 'Apt. 55'
+  city: 'Arlington'
+  state_id: 1
+  postcode: '12345'
+  country_id: 223
+  type: 'ShippingAddress'
+address2:
+  address_id: 2
+  first_name: 'Bob'
+  last_name: 'Voot'
+  address_1: '4 Street St.'
+  address_2: 'Apt. 55'
+  city: 'Arlington'
+  state_id: 1
+  postcode: '12345'
+  country_id: 223
+  type: 'BillingAddress'
+address3:
+  address_id: 3
+  first_name: 'Ample'
+  last_name: 'Boots'
+  address_1: '5 Street St.'
+  address_2: 'Apt. 45'
+  city: 'Arlington'
+  state_id: 1
+  postcode: '12345'
+  country_id: 223
+  type: 'ShippingAddress'
+
+
+manage_cc_test_shipping:
+  address_id: 10
+  first_name: 'Manage'
+  last_name: 'CreditCardGuy'
+  address_1: '5 Street St.'
+  address_2: 'Apt. 45'
+  city: 'Arlington'
+  state_id: 1
+  postcode: '12345'
+  country_id: 223
+  type: 'ShippingAddress'
+
+manage_cc_test_billing:
+  address_id: 11
+  first_name: 'Manage'
+  last_name: 'CreditCardGuy'
+  address_1: '5 Street St.'
+  address_2: 'Apt. 45'
+  city: 'Arlington'
+  state_id: 1
+  postcode: '12345'
+  country_id: 223
+  type: 'BillingAddress'
+
+
+#--------------------
+
+standard:
+  first_name: Standard
+  last_name: Joe
+  address_1: "123 Sesame Street"
+  city: "Boston"
+  postcode: 02145
+  country_id: 223
+  updated_at: <%= Time.now.to_s(:db) %>
+
+charge_expired_cc_s:
+  address_id: 5020
+  type: ShippingAddress
+  first_name: Standard
+  last_name: Joe
+  address_1: "123 Sesame Street"
+  city: "Boston"
+  postcode: 02145
+  country_id: 223
+  updated_at: <%= Time.now.to_s(:db) %>
+
+charge_expired_cc_b:
+  address_id: 5021
+  type: BillingAddress
+  first_name: Standard
+  last_name: Joe
+  address_1: "123 Sesame Street"
+  city: "Boston"
+  postcode: 02145
+  country_id: 223
+  updated_at: <%= Time.now.to_s(:db) %>
+  

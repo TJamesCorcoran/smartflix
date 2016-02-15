@@ -1,0 +1,35 @@
+<% if defined?(@univ)
+    ratings = @univ.univ_stub.ratings_n_star(5)
+  else
+    ratings = @univs.map(&:univ_stub).compact.map { |us| us.ratings_n_star(5) }.flatten 
+  end
+%>
+
+<% if ratings.size >= 3 %>
+
+  <div id="testimonial-block">
+
+     <h2>Testimonials
+       <% if defined?(@univ) %>
+         for <%= @univ.name %>
+       <% end %>
+     </h2>
+
+      <div class="testimonial-container">
+
+        <% ratings[0,3].each do |rr| %>
+
+          <div class= "cust-testimonial">
+            <p>
+               <span class="rating_stars"><%= rr.rating %> stars! </span>
+               <%= rr.summary(300, false) if rr %>
+               <% if rr.customer %>
+                 <span class="rating_writer">-- <%= rr.customer.display_name %></span>  
+               <% end %>
+            </p>
+          </div>
+        <% end %>
+      <div>
+  </div>
+
+<% end %>

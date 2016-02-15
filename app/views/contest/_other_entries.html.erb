@@ -1,0 +1,15 @@
+<% photos = @contest.entries.map(&:contest_entry_photos).flatten %>
+<% if photos.size > 0 %>
+  <div class="contest-sidebar">
+    <div class="header">
+      OTHER ENTRIES
+    </div>
+    <p>Here are some randomly chosen images from contest entries:</p>
+    <% photos.sort_by { rand }[0,3].each do |photo| %>
+      <% caption = photo.contest_entry.title %>
+      <% photo = photo.thumbnails.first if photo.thumbnails.any? %>
+      <div class="photo"><%= clickable_contest_thumbnail(photo) %></div>
+      <div class="caption"><p><%= h caption %></p></div>
+    <% end %>
+  </div>
+<% end %>

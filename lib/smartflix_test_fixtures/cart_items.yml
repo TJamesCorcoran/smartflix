@@ -1,0 +1,36 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  cart_item_id: 1
+  cart_id: 1
+  product_id: 1
+  saved_for_later: 1
+  created_at: <%= 8.days.ago.to_s(:db) %>
+two:
+  cart_item_id: 2
+  cart_id: 1
+  product_id: 2
+  saved_for_later: 0
+  created_at: <%= 8.days.ago.to_s(:db) %>
+three:
+  cart_item_id: 3
+  cart_id: 2
+  product_id: 2
+  saved_for_later: 1
+  created_at: <%= 8.days.ago.to_s(:db) %>
+four:
+  cart_item_id: 4
+  cart_id: 2
+  product_id: 1
+  saved_for_later: 0
+  created_at: <%= 6.days.ago.to_s(:db) %>
+five:
+  cart_item_id: 5
+  cart_id: 3
+  product_id: 1
+  saved_for_later: 0
+  created_at: <%= 6.days.ago.to_s(:db) %>
+six:
+  cart_item_id: 6
+  cart_id: 4
+  product_id: 2
+  saved_for_later: 0

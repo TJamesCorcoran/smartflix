@@ -1,0 +1,31 @@
+<% bad_lis = @customer.uncancelled_and_unshipped_line_items_payment_bad %>
+<% if bad_lis.any? %>
+  <h2>Payment Problems</h2>
+    <div class="univ_on_hold">
+      <div class="univ_on_hold_inner">
+       <p>
+         <strong>These orders are on hold because we can't charge your credit card.</strong>
+       </p>
+       <p>
+          Please  <%= link_to "contact customer support", :controller => :store, :action=> :contact_us %> to get these items out to you ASAP!
+       </p>
+
+       <ul>
+         <% bad_lis.each do |li| %>
+            <li>
+             <% payment = li.order.payments.last %>
+             <%= li.product.name %> - 
+             <span class="payment_problem_detail">
+               <%  if payment %>
+                   <%= payment.message.andand.empty_is_nil || "unknown error"  %> - <%= payment.credit_card.andand.name %>
+               <%  else %>
+                       No payment found for order #<%= li.order.id %>! Please  <%= link_to "contact customer support", :controller => :store, :action=> :contact_us %> 
+               <%  end %>
+             </span>
+           </li>
+         <% end %>
+       </ul>
+    </div>
+  </div>
+<% end %>
+

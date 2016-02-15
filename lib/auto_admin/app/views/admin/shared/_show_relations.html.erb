@@ -1,0 +1,72 @@
+<% 
+  reflections = item.class.reflections.select {|key, val| [ :has_one, :has_many, :belongs_to, :has_and_belongs_to_many ].include?(val.macro) } 
+  reflections.each do |refl_str, info|  
+       next if reject.include?(refl_str)
+       refl_str = refl_str.to_s
+       bullet_pts = item.send(refl_str)
+       bullet_pts = bullet_pts.to_array.reverse
+       # POST-CONDITION: wether we started with an array or not, we now have an array
+
+%>
+
+            <div>
+              <span style="font-size: 17px; line-height: 20px; margin: 05.em 0 0.7em; font-weight: bold;">
+                 <%= refl_str.to_s %> ( <%= bullet_pts.size %> items )
+              </span>
+              <span style="margin-left: 30px;">
+              <% if item.class.methods.include?(:advice_relations_creatable_via_admin) && item.class.advice_relations_creatable_via_admin.include?(refl_str) %> 
+                  <%= link_to "create a new #{refl_str}", { :controller => info.klass.to_s.underscore.pluralize, 
+                                                            :action => :new, 
+                                                            info.klass.to_s.to_sym => {   
+                                                                info.foreign_key.to_sym => item.id 
+                                                            }  
+                                                          }
+                    %>
+              <% end %>
+              </span>
+            </div>
+
+
+            <% if bullet_pts.empty? %>
+                   <span style="padding-left:25px;"><i>none</i></span>
+             <% else  %>
+                   <% killable = item.class.methods.include?(:advice_relations_deletable_via_admin) && item.class.advice_relations_deletable_via_admin.include?(refl_str.to_s) %> 
+
+                   <% if bullet_pts.size > 10 %>
+                      <div style="margin-left: 20px; padding-left:-10px; border: solid 2px #eee; padding : 4px; width : 800px; max-height: 200px; overflow : auto; ">
+                   <% end %>
+                           <ul>
+                               <% bullet_pts.sort_by {|x| x.methods.include?(:name) ? 
+begin
+x.name
+rescue
+"ERROR"
+end
+
+ : 0}.each do |subitem| %>
+                                    <li>
+                                    <%= 
+                                       linktext = subitem.respond_to?(:name) ? 
+begin
+subitem.name
+rescue
+"ERROR"
+end
+ : (subitem.respond_to?(:text) ? subitem.text : subitem.id )
+                                       link_to(linktext, { :controller => subitem.class.to_s.pluralize.underscore, :action=>:show, :id =>subitem.id })
+                                     %>
+                                      <% if killable %>
+                                         [ <%= link_to("X", { :controller => subitem.class.to_s.pluralize.underscore, :action => "destroy", :id => subitem.id}, 
+                                                           { :method =>:delete, :confirm => "are you sure you want to kill association #{linktext} ?" } )  %> ]
+                                      <% end %>
+
+                                 <% end %>
+                           </ul>
+                   <% if bullet_pts.size > 10 %>
+                      </div>
+                   <% end %>
+       <%  end      %>
+
+<%  end %>
+
+<br></br>

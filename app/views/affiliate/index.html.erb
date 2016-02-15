@@ -1,0 +1,125 @@
+<div class="text-content">
+
+<h1>Welcome to the Affiliate Program!</h1>
+<p>You are now signed up for the affiliate program, <%= @customer.first_name %>!</p>
+
+<p>
+This page has your balance information, and some links and banner ads for you to use.</p>
+
+<p>...but make sure to read the <%= link_to 'introduction', :action => 'introduction' %> page for an overview, and for a list of hints to <strong>help you make more money !</strong>
+</p>
+
+<h1>Balance and Payment History</h1>
+
+<p>
+Payments are made on the first of each month for those months where your
+balance is at or above $50.00.
+</p>
+
+
+<p>Your balance is updated approximately once each day, and may not include
+the most recent credits or payments.</p>
+
+<p>  Right now, your current balance is <strong><%= number_to_currency(@current_balance) %></strong>
+</p>
+
+<%   if @payments.size == 0 -%>
+<p><i>No payments yet</i></p>
+<%   else -%>
+<%     @payments.each do |p| -%>
+<%=      "#{p.date.to_s} #{number_to_currency(p.amount.abs)}" %><br>
+<%     end -%>
+<%   end -%>
+
+
+
+
+<%# If we don't have their SSN, we must collect it before we can make payments -%>
+<% if (!@customer.encrypted_ssn?) -%>
+<h1>SSN</h1>
+
+<p>
+You can get started using the links and images below, but before you
+can receive payments from us the IRS requires (for tax purposes) that we get your
+Social Security Number
+</p>
+
+<%   if (@customer.errors.size > 0) -%>
+<%     @customer.errors[:ssn].each do |error| -%>
+<%=      "<font color=\"red\">The SSN you entered #{error}</font>"%><br> 
+<%     end %><p>
+<%   end -%>
+
+<%= form_for(:customer, :url => {:action => :index, :trailing_slash => true}) do |form| %>
+Social Security Number:
+<%=    form.text_field :ssn, :size => 9, :maxlength => 9 %>
+<%=    submit_tag 'Submit', :class => 'submit' %>
+<%   end -%>
+
+<% else -%>
+<%   if (flash[:ssn_message]) -%>
+<%=      "<font color=\"green\">#{flash[:ssn_message]}</font>"%><p>
+<%   end -%>
+<%end -%>
+
+
+
+<h1>Links and Images</h1>
+
+<p>
+To get started you just have to copy any of the links or banners below to your own website.
+</p>
+
+<p>
+You can also find affiliate
+links to individual videos, video categories, and video authors at the
+bottom of each of those pages.
+</p>
+
+<p>
+If you'd like to provide a simple text link to our main site, you can
+paste the following HTML into a web page:
+</p>
+
+<div class='outlined'>
+<a href="<%= @affiliate_link %>">SmartFlix.com How-To DVDs</a>
+<p>
+<textarea readonly cols='80' rows='2' onclick='this.focus(); this.select();'>
+<%= h("<a href=\"#{@affiliate_link}\">SmartFlix.com How-To DVDs</a>") %>
+</textarea>
+</div>
+
+<p>
+We also have several images that you can quickly add to your site,
+simply copy and paste the supplied HTML into your web page:
+</p>
+
+<% @images.each do |image| -%>
+<div class='outlined'>
+<%= image_tag image %>
+<p>
+<textarea readonly cols='80' rows='3' onclick='this.focus(); this.select();'>
+<%= h("<a href=\"#{@affiliate_link}\"><img border=0 src=\"#{image}\" alt=\"SmartFlix.com How-To DVD Rental\"></a>") %>
+</textarea>
+</div>
+<p>
+<% end -%>
+
+<h1>What next?</h1>
+
+It can be as easy as 
+
+<ol>
+<li> <b>Copy one of the affiliate codes above, and paste it into your website or blog, and you're done!</b>
+</ol>
+
+...but there are other steps you can do, to earn more money!
+
+<ul>
+<li> ...visit any page at SmartFlix and get an affiliate link that goes directly to an author, video, or category.
+<li> Reread the  <%= link_to 'introduction', :action => 'introduction' %> page for lots of hints on how to make even more money.
+<li> Make sure to drop a new link into your website or blog regularly.  The more links, the more money you make.   Once a week isn't too often!
+</ul>
+
+
+</div>

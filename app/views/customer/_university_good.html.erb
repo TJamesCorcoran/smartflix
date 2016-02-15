@@ -1,0 +1,38 @@
+<div class="univ_good">
+  <div class="univ_good_inner">
+  <p>
+      Your "university month" runs from <%= order.univ_month_begin.strftime("%A %B %d") %> to <%= order.univ_month_end.strftime("%A %B %d") %>. 
+      </p>
+
+
+        <p>
+        You're on the <b><%= order.univ_paid_ship_rate_str %></b> plan.
+        </p>
+      <% if order.univ_paid_ship_rate != order.univ_dvd_rate %>
+        <p style="margin-left:20px;">
+          ... and you switch to the  <b><%= order.univ_dvd_rate_str %></b> plan on <%= order.univ_month_end.strftime("%A %B %d") %>.
+        </p>
+      <% end %>
+
+
+      <p>
+      <%= link_to "Click here to change your plan", :action => :change_plan, :order_id => order %>
+      </p>
+
+      <% details = @customer.shipped_in_last_month_for_univ_size(order.university) %>
+
+      <p>
+      You've got <%= order.line_items_in_field.size %> DVDs right now, and we've shipped you <%= details %> DVDs this month.
+      <p>
+
+  </div>
+
+  <%= render :partial => 'university_payment', :locals => { :last_payment => order.most_recent_payment } %>
+
+  <div class="univ_good_inner">
+     <p>
+       <%= @customer.shippable_count_for_univ_int(order.university, 0)[1] %>
+     </p>
+  </div>
+
+</div>

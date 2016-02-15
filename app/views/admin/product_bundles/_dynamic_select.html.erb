@@ -1,0 +1,50 @@
+<%
+  options ||= []
+  id_prefix ||= options.first.class.to_s.underscore if options.first
+    text_attribute ||= 'name' 
+    selected_options ||= []  -%>
+
+<div>
+  <input type="text" id="<%= id_prefix %>_search" />
+  <input type="button" value="Search" id="<%= id_prefix %>_search_button" onclick='filter_options("<%= id_prefix %>_search","<%= id_prefix %>_repository")'>
+  
+  <br />
+  
+  <select id="<%= id_prefix %>_repository" size="10">
+    <% (options - selected_options).each do |option| -%>
+      <option id="<%= id_prefix %>_option_<%= option.id %>" value="<%= option.id %>"><%= option.send(text_attribute) %></option>
+    <% end -%>
+  </select>
+
+  <br />
+
+  <input type="button" value="Add" onclick="move_option('<%= id_prefix %>_repository', '<%= id_prefix %>_basket')">
+  <input type="button" value="Remove" onclick="move_option('<%= id_prefix %>_basket', '<%= id_prefix %>_repository')">
+
+  <br />
+
+  <select id="<%= id_prefix %>_basket" size="10">
+    <% selected_options.each do |option| -%>
+      <option id="<%= id_prefix %>_option_<%= option.id %>" value="<%= option.id %>"><%= option.send(text_attribute) %></option>
+    <% end -%>
+  </select>
+
+  <input type="hidden" name="<%= id_prefix %>_results" id="<%= id_prefix %>_results" />
+</div>
+
+<script type="text/javascript">
+  $('<%= id_prefix %>_search').onkeypress = function(evt) {
+    if(evt.keyCode==13) {
+      filter_options("<%= id_prefix %>_search","<%= id_prefix %>_repository");
+      return false;
+    }
+  }
+  document.getElementsByTagName('form')[0].addEventListener('submit', function(evt) {
+    target = $("<%= id_prefix %>_basket");
+    results = $("<%= id_prefix %>_results");
+    
+    for(var i=0; i < target.options.length; i++) {
+      results.value += target.options[i].value + ' ';
+    }
+  }, true);
+</script>

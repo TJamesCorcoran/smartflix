@@ -1,0 +1,10 @@
+<h1>Editing Oreilly category "<%= @oreilly_category.display_name%>"</h1>
+
+<%= form_for(:oreilly_category, :url => oreilly_category_path(@oreilly_category), :html => { :method => :put }) do |f| %>
+    <%= render :partial => 'form' %>
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+

@@ -1,0 +1,5 @@
+<% @bundles.each do |bundle| %>
+  <%= bundle.name %>: <%= @bundle_rentals[bundle.id] %><br>
+<% end %>
+
+<p>Total bundle rentals: <%= @bundle_rentals.values.sum %></p>

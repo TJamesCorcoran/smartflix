@@ -1,0 +1,44 @@
+
+<%= form_tag :action => 'index', :id => @videoset do %>
+  <%= text_field_tag  'search_str'  %>
+  <%= submit_tag 'Search' %>
+<% end %>
+
+<table border=0><tr><td>
+<h1>
+Listing videosets</h1></td><td>
+(<%= link_to 'unfiltered', :action => 'list' %>)</td></tr></table>
+
+<table>
+  <tr>
+  <th></th>
+  <% for column in Videoset.content_columns.reject { |c| c.name == "description" } %>
+    <th align=left><%= 
+				column.human_name
+			 %></th>
+  <% end %>
+  </tr>
+
+<% for videoset in @videosets %>
+  <tr>
+<td><%= link_to '(edit)', :action => 'edit', :id => videoset %></td> 
+  <%
+ for column in Videoset.content_columns.reject { |c| c.name == "description" } %>
+    <td><%= 
+            if (column.name == "name") 
+                link_to(videoset.name, :action => 'show', :id => videoset)
+            else
+				videoset.send(column.name) 
+			end
+	%></td>
+  <% end %>
+  </tr>
+<% end %>
+</table>
+
+<hr>
+<%= link_to 'Previous page', { :page => @videoset_pages.current.previous } if @videoset_pages.current.previous  %> <%= link_to 'Next page', { :page => @videoset_pages.current.next } if @videoset_pages.current.next %> 
+
+<br>
+<%= link_to 'New videoset', :action => 'new' %>
+

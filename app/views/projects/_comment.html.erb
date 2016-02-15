@@ -1,0 +1,13 @@
+<% heading_type = local_assigns[:heading_type] || :author %>
+<% heading = case heading_type
+             when :author then "By #{link_to_customer(comment.author)}"
+             when :parent_name then "Comment on #{link_to(h(comment.parent.title), comment.parent)}"
+             end %>
+<div class="project-comment">
+  <div class="header">
+    <span class="right"><%= comment.created_at.strftime('%a %b %d, %Y %I:%M %p') %></span>
+    <span class="left"><%= heading %></span>
+  </div>
+  <p><%= html_paragraphs(comment.text) %></p>
+  <br class="clear"/>
+</div>

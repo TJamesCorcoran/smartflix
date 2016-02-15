@@ -1,0 +1,79 @@
+<% if lis.empty? %>
+    <div>
+        <p style="margin-left:25px; width:600px;">
+            <i><%= empty_text %></i> 
+        </p>
+    </div>
+<% else %>
+
+    <% lis.each do |li| %>
+      <div class="univ_line_item" id="li_<%=li.id%>" style="position:relative;">
+
+         <div class="li_col_1">
+           &nbsp;
+           <% if move_button %>
+              <div id="li_<%=li.id%>_position">
+                 <%= li.queue_position -%>
+              </div>
+           <% end -%>
+         </div>
+
+         <div class="li_col_2">
+           &nbsp;
+           <% if move_button %>
+               <%= button_to("move to top", ajax_univ_move_to_top_url(li),  :remote => true, :class => "orange button" )  -%>
+           <% end -%>
+
+           <% if dup_button && ! order.line_items_unshipped_and_uncancelled.map(&:product_id).include?(li.product_id) %>
+             <%= button_to("view again", ajax_univ_duplicate_url(li),  :remote => true, :class => "orange button" )  -%>
+           <% end -%>
+
+           <% if uncancel_button %>
+              <%= button_to("uncancel", ajax_univ_uncancel_li_url(li), :remote => true, :class => "orange button"  )  %>
+           <% end -%>
+
+         </div>
+
+
+         <div class="prod_name" title="<%= li.product.author.name %>">
+           <%= link_to li.product.name, video_url(li.product) %>
+         </div>
+
+         <div>
+           <%= if rating == :existing 
+                   rating_image(li.product.avg_rating, :large)
+               elsif rating == :none
+                    # nothing
+               elsif rating == :new
+                 if li.product.rating_by_customer(@customer)
+                   "Thank you for rating this!"
+                 else
+                   link_to "Review this", {:controller => :store, :action => :review, :id => li.product}
+                 end
+               else 
+                   ""
+               end  %>
+          </div>
+
+         <div>
+           <% show_delay = false %> 
+           <%= show_delay ? li.uni_wait_str : "" %>
+         </div>
+
+        <div>
+          <% if cancel_button %>
+              <% if  li.potential_item %>
+                 shipping soon!
+              <% else %>
+                 <%= button_to("CANCEL",  ajax_univ_cancel_li_url(li), :remote =>true, :class => "button grey")  %>
+              <% end %>
+          <% end %>
+        </div>
+
+      </div> 
+
+      <div class="clear"></div>
+
+    <% end %>
+
+<% end %>

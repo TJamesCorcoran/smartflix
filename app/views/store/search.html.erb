@@ -1,0 +1,41 @@
+<% if @matching_univs && @matching_univs.size > 0 -%>
+  <div class="search-results-univ-outer">
+    <% match_found = true -%>
+    <% univs_string = "universit#{@matching_univs.size > 1 ? 'ies' : 'y'}" -%>
+    <% match_string = "match#{@matching_univs.size > 1 ? '' : 'es'}" -%>
+   <h1>We found   <%= @matching_univs.size %> <%= univs_string %> </h1>
+
+      <%=  render :partial => 'product_listing', :locals => { :products => @matching_univs } %>
+   </div>
+<% end %>
+
+<div class="clear"></div>
+
+<% if @matching_categories && @matching_categories.size > 0 -%>
+  <div class="search-results-category-outer">
+      <% match_found = true -%>
+      <% category_string = "categor#{@matching_categories.size > 1 ? 'ies' : 'y'}" -%>
+      <% match_string = "match#{@matching_categories.size > 1 ? '' : 'es'}" -%>
+      <h1>We found <%= @matching_categories.size %> <%= category_string %> </h1>
+      <ul>
+      <% @matching_categories.each do |category| -%>
+        <li>
+        <%= link_to_category(category, category.full_path_text(' :: ')) %>
+      <% end -%>
+      </ul>
+   </div>
+<% end -%>
+
+<div class="clear"></div>
+
+<% if @matching_products && @matching_products.size > 0 -%>
+  <% match_found = true -%>
+  <h1>We found <%= @matching_products.size %> product<%= @matching_products.size > 1 ? 's' : ''%></h1>
+  <%=  render :partial => 'product_listing', :locals => { :products => @matching_products } %>
+<% end -%>
+
+<% if !match_found -%>
+Sorry, no matches were found for your search.
+<% end -%>
+
+<%= render :partial => 'find_help' %>

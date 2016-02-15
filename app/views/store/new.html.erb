@@ -1,0 +1,10 @@
+<div id="subcat-title">
+  <h1>New How-To Titles on DVD</h1>
+</div>
+
+<% @new_products.group_by(&:date_added).sort.reverse.each do |date, products| -%>
+<div class="category-listing-section">
+<h2>Added on <%= date.to_s %> </h2>
+<%=  render :partial => 'product_listing', :locals => { :products => products } %>
+</div>
+<% end -%>

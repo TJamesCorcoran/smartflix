@@ -1,0 +1,40 @@
+   <div class=univ_on_hold>
+      <div class=univ_on_hold_inner>
+         <h3>This order was cancelled</h3>
+
+         <% in_field = order.line_items_in_field %>
+         <% if in_field.any? %>
+         You will be charged until you return the DVDs
+            <%= render :partial => 'university_lis', 
+                       :locals => { :lis             => in_field,
+                                    :empty_text      => "You have no DVDs out right now.",
+                                    :show_delay      =>  false,
+                                    :rating          => :new,
+                                    :cancel_button   =>  false,
+                                    :move_button     => false, 
+                                    :uncancel_button =>  false,
+                                    :dup_button      => false 
+              } %>
+         <% end %>
+
+         <%= button_to "Restore this university", 
+                       { :action =>:reinstate_order, :id =>order } ,
+                       { :style =>"margin-bottom: 20px;" } %>
+         <% not_sent = order.line_items_unshipped %>
+         <% if not_sent.size > 0 %>
+             ...and you'll soon begin receiving great DVDs like
+                <%= render :partial => 'university_lis', 
+                           :locals => { :lis             => not_sent,
+                                        :empty_text      => "",
+                                        :show_delay      =>  true,
+                                        :rating          => :none,
+                                        :cancel_button   =>    false,
+                                        :move_button     => false, 
+                                        :uncancel_button =>  false,
+                                    :dup_button      => false  } %>
+         <% end %>           
+        
+
+     </div>
+   </div>
+

@@ -1,0 +1,29 @@
+
+<a name="order_<%= order.id %>"></a>
+<div class="customer-admin univ_detail" id="order_#{order.id}">
+
+ <div class="univ_detail_header">
+   <%= link_to order.id, :controller=> :orders, :action => :show, :id => order.id %> 
+   <%= link_to order.university.name, :controller => :universities, :action => :show, :id => order.university.id  %> 
+ </div>
+
+<table border=0>
+  <tr>
+    <td width=30% >
+        <%= render :partial => "university_status_text", :locals => { :order => order }%>
+    </td>
+
+    <td  width=20% valign=top>
+        <%= render :partial => "university_status_payments", :locals => { :order => order }%>
+    </td>
+
+    <td  width=20% valign=top>
+        <%= render :partial => "university_status_cancellation", :locals => { :order => order }%>
+    </td>
+
+    <td width=30% valign=top>
+        <%= render :partial => "university_status_cust_msg", :locals => { :order => order }%>
+    </td>
+  </tr>
+</table>
+</div>

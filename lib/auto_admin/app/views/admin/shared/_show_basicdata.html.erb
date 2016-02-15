@@ -1,0 +1,30 @@
+<%  reflections = item.class.reflections.select {|key, val| [ :belongs_to ].include?(val.macro) }.map { |key, ref| [ref.foreign_key, ref]}.to_hash
+    # POST-CONDITION:
+    #  reflections is a hash
+    #    { foreign_key => reflection-object,
+    #      foreign_key => reflection-object }
+%>
+
+<% 
+         partials =  local_assigns[:partials] || {}
+
+%> 
+
+<table border=0>
+	<% item.class.columns.each do |col| %>
+	<tr>
+	   <th align=left><%= col.name %></th>
+	   <td><%=
+              if partials.keys.include?(col.name)
+                render :partial => partials[col.name.to_sym], :locals => { :item => item.send(col.name) }
+              elsif ref = reflections[col.name]
+                subitem = item.send(ref.name) 
+                text = subitem.methods.include?(:name) ? subitem.name : subitem
+                link_to text, :controller =>subitem.class.to_s.pluralize.underscore , :action => :show, :id => item.send(col.name)
+              else
+                item.send(col.name).to_s.gsub("\n", "<br>")
+              end
+              %></td>
+                </tr>
+	<% end %>
+</table>

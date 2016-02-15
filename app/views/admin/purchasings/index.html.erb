@@ -1,0 +1,130 @@
+<h1>Purchasing: Things to buy</h1>
+
+
+
+<%= form_for(:purchasings, :url => {:action =>:update}, :html => { :method => :put }) do |f| %>
+
+    <table border=0>
+      <tr><td>last updated:</td><td> <%= Tobuy.updated_at || "n/a" %></td></tr>
+      <tr><td> pain min:</td><td>
+          <% [0,2,5,100,200, 1000].each do |limit| %>
+             <%=  (params[:painMin] == limit) ? limit : link_to(limit, :controller =>"purchasings", :action=>"index", :overwrite_params => { :painMin => limit } )  %> |
+          <% end %>
+          </td>
+      </tr>
+      <tr>
+        <td>verbosity:</td><td>
+        <%=  (params[:verboseP] == "true")  ? link_to("quiet", :controller =>"purchasings", :action=>"index", :overwrite_params => { :verboseP => "false" }) : "quiet" %> |
+        <%=  (params[:verboseP] == "false")  ? link_to("verbose", :controller =>"purchasings", :action=>"index",  :overwrite_params => { :verboseP => "true" }) : "verbose" %> 
+        </td>
+      </tr>
+      <tr>
+        <td>univ:</td><td>
+       
+        <%=  (params[:univ] == "true")  ? link_to("all", :controller =>"purchasings", :action=>"index", :overwrite_params => { :univ => "false" }) : "all" %> |
+        <%=  (params[:univ] == "false")  ? link_to("univ", :controller =>"purchasings", :action=>"index",  :overwrite_params => { :univ => "true" }) : "just univ" %> 
+        </td>
+      </tr>
+      <tr>
+         <td>total</td><td> <%= @tobuy.inject(0){|sum,tb| sum + tb.quant } %></td>
+      </tr>
+      <tr>
+         <td>purchased by</td>
+         <td>
+            <%= fields_for ( "purchaser") do |purch| -%>
+                     <%= purch.select( :purchaser_id, @purchasers)  %> 
+            <% end %>
+         </td>
+      </tr>
+    </table>
+
+
+
+    <table class="sortable" id="line_items" border=0>
+    <tr>
+      <th>vendor</th>
+      <th>mood</th>
+      <th>vendor pain</th>
+      <th>category</th>
+      <th>univ</th>
+      <th>product</th>
+      <th>pain</th>
+      <th>already purchased</th>
+      <th>buy now</th>
+      <th></th>
+      <th><%= link_to "polishable", :controller=>"purchasing", :action=>"polishable" %></th>
+
+    </tr>
+    <% 
+       vendorHash = Hash.new
+       vendorPain = Hash.new
+       @tobuy.each do |bb| 
+         vendor = bb.product.vendor
+         if (vendorHash[vendor].nil?)
+           vendorHash[vendor] = Array.new
+           vendorPain[vendor] = 0.0
+         end
+         vendorHash[vendor].push bb
+         if (bb.pain > vendorPain[vendor])
+            vendorPain[vendor] = bb.pain
+         end
+      end
+
+    vendorOrder = vendorHash.keys.sort do |a,b|
+          a.name <=> b.name
+    end
+
+    vendorOrder.each do |vendor|
+
+      tbArray = vendorHash[vendor]
+    %>
+
+    <%  
+      cssclass = "dark"
+      tbArray.each do |bb|
+      cssclass = ((cssclass == "dark") ? "light" : "dark")
+    %>
+
+    <tr>
+    <td class="vendor">
+      <%= link_to "[http]", "http://#{vendor.name}", "target" => "_blank"  %>
+      <%= link_to vendor.name, :controller=>"vendors", :action=>"show", :id=>vendor.id %>
+    </td>
+    <td class="vendor"><%= vendor.vendor_mood.moodText %></td>
+    <td class="vendor"><i><%= vendorPain[vendor] %></i></td>
+
+    <td class="<%=cssclass%>"><%= bb.product.categories.first.andand.high_level_cat.andand.name %></td>
+    <td class="<%=cssclass%>">
+       <% univ =  bb.product.universities.first %>
+       <%= link_to univ.name_short, :controller => :universities, :action =>:show, :id => univ.id  if univ %>
+    </td>
+    <td class="<%=cssclass%>"><%=  link_to bb.product.name, :controller=>"products", :action=>"show", :id=>bb.product.id %></b><%= bb.product.part_number.nil? ? "": "( P/N #{bb.product.part_number} )" %></td>
+    <td class="<%=cssclass%>"><%= bb.pain %></td>
+    <td class="<%=cssclass%>"><%= bb.product.inventory_ordered.nil? ? 0 : bb.product.inventory_ordered["quant_dvd"] %></td>
+    <td class="<%=cssclass%> buynow"><%= bb.quant %></td>
+
+    <td class="<%=cssclass%>">
+        <%= fields_for ("tobuy" + bb.product_id.to_s) do |tb| %>
+        <%= tb.select(:quant, @quant_choices)  %>
+        <% end %>
+    </td>
+    <% if (! @polishable[bb.product_id].nil? && @polishable[bb.product_id].size > 0) %>
+    <td>
+           polish 
+              <%= @polishable[bb.product_id].inject([]) {  |array, copy_id|
+                      array.push link_to(Copy.id_to_sticker(copy_id), :controller => :copies, :action => :show, :id => copy_id)
+                      array
+                    }.join(", ").html_safe
+              %>
+    </td>
+    <% end %>
+    </tr>
+    <% end
+    end %>
+    </table>
+
+    <%= submit_tag "Update" %>
+<% end %>
+
+<br />
+

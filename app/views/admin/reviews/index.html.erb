@@ -1,0 +1,16 @@
+<h1>Reviews</h1>
+<% @reviews.each do |review| -%>
+    <div class="box">
+    Reviewer: <%= review.customer ? link_to(review.customer.email, :action => 'customer', :id => review.customer) : 'UNKNOWN' %><br>
+    Title: <%= link_to_product review.product %><br>
+    Date: <%= review.created_at %><br>
+    Rating: <%= review.rating %><p>
+    <%= form_for review, :url => admin_reviews_url do |form| -%>
+    <p>
+    <%= form.text_area :review, :cols => 80, :rows => review.review.length / 80 + review.review.gsub(/[^\n]/, '').size + 2 %><p>
+    <%= form.hidden_field :id %>
+    <%= submit_tag "Approve", :class => "submit" %>
+    <%= submit_tag "Delete", :class => "submit" %>
+    <% end -%>
+    </div>
+<% end -%>

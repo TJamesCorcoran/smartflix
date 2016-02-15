@@ -1,0 +1,8 @@
+<%# Snippet of a form for getting address data -%>
+<%# Parameter: form is the block argument of a form_for or fields_for -%>
+<%# Parameter: address is the address model object being edited (nil is ok) -%>
+
+<table>
+
+  <%= render :partial => "customer/address_form_bare", :locals => { :form => form, :address => @invalid_address } %>
+</table>

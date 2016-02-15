@@ -1,0 +1,244 @@
+Installation
+------------
+
+1) Environment  
+--------------
+ * Make sure that your 
+   		config/environment.rb 
+   defines 
+        * SITE_NAME           # e.g. "HeavyInk"
+        * WEB_SERVER          # e.g. "HeavyInk.com".
+        * EMAIL_TO_DEVELOPER
+        * EMAIL_TO_BOUNCES    = 'bounces@.....com'
+
+2) Models
+---------
+  * Make sure that Customer has a method 'email'
+
+3) Javascript
+-------------
+   * cd public/assets/javascript
+   * ln -s ../../../lib/newsletter/app/assets/javascripts/newsletters.js 
+
+3) Views
+--------
+    * for customer facing archive of old newsletters:
+         cd app/views
+         ln -s ../../vendor/plugins/newsletter_editor/app/views/customer_facing/ newsletters
+
+
+	* Create a file
+		  app/views/mailer/newsletter.text.html.erb
+	   that has this in it
+		  <%= render :partial => 'newsletters/newsletter', :locals => { :newsletter => @newsletter, :customer => @customer } %>
+
+	* Do similar for 
+		  app/views/mailer/newsletter.text.html.erb
+
+    * create customer facing index page:
+          app/views/newsletters/index.html.erb
+					<%= NewsletterEditor.templates['Header'].process(nil, nil, 
+																	  { :id => id, 
+																		:headline => "Newsletter Archives", 
+																		:index_link => @index_link
+																	   }
+																		) %>
+
+					<ul>
+						<% 
+						   floor =  Rails.env == 'production' ? 226 : 200
+						   Newsletter.find(:all, :conditions => "total_recipients > 5 and newsletter_id > #{floor}", :order => "created_at desc").each do |nl| %>
+						   <li>
+						<%= link_to "##{nl.id} &nbsp; #{nl.updated_at.strftime("%d %b %Y")} &nbsp; #{nl.headline}", :action => 'show', :id => nl.id %>
+						   </li>
+						<% end %>
+					</ul>
+
+					<%= NewsletterEditor.templates['Footer'].process(nil,nil) %>
+
+    * create customer facing show page:
+          app/views/newsletters/show.html.erb
+					<div id="newsletter_preview">
+					  <% begin %>
+					   <%= render :partial => 'admin/newsletters/newsletter', :locals => { :newsletter => @newsletter, 
+																		 :customer => nil} %>
+					  <% rescue Exception => e %>
+						<div style="border: 3px solid #ff0000; background-color: #ffcccc; padding:20px;">     
+						 ERROR: <%= e.message %>
+						 <% HiMailer.message(EMAIL_TO_BUGS, EMAIL_FROM, "bug in customer facing newsletter" , params.inspect) %>
+						</div>
+					  <% end %>
+
+					</div>
+
+
+
+4) Controllers
+--------------
+  * create  
+
+      app/controllers/newsletters_controller.rb
+
+    with this:
+
+		class NewslettersController < ApplicationController
+		  include NewsletterEditor::CustController
+
+		  htpasswd :file => ..... # auth is responsibility of app, NOT plugin
+		end
+
+   * create 
+
+        app/controllers/udadmin/newsletters_controller.rb
+
+     with this:
+
+		class Udadmin::NewslettersController < Udadmin::Base
+		  layout 'admin'
+
+		  include NewsletterEditor::Controller
+		end
+
+
+5) Libs
+-------
+	* create the graphic design in
+		lib/newsletter_templates.yaml
+
+6) Helpers
+----------
+	*  you'll prob need to create 
+		   helpers/email_helper.rb
+	   for utility funcs to create buttons, images, etc.
+
+7) Migrations
+-------------
+	* 'ln -s' or 'cp' all the items in
+		   vendor/plugins/newsletter_editor/db/migrate
+	   into your application's 
+		   db/migrate
+
+	* in a new migration add new recipient categories as needed
+		NewsletterCategory.create(:name => "all customers",
+								  :code => "Customer.find(:all)")
+
+8) Config
+---------
+
+   Add to your config/routes.rb
+
+      NewsletterEditor.add_routes(binding, "admin")
+
+Templates
+---------
+
+Templates live in lib/newsletter_templates.yaml
+
+That file is loaded and parsed by lib/newsletter_editor.rb
+
+In production, the template is loaded only once, but in devel it is
+reloaded with each query.
+
+To add a new block:
+
+   <New-Section-Name>:
+     fields:
+     - - <field-name>
+       - <field-type> # text / richtext / upload
+       html: |  <html>
+
+1) Put as many fields as you want.
+     * specify no fields with
+	      fields: []
+2) refer to the fields in the html block with <%= field-name %>
+
+3) OPTIONAL: include stylesheet info:
+
+	Foo-Section:
+	  fields:
+	  - - title
+		- text
+	  - - subtitle
+		- text
+	   html: 
+		  <newsletter_style p "color: black;">   
+		  <newsletter_style td "color: red;">
+		  <p>baz</p>
+
+   This will render as   
+
+ 		  <p style="color: black;">baz</p>
+
+
+
+Including one template in another
+---------------------------------
+
+In the html of a block, include another block this way:
+
+   INCLUDE_TEMPLATE: <template_name>!
+
+The HTML of the included block is #included, in the scope of the outer
+block.
+
+    Example
+    -------
+
+	Foo:
+	  fields:
+	  - - body
+		- richtext
+	  html: |
+		 foo-before
+		 <%= body %>
+		 foo-after     
+
+	Bar:
+	  fields:
+	  html: |
+		 bar-before
+		 <% body = "this string serves as the body variable" %>
+		 INCLUDE_TEMPLATE: Foo!
+		 bar-after
+
+
+Understanding views
+-------------------
+
+1) email view
+
+  * mailer
+  	   vendor/plugins/newsletter_editor/lib/newsletter_editor/mailer.rb
+    method newsletter() called
+
+  * which loads mailer view
+       app/views/mailer/newsletter.text.html.erb
+
+  * which loads partial
+       vendor/plugins/newsletter_editor/app/views/newsletters/_newsletter.html.erb
+    and provides locals
+       :newsletter => @newsletter,
+       :customer => @customer
+
+2) admin view
+
+  XXX
+
+3) customer archive view
+
+  XXX
+
+integration with campaigns
+--------------------------
+
+When newsletter is sent (or viewed in web page!) all URLs are hacked to include
+	 
+	 ?ct=nl<id>
+
+
+
+Bugs
+----
+
+* save button works, but gives SSL error (seen in logs, not on screen)
+* needs conversion tracking

@@ -1,0 +1,42 @@
+
+<%= render :partial => 'shared/message' %>
+
+<% if @line_item.pending? -%>
+   <%= render :partial => 'report_problem_shipping_delay' %>
+   <%= report_problem_close(:ok) %>
+<% elsif @line_item.returned? -%>
+   <p>This item has already been returned.</p>
+   <%= report_problem_close(:ok) %>
+<% elsif @line_item.cancelled? -%>
+   <p>This item was cancelled.</p>
+   <%= report_problem_close(:ok) %>
+<% elsif @line_item.children_lis.any? -%>
+    <p>You've already reported a problem with this item.</p> <%# ' %>
+    <%= report_problem_close(:ok) %>
+<% else -%>
+    <%= form_tag customer_report_problem_2_url( @line_item.id), :remote => true do -%>
+        <p>What's wrong?</p>
+
+        <p>
+            <%=   radio_button_tag 'problem_type', 'damaged', true        %> The DVD is damaged or doesn't play<br>
+            <%=   radio_button_tag 'problem_type', 'wrong_dvd'            %> You sent me the wrong DVD<br>
+            <%=   radio_button_tag 'problem_type', 'late'                 %> The DVD hasn't arrived yet<br>
+            <%=   radio_button_tag 'problem_type', 'missing_return_label' %> I don't have a return shipping label<br>
+            <%=   radio_button_tag 'problem_type', 'missing_box'          %> I misplaced the shipping box<br>
+            <%=   radio_button_tag 'problem_type', 'lost_by_customer'     %> I lost or damaged the DVD and need to pay for it
+            <% if @line_item.product.handout && @line_item.product.handout.length > 0 -%>
+                <%=  radio_button_tag 'problem_type', 'missing_handout' %> The wrong DVD handout was included <br>
+            <% end -%>
+        </p>
+
+        <div id="form_<%= @line_item.id %>"></div>
+        <%= Button.new( "submit", { :class => :orange, :method => :submit}) %>
+    <% end -%>
+<% end -%>
+
+
+
+
+
+
+

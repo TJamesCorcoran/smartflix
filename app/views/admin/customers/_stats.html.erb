@@ -1,0 +1,14 @@
+<div class="ud_block">
+    <h2>lawsuit stats</h2>
+    <% in_field = @customer.line_items_shipped_not_returned %>
+    <%= in_field.count %> in field:
+    <ul>
+      <li> OK: <%= in_field.select { |li| li.copy.andand.death_type_id == DeathLog::DEATH_NOT_DEAD }.count %>
+      <li> unpaid: <%= in_field.select { |li| li.copy.andand.death_type_id == DeathLog::DEATH_LOST_BY_CUST_UNPAID }.count %>
+      <li> no addr: <%= in_field.select { |li| li.copy.andand.death_type_id == DeathLog::DEATH_LOST_BY_CUST_NOADDR }.count %>
+      <li> sold: <%= in_field.select { |li| li.copy.andand.death_type_id == DeathLog::DEATH_SOLD }.count %>
+      <li> lawsuit_snailmailed: <%= in_field.select { |li| li.lawsuit_snailmail }.count %>
+      <li> lawsuit_filed: <%= in_field.select { |li| li.lawsuit_filed }.count %>
+    </ul>
+</div>
+

@@ -1,0 +1,16 @@
+<table cellpadding="3">
+<tr><th>Order ID</th><th>Customer Email</th><th>Order Total</th><th>Order Date</th></tr>
+<% @orders.each do |order| -%>
+  <% bg_color = "fff"
+     bg_color = "9ff" if order.university
+     bg_color = "ff6" if order.server_name == "late charge"
+     bg_color = "f60" if order.server_name == "replacement charge"
+   %>
+  <tr style="background-color:#<%= bg_color %>" >
+  <td><%= link_to "#{order.id}", :controller => 'admin/orders', :action => :show, :id => order.id %></td>
+  <td><%= link_to h(order.customer.andand.email || "none"), :controller => 'admin/customers', :action => 'show', :id => order.customer_id %></td>
+  <td><%= number_to_currency(order.total) %></td>
+  <td><%= order.listing_time %></td>
+<% end -%>
+</tr>
+</table>

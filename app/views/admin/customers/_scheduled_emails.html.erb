@@ -1,0 +1,23 @@
+<h1>scheduled emails</h1>
+  <div class="customer-admin" >
+    (<a href="#" onclick="$('scheduled_int').hide(); return false;">hide</a> / 
+    <a href="#" onclick="$('scheduled_int').show(); return false;">show</a>)
+
+    <div id="scheduled_int" style="display:none;">
+       <%  grp_by_type = @customer.scheduled_emails.group_by(&:email_type)
+           ScheduledEmail::TYPES.each do |key| %>
+              <h2><%= key.to_s %></h2>
+              <% if grp_by_type[key.to_s].empty? %>
+                 <i>none</i>
+              <% else %>
+                  <ul>
+                  <% grp_by_type[key.to_s].each do |se| %>
+                    <li>
+                       <%= se.created_at %> // <%= link_to (se.product.andand.name || "unknown"), :controller => :products, :action => :show, :id => se.product_id %>
+                    </li>
+                  <% end %>
+                  </ul>
+              <% end %>
+       <% end %>
+    </div>
+  </div>

@@ -1,0 +1,33 @@
+Hi there,
+
+We noticed you've had some items in your wishlist for a while.  If you
+rent now, we will give you a $2.00 discount on the rental of the
+following video:
+
+<% product = Product.find(@discount_product_id) %>
+<%= product.name %>
+
+Just use the following link to place this video in your shopping
+cart with the $2.00 discount --  on top of our free shipping and low
+rental price!
+
+<%= @discount_link %>
+
+Thanks,
+
+Your friends at SmartFlix.com
+
+
+--
+http://SmartFlix.com/
+Web's Biggest How-To DVD Rental Store
+
+-----------------------------------------------------------------
+We hope you enjoyed receiving this message. However, if you would
+rather not receive future e-mails like this one, please visit our
+email preferences page:
+<% email_url = @customer.email_preferences_url -%>
+<%= email_url %>
+This email was sent to <%= @customer.email %>
+-----------------------------------------------------------------
+

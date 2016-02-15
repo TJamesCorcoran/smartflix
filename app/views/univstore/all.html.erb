@@ -1,0 +1,26 @@
+<div id="right_col">
+    <%= render :partial => 'signup', :locals => { :customer => @customer, :supress_show_all => true } %>
+</div>
+
+<div id="uni-info">
+
+  <%= render :partial => "big_image", :locals => { :id => 41} %>
+
+  <div id="uni-linklist">
+    <%= render :partial => 'univ_list', :locals => { :title_html_tag => "h1" } %>
+  </div>
+
+</div>
+
+<%= render :partial => 'testimonials' %>
+
+
+<% # the layout loads JS libs; place our JS lower in the page -%>
+<% content_for :javascript_footer do %> 
+  <script  type="text/javascript"> 
+         duration = 3500;
+        /* initialise fader by hiding image object first */
+        addEvent(window,'load',fadeInit)
+  </script>
+<% end %> 
+

@@ -1,0 +1,18 @@
+Hello there,
+
+<%= "#{h(@customer.full_name)} (#{h(@customer.email)}) asked us to send you this email about #{@product ? "a video at SmartFlix.com that you might find interesting" : "SmartFlix.com"}, and included this message:".wrap_at(72, -1) %>
+
+<%= h(@message).wrap_at(72, -1).split(/\n/).map { |s| "  #{s}" }.join("\n") %>
+
+(This message was not written or reviewed by SmartFlix.com).
+<% if @product -%>
+
+<%= "The video is \"#{@product.name}\". You can find out more about this video here:".wrap_at(72) %>
+
+  <%= url_for(:controller => 'store', :action => 'video', :id => @product.id, :ct => @ct_code, :host => WEB_SERVER) %>
+<% end -%>
+
+If you have questions about this email, please write to us at
+info@smartflix.com
+
+- The SmartFlix.com Team

@@ -1,0 +1,18 @@
+<h1>Listing vendor_order_logs</h1>
+
+<table>
+  <tr>
+  </tr>
+  
+<% for vendor_order_log in @vendor_order_logs %>
+  <tr>
+    <td><%= link_to 'Show', vendor_order_log_path(vendor_order_log) %></td>
+    <td><%= link_to 'Edit', edit_vendor_order_log_path(vendor_order_log) %></td>
+    <td><%= link_to 'Destroy', vendor_order_log_path(vendor_order_log), :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New vendor_order_log', new_vendor_order_log_path %>

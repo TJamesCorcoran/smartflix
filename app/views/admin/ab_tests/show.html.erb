@@ -1,0 +1,15 @@
+<% content_for :sidebar do %> 
+ <h2>Results</h2>
+ <table>
+     <% @item.quick_compare.map { |k, v| [v,k] }.sort_by{|x| x[0]}.each do  |val, option| %>
+       <tr>
+         <td><%= val %></td>
+         <td><%= option %></td>
+       </tr>
+     <% end %>
+ </table>
+ XXX here
+<br><br><br><br>
+<% end %>
+
+<%= render(:partial => 'admin/shared/show', :locals => { :item => @item, :reject => [:ab_test_results, :notes] } )  %>

@@ -1,0 +1,9 @@
+<% if (li.product.is_a?(Video)) -%>
+  <div id="button_<%= li.id %>">
+     <%= form_tag( { :action => 'report_problem', :id => li }, {:remote =>true}) do -%>
+     <%= Button.new("report problem", { :class => :orange, :method => :submit})%>
+  <% end -%>
+  </div>
+<% else -%>
+  <%= link_to 'Contact Us', :controller => 'store', :action => 'contact_us' %>
+<% end -%>

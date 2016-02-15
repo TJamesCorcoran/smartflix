@@ -1,0 +1,15 @@
+<% if @address -%>
+  <div class="text-content">
+
+    <h1>Edit <%= @address.display_type %></h1>
+
+    <%= error_messages_for :address, :header_tag => :strong %>
+
+    <%= form_for :address do |form| -%>
+      <%= render :partial => 'address_form', :locals => { :form => form, :address => @address } %>
+      <%= onepage_auth_hidden_field %>
+      <%= Button.new( "update", { :class => :orange, :method => :submit }) %>
+    <% end -%>
+
+  </div>
+<% end -%>

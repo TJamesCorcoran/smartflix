@@ -1,0 +1,42 @@
+<h1>Listing shipments / <%= link_to "Ship!", :action => :ship %></h1>
+
+<%= form_tag ( {:action => 'index'}, {:method => :get} ) do %>
+  <%= text_field_tag  'search_str'  %>
+  <%= submit_tag 'Search by shipmentID' %>
+<% end %>
+
+
+
+<table>
+
+<tr>
+<% for column in Shipment.columns.reject { |c| c.name == "description" } %>
+<th>
+<%=
+                column.name
+%>
+</th>
+<% end %>
+</tr>
+
+<% for shipment in @shipments %>
+  <tr>
+<% for column in Shipment.columns.reject { |c| c.name == "description" } %>
+<td>
+<%=
+
+            if (column.name == "shipment_id")
+              link_to shipment.send(column.name), :action=>:show, :id=>shipment.send(column.name)
+            else
+              shipment.send(column.name)
+            end
+
+%>
+</td>
+<% end %>
+</tr>
+<% end %>
+</table>
+
+<br />
+<hr>

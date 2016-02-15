@@ -1,0 +1,14 @@
+<h1>Stats : <%= @vendor.name %></h1>
+<table border=0>
+
+
+
+<table border =1>
+<tr><th>month</th><th>videos ordered (paying and non)</th></tr>
+<% @status.keys.sort.each do |kk| %>
+<tr><td><%= kk %></td><td><%= @status[kk].nil? ? 0 : @status[kk] %></td></tr>
+<% end %>
+</table>
+
+
+<%= link_to 'Back', :action => 'show', :id => @vendor  %>

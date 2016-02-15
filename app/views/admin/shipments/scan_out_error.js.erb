@@ -1,0 +1,3 @@
+$("#ajax_feedback").append("<span style='color:red;'>ERROR - <%= @barcode %> - <%= @msg %></span><br>");
+$("#barcode").val("");
+soundManager.play('failure');

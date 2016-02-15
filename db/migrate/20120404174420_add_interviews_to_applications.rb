@@ -1,0 +1,1 @@
+../../vendor/plugins/apply_for_job/db/migrations/20120404174420_add_interviews_to_applications.rb

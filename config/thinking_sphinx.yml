@@ -1,0 +1,27 @@
+# ports 
+#     devel    test
+#-------------------
+# HI - 9312 / 10312
+# SF - 9313 / 10313  <====
+
+
+# http://pat.github.com/ts/en/advanced_config.html
+
+development:
+  mysql41: 9313
+  morphology: stem_en
+  utf8: true
+  index_field_lengths: 1
+
+test:
+  mysql41: 10313
+  morphology: stem_en
+  utf8: true
+  index_field_lengths: 1
+
+production:
+  mysql41: 9313
+  morphology: stem_en
+  utf8: true
+  index_field_lengths: 1
+

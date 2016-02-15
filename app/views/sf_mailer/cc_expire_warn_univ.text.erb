@@ -1,0 +1,38 @@
+Hi <%= @customer.first_name %>,
+
+We're thrilled that you're enjoying your <%= @order.university.name %>
+subscription, but we're worried that your credit card ( <%= @customer.last_to_expire_credit_card.name %>)
+is going to expire soon.
+
+As per the terms and conditions of <%= @order.university.name %>, we
+need a new credit card from you, or we'll have to charge you the
+replacement cost of the DVDs you have out.
+
+We don't want to charge you - we want you to keep enjoying and
+learning from <%= @order.university.name %>!
+
+Please go here
+
+   http://smartflix.com/customer/manage_cc
+
+and give us a new up-to-date credit card before
+<%= @customer.last_to_expire_credit_card.charge_date_before_expire %>.
+
+If you have any questions, please contact us at info@smartflix.com.
+
+As a courtesy, we'll send this reminder to you once per week, until we
+get a new card.
+
+
+Thank you,
+
+Your friends at SmartFlix.com
+
+
+
+--
+http://SmartFlix.com/
+Web's Biggest How-To DVD Rental Store
+
+
+This email was sent to <%= @customer.email %>

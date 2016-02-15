@@ -1,0 +1,40 @@
+<h1><%= @cobrand.server_name %></h1>
+
+<h2> payments from us</h2>
+<h2>
+
+<% @cobrand.cobrand_payments.each do |pay| %>
+<table border=0>
+<tr><td width=50px></td><td width=150px><%= pay.created_at %></td><td width=150px><%= number_to_currency(pay.payment) %></td></tr>
+<% end %>
+</table>
+
+
+
+<h2>orders by customers</h2>
+
+
+<table border=0>
+<tr><td></td><th>date</th><th>customer</th><th>items ordered</th><th>price</th></tr>
+<%
+   cssclass = "dark"
+   old_month = 0
+
+   @cobrand.orders.sort_by { |x| x.orderDate }.reverse.each do |order|
+
+   if order.orderDate.month != old_month
+      cssclass = ((cssclass == "dark") ? "light" : "dark")
+      old_month = order.orderDate.month
+   end
+%>
+<tr>
+<td width=50px></td>
+<td width=100px class="<%=cssclass%>"><%= order.orderDate %></tD>
+<td width=100px class="<%=cssclass%>"><%= link_to order.customer.id, :controller=>:customer, :action=>:show, :id =>order.customer.id %></td>
+<td width=100px class="<%=cssclass%>"><%= order.line_items.size%> </td>
+<td width=100px class="<%=cssclass%>"><%= number_to_currency(order.total_price) %> </td>
+</tr>
+<% end %>
+</table>
+
+<%= link_to 'Back', cobrands_path %>

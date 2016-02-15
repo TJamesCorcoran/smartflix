@@ -1,0 +1,99 @@
+<div class="text-content">
+
+<h1>Help</h1>
+
+<p>
+You can find the answers to most questions quickly using the tools and information in the sections below.
+</p>
+
+<h2>Top 4 questions:</h2>
+
+<p class="faq-question-main">
+1) My video has not arrived.  Has it shipped?  When will I get it?
+</p>
+
+<p class="faq-answer">
+<b>Answer</b>: This information is online! Go to your
+<%= link_to 'Order History', :controller => 'customer', :action => 'order_history' %>,
+then follow the instructions at the top of the page.
+</p>
+
+<p class="faq-question-main">
+2) How do I suggest a new video?
+</p>
+
+<p class="faq-answer">
+<b>Answer</b>: Go to our
+<%= link_to 'Suggest a Video', :controller => 'store', :action => 'suggest' %>
+page.
+</p>
+
+<p class="faq-question-main">
+3) I received the video, but there's a problem.  How do I get it fixed?
+</p>
+
+<p class="faq-answer">
+<b>Answer</b>: First of all: we apologize, and we <b><i>will</i></b>
+solve your problem - we'll get a new copy out to you ASAP.  To do that:
+go to your
+<%= link_to 'Order History', :controller => 'customer', :action => 'order_history' %>,
+then follow the instructions at the top of the page.
+</p>
+
+<p class="faq-question-main">
+4) Where do you ship to?
+</p>
+
+<p class="faq-answer">
+<b>Answer</b>: We ship to all US and Canadian addresses, including Puerto Rico, APO and AE addresses.  Unfortunately, we do not ship to any other locations.
+</p>
+
+<p>
+Answers to all other questions can be found in one of the following sections. 
+</p>
+
+<ul>
+
+<li>
+<%= link_to 'How it Works', :action => 'how_it_works' %>:
+how to order, how long shipping takes, what countries we ship to, and a lot more
+</li>
+
+<li>
+<%= link_to 'SmartFlix Universities', :action => 'univ_faq' %>:
+how SmartFlix Universities work 
+</li>
+
+<li>
+<%= link_to 'Payment', :action => 'payment' %>:
+how to pay, what a credit card rejection means, and more
+</li>
+
+<li>
+<%= link_to 'Legal', :action => 'legal' %>:
+info about copyright, terms and conditions, etc.
+</li>
+
+<li>
+<%= link_to 'Technical', :action => 'technical' %>:
+what formats the videos are in, whether they'll work in your computer, and related issues
+</li>
+
+<li>
+<%= link_to 'Video Bundles', :action => 'video_bundles' %>:
+Everything you need to know about video bundles
+</li>
+
+<li>
+<%= link_to 'Other', :action => 'other' %>:
+solutions to other problems
+</li>
+
+</ul>
+
+<p>
+If you still have questions that aren't answered above, you can
+<%= link_to 'contact us', :controller => 'store', :action => 'contact_us' %>.
+</p>
+
+</div>

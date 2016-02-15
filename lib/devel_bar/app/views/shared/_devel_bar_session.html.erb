@@ -1,0 +1,26 @@
+<div id="session_view" style="display:none; margin-left:10px;">
+    <table>
+      <% session.keys.sort.each do |kk| %>
+         <tr>
+           <td> <%= kk %> : </td>
+           <td> <%= session[kk] %></td>
+           <td> <%= form_tag admin_devel_bar_set_session_var_url do %>
+                    <%= hidden_field_tag 'kk', kk %>
+                    <%= text_field_tag 'vv', session[kk] %></td>
+                    <td><%= submit_tag 'set' %>
+                   <% end %></td>
+                   <td><%= button_to  'delete', admin_devel_bar_del_session_var_url(kk) %>
+           </tr>
+      <% end %>
+      <tr>
+       <td>
+<%= form_tag admin_devel_bar_set_session_var_url do %>
+        <%= text_field_tag 'kk' %></td>
+        <td><%= text_field_tag 'vv' %></td>
+        <td><%= submit_tag 'set' %></td>
+       </tr>
+<% end %>
+
+    </table>
+</div>
+

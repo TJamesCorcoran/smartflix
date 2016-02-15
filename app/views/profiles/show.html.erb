@@ -1,0 +1,101 @@
+<div class="profile">
+
+<h1><%= h(@profile_customer.display_name(:period => false)) %>'s Profile</h1>
+
+<% project_count = @profile_customer.projects.count %>
+<% comment_count = @profile_customer.comments.count %>
+<% favorite_count = @profile_customer.favorite_projects.count %>
+<% review_count = @profile_customer.reviews.count %>
+<% forum_post_count = @profile_customer.posts.count %>
+<% wiki_pages_count = @profile_customer.wiki_pages.count %>
+<% wiki_edits_count = @profile_customer.wiki_page_versions.count %>
+
+<div class="profile-links">
+  <% top_links = [] %>
+  <% top_links << link_to(pluralize(wiki_edits_count, 'article edit'), :anchor => 'articles') if wiki_edits_count > 0 %>
+  <% top_links << link_to(pluralize(forum_post_count, 'forum post'), :anchor => 'forum posts') if forum_post_count > 0 %>
+  <% top_links << link_to(pluralize(project_count, 'project'), :anchor => 'projects') if project_count > 0 %>
+  <% top_links << link_to(pluralize(comment_count, 'comment'), :anchor => 'comments') if comment_count > 0 %>
+  <% top_links << link_to(pluralize(favorite_count, 'favorite'), :anchor => 'favorites') if favorite_count > 0 %>
+  <% top_links << link_to(pluralize(review_count, 'review'), :anchor => 'reviews') if review_count > 0 %>
+  <p><%= top_links.join(' | ') %></p>
+</div>
+
+<% if wiki_edits_count > 0 %>
+  <div class="profile-section">
+    <a name="articles"></a>
+    <h2><%= wiki_pages_count > 10 ? "Most Recent" : "" %> Articles Worked On</h2>
+    <ul>
+      <% @profile_customer.wiki_pages.each do |wiki_page| %>
+        <li><%= link_to wiki_page.name, wiki_page_url(wiki_page) %>  </li>
+      <% end %>
+    </ul>
+    <br class="clear"/>
+  </div>
+<% end %>
+
+
+<% if project_count > 0 %>
+  <div class="profile-section">
+    <a name="projects"></a>
+    <h2><%= pluralize(project_count, 'Project') %></h2>
+    <%= render :partial => 'projects/project_summary', :collection => @profile_customer.projects %>
+    <br class="clear"/>
+  </div>
+<% end %>
+
+<% if forum_post_count > 0 %>
+  <div class="profile-section">
+    <a name="forum posts"></a>
+    <h2><%= forum_post_count > 10 ? "Most Recent" : "" %> Forum Posts</h2>
+    <ul>
+      <% @profile_customer.posts.reverse[0,10].each do |post| %>
+        <li><%= link_to post.topic.title, post_url(post) %> ( <%= post.created_at.to_date %> ) </li>
+      <% end %>
+    </ul>
+    <br class="clear"/>
+  </div>
+<% end %>
+
+<% if comment_count > 0 %>
+  <div class="profile-section">
+    <a name="comments"></a>
+    <h2><%= pluralize(comment_count, 'Comment') %></h2>
+    <%= render :partial => 'projects/comment', :collection => @profile_customer.comments, :locals => { :heading_type => :parent_name } %>
+    <br class="clear"/>
+  </div>
+<% end %>
+
+<% if review_count > 0 %> 
+  <div class="profile-section">
+    <a name="reviews"></a>
+    <h2><%= pluralize(review_count, 'Review') %></h2>
+    <div id="vid-rating">
+      <% @profile_customer.reviews.each do |r| -%>
+        <div class="review">
+          <div class="header">
+            <div class="rating">
+              <span class="content"><%= rating_image r.rating %></span>
+            </div>
+            <div class="reviewer">
+              <span class="label">Video:</span>
+              <span class="content"><%= r.product ? link_to_product(r.product) : 'No Longer Available' %></span>
+            </div>
+          </div>
+          <blockquote><%= html_paragraphs(r.review) %></blockquote>
+        </div>
+      <% end -%>
+    </div>
+    <br class="clear"/>
+  </div>
+<% end %>
+
+<% if favorite_count > 0 %>
+  <div class="profile-section">
+    <a name="favorites"></a>
+    <h2><%= pluralize(favorite_count, 'Favorite Project') %></h2>
+    <%= render :partial => 'projects/project_summary', :collection => @profile_customer.favorite_projects %>
+    <br class="clear"/>
+  </div>
+<% end %>
+

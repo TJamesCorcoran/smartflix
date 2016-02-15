@@ -1,0 +1,15 @@
+announcements:
+  email_preference_type_id: 1
+  form_tag: "announcements"
+  name: "General Announcements"
+  description: "blah blah blah"
+new:
+  email_preference_type_id: 2
+  form_tag: "new"
+  name: "New Products"
+  description: "blah blah blah"
+recommended:
+  email_preference_type_id: 3
+  form_tag: "recommended"
+  name: "Recommended Products"
+  description: "blah blah blah"

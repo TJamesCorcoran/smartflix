@@ -1,0 +1,10 @@
+<h1>university orders</h1>
+        <% if @customer.orders.andand.detect {|order| order.university } %>
+          <ul>
+            <% @customer.univ_orders.each do |order| %>
+              <%= render(:partial => "university_status", :locals => { :order => order }) %>
+            <% end %>
+          </ul>
+        <% else %>
+           <i>no univ orders</i>
+        <% end %>

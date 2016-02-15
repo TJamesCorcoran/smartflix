@@ -1,0 +1,76 @@
+<div id="welcome_back">
+
+    <%= render :partial => "shared/scanalert", :locals => { :divid => 'smartflix-secure' } %>
+
+    <div id="set_cc_box">
+
+    <h1><%= @customer.first_name.capitalize %>, Get Your Free Month (up to a $25 value)</h1>
+
+    <p>
+    To thank you for coming back to  <%= @univ_choice.name %> we're giving you a free month!
+    </p>
+
+    <p>
+    What's your minimum commitment?
+    </p>
+
+    <p>There is none.  Stick around for a week, or for two years.  The choice is yours, and no matter how long you enjoy great how-to DVDs at a stunningly affordable price, the first month is free.
+    </p>
+
+    <p>After that, you can pick your price point from the super-affordable <%= University.min_plan_price.to_f.currency %> per month 1-DVD program or the regular 3-at-a-time price of <%= University.base_plan_price.to_f.currency %>.
+    </p>
+
+    <h1>Welcome Back to <%= @univ_choice.name %> !</h1>
+
+    <p>Just confirm your address and we'll start sending great videos out to you as soon as tomorrow morning.
+    </p>
+
+
+
+    <%= form_for :customer, :url => univstore_welcome_back_url do |f| -%>
+        <table class="set_cc" >
+          <%= fields_for "credit_card" do |cc| %>
+              <tr>
+                <td class="form-label">Credit Card number:</td>
+                <td><%= cc.text_field :number %></td>
+              </tr>
+              <tr>
+                <td class="form-label">Expiration date:</td>
+                <td>
+              <%= select_month(Date.today,  :prefix => 'credit_card') %>
+              <%= select_year(Date.today,   :prefix => 'credit_card') %>
+
+                </td>
+              </tr>
+           <% end %>
+
+
+            <%= fields_for :address, @customer.billing_address do |addr_form| -%>
+               <%=  render :partial => 'customer/address_form', :locals => { :form => addr_form, :address => @invalid_address } %>
+            <% end -%>
+
+          <tr>
+            <td class="form_label" id="secure_server_lock_white">Secure server:</td>
+            <td><%= submit_tag "Continue", :class => "submit_button" %></td>
+          </tr>
+
+        </table>
+
+    <% end %>
+
+
+    <% if (Rails.env != 'production') -%>
+      <p id="cc_production">
+        <font color="red">
+          DEVELOPMENT MODE -- NOT LIVE<br />
+          AMEX success: 370000000000002<br />
+          Discover success: 6011000000000012<br />
+          MC success: 5424000000000015<br />
+          Visa success: 4007000000027<br />
+          Failure: 4222222222222 (set price to desired error code)
+        </font>
+      </p>
+    <% end %>
+
+    </div>
+</div>

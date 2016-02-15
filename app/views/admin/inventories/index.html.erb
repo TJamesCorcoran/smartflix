@@ -1,0 +1,24 @@
+<h1>Inventory </h1>
+
+<%= link_to "start inventory", admin_inventory_start_url %><br>
+
+Freshness = <%=     @freshness_pct %> %
+
+<p>
+Last 20 inventories ...
+</p>
+
+<table border=0 class="sortable" id="categories" >
+
+<tr>
+   <% Inventory.columns.each do |column| %><th><%= 			column.name%></th><% end %>
+</tr>
+  
+<%  @inventories.each do |inventory| %>
+<tr>
+<% Inventory.columns.each do |column | %>
+   <td><%= inventory.send(column.name) %></td>
+<% end %>
+</tr>
+<% end %>
+</table>

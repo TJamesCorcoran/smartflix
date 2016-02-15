@@ -1,0 +1,73 @@
+<table border=0><tr><td valign=top>
+	<table border=0>
+	  <tr>
+		  <td><h1>Copy <%= @copy.sticker_id %></h1></td>
+		  <td><%= render(:partial => "admin/copies/search_by_copyid") %></td>
+	  </tr>
+
+	  <% for column in Copy.columns %>
+	  <tr>
+		<td> <b> <%= column.human_name %>:</b></td>
+		<td> <%=
+				if (column.name == "product_id")
+					link_to @copy.product.name, :controller=>"products", :action=>"show", :id=>@copy.product_id
+				elsif (column.name == "copy_id")
+					@copy.sticker_id
+				elsif (column.name == "status")
+					(1 == @copy.status) ? "live" : "dead"
+				elsif (column.name == "death_type_id")
+					@copy.death_type.andand.name
+				else
+					@copy.send(column.name)
+				end
+		%>
+		</td>
+	   </tr>
+	<% end %>
+
+	</table>
+</td><td>
+       <%=   render(:partial => "admin_panel_shippers"   ) %>
+       <%=   render(:partial => "admin_panel_instock"    ) %>
+       <%=   render(:partial => "admin_panel_destruction") %>
+</td></tr></table>
+
+
+
+<h1>History</h1>
+<table border=0>
+<tr><th>customer</th><th>order date</th><th>ship date</th><th>back date</th></tr>
+<% events = @copy.line_items.reject {|li| ! li.actionable }
+   events += @copy.death_logs
+
+events.sort_by { |ev| ev.date }.each do |ev| %>
+    <tr>
+    <% case ev
+    when LineItem %>
+      <td><%= ev.order.customer.nil? ? "no customer" : link_to(ev.order.customer.email, :controller=>:customers, :action=>:show, :id=>ev.order.customer.id) %></td>
+      <td><%= ev.order.orderDate %></td>
+      <td><%= ev.shipment.andand.dateOut %></td>
+      <td><%= ev.dateBack %></td>
+    <%
+    when DeathLog %>
+      <td></td>
+      <td><%= ev.date %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <% if ev.death_type.nil? then raise ev.inspect end %>
+      <td><%= ev.to_s %></td>
+    <%
+    end
+    %>
+    </tr>
+<% end %>
+
+</table>
+
+<p>
+
+<%= render(:partial => 'admin/shared/show_relations', :locals => { :item => @copy, :reject => [:line_items, :product, :death_logs, :death_type] })  %>
+
+<%= link_to 'Edit', :action => :edit, :id =>@copy %> |
+<%= link_to 'Back',  :action => :show, :id =>@copy %> |

@@ -1,0 +1,20 @@
+<%= form_tag( customer_report_problem_3_url(@line_item.id), :remote => true ) do -%>
+
+    <%=  hidden_field_tag 'problem_type', h( @problem_type) %>
+    <%=  hidden_field_tag 'final', '1' %>
+
+    <p>You can use a sturdy replacement shipping container of your own and send the DVD back to</p>
+
+    <p>
+    <%= SmartFlix::Application::SF_MAILING_ADDRESS_HTML.html_safe %>
+    </p>
+
+    <p>PLEASE DO NOT SEND THE DVDs BACK WITHOUT A BOX!</p>
+
+    <p>If you need a replacement box, just click 'Send Replacement'</p>
+
+    <%= report_problem_close(:done) %>
+
+    <%= Button.new( "send replacement", { :class => :orange, :method => :submit }) %>
+
+<% end -%>

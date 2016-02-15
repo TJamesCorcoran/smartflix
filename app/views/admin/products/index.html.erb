@@ -1,0 +1,65 @@
+
+<%= form_tag( {:action => 'index'}, {:method => :get} ) do %>
+  <%= text_field_tag  'search_str'  %>
+  <%= submit_tag 'Search by Video text' %>
+<% end %>
+
+<table border=0><tr>
+	<td><h1>Video list</h1></td>
+	<td>(<%= link_to 'unfiltered',            :action => 'list' %>)</td>
+	<td>(<%= link_to 'with handouts',         :action=>"index", :handout=>1 %>)</td>
+	<td>(<%= link_to 'overdue, need prices',  :action=>"need_prices", :overdue => true %>)</td>
+	<td>(<%= link_to 'all need prices',       :action=>"need_prices" %>)</td>
+	<td>(<%= link_to 'DNU',                   :action=>"dnu" %>)</td>
+	</tr>
+</table>
+<hr>
+<%= link_to 'New video', :action => :new %>
+<hr>
+
+<%= will_paginate @products %>
+
+<hr>
+<table class="sortable" id="categories" >
+
+<tr>
+<th></th>
+<% for column in Video.content_columns.reject { |c| c.name == "description" } %>
+<th>
+<%=
+
+            if (column.name == "author_id") 
+			    "author"
+            else
+				column.name
+			end
+%>
+</th>
+<% end %>
+</tr>
+  
+<% for video in @products %>
+  <tr>
+    <td><%= link_to 'Show', :action => :show, :id => video %></td>
+
+<% for column in Video.content_columns.reject { |c| c.name == "description" } %>
+<td>
+<%=
+
+            if (column.name == "author_id") 
+			    video.author.name
+            else
+				video.send(column.name) 
+			end
+%>
+</td>
+<% end %>
+</tr>
+<% end %>
+</table>
+
+<br />
+<hr>
+<%= will_paginate @products %>
+<hr>
+<br />

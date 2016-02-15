@@ -1,0 +1,64 @@
+#----------------------------------------------------------------------
+
+warn_no_univ:
+   university_id: 5006
+   name:  "Foobar University"
+
+
+
+#----------
+# customer / university / shipping testing
+
+
+univ_1:
+   university_id: 7010
+   name:  "Woodturning University"
+   subscription_charge: 30.00
+
+univ_2:
+   university_id: 7020
+   name:  "Welding University"
+
+# test_live_university
+live_university: 
+  university_id: 8100
+  name: "Clown University"
+
+
+#----------------------------------------------------------------------
+#   university tests
+#----------------------------------------------------------------------
+
+misc_university: 
+  university_id: 9000
+  name: "Foobar University"
+
+
+#----------------------------------------------------------------------
+#   orders tests
+#----------------------------------------------------------------------
+
+
+foo_university: 
+  university_id: 1
+  name: "Foo University"
+
+bar_university: 
+  university_id: 2
+  name: "Bar University"
+
+#----------------------------------------------------------------------
+#   railscart integration tests
+#----------------------------------------------------------------------
+
+wood_university: 
+  university_id: 10
+  category_id: 10
+  name: "Wood University"
+
+metal_university: 
+  university_id: 11
+  category_id: 11
+  name: "Metal University"
+
+# NOTE: intentionally no paint_univ w id 12

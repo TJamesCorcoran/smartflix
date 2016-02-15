@@ -1,0 +1,6 @@
+--------------------
+  <% if defined?(@customer) %>
+This email was sent to <%= @customer.email %>.
+Go to <%=  customer_email_prefs_url(:host => WEB_SERVER, :token => @token) %> 
+to change your email preferences.
+<% end %>

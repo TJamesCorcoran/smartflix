@@ -1,0 +1,92 @@
+Thanks for your order!
+
+In stock
+--------
+
+We've shipped
+
+<% @titles.each do |title| -%>
+    * <%= title %>
+<% end -%>
+
+To check the status of your orders, just visit:
+
+  http://smartflix.com/history
+
+If you don't receive your DVD within the expected shipping time or if
+there's is a problem with your order, like a scratched DVD or if you
+received the wrong title, just visit your history page and tell us about
+it. We'll fix it ASAP.
+
+<% if @unfulfilled_titles.size > 0 -%>
+<%   if @customer.shippable_count_for_sf > 0 -%>
+Out of stock
+------------
+
+Sometimes, no matter how many copies we have in stock, our most popular
+DVDs, like
+
+<% @unfulfilled_titles.each do |title| -%>
+    * <%= title %>
+<% end -%>
+
+are out. But, rest assured, your DVD will be back in stock soon and out
+the door to you.
+
+As soon as the next available copy is returned to our shipping center,
+we'll get it right in the mail. We'll also send you an email when we do,
+so you can plan your project.
+<%   else -%>
+Scheduled shipments
+-------------------
+
+Your current setting for how many videos you'd like at a time is <%= @customer.ship_rate %>.
+We'll ship your next batch of videos in one week, right around the time
+you're done with these and ready to send them back! Here are the videos
+we'll be shipping to you in the near future:
+
+<% @unfulfilled_titles.each do |title| -%>
+    * <%= title %>
+<% end -%>
+
+You can change the number of videos you receive at a time on your
+customer settings page, available here:
+
+  http://smartflix.com/customer/account_info
+<%   end -%>
+<% else -%>
+All videos you've ordered in time for today's shipments have been
+shipped.
+<% end -%>
+
+Tracking Numbers
+----------------
+
+There are no tracking numbers. Why? The U.S. Post Office doesn't give
+tracking numbers for their First class or Media mail. But we'd certainly
+give them to you if we had them.
+
+Shipping
+--------
+
+Your package will be hand packed at our shipping center, picked up by
+the friendly folks from the post office, and shipped via USPS First
+Class Mail. Estimated arrival dates are listed below. Some locations,
+like Canada and Hawaii, may take a bit longer.
+
+Our mail goes out every day, Monday through Friday.
+
+USPS goes out on:            <%= @shipment.posted_on.strftime("%d %b %Y") %>
+
+Earliest expected delivery:  <%= @shipment.early_arrival.strftime("%d %b %Y") %>
+
+Later expected delivery:     <%= @shipment.late_arrival.strftime("%d %b %Y") %>
+
+
+Thanks,
+
+Your friends at SmartFlix.com
+
+
+P.S. Remember to open the envelope or box carefully because you'll use it again to
+return the DVD(s).

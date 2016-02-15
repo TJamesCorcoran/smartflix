@@ -1,0 +1,9 @@
+This newsletter is being sent in HTML.
+
+If you have problems reading it, please go here:
+
+   <%= url_for :only_path =>false, 
+               :host => WEB_SERVER_NOPORT ,  
+               :controller => 'newsletters', 
+               :action => 'show', 
+               :id => @newsletter.id %>

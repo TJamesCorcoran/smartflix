@@ -1,0 +1,33 @@
+<% extend NewsletterEditor::Helper::Mailer -%>
+<%  puts "***1 #{NewsletterEditor.inspect}" %>
+<%  puts "***2 #{NewsletterEditor.templates.inspect}" %>
+<%  puts "***3 #{NewsletterEditor.templates['Header'].inspect}" %>
+<%= NewsletterEditor.templates['Header'].process(nil,customer, 
+                                                  { :id => newsletter.id, 
+                                                    :headline => newsletter.headline, 
+                                                    :index_link => @index_link
+                                                   }
+                                                    ).html_safe %>
+
+<%  puts "***4 #{NewsletterEditor.templates.keys.inspect}" %>
+
+<% newsletter.sections.each do |section| %>
+  <%  puts "***5a #{section.inspect}" %>
+  <%  puts "***5b #{section.section.inspect}" %>
+  <%  puts "***5c #{NewsletterEditor.templates[section].inspect}" %>
+  <%  puts "***5d #{NewsletterEditor.templates[section.section].inspect}" %>
+
+    <% puts "--------------------" %>
+  <% if NewsletterEditor.templates[section.section] %>
+    <div class="section">
+      <%= 
+# campaign_ids(NewsletterEditor.templates[section.section].process(section,customer), newsletter).html_safe
+             NewsletterEditor.templates[section.section].process(section,customer).html_safe
+ %>
+    </div>
+  <% else %>
+    <% raise "problem - no definition of section '#{section.section}'"  %>
+  <% end %>
+
+<% end %>
+<%= NewsletterEditor.templates['Footer'].process(nil,customer).html_safe %>

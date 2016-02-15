@@ -1,0 +1,20 @@
+<div class="box">
+<%= # raise @promotion.inspect 
+%>
+  <h1>  editting pages for  "<%= link_to @promotion.tagline, {:action=>'promotion', :id => @promotion.promotion_id} %>"  promotion</h1>
+<ul><li>  <%= link_to 'Back to Promotions', :action => 'promotions' %>
+<li>  <%= link_to 'Create new page', :action => 'promotion_page', :promotion_id => @promotion.id %>
+</ul>
+  <%= form_tag :action => 'promotion_pages' do |f| %>
+    <table>
+    <% @promotion.promotion_pages.sort_by{|p| p.order }.each_with_index do |page,i| %>
+      <tr>
+        <td><%= text_field_tag "order[#{page.id}]", i+1, {:size => 1} %>
+        <td><%= link_to strip_tags(page.content)[0..50], :action => 'promotion_page', :id => page.id %>...</td>
+        <td><%= link_to "Delete", {:action => 'promotion_page', :id => page.id}, :method => :delete %>
+      </tr>
+    <% end %>
+    </table>
+    <%= submit_tag 'Save Order' %>
+  <% end %>
+</div>

@@ -1,0 +1,51 @@
+	<p>name<br/>
+	<%= text_field 'product', 'name'  %></p>
+
+	<p>author<br/>
+	<%= 
+	select(:product, :author_id, @authors)
+	%></p>
+
+	vendor
+	<table border=0><tr><td>
+	<%= select(:product, :vendor_id, @vendors) 	%></td><td>
+	vendor part number (optional): </td><td>
+	<%= text_field 'product', 'part_number'  %></td></tr>
+	</table>
+
+	<p>minutes<br/>
+	<%= text_field 'product', 'minutes'  %></p>
+
+	<p>display on website ?<br/>
+	<%= text_field 'product', 'display'  %></p>
+
+	<p>in print ?<br/>
+	<%= text_field 'product', :in_print  %></p>
+
+	<p>rental price ?<br/>
+	<%= 
+	select(:product, :price, @prices)
+	%></p>
+
+
+	<p>purchase price<br/>
+	<%= text_field 'product', 'purchase_price'  %></p>
+
+	<p>Description<br/>
+	<%= text_area 'product', 'description', :cols=>120, :rows=>30  %></p>
+
+	<p>handout<br/>
+	<%= text_field 'product', 'handout'  %></p>
+
+	<p><label>set membership</label><br/>
+	<%  
+            fields_for (@product_set_membership) do |setform| -%>
+    	   	    member  <%= setform.select(:ordinal, @ordinals)  %> 
+                of set  <%= setform.select(:product_set_id, @product_sets) %>
+        	<% end %>
+	</p>
+
+
+
+
+  </p>

@@ -1,0 +1,70 @@
+
+<%= form_tag ( {:action => 'index'}, {:method => :get} ) do %>
+  <%= text_field_tag  'search_str'  %>
+  <%= submit_tag 'Search by Magazine text' %>
+<% end %>
+
+<table border=0><tr><td>
+<h1>
+Magazine list</h1></td><td>
+(<%= link_to 'unfiltered', :action => 'list' %>)</td></tr></table>
+<hr>
+<%= link_to 'Previous page', { :page => @magazine_pages.current.previous } if @magazine_pages.current.previous  %> <%= link_to 'Next page', { :page => @magazine_pages.current.next } if @magazine_pages.current.next %> 
+<hr>
+<table>
+
+
+
+<tr>
+<th></th><th></th>
+<%
+rejected_columns = /^(street|city|state|zip)$/
+ for column in Magazine.content_columns.reject { |c| c.name =~ rejected_columns } %>
+<th>
+<%=
+
+            if (column.name == "catID") 
+			    "category"
+            else
+				column.name
+			end
+%>
+</th>
+<% end %>
+</tr>
+  
+<% for magazine in @magazine %>
+  <tr>
+    <td><%= link_to 'Show', magazine_path(magazine) %></td>
+    <td><%= link_to 'Edit', edit_magazine_path(magazine) %></td>
+<!--    <td><%= link_to 'Destroy', magazine_path(magazine), :confirm => 'Are you sure?', :method => :delete %></td>
+-->
+
+<% for column in Magazine.content_columns.reject  { |c| c.name =~ rejected_columns } %>
+<td>
+<%=
+
+            if (column.name == "url") 
+			    link_to magazine.url, magazine.url
+			elsif (column.name == "catID") 
+				if (magazine.catID.nil?)
+					""
+				else
+					link_to Category.find(magazine.catID).description, :controller=>"categories", :action=>"show", :id=>magazine.catID
+				end
+            else
+				magazine.send(column.name) 
+			end
+%>
+</td>
+<% end %>
+</tr>
+<% end %>
+</table>
+
+<br />
+<hr>
+<%= link_to 'Previous page', { :page => @magazine_pages.current.previous } if @magazine_pages.current.previous  %> <%= link_to 'Next page', { :page => @magazine_pages.current.next } if @magazine_pages.current.next %> 
+<hr>
+<br />
+<%= link_to 'New magazine', new_magazine_path %>

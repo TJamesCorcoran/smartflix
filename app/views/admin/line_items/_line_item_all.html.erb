@@ -1,0 +1,48 @@
+
+<% 
+  reject_list = [ "Zclineitemid", "format", "Apologycopyp", "Format", "Latemsg2sent", "Latemsg3sent", "Refunded","Created at", "Updated at" ]
+  columns = LineItem.columns.reject { |col| reject_list.include?(col.human_name)}
+
+  line_items_grouped = line_item_all.group_by(&:status_at)
+
+  grp_keys = (LineItem::LI_STATES + line_items_grouped.keys).uniq - [ :not_existing ]
+
+%>
+
+<% grp_keys.each do |li_status| %>
+    <a name="<%= li_status %>">
+
+    <h2> <%= li_status.to_s %> ( <%= line_items_grouped[li_status].size %> items) </h2>
+        <div style="margin-left:30px;">
+          <% (grp_keys).each do |li_status_nav| %>
+            <%= link_to li_status_nav, "##{li_status_nav}" %> |
+          <% end %>
+        </div>
+
+        <% if line_items_grouped[li_status].empty? %>
+            &nbsp; <i>none</i>
+        <% else %>
+            <table class="sortable" id="line_items" border=0>
+               <%=  render(:partial => "admin/line_items/line_item_headers", :locals => {:columns => columns} ) %>
+               <%=  render(:partial => "admin/line_items/line_item", :collection => line_items_grouped[li_status], :locals => {:columns => columns, :person => @employee} ) %>
+            </table>
+
+                  <% if li_status == :not_shipped %>
+                      <%= form_tag :controller =>:line_items, :action => :cancel_multiple do %>
+                      <%= hidden_field_tag :r_controller, params[:controller] %>
+                      <%= hidden_field_tag :r_action, params[:action] %>
+                      <%= hidden_field_tag :r_id,     params[:id] %>
+                      <% line_items_grouped[li_status].each do |line_item| %>
+                          <div style="display:none;">
+                            <%= check_box_tag("li_ids[#{line_item.id}]") %>
+                          </div>
+                      <% end %>
+                      <%= submit_tag "cancel multiple line items", 
+                                     :confirm => "really cancel these line items?"  if li_status == :not_shipped  && @employee.andand.authority_edit_order %>
+                      <% end %>
+                  <% end %>
+
+
+        <% end %>
+<% end %>
+

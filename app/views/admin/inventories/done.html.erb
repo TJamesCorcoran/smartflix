@@ -1,0 +1,16 @@
+<h1>Inventory: Done </h1>
+
+<%= render :partial => 'admin/shared/show_basicdata', :locals => { :item => @new_inventory, :partials => {} }  %>
+
+<table border=0>
+
+
+<table border=0>
+    <tr><tr><td width=50px;>:startID </td><td><%= session[:inventory][:start_id] %></td></tr>
+    <tr><td> :endID </td>                 <td><%= session[:inventory][:end_id] %></td></tr>
+    <tr><td> :present </td>               <td><%= session[:inventory][:present_ids].join(",") %></td></tr>
+    <tr><td> :misfiled </td>              <td><%= session[:inventory][:misfiled_ids].join(",") %></td></tr>
+    <tr><td> :missing </td>               <td><%= session[:inventory][:missing_ids].join(",") %></td></tr>
+    <tr><td> :found </td>                 <td><%= session[:inventory][:found_ids].join(",") %></td></tr>
+    <tr><td> :returned </td>              <td><%= session[:inventory][:returned_ids].join(",") %></td></tr>
+</table>

@@ -1,0 +1,17 @@
+<div class="signup_complete">
+
+  <h1>Congratulations!</h1>
+
+  <p>You're signed up for <strong><%= @univ_choice.name %></strong>.</p>
+
+  <p>We'll get the first DVDs out to you ASAP.</p>
+
+  <p>You can check your <strong>SmartFlix University</strong> status at any time by going <%= link_to "here", :controller => :customer, :action => :university_status %>.</p>
+
+</div>
+
+
+<script type="text/javascript">
+    var targetURL="<%= url_for :controller => :customer, :action => :university_status %>";
+    setTimeout("window.location=targetURL",5000);
+</script>

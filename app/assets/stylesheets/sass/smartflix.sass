@@ -1,0 +1,3226 @@
+//------------------------------------------------------------
+// NOTE: if this is a .css file, it is a GENERATED file, created
+//        from a .sccs file. 
+//
+// DO NOT EDIT the .css file by hand
+//
+// regenerate file:
+//    sass public/stylesheets/smartflix.scss:public/stylesheets/smartflix.css
+//
+// ...or set up a daemon to do it:
+//    cd ~/bus/sf/src/railscart
+//    sass --watch public/stylesheets/smartflix.scss:public/stylesheets/smartflix.css
+//------------------------------------------------------------ 
+
+.clear 
+  clear: both 
+
+//----------
+// SASS variables, etc.
+//  (see http://sass-lang.com/tutorial.html)
+//---------- 
+
+
+$nav_body_color: #eceadc
+$nav_hi_color: #107089
+$nav_lo_color: #034854
+
+$button_orange_bg: #ff6b00
+$button_orange_color: #ffffff
+
+$button_yellow_bg: #ffcc00
+$button_yellow_color: #000000
+
+$button_grey_bg: #888888
+$button_grey_color: #000000
+
+
+//---------- 
+// Buttons
+//---------- 
+
+// common to all buttons 
+a.button,
+button,
+input.button 
+  -moz-border-radius: 5px
+  -webkit-border-radius: 5px
+  border-radius: 5px
+  font-weight: bolder
+  padding: 3px
+  padding-left: 6px
+  margin-bottom: 10px
+  width: 95 px
+  border: 0px
+  border: 0
+  margin: 0
+  cursor: default
+  text-align: center
+  text-decoration: none
+
+  
+
+
+a.button span,
+  button span 
+  font-family: inherit
+  color: white
+  font-weight: bold
+  
+
+
+
+.rent-button 
+  margin-bottom: 10px
+  
+
+
+
+
+//---
+// color
+//-- 
+
+a.orange,
+button.orange, 
+input.orange 
+  background-color: $button_orange_bg
+  color:            $button_orange_color
+
+  
+ 
+
+
+button.grey,
+a.button.grey 
+  background-color: $button_grey_bg
+  color:            $button_grey_color
+
+  
+
+
+button.dark,
+a.button.dark 
+  background-color: $button_grey_bg
+  color:            $button_grey_color
+
+  
+
+
+button.yellow,
+a.button.yellow 
+  background-color: $button_yellow_bg
+  color:            $button_yellow_color
+
+  
+
+
+
+//---
+// buttons: size
+//:huge |:large |:med_wide |:med  |:small |:tiny |:nano 
+//
+//-- 
+
+
+// H 
+a.huge,
+button.huge 
+  height: 40px
+  width: 200px
+  
+
+
+a.huge span,
+button.huge span 
+  line-height: 30px
+  font-size: 120%
+  
+
+
+// L 
+a.large,
+button.large 
+  height: 40px
+  width: 115px
+  
+
+
+a.large span,
+button.large span 
+  line-height: 19px
+  font-size: 120%
+  
+
+
+// M 
+a.med_wide,
+button.med_wide 
+  height: 20px
+  width: 200px
+  
+
+
+a.med_wide span,
+button.med_wide span  
+
+
+// M 
+a.med,
+button.med  
+  height: 20px
+  width: 115px
+
+
+a.med_wide span,
+button.med span  
+
+
+// S 
+a.small,
+button.small  
+  height: 20px
+  width:  80px
+
+
+a.small span,
+button.small span  
+
+
+// T 
+a.tiny,
+button.tiny  
+  height: 20px
+  width:  70px
+
+
+a.tiny span,
+button.tiny span  
+
+
+// N 
+a.nano,
+button.nano  
+  height: 12px
+  width:  50px
+
+
+a.nano span,
+button.nano span  
+  line-height: 10px
+  font-size: 80%
+
+
+
+
+
+
+
+//----------
+// Affiliate Links
+//---------- 
+
+div.affiliate_link 
+  margin: 15px 0
+  clear: both
+  
+
+div.affiliate_link h4 
+  margin: 2px
+  
+
+
+//---------- 
+// Flipper 
+//---------- 
+$banner_max_width:  575px
+
+$inner_flipper_padding: 10px
+
+@mixin banner-base 
+  max-width: $banner_max_width
+  border: 3px solid
+  margin: 0 0 10px 0
+  padding: 0 0 0px 0px
+  position: relative
+  
+
+
+.inner_flipper 
+  @include banner-base
+  border-color: #80A4CB
+  background-color: #FFF
+  padding: $inner_flipper_padding
+  max-width: ($banner_max_width - (2 * $inner_flipper_padding))
+  
+
+
+.inner_flipper .close 
+  position: absolute
+  font-size: 11px
+  right: 10px
+  top: 2px
+  
+
+
+//----------
+//  New Customer / Partial Customer Funnel stuff
+//----------
+
+div.new_customer_widget 
+  width: 400px
+  border: solid 4px #b00000
+  position: absolute
+  left: 400px
+  top: 300px
+  z-index: 10
+  
+
+
+#new_customer_widget_error 
+  position: absolute
+  left: 200px
+  top:  100px
+  z-index: 11
+  
+
+
+
+div.new_customer_widget_title 
+  width: 100%
+  background-color: #b00000
+  font-size: 14px
+  color: #2C2A1C
+  font-weight: bolder
+  
+
+
+div.new_customer_widget_title_left h1 
+  padding-left: 10px
+  margin-bottom: 0px
+  padding-top: 3px
+  padding-bottom: 5px
+  color: white
+  font-size: 23px
+  line-height: 28px
+
+  
+
+
+div.new_customer_widget_title_right 
+  float:right
+  padding-right: 10px
+  
+
+
+div.new_customer_widget_title_right a 
+  color: white
+  
+
+
+div.new_customer_widget_body 
+  padding: 10px
+  
+
+
+#new_customer_widget_initial > div.new_customer_widget_body 
+  background-color: #ffffc0
+  
+
+
+#new_customer_widget_error > div.new_customer_widget_body 
+  background-color: #ffaa33
+  
+
+
+#new_customer_widget_success > div.new_customer_widget_body 
+  background-color: #c0ffc0
+  
+
+
+div.new_customer_widget_body p 
+  font-size: 0.8em
+  margin-top: 0px
+  
+
+
+div.new_customer_widget_body form input.email 
+  color: #808080
+  
+
+
+//----------
+// ???
+//---------- 
+
+
+.address 
+  float: left
+  margin-right: 40px
+  margin-top: -10px
+  
+
+
+//----------
+// testimonials
+//---------- 
+
+.comment 
+  margin-left: 10px
+  margin-right: 100px
+  margin-top: 30px
+  font-size: .75em
+  line-height: 1.6em
+  color: Black
+  
+
+
+.comment p 
+  font-size: 1em
+  margin-bottom: 0px
+  
+
+
+.customer-name 
+  margin-left: 10px
+  margin-top: 3px
+  font-size: .75em
+  line-height: 1.6em
+  color: Black
+  font-weight: bolder
+  
+
+
+//----------
+// cat nav bar
+//---------- 
+
+.category-listing-section 
+  clear: both
+  overflow: hidden
+  margin-bottom: 20px
+  
+
+.category-listing-section h1 
+  margin-bottom: 10px
+  font-family: Georgia, serif
+  font-size: 22px
+  line-height: 26px
+  
+
+
+//----------
+// cart
+//---------- 
+
+.shopping-cart 
+  vertical-align: middle
+  
+
+
+//----------
+//  general typography
+//----------
+
+.text-content 
+  max-width: 100
+  padding-right: 20px
+  
+
+
+div.text-content p 
+  max-width: 600px
+  
+
+
+.text-content blockquote 
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.6em
+  color: Black
+  
+
+
+a:hover 
+  color: #e87833
+  
+
+
+ol 
+
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.6em
+  color: Black
+  
+
+
+ol li p 
+
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  font-size: 1.0em
+  line-height: 1.6em
+  color: Black
+  
+
+
+td ul li 
+  margin-bottom: -15px
+  font-size: 1.0em
+  
+
+
+td ul li 
+  margin-bottom: -15px
+  font-size: 1.0em
+  
+
+
+ul.report_problem li 
+  margin-bottom: 0px
+  
+
+
+
+ul li 
+
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.6em
+  color: Black
+  
+
+
+body 
+  min-width: 580px // 2x LC width + RC width 
+  margin-bottom: 0px
+  margin-left: 0px
+  margin-right: 0px
+  margin-top: 0px
+  padding-left: 0px
+  padding-right: 0px
+  padding-top: 0px
+  padding-bottom: 0px
+
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  color: Black
+
+  
+
+
+#container 
+  padding-top: 0px
+  padding-left: 10px
+  width: 980px
+  clear: left
+  
+
+
+#container .column 
+  float: left
+  
+
+
+#container #center 
+  width: 575px
+  
+
+
+#container #left 
+  width: 200px
+  float: left
+  
+
+
+#container #right 
+  width: 180px           // RC width 
+  float: right
+  margin-left: 20px
+  
+
+
+#container-2col 
+  padding-left: 200px   // LC width 
+  padding-top: 0px
+  clear: left
+  
+
+
+#container-2col #center 
+  float: left
+  width: 100%
+  
+
+
+#left-2col 
+  width: 200px    // LC width 
+  margin-left: -200px
+  float: left
+  
+
+
+#right-2col 
+
+  width: 0px         // RC width 
+  margin-right: 0px  // RC width 
+
+  
+
+
+#footer 
+  clear: both
+  padding-top: 40px
+  padding-bottom: 20px
+  font: 12px Verdana, Arial, Helvetica, sans-serif
+  line-height: 18px
+  
+
+
+
+
+
+p , td 
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.6em
+  color: Black
+  
+
+
+
+p.faq-question 
+  font-weight: bolder
+  
+
+
+p.faq-answer 
+
+  margin-left: 28px
+
+  
+
+
+
+//---------- 
+// typography 
+//---------- 
+
+h1, h2.looks_like_h1 
+
+  font-family: Georgia, serif
+  font-size: 28px
+  line-height: 32px
+  color: black
+  margin-top: 0px
+  vertical-align: top
+  
+
+
+.rent-dvds-like 
+
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 1.1em
+  line-height: 1.3em
+  margin-bottom: 1.2em
+  color: black
+  margin-top: 0em
+
+  
+
+
+h2 
+
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 14px
+  line-height: 16px
+  color: black
+
+  
+
+
+.inline_h2 
+  font-size: 150%
+  
+
+
+.inline_red 
+  color: red
+  
+
+
+//---------- 
+// Vidcap 
+//---------- 
+
+
+.vidcap 
+  width: 198px
+  height: 198px
+  float: left
+  margin-bottom: -8px
+  
+
+
+//----------
+// video descriptions
+//---------- 
+
+.vid-desc 
+// this is essential, as it turns out 
+  position: relative
+  float: left
+  max-width: 575px   // if we have a very very long video title, it can stretch everything out - use this as a fallback 
+  
+
+.vid-desc p.with-author 
+  margin-top: 0
+  
+
+.vid-desc h1.title 
+  margin-bottom: 5px
+  
+
+.vid-desc img.rating 
+  margin-bottom: -15px
+  
+
+.vid-desc ul.also-rented li 
+  padding: 0 0 6px 0
+  
+
+
+div.vid-desc h2 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 18px
+  line-height: 22px
+  color: #e87731
+  margin: 0
+  padding: 14px 0 0 0
+  font-weight: bolder
+  
+
+
+div.vid-desc h3 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 16px
+  color: black
+  margin: 15px 0 2px 0
+  
+
+
+//----------
+// reviews, ratings
+//---------- 
+
+#vid-rating h2 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 18px
+  line-height: 22px
+  color: #e87731
+  margin: 0
+  padding: 7px 0 0 0
+  font-weight: bolder
+  
+
+
+#vid-rating h3 
+
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 13px
+  line-height: 18px
+  margin-top: 0px
+  font-weight: bolder
+  
+
+
+a.write-review 
+  font-size: 11px
+  
+
+
+#vid-rating div.review div.header 
+  height: 23px
+  background-color: #eceadd
+  
+
+
+#vid-rating div.review div.header div span.label,
+#vid-rating div.review div.header div span.content 
+  font-size: 11px
+  line-height: 23px
+  vertical-align: middle
+  
+
+
+#vid-rating div.review div.header div span.label 
+  font-weight: bold
+  
+
+
+#vid-rating div.review div.header div.reviewer 
+  float: left
+  padding-left: 5px
+  
+
+
+#vid-rating div.review div.header div.rating 
+  float: left
+  padding: 5px
+  
+
+
+#vid-rating div.review blockquote 
+  margin: 9px 0 9px 0
+  padding: 0 0 9px 76px
+  background: url('/images/bq.gif') top left no-repeat
+  min-height: 45px
+  
+
+
+#vid-rating div.review blockquote p 
+  margin: 0 0 16px 0
+  
+
+
+
+//---------- 
+//   left-hand col:  nav
+//   right-hand col: rent buttons
+//---------- 
+
+
+#sidenav-wrap 
+  padding-right: 20px
+  
+
+
+#sidenav-box 
+  background-color: #eceadc
+  margin-top: 0px
+  margin-bottom: 20px
+  padding: 15px 5px 10px 5px
+  
+
+
+#rent-box, #univ-box 
+  background-color: #eceadc
+  margin-top: 0px
+  margin-bottom: 20px
+  padding: 15px 20px 10px 20px
+  
+
+
+#sidenav-box a, #sidenav-box a:visited 
+  text-decoration: none
+  color: black
+  font-weight: bold
+  line-height: 1.3em
+  
+
+
+#sidenav-box a:hover 
+  text-decoration: none
+  color: #e87833
+  
+
+
+#sidenav-box-header, #rent-box-header, #univ-box-header 
+  width: 180px
+  height-min: 28px
+  margin-bottom: 0px
+  padding-bottom: 0px
+  background-color: #116f89
+  color: #fff
+  font-weight: bolder
+  text-align: center
+  padding-top: 10px
+  padding-bottom: 10px
+  
+
+
+#sidenav-box-header h1, #rent-box-header h1 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 16px
+  line-height: 18px
+  color: black
+  margin-top: 0px
+  margin-bottom: 0px
+  padding-bottom: 0px
+  padding-top: 7px
+  padding-left: 20px
+  
+
+
+ul.menu 
+  list-style: none
+  margin-left: 0px
+  margin-top: 0px
+  padding: 0
+  
+
+ul.menu li 
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  line-height: 1.3em
+  padding: 0
+  margin: 0
+  
+
+ul.menu li ul.menu 
+  padding-left: 10px
+  
+
+ul.menu li a 
+  display: block
+  padding: 4px 15px 4px 15px
+  margin: 0
+  
+
+ul.menu li ul.menu li 
+  font-size: 12px
+  padding-right: 0
+  
+
+ul.menu li a.selected 
+  background-color: white
+  border: 1px solid #cfcaac
+  margin: 3px 0
+  color: $nav_hi_color 
+  
+
+
+#rent-box p, #univ-box p 
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.3em
+  color: black
+  margin-top: 0px
+  padding-top: 0px
+  padding-bottom: 10px
+  
+
+
+#this-subcat 
+  font-weight: bolder
+  color: #e87833
+  
+
+
+#nav-box1 ul ul ul li:before 
+  content: "\00BB \0020" // custom bullets 
+  text-indent: -2em
+  
+
+
+
+#sidenav-box p, #sidenav-box div 
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1em
+  color: black
+  margin-top: 0px
+  padding-top: 0px
+  padding-bottom: 0px
+  padding-right: 20px
+  
+
+
+#sidenav-box p a 
+  text-decoration: none
+  
+
+
+div#sidenav-box div.indented-cat 
+  padding-left: 20px
+  
+
+
+#selected-cat 
+  font-weight: bold
+  color: $nav_hi_color
+  background-color: white
+  
+
+
+#selected-cat a, #selected-cat a:visited 
+  text-decoration: none
+  color: $nav_hi_color
+  font-size: 12px
+  
+
+
+#bullet 
+  margin-left: -0.9em
+  color: $nav_hi_color
+  font-weight: bold
+  font-size: 1.2em
+  
+
+
+
+//---------- 
+//
+//   top nav bar / tabs
+//
+//---------- 
+
+$tab_bar_ascender: 25px
+$blue_bar_height: 30px
+
+
+#sf-logo 
+  padding-left: 20px
+  padding-top: 20px
+  
+
+
+#header 
+  background-color: #eceadc
+  height: 60px + $tab_bar_ascender 
+  
+
+
+#navbar 
+  height: 30px
+  background-color: red
+  
+
+
+#bluebar 
+  height: $blue_bar_height
+  background-color: $nav_hi_color
+  
+
+
+#white-graf 
+  float: left
+  
+
+
+#bluebar p 
+  margin: 0
+  padding: 0 0 0 20px
+  color: white
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-weight: bolder
+  line-height: 30px
+  vertical-align: middle
+  
+
+
+
+#tab-wrap 
+  height: $tab_bar_ascender
+  background-image: url('/images/banner_bg.gif')
+  
+
+
+#tabs 
+  padding-right: 40px
+  margin-left: 0px
+  float: right
+  width: 590
+  
+
+
+.tab 
+  background-color: $nav_lo_color
+  float: left
+  margin-right: 3px
+  height: $tab_bar_ascender
+
+  display: relative
+  position: relative
+  text-align: center
+  
+
+
+.tab img.left 
+  position: absolute
+  left: 0
+  
+
+
+.tab img.right 
+  position: absolute
+  right: 0
+  
+
+
+.tab.active 
+  background-color: $nav_hi_color
+  
+
+
+//
+topright_nav 
+  float:right 
+  margin: 10px 10px 0 0
+  
+
+
+topright_nav a,
+div.tab a 
+  color: white
+  font-weight: bold
+  font-size: 12px
+  text-decoration: none
+  padding: 0 12px 0 12px
+  padding-top: 26px
+  vertical-align: bottom
+
+  
+
+
+
+
+
+#bluebar #searchbox 
+  position: relative
+  float: right
+  padding-right: 43px
+  color: white
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-weight: bolder
+  font-size: .75em
+  line-height: 1.6em
+  
+
+
+    //---------- 
+//
+//   top nav bar: search
+//
+//---------- 
+
+
+.search-field 
+  height: 17px
+  line-height: 17px
+  border: 0
+  background-color: #ffffcd
+  margin-top: 6px
+  color: black
+  font-size: 12px
+  
+
+
+.search-field:focus 
+  background-color: white
+  
+
+
+form.search 
+  padding: 15px
+  border: 1px solid #DFDCD1
+  background-color: #F1F0EB
+  overflow: hidden
+  width: 280px
+  
+
+
+form.search input.search-field 
+  border: 1px solid black
+  width: 163px
+  
+
+
+form.search button 
+  margin-top: 15px
+  float: right
+  
+
+
+#search-field 
+
+  position: relative
+  float: left
+  padding-right: 10px
+  
+
+
+#search-title 
+  position: relative
+  float: left
+  padding-right: 10px
+  line-height: 30px
+  vertical-align: middle
+  
+
+
+#search-go 
+  position: relative
+  float: left
+  padding-top: 6px
+  
+
+
+//----------
+// breadcrumb nav & account links 
+//---------- 
+
+#links 
+  clear: left
+  padding-top: 16px // this is also a containing block for the floats 
+  
+
+
+#breadcrumb-nav 
+  padding-left: 20px
+  margin-top: 0px
+  padding-top: 0px
+  margin-bottom: 15px
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: .75em
+  position: relative
+  float: left
+  min-width: 240px
+  
+
+
+#account-nav 
+  position: relative
+  float: right
+  margin-top: -4px
+  padding-top: 0px
+  padding-right: 40px
+  
+
+
+#account-nav p 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: .75em
+  margin-top: 0px
+  padding-top: 0px
+  
+
+
+#help 
+  color: red
+  
+
+
+#vid-trivia 
+  margin-top: 30px
+  
+
+
+#vid-rating 
+  margin-top: 0px
+  
+
+
+
+//----------
+//  product area
+//---------- 
+
+
+
+.vidcap-sm 
+  width: 109px
+  height: 109px
+  float: left
+  
+
+
+img.new-overlay 
+  width: 109px
+  height: 109px
+  float: left
+  margin-left: -109px
+  
+
+
+#subcat-title h1 
+  margin-top: 0px
+  padding-top: 0px
+  padding-bottom: 10px
+  
+
+
+#subcat-title p 
+  margin-top: -12px
+  padding-top: 0px
+  
+
+
+//----------
+//  univ_element listing in univ listing page
+//----------
+
+div.univ_element 
+  background-color: #f1f0eb
+  width: 500px
+  min-height: 200px
+  
+
+
+div.univ_element h2 
+  padding-left: 20px
+  height: 26px
+  font-weight: bold
+  overflow: hidden
+  vertical-align: top
+  background-color: #dfdcd1
+  
+
+
+div.univ_element_inner 
+  margin: 20px
+  
+
+
+div.univ_element_inner img 
+  padding: 10px
+  
+
+
+div.univ_upsell_review 
+  max-width: 600px 
+  padding-top: 15px
+  
+
+
+div.univ_upsell_review h2 
+  line-height: 150%
+  
+
+
+div.univ_upsell_review_button_right 
+  float:right
+  
+
+
+div.univ_search_header 
+  width: 346px
+  
+
+
+//----------
+// search results 
+//---------- 
+
+
+// item listing 
+
+div.item 
+  background-color: #f1f0eb
+  height: 135px
+  width: 246px
+  float: left
+  padding: 5px
+  margin: 7px 13px 7px 0
+  position: relative
+  
+
+
+div.bundle 
+  border: 1px solid #827f6c
+  width: 513px
+  height: 133px
+  background-color: #F1F0EB
+  float: left
+  margin: 7px 13px 7px 0pt
+  padding: 5px
+  position: relative
+  
+
+
+div.bundle a.help 
+  float:right
+  font-size: 12px
+  margin-top: 5px
+  padding: 4px
+  
+
+
+div.item h2, div.bundle h2 
+  margin: -5px -5px 5px -5px
+  height: 26px
+  font-weight: bold
+  overflow: hidden
+  vertical-align: top
+  background-color: #dfdcd1
+  
+
+
+div.bundle h2 
+  background-color: #827f6c
+  
+
+
+div.item h2 a, div.bundle h2 a 
+  text-decoration: underline
+  color: blue
+  display: block
+  overflow: hidden
+  height: 16px
+  line-height: 18px
+  font-size: 12px
+  padding: 4px 5px 6px 5px
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  
+
+
+div.bundle h2 a 
+  color: white
+  
+
+
+div.item h2 a:hover, div.bundle h2 a:hover 
+  background-color: #8f8e86
+  color: white
+  
+
+
+div.item img, div.bundle img 
+  float: left
+  
+
+
+div.item h3 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-weight: bold
+  float: left
+  font-size: 12px
+  margin: 3px 0
+  width: 137px
+  line-height: 16px
+  height: 16px
+  overflow: hidden
+  
+
+
+div.item h3 a 
+  color: black 
+
+div.item p 
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  font-size: 12px
+  line-height: 16px
+  height: 48px
+  float: left
+  margin: 5px 0 5px 0
+  padding: 0
+  width: 137px
+  overflow: hidden
+  
+
+
+div.item p.no-author 
+  height: 64px 
+
+div.item button, div.bundle button 
+  position: absolute
+  bottom: 3px
+  right: 3px
+  
+
+
+.rent-buttons p 
+  margin-bottom: 25px
+  
+
+.rent-buttons hr 
+  margin: 20px -20px 20px -20px
+  height: 15px
+  background-color: $nav_hi_color
+  border: 0
+  
+
+
+.rent-buttons form 
+  margin-bottom: 5px
+  
+
+
+
+//----------
+//  post checkout
+//---------- 
+
+
+
+div.postcheckout_page 
+  margin-left: 100px
+  width: 685px
+  
+
+
+div.postcheckout_header 
+  margin-top: 20px
+  margin-left: 200px
+  width: 585px
+  
+
+
+div.postcheckout_header p 
+  color:Black
+  font-family:Verdana,Helvetica,Arial,sans-serif
+  font-size: 1.0em
+  line-height: 1.2em
+  
+
+
+div.postcheckout_header h1 
+  font-size: 1.7em
+  color: #cc0000            
+  
+        
+
+div.postcheckout_header h2 
+  font-size: 1.0em
+  
+        
+
+div.postcheckout_header img 
+  float: left
+  margin-right: 20px
+  
+        
+
+div.postcheckout_footer 
+  margin-right: auto
+  margin-left: auto
+  width: 600px
+  font-size: 1.0em
+  
+
+
+div.postcheckout_item 
+  background-color: #f1f0eb
+  height: 300px
+  width: 500px
+  float: left
+  padding: 5px
+  margin: 7px 13px 7px 0
+  position: relative
+  
+
+
+div.postcheckout_item h2 
+  margin: -5px -5px 5px -5px
+  height: 26px
+  font-weight: bold
+  overflow: hidden
+  vertical-align: top
+  background-color: #dfdcd1
+  
+
+
+h3.customer_review_header 
+  font-size: 1.0em
+  
+
+
+// positioning mess 
+
+.button-float p 
+  position: relative
+  float: left
+  padding-top: 0px
+  padding-bottom: 0px
+  margin-top: 0px
+  margin-bottom: 0px
+
+  
+
+
+.item-button 
+  position: relative
+  float: left
+  padding-right: 3px
+  
+
+
+//----------
+//  category page
+//---------- 
+
+
+
+#subcat-wrapper 
+
+  background-image: url('/images/sidenav_bg.gif')
+  padding: 20px
+  margin-bottom: 20px
+  
+
+
+.clear 
+
+  clear: both
+  display: block
+  height: 1px
+  overflow: hidden
+  padding: 0px
+  margin-top: 0px
+  margin-left: 0px
+  margin-right: 0px
+
+  
+
+
+.hidden 
+  display: none
+  
+
+
+#cart-guarantee 
+  width: 690px
+  
+
+
+
+
+#subcat-container-header 
+
+  height: 33px
+  width: 690px
+  background-image: url('/images/subcat_header_bg.gif')
+  margin-bottom: 0px
+  padding-bottom: 0px
+
+  
+
+
+#subcat-container-header h2 
+
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 16px
+  line-height: 18px
+  color: black
+  margin-top: 0px
+  margin-bottom: 0px
+  padding-bottom: 0px
+  padding-top: 7px
+  padding-left: 20px
+
+  
+
+
+#subcat-list p 
+
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.1em
+  color: Black
+  margin-top: 0px
+  padding-top: 0px
+  padding-bottom: 0px
+  padding-right: 20px
+  position: relative
+  float: left
+
+  
+
+
+#item-sample-container 
+
+  position: relative
+  float: left
+
+  
+
+
+#subcat-container 
+
+  position: relative
+  float: left
+  width: 690px
+
+  
+
+
+
+
+// new category page stuff 
+div.subcategories 
+  width: 792px
+  background-color: #F1F0EB
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  overflow: hidden
+  margin-bottom: 20px
+  
+
+div.subcategories h2 
+  background-color: #DFDCD1
+  margin: 0
+  height: 28px
+  line-height: 28px
+  padding: 0 20px
+  
+
+div.subcategories ul 
+  float: left
+  width: 176px
+  list-style-type: none
+  padding: 15px 0 15px 20px
+  margin: 0
+  
+
+div.subcategories ul li 
+  padding-bottom: 5px
+  
+
+
+
+
+
+
+//----------
+//  checkout
+//---------- 
+
+
+// start header section duplicated with ck- prepended in case we want to change stuff just for this page 
+
+#ck-header 
+
+  background-image: url('/images/banner_bg.gif')
+  min-height: 70px
+
+  
+
+
+#ck-sf-logo 
+
+  padding-left: 20px
+  padding-top: 15px
+
+  
+
+
+
+#ck-bluebar 
+
+  height: 20px
+  background-image: url('/images/tab_bar_bg.gif')
+
+  
+
+
+#ck-white-graf 
+
+  float: left
+
+  
+
+
+#ck-bluebar p 
+
+  margin-top: 0px
+  padding-top: 3px
+  padding-bottom: 0px
+  padding-left: 20px
+  color: white
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-weight: bolder
+
+  
+
+
+#ck-bluebar #ck-searchbox 
+
+  position: relative
+  float: right
+  padding-right: 40px
+
+  color: white
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-weight: bolder
+  font-size: .75em
+  line-height: 1.6em
+
+  
+
+
+.ck-search-field 
+
+  height: 12px
+  border: 1px solid white
+  background-color: #84B5D3
+  margin-top: 6px
+
+  
+
+
+#ck-search-field 
+
+  position: relative
+  float: left
+  padding-right: 10px
+
+  
+
+
+#ck-search-title 
+
+  position: relative
+  float: left
+  padding-right: 10px
+  padding-top: 5px
+
+  
+
+
+
+#ck-search-go 
+
+  position: relative
+  float: left
+  padding-top: 5px
+
+  
+
+
+// end duplicate header stuff 
+
+#ck-content 
+
+  margin-top: 20px
+
+  
+
+
+.ck-column-left 
+
+  background-image: url('/images/checkout_column_left_bg.gif')
+  height: 33px
+  width: 520px
+
+  
+
+
+.ck-column-right 
+
+  background-image: url('/images/checkout_column_right_bg.gif')
+  height: 33px
+  width: 350px
+
+  
+
+
+.ck-column-left h1, .ck-column-right h1 
+
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 16px
+  line-height: 18px
+  color: black
+  margin-top: 0px
+  margin-bottom: 0px
+  padding-bottom: 0px
+  padding-top: 7px
+  padding-left: 20px
+
+  
+
+
+//---------- 
+// Shopping Cart 
+//---------- 
+
+
+#ck-checkout, #ck-shopping-cart 
+
+  position: relative
+  float: left
+  margin-left: 20px
+  margin-bottom: 40px
+
+  
+
+
+
+#ck-checkout 
+
+  width: 520px
+
+  
+
+
+#ck-shopping-cart 
+  width: 350px
+  
+
+
+#ck-checkout-box, #ck-shopping-cart-box 
+  background-image: url('/images/sidenav_bg.gif')
+  padding-left: 20px
+  padding-right: 20px
+  padding-top: 20px
+  padding-bottom: 20px
+  
+
+
+#ck-checkout-box h1, #ck-shopping-cart-box h1 
+  font-family: Verdana, Geneva, Arial, Helvetica, sans-serif
+  font-size: 16px
+  line-height: 18px
+  color: black
+  padding-top: 20px
+  
+
+
+#ck-headline-first 
+  margin-top: -20px
+  
+
+
+#ck-headline-first-2 
+  margin-top: 0px
+  
+
+
+#ck-table-container 
+  padding-top: 20px
+  padding-right: 20px
+  padding-bottom: 20px
+  
+
+
+#ck-table-container 
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.6em
+  color: Black
+  
+
+
+#ck-table 
+  width: 310px
+  
+
+
+#checkout-button 
+  background-color: $button_orange_bg
+  color: $button_orange_color
+
+  -moz-border-radius: 10px
+  -webkit-border-radius: 10px
+  border-radius: 10px
+
+  font-weight: bolder
+  
+
+
+#ck-table 
+
+  width: 310px
+
+  
+
+
+//---------- 
+// Discount banner 
+//---------- 
+
+h1.discount_banner 
+  border-top: 3px solid black
+  border-bottom: 3px solid black
+  color: black
+  float: left
+  font-size: 22px
+  margin: 0.1em 0 0.6em 0
+  padding: 0.4em 0
+  text-align: center
+  width: 25em
+  
+
+
+///*******************
+//   show the purchase price, rental price, and savings on
+//   product pages and in the cart
+///
+
+div.purchase_price_comparison_leftshift 
+  margin-left: -15px
+  
+
+
+div.purchase_price_comparison 
+  margin-bottom: 20px
+  text-align: right
+  
+
+
+div.purchase_price_comparison 
+  margin-bottom: 20px
+  text-align: right
+  
+
+
+div.purchase_price_comparison td 
+  margin-bottom: 0px
+  color: black
+  font-size: 0.85em !important
+  font-family: verdana, helvetica, arial, sans-serif
+  
+
+
+span.purchase_price_product 
+  text-decoration: line-through
+  
+
+
+span.rental_price_product 
+  font-size: 1.4em
+  font-weight: bold
+  color: #cc0000                    
+  
+
+
+span.savings_price_product 
+  font-weight: bold
+  color: #cc0000                    
+  
+
+
+td.comparison_right 
+  text-align: right
+
+td.comparison_left 
+  text-align: left
+
+//---------- 
+// Recently Viewed Videos 
+//---------- 
+
+div#recent-wrap 
+  margin-top: 200px
+  
+
+
+
+div#recently-viewed-box 
+  background-color: #eceadc
+  border: 3px
+  margin-top: 0px
+  margin-bottom: 20px
+  padding: 15px 20px 10px 20px
+  
+
+
+div#recent-box-header 
+  width: 180px
+  height: 28px
+  margin-bottom: 0px
+  padding-bottom: 0px
+  
+
+
+div.mini-product 
+  font-size: 0.75em
+  margin-bottom: 30px
+  
+
+
+.box 
+  border: solid thin black
+  padding: 5px
+  margin: 5px
+  background-color: white
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  line-height: 1.4em
+  color: Black
+  
+
+
+.box-float 
+  float: left
+  margin-right: 40px
+  position: relative
+  
+
+
+.box p 
+  font-size: 1em
+  line-height: 1.4em
+  
+
+
+.error-box 
+  @include banner-base
+  border: solid 3px $nav_hi_color
+  background-color: yellow
+  margin-bottom: 20px
+  width: 450px 
+
+.ck-error-box 
+  margin-top: 20px
+  margin-left: 20px
+  margin-bottom: 20px
+  
+
+
+.error-span 
+  padding: 10px
+  font-weight: bolder
+  line-height: 40px
+  
+
+
+.problemReportBox 
+  border: solid 2px #80A4CB
+  padding: 5px
+  margin-bottom: 20px
+
+.fieldWithErrors input,
+.fieldWithErrors select,
+.fieldWithErrors textarea 
+  background-color: #FFD0D0
+  
+
+
+.errorExplanation 
+  border: solid thin black
+  padding: 5px
+  margin: 5px
+  background-color: #FFFFB0
+  
+
+
+.payment_problem_detail 
+  font-weight: bolder
+  color: #dd0000
+
+
+//---------- 
+// IE hacks  
+//---------- 
+
+
+
+// IE7 fix  
+
+// #container-2col > #left-2col 
+//   left: -200px // -LC width for others 
+//   margin-left: expression(  document.all.center.offsetWidth * -1 +  parseFloat(document.all.center.currentStyle.paddingLeft)  ) // Fix for IE7 
+//   
+// 
+// 
+// #container > #left 
+//   left: -200 // -LC width for others 
+//   margin-left: expression(
+//   document.all.center.offsetWidth * -1 +  parseFloat(document.all.center.currentStyle.paddingLeft) +  parseFloat(document.all.left.currentStyle.paddingLeft) +  parseFloat(document.all.left.currentStyle.paddingRight)  ) // Fix for IE7 
+  
+div.gc_header 
+  font-size: 0.9em
+  
+
+
+div.gc_entry 
+  margin-top: 25px
+  
+
+
+div.gc_image 
+  float: left
+  margin-right: 15px
+  
+
+
+div.gc_description 
+  font-size: 0.8em
+  margin-bottom: 5px
+  width: 650px
+  
+
+
+br.gc_clear 
+  clear: both
+  
+
+
+// scanalert 
+div#smartflix-secure 
+  float: right
+  width: 150px
+  background-color: white
+  border: 1px solid #827f6c
+  margin: 10px 20px 20px 0
+  padding: 2px
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  font-size: 12px
+  
+
+
+
+// Submenus 
+div#sidenav-box a 
+  line-height: 14px 
+
+div#sidenav-box.alt 
+  padding-left: 0 
+
+div#sidenav-box div 
+  padding: 5px 0 5px 0 
+
+div#sidenav-box.alt div.menu-head 
+  position: relative
+  display: block
+  padding: 2px 0 3px 2px
+  
+
+div#sidenav-box.alt div.menu-head a,
+div#sidenav-box.alt div.menu-head div.name 
+  display: block
+  padding: 4px 8px
+  position: relative
+  z-index: 2
+  font-size: 12px
+  
+
+div#sidenav-box.alt div#selected-cat 
+  display: block
+  padding: 4px 4px 4px 16px
+  
+
+
+div#sidenav-box.alt div.menu-head:hover 
+  padding: 0
+  border-top: 2px solid #c6c4b9
+  border-left: 2px solid #c6c4b9
+  border-bottom: 3px solid #929188
+  
+
+div#sidenav-box.alt div.menu-head:hover a,
+div#sidenav-box.alt div.menu-head:hover div.name 
+  background-color: #e3e1d4
+  
+
+div#sidenav-box.alt div.menu-head a:hover 
+  color: blue
+  font-weight: bold
+  text-decoration: underline
+  
+
+//div#sidenav-box.alt div.menu-head a.nolink:hover 
+  color: black
+  font-weight: normal
+  text-decoration: none
+  
+
+div#sidenav-box.alt div.menu-head:hover div.subcat-menu, div.subcat-menu:hover 
+  display: block
+  
+
+div#sidenav-box.alt div.menu-head div.subcat-menu 
+  position: absolute
+  background-color: #e3e1d4
+  left: 168px
+  top: -2px
+  
+
+div#sidenav-box.alt div.subcat-menu 
+  display: none
+  z-index: 1
+  border-left: none
+  padding-right: 0 !important
+  width: 255px
+  border-top: 2px solid #c6c4b9
+  border-left: 2px solid #c6c4b9
+  border-right: 3px solid #929188
+  border-bottom: 3px solid #929188
+  
+
+div#sidenav-box.alt div.subcat-menu ul 
+  padding: 0 !important
+  margin-bottom: 0
+  
+
+div#sidenav-box.alt div.subcat-menu ul li 
+  padding: 0 !important 
+
+div#sidenav-box.alt div.subcat-menu ul li a 
+  font-size: 12px
+  line-height: 1.3em
+  font-weight: normal
+  display: block
+  padding-top: 3px !important
+  padding-bottom: 3px !important
+  padding-left: 25px !important
+  
+
+
+
+// Category Listing 
+
+div.category-column 
+  float: left
+  width: 300px
+  
+
+div.parent-category 
+  padding: 10px 0
+  font-size: 12px
+  
+
+div.parent-category a 
+  font-weight: bold
+  display: block
+  padding-bottom: 5px
+  
+
+div.parent-category div.children a 
+  font-weight: normal
+  display: block
+  padding: 0 0 0 10px
+  
+
+
+
+div#sidenav-box-header h1 a 
+  color: black
+  text-decoration: none
+  
+
+div#sidenav-box-header h1 a:hover 
+  text-decoration: underline
+  
+
+
+// Can't find what you're looking for? 
+div#help-find 
+  clear: left
+  float: left
+  margin-top: 30px
+  height: 117px
+  background: url(/images/search_bulb.jpg) top left no-repeat
+  padding: 37px 0 0 97px
+  font-size: 15px
+  
+
+div#help-find div 
+  font-weight: bold
+  color: white
+  background-color: $nav_hi_color
+  height: 48px
+  line-height: 48px
+  padding: 0 40px 0 20px
+  float: left
+  
+
+div#help-find a 
+  font-weight: bold
+  padding: 0 40px 0 40px
+  line-height: 44px
+  display: block
+  height: 44px
+  float: left
+  border: 2px solid $nav_hi_color
+  
+
+
+label.help-search 
+  font-size: 12px 
+
+//---------- 
+// Tell a friend 
+//---------- 
+
+div.tell-a-friend-title 
+  width: 100%
+  height: 18px
+  background-color: #DFDCD1
+  padding-left: 13px
+  padding-right: 13px
+  font-size: 14px
+  color: #2C2A1C
+  font-weight: bolder
+  
+
+
+div.tell-a-friend-title-close 
+  float: right
+  
+
+
+div.tell-a-friend 
+  width: 100%
+  height: 100%
+  background-color: #F1F0EB
+  border: 3px solid #DFDCD1
+  padding: 10px
+  
+
+
+div.tell-a-friend table 
+  clear: both
+  border-top: 1px dashed black
+  border-bottom: 1px dashed black
+  font-size: 14px
+  width: 100%
+  margin-top: 10px
+  margin-bottom: 30px
+  padding-bottom: 10px
+  
+
+
+div.tell-a-friend table td.left 
+  font-weight: bolder
+  text-align: right
+  vertical-align: top
+  padding-top: 10px
+  
+
+
+div.tell-a-friend table td.right 
+  text-align: left
+  vertical-align: top
+  padding-top: 10px
+  
+
+
+div.tell-a-friend table td.right p 
+  font-size: 12px
+  margin-bottom: 2px
+  margin-top: 2px
+  margin-left: 0px
+  
+
+
+div.tell-a-friend div.buttons 
+  margin-top: -20px
+  float: right
+  
+
+
+div.tell-a-friend div#tell-a-friend-errors p 
+  color: white
+  background-color: red
+  font-size: 16px
+  font-weight: bolder
+  padding: 2px
+  padding-left: 6px
+  
+
+  
+
+
+div.contests div.contest-sidebar p 
+  line-height: 1.2em
+  margin-top: 5px
+  
+
+
+div.contests div.contest-sidebar div.header 
+  width: 194px
+  margin-left: -10px
+  margin-top: -10px
+  background-color: $nav_hi_color
+  text-align: center
+  vertical-align: center
+  font-size: 17px
+  font-weight: bolder
+  color: white
+  padding: 3px
+  
+
+
+div.contests div.contest-sidebar div.photo 
+  text-align: center
+  margin-top: 20px
+  margin-bottom: 5px
+  
+
+
+div.contests div.contest-sidebar div.photo img 
+  border: 1px solid #225D85
+  
+
+
+div.contests div.contest-sidebar div.caption p 
+  text-align: center
+  margin-bottom: 30px
+  font-weight: bolder
+  
+
+
+div.contests div.contest-sidebar div.cancel-vote 
+  text-align: center
+  margin-top: -30px
+  margin-bottom: 25px
+  
+
+
+div.contests div.contest-sidebar div.cancel-vote a 
+  text-decoration: underline
+  color: blue
+  
+
+
+div.contests div.contest-sidebar div.cancel-vote a:hover 
+  color: #e87833
+  
+
+
+div.contests div.contest-entry 
+  width: 530px
+  background-color: $nav_body_color
+  padding: 10px
+  margin-bottom: 20px
+  
+
+
+div.contests div.voted-contest-entry 
+  background-color: #ACAA9C
+  
+
+
+div.contests div.contest-entry div.header 
+  width: 530px
+  height: 28px
+  margin-left: -10px
+  margin-top: -10px
+  background-color: $nav_hi_color
+  padding: 5px 10px 5px 10px
+  font-family: Georgia,serif
+  font-weight: bolder
+  line-height: 24px
+  color: white
+  
+
+
+div.contests div.contest-entry div.header div.project-name 
+  font-size: 21px
+  float: left
+  
+
+
+div.contests div.contest-entry div.header div.entry-by 
+  font-size: 16px
+  float: right
+  
+
+
+div.entry-by a 
+  color:white
+  font-family:Georgia,serif
+  font-weight: bolder
+  
+
+
+div.contests div.contest-entry div.photos 
+  text-align: center
+  
+
+
+div.contests div.contest-entry img 
+  margin: 25px 5px 10px 5px
+  border: 1px solid #225D85
+  vertical-align: top
+  
+
+
+div.contests div.contest-entry div.entry-vote p 
+  font-family: Georgia,serif
+  font-weight: bolder
+  float: right
+  font-size: 16px
+  
+
+
+div.contests div.contest-sidebar div.submit-vote p 
+  margin-top: 40px
+  
+
+
+div.contests div.contest-sidebar div.submit-vote input 
+  margin-top: 0px
+  
+
+
+div.contest_nav_previous 
+  float: left
+  margin-bottom: 10px
+  
+
+
+div.contest_nav_next 
+  float: right
+  margin-bottom: 10px
+  
+
+
+// Projects 
+
+div.new-project input, div.new-project textarea 
+  background-color: #FFFFC9
+  border: 1px solid #225D85
+  padding: 3px
+  margin-top: 10px
+  
+
+
+div.new-project input:focus, div.new-project textarea:focus 
+  background-color: white
+  
+
+
+div.new-project input.button 
+  background-color: $nav_hi_color
+  color: white
+  font-weight: bolder
+  
+
+
+div.new-project p 
+  width: 540px
+  
+
+
+
+div.project-summary 
+  width: 550px
+  background-color: $nav_body_color
+  margin-bottom: 10px
+  
+
+
+div.project-summary div.header 
+  background-color: $nav_hi_color
+  
+
+
+div.project-summary div.header h3 
+  font-family: Georgia,serif
+  color: white
+  font-weight: normal
+  height: 28px
+  font-size: 16px
+  line-height: 28px
+  margin: 0px 0px 0px 15px
+  
+
+
+div.project-summary div.header a 
+  color: white
+  
+
+
+div.project-summary img 
+  margin: 10px 15px 10px 10px
+  float: left
+  
+
+
+div.project-summary p 
+  margin: 15px 15px 15px 0px
+  
+
+
+div.project-summary p.project-comment-link 
+  margin-top: -25px 
+  margin-right: 10px 
+  float:right
+  
+
+
+
+div.project 
+  width: 550px
+  background-color: $nav_body_color
+  margin-bottom: 10px
+  
+
+
+div.project div.header 
+  background-color: $nav_hi_color
+  height: 28px
+  font-size: 16px
+  line-height: 28px
+  color: white
+  font-family: Georgia,serif
+  font-weight: normal
+  
+
+
+div.project div.header h1 
+  font-family: Georgia,serif
+  color: white
+  font-weight: bold
+  font-size: 16px
+  line-height: 28px
+  margin: 0px 0px 0px 15px
+  float: left
+  
+
+
+div.project div.header h3 
+  font-family: Georgia,serif
+  color: white
+  font-weight: normal
+  font-size: 16px
+  line-height: 28px
+  margin: 0px 0px 0px 15px
+  
+
+
+div.project div.header div.name 
+  margin-right: 15px
+  float: right
+  
+
+
+div.project div.header a 
+  color: white
+  
+
+
+div.project div.meta-top 
+  height: 35px
+  margin: 5px 15px 0px 15px
+  color: black
+  font-family: Verdana,Helvetica,Arial,sans-serif
+  font-size: 0.70em
+  
+
+
+div.project div.meta-top div.favorite 
+  float: right
+  text-align: right
+  
+
+
+div.project span.tiny-link 
+  font-size: 0.8em
+  
+
+
+div.project div.project-body 
+  margin: 15px
+  
+
+
+div.project div.images 
+  max-width: 220px
+  margin-right: 15px
+  float: left
+  
+
+
+div.project div.images img 
+  margin-bottom: 10px
+  
+
+
+div.project div.deletable-image 
+  float: left
+  padding-right: 10px
+  
+
+
+div.project div.deletable-image p 
+  margin-top: 4px
+  
+
+
+div.project div.meta-bottom 
+  background-color: #FFFEF0
+  margin: 0px 15px 15px 15px
+  padding: 5px 10px 5px 10px
+  color: black
+  font-family: Verdana,Helvetica,Arial,sans-serif
+  font-size: 0.90em
+  
+
+
+
+div.project-comments h2 
+  font-size: 1.0em
+  
+
+
+div.project-comments h3 
+  font-size: 0.9em
+  
+
+
+div.project-comment 
+  width: 550px
+  background-color: $nav_body_color
+  margin-bottom: 10px
+  
+
+
+div.project-comment div.header 
+  background-color: $nav_hi_color
+  font-family: Georgia,serif
+  font-weight: bolder
+  font-size: 12px
+  line-height: 20px
+  color: white
+  
+
+
+div.project-comment div.header a 
+  color: white
+  
+
+
+div.project-comment p 
+  margin: 15px
+  
+
+
+div.project-comment div.header span.left 
+  margin-left: 15px
+  
+
+
+div.project-comment div.header span.right 
+  float: right
+  margin-right: 15px
+  
+
+
+// Profile page 
+
+div.profile 
+  width: 550px
+  
+
+
+div.profile h1 
+  font-family: Georgia,serif
+  font-weight: bolder
+  font-size: 1.7em
+  
+
+
+div.profile h2 
+  font-family: Georgia,serif
+  font-weight: bolder
+  font-size: 1.3em
+  
+
+
+div.profile h3 
+  font-family: Georgia,serif
+  font-weight: bolder
+  font-size: 1.0em
+  
+
+
+div.profile div.review-text 
+  width: 550px
+  
+
+
+div.profile div.profile-links 
+  margin-bottom: 30px
+  margin-top: -15px
+  
+
+
+div.profile div.profile-section 
+  margin-bottom: 30px
+  
+
+
+
+span.highlight 
+  background: yellow 
+  
+
+
+// wiki 
+
+div.wiki_instructions_general 
+  width: 600px
+  
+
+
+a.wiki_instructions_link 
+  text-decoration: underline
+  color: blue
+  
+
+
+div.wiki_instructions_editing 
+  width: 500px
+  margin: 10px
+  padding: 10px
+  background-color: $nav_body_color
+  
+
+
+div.wiki_instructions_editing_headline 
+  background-color: $nav_hi_color
+  color:white
+  font-family:Verdana,Geneva,Arial,Helvetica,sans-serif
+  font-size: 0.75em
+  font-weight: bolder
+  padding: 10px
+  margin: -10px
+  
+
+
+p.wiki_instructions_editing_example 
+  margin-left: 20px
+  
+
+
+div.wiki_article_content 
+  width: 600px
+  
+
+
+textarea.wiki_edit 
+  width: 600px
+  
+
+
+div.wiki_create_a_new_link 
+  padding-top: 70px
+  
+
+
+p.wiki_footnote 
+  padding-top: 20px
+  font-size: 8px
+  
+
+
+div.item 
+  width: 368px 
+  
+
+
+div.item p, 
+div.item h3 
+  width: 257px 
+  
+
+
+div.customer_nav 
+  
+  margin-bottom: 40px
+  
+
+
+div.email_update
+  
+  margin-bottom: 40px
+  margin-left: 20px
+  
+
+
+div.email_preferences
+  
+  margin-bottom: 40px
+  margin-left: 20px
+  
+
+
+div.wheres_my_stuff 
+  
+  margin-bottom: 40px
+  
+
+
+//--------------------
+//
+// university status page
+//
+// --------------------
+///
+
+table.univ_lis td
+  
+  margin-left: 20px
+  margin-right: 50px
+  
+
+
+div.univ_line_item
+  
+  margin-left: 20px
+  margin-right: 50px
+  min-width: 600px
+  min-height: 50px
+  
+
+
+div.univ_line_item > div
+  
+  float:left 
+  
+
+
+div.univ_line_item div.li_col_1
+  
+  min-width: 50px
+  
+
+
+div.univ_line_item div.li_col_2
+  
+  min-width: 100px
+  
+
+
+div.univ_line_item div.prod_name
+  
+  width: 400px
+  
+
+
+
+//--------------------
+//
+// university change-plan page
+//
+// --------------------
+///
+
+table#change_plans 
+  
+  border-collapse:collapse
+  font-family:Helvetica,Arial,sans-serif
+  font-size-adjust:none
+  font-stretch:normal
+  font-style:normal
+  font-variant:normal
+  
+
+
+table#change_plans td
+  
+  border: 1px solid black
+  height: 40px
+  padding: 10px
+  
+
+
+table#change_plans td.change_plan_left
+  
+  width: 50%
+  min-width: 200px
+  
+
+
+table#change_plans td.change_plan_right
+  
+  width: 50%
+  
+
+
+
+table#change_plans tr.selected_plan 
+  
+//  background-color: #e0e0e0 
+  background-color: #eceadc 
+  
+
+
+table#change_plans span.current_plan_text
+  
+  color: #333399
+  font-size: 10pt
+  font-weight: bold
+  line-height: 1.25em
+  
+
+
+table#change_plans span.plan_text
+  
+  margin-left: 20px
+  
+
+
+table#change_plans span.plan_price
+  
+  font-size: 11pt
+  font-weight: bold
+  line-height: 1.25em
+  text-align: right
+  
+
+
+table#change_plans span.plan_text_num
+  
+  font-size: 20pt
+  font-weight: bold
+  
+
+
+table#change_plans span.plan_commentary
+  
+  margin-left: 20px
+  color: #f00
+  font-weight: bold
+  
+
+
+
+//--------------------
+//
+// university FAQ
+//
+// --------------------
+///
+
+
+
+div.univ_faq
+  
+  margin-bottom: 25px
+  
+
+div.univ_faq_question
+  
+  margin-bottom: -5px
+  
+
+
+.univ_faq p + p 
+  text-indent: 0px  
+  
+
+
+.univ_faq p 
+  margin-left: 20px
+  text-indent: -20px
+  
+
+
+
+//--------------------
+//
+// university status: red / green / yellow
+//
+// --------------------
+///
+
+div.univ_on_hold 
+  
+  @include banner-base
+  border-color: #ff0000
+  
+
+
+div.univ_on_hold_inner
+  
+  padding: 10px
+  background-color: #ffcccc
+  
+
+
+div.univ_uncharged 
+  
+  @include banner-base
+  border-color: #ffff00
+  
+
+
+div.univ_uncharged_inner
+  
+  padding: 10px
+  background-color: #ffffcc
+  
+
+
+
+div.univ_good
+  
+  @include banner-base
+  border-color: #00ff00
+  
+
+
+div.univ_good_inner
+  
+  padding: 10px
+  background-color: #ccffcc
+  
+
+
+div.univ_done
+  
+  @include banner-base
+  border-color: #ffff00
+  
+
+
+div.univ_done_inner
+  
+  padding: 10px
+  background-color: #ffffcc
+  
+
+
+
+div.univ_payment
+  
+  padding: 10px
+  
+
+
+span.dollars
+  
+  font-size: 24px
+  font-weight: bold
+  padding-top: 11px
+  
+
+
+span.cents 
+  
+  font-size: 12px
+  line-height: 20px
+  vertical-align:top
+  
+
+
+img 
+  text-decoration: none
+  border: 0
+  
+
+
+
+//----------
+// admin blocks in customer-facing site
+//---------- 
+span#devel_prod,
+span.ud_block,
+div.ud_block 
+  padding: 4px
+  font-size: 12px
+  background: yellow 
+  color: black
+  border: 2px solid #000000
+  
+
+div.ud_block 
+  float: right
+  
+
+
+
+//----------
+// job application (customer facing)
+//---------- 
+div.job_application 
+  padding: 10px
+  font-size: 12px
+  color: black
+  border: 2px solid #000000
+  
+
+
+//----------
+// univstore
+//---------- 
+div.job_application 
+  padding: 10px
+  font-size: 12px
+  color: black
+  border: 2px solid #000000
+  
+
+
+

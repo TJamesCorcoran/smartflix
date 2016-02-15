@@ -1,0 +1,25 @@
+<% if @window == :text %>
+    <% if @msg.empty_is_nil %>
+    $("#ajax_feedback_goes_here").prepend("<span style='color:<%= @success ? "green" : "red" %>;'><%= @msg %></span><br>");
+    <% end %>
+<% end %>
+
+<% if @expected_id %>
+   $("#next_expected").html("<%= Copy.id_to_sticker(@expected_id) %>"); 
+<% end %>
+
+
+$("#barcode").val(""); 
+$("#barcode").focus(); 
+$("#scan").show();
+$("#buttons_many").hide();
+$("#buttons_one").hide();
+
+<% if @window  == :one %>
+    $("#buttons_one").show();
+<% elsif @window  == :many %>
+    $("#buttons_many").show();
+<% end %>
+
+
+// soundManager.play("<%= @success ? "success" : "failure" %>");

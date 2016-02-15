@@ -1,0 +1,43 @@
+<%# Parameter: category_list is an array of Category objects %>
+<% category_list.each do |cat| -%>
+
+<% p_class = ' class="indented-cat"' if cat.indented -%>
+<% p_id = ' id="selected-cat"' if cat.selected -%>
+
+<%= "<div#{p_class}#{p_id}>" %>
+
+<% if cat.selected -%>
+  <span id="bullet">&#187;</span>
+<% end -%>
+
+<%= link_to_category cat %>
+
+</div>
+
+<% end -%>
+
+<hr />
+
+<p><%= link_to 'Gift Certificates', {:controller => 'store', :action => 'giftcert', :id => nil} %></p>
+
+<hr />
+
+<% if ab_test(:most_popular, session) == :show -%>
+  <p>
+    <%= link_to 'Most Popular Titles', {:controller => 'store', :action => 'popular'} %>
+  </p>
+<% end -%>
+
+<p>
+<%= link_to 'New Titles', {:controller => 'store', :action => 'new'} %>
+&nbsp;
+</p>
+<p><%= link_to 'Top Rated Titles', {:controller => 'store', :action => 'top_rated'} %></p>
+<% if @customer && @customer.recommended_products.size > 0 -%>
+  <p><%= link_to 'Your Recommended Titles', {:controller => 'store', :action => 'recommended'} %></p>
+<% end -%>
+
+
+<hr />
+
+<p><%= link_to 'Affiliate Program', {:controller => 'affiliate'} %></p>

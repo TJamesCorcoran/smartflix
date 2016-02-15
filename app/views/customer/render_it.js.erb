@@ -1,0 +1,10 @@
+$("#error_field").html("");
+$("#li_<%= @li.id %>").html("<div id='li_<%= @li.id %>'  style=\"background-color:#ffc; width:600px;\"><b><%= @verb %>: </b><%= @product_name %></div>");
+$("#li_<%= @li.id %>").effect("fade", {}, 2000);
+
+
+<% if @direction == :cancel %>
+    <% @li.order.line_items_pending.select { |mli| mli.queue_position >= @pos }.each do |mli| %>
+      $("#li_<%= mli.id %>_position").html( <%= mli.queue_position %>);
+    <% end %>
+<% end %>

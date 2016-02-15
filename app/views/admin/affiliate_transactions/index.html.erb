@@ -1,0 +1,28 @@
+<h1>Affiliates</h1>
+
+<table>
+
+<% @affiliates.each do | af | %>
+  <tr>
+    <td><%=  link_to af.email, :controller=>:affiliate_transactions, :action=>:show, :id=>af.id      %></td>
+    <td><%=  af.referrals.size %></td>
+    <td><%=  number_to_currency(af.referral_fee_owed) %></td>
+    <td>
+
+
+                <% if ( af.referral_fee_owed >= 50 )
+                    form_for :affiliate_transaction, :url => {:action => 'create_payment'} do |ff| %>
+                <%= ff.hidden_field :amount,                 :value => - af.referral_fee_owed %>
+                <%= ff.hidden_field :transaction_type,       :value => "P" %>
+                <%= ff.hidden_field :date,                   :value => Date.today %>
+                <%= ff.hidden_field :affiliate_customer_id,  :value => af.id %>
+
+                <%= submit_tag "pay now" %>
+           <%   end
+                end     %>
+     </td>
+
+</tr>
+<% end %>
+</table>
+

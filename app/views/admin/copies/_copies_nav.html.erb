@@ -1,0 +1,8 @@
+<h1><%= link_to "Listing copies", :action=> :index %>
+	<% if (! params[:deathType].nil?) %>
+	( deathType = <%= DeathType.find(params[:deathType].to_i).name %>)
+	<% end %>
+/
+    <%= link_to "do returns", :action => :returns %>
+
+</h1>

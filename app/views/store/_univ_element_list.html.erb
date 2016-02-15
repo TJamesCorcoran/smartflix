@@ -1,0 +1,17 @@
+<ul>
+  <% products.each do |title| %>
+    <li>
+        <% if title.useful_description? %>
+            <%= link_to title.name, store_expand_univ_element_url(title.id), :remote => true %>
+            <div id="video-<%= title.id %>-outer" style="display:none;">
+            </div>
+        <% else %>
+            <%=  title.name %>
+        <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<% if products.empty? %>
+  <i>no items</i>
+<% end %>

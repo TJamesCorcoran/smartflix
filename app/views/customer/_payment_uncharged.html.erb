@@ -1,0 +1,22 @@
+<% uncharged_lis = @customer.uncancelled_and_unshipped_line_items_payment_incomplete %>
+<% if uncharged_lis.any? %>
+  <h2>Payments Not Yet Processed </h2>
+    <div class="univ_uncharged">
+      <div class="univ_uncharged_inner">
+       <p>
+         These orders were recently placed using a stored credit card. 
+       <p>
+         <strong>For your security</strong>, we will charge your credit card <strong>within 24 hours and ship then ship the DVDs.</strong>
+       </p>
+       <ul>
+         <% uncharged_lis.each do |li| %>
+            <li>
+             <% payment = li.order.payments.last %>
+             <%= li.product.name %> - <%= li.created_at %>
+           </li>
+         <% end %>
+       </ul>
+    </div>
+  </div>
+<% end %>
+

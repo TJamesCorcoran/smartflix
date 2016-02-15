@@ -1,0 +1,12 @@
+<%= form_tag :url => { :action => 'report_problem', :id => @line_item } do -%>
+
+<p>Sorry about the mistake! If you'd like, we can send a replacement handout.</p>
+
+<%=  hidden_field_tag 'problem_type', h(:remote =>true, @problem_type) %>
+<%=  hidden_field_tag 'final', '1' %>
+
+<%= report_problem_back(:cancel) %>
+
+<%= Button.new( "send replacement", { :class => :orange, :method => :submit })%>
+
+<% end -%>

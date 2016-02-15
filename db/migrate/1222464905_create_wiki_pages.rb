@@ -1,0 +1,1 @@
+../../vendor/plugins/wiki/db/migrate/1222464905_create_wiki_pages.rb

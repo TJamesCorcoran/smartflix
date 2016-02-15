@@ -1,0 +1,22 @@
+<h1>SmartFlix Gift Cards</h1>
+
+<div class='gc_header'>
+SmartFlix Gift Cards make great gifts for anyone who loves to learn.
+Order today and we'll send you a gift card in the mail, suitable for
+wrapping or tucking into a stocking. Our gift cards can be redeemed at
+our website for rentals of any of our thousands of videos.
+</div>
+
+<% @giftcerts.select {|gc| gc.attributes["display"] }.each do |gc| %>
+  <div class='gc_entry'>
+    <div class='gc_image'>
+      <%= image_tag('SF_new_giftcard_web.jpg', :alt => 'SmartFlix Gift Certificate', :title => 'SmartFlix Gift Certificate') %>
+    </div>
+    <div class='gc_description'>
+      <h2><%= gc.name %> </h2>
+      <%= gc.description %>
+    </div>
+    <%= buy_gc_button(gc.id) %>
+  </div>
+  <br class='gc_clear'>
+<% end %>

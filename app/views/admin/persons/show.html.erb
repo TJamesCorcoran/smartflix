@@ -1,0 +1,52 @@
+<h1>Person Info: <%= @person.to_s %></h1>
+<table border=0>
+
+<div style="float:right;padding-right:200px;">
+  <%= form_for(:person,  :url => { :action => :login } ) do |f| %>
+	   <%= password_field_tag :password, "" %>
+	   <%= hidden_field_tag :id, @person.id %>
+	   <%= submit_tag "Login" %> 
+  <% end %>
+
+<%= link_to( "logout", :action => :logout, :id =>@person.id ) %>
+</div>
+
+
+<%
+  	   my_cols_ordered = Person.columns.sort do |a,b| 
+           if    (a.name == "employee_number") then -2 elsif (b.name == "employee_number") then 2
+           elsif (a.name == "name_last") then -1 elsif (b.name == "name_last") then 1 
+	       elsif (a.name == "name_first") then -1 elsif (b.name == "name_first") then 1 
+	       elsif (a.name.match(/^authority_/)) then 2 elsif (b.name.match(/^authority_/)) then -2
+	       elsif (a.name.match(/^email_/)) then 1 elsif (b.name.match(/^email_/)) then -1
+           else 0
+           end
+       end
+        
+	   my_cols_ordered.each do |column|
+
+ %>
+<% cssclass = column.name.match(/^email_/) ? "dark": "light" %>
+
+<tr><td class="<%= cssclass %>"> <b> <%= column.human_name %>:</b></td>
+    <td class="<%= cssclass %>">
+       <font color="<%= column.name.match(/^(email|authority)_/) ? (@person.send(column.name) ? "green" : "red") : "black" %>" >
+           <%=			@person.send(column.name) %>
+       </font>
+</td></tr>
+<% end %>
+</table>
+
+<% if @person.hourlyP %>
+<h1>Timesheets</h1>
+<ul>
+<% @timesheet_dates.each do | dd| %>
+<li><%= link_to dd.strftime, :overwrite_params => { :controller=>"timesheets", :date => dd.strftime } %>
+<% end %>
+</ul>
+<% end %>o
+
+
+<%= link_to 'Edit', :action => :edit, :id =>@person %> |
+<%= link_to 'Back', :action =>:index %>
+

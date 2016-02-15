@@ -1,0 +1,6 @@
+
+<h1>Thanks!</h1>
+
+Thanks <%= @customer.first_name.capitalize %>, we've reinstated your <%= @reinstated_univ_order.university.name %> (order # <%= @reinstated_univ_order.id %>).
+
+You can manage your account <%= link_to("here", customer_university_status_url(@reinstated_univ_order.id) ) %>.

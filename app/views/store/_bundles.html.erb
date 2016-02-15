@@ -1,0 +1,4 @@
+<%# Parameter: bundles is a list of bundles -%>
+<% bundles.each do |bundle| -%>
+  <%= render :partial => 'bundle', :object => bundle %>
+<% end -%>

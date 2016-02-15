@@ -1,0 +1,23 @@
+<% widget_html = capture do -%>
+<div style="width: 530px; background-color: #ECEADC; padding: 10px; margin-bottom: 20px;">
+  <div style="width: 530px; height: 28px; margin-left: -10px; margin-top: -10px; background-color: #107089; padding: 5px 10px 5px 10px; font-family: Georgia,serif; font-weight: bolder; line-height: 24px; color: white;">
+    <div style="font-size: 21px; float: left;"><%= h contest_entry.title %></div>
+    <div style="font-size: 16px; float: right;">by <%= h contest_entry.full_name %></div>
+  </div>
+  <div style="text-align: center;">
+  <% contest_entry.contest_entry_photos.each do |photo| -%>
+    <% photo = photo.thumbnails.first if photo.thumbnails.any? -%>
+    <%= image_tag "http://#{SmartFlix::Application::WEB_SERVER}#{photo.public_filename}", :style => 'margin: 25px 5px 10px 5px; border: 1px solid #225D85; vertical-align: top;' %>
+  <% end -%>
+  </div>
+  <br style="clear: both; display: block; height: 1px; overflow: hidden; padding: 0px; margin-top: 0px; margin-left: 0px; margin-right: 0px;"/>
+  <div style="color: Black; font-family: Verdana,Helvetica,Arial,sans-serif; font-size: 15px; line-height: 1.6em;">
+     <%= link_to 'Vote for my contest entry', url_for(:controller => 'contest', :action => 'show', :id => contest_entry.contest, :only_path => false) %> at
+     <%= link_to 'SmartFlix.com', url_for(:controller => 'store', :action => nil, :only_path => false) %>!
+  </div>
+</div>
+<% end %>
+
+<textarea readonly style="width: 530px;" cols='80' rows='10' onclick='this.focus(); this.select();'>
+  <%= h widget_html %>
+</textarea>

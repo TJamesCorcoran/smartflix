@@ -1,0 +1,203 @@
+<%# The cart summary gets its own location in the layout -%>
+
+<% content_for :cart_sidebar do -%>
+  <%= Button.new("edit",  :class => :grey, :size =>:med, :url => url_for( :controller => 'cart', :action => 'index')) %>
+
+  <% 
+    display_month  =  can_use_univ_month_credits(@cart, @customer)
+    display_credit =  !display_month && can_use_acct_credit(@cart, @customer)
+    display_regular = !display_month && !display_credit
+
+    div_style_month   = display_month    ? '' : 'display:none'
+    div_style_credit  = display_credit   ? '' : 'display:none'
+    div_style_regular = display_regular  ? '' : 'display:none' 
+  %>
+  <div id="cart_account_credit"   style="<%= div_style_credit %>;" >
+    <%= cart_display_for(@cart, :items_to_buy, { :style => :summary, :display_total => true, :display_credit_style => :credit }) %>
+  </div>
+
+  <div id="cart_month_credit"   style="<%= div_style_month %>;" >
+    <%= cart_display_for(@cart, :items_to_buy, { :style => :summary, :display_total => true, :display_credit_style => :month }) %>
+  </div>
+
+  <div id="cart_regular" style="<%= div_style_regular  %>;" >
+    <%= cart_display_for(@cart, :items_to_buy, { :style => :summary, :display_total => true, :display_credit_style => :regular }) %>
+  </div>
+<% end -%>
+
+
+
+<%= render :partial => 'shared/addresses', :locals => { :customer => @customer } %>
+
+<h2>Gift Certificates and Coupons</h2>
+<div style="margin-left:20px;">
+  <p>
+    Enter your coupon or gift certificate here and click "apply":
+  </p>
+
+  <% form_tag :action => 'claim_code' do -%>
+    <span style="float:left; margin-right:20px">
+      <%=  text_field_tag 'code', nil, :size => 12 %>
+    </span>
+    <%=  Button.new( :apply, { :class => :grey, :method => :submit }) %>
+  <% end -%>
+</div>
+
+<h2>Payment Method: <%= image_tag 'credit_card_logos.gif' %></h2>
+<%= form_tag checkout_url  do |form| -%>
+
+<% if can_use_univ_month_credits(@cart, @customer) -%>
+    <% display_credit_checkbox = true %> 
+    <p>
+      You have an account credit of
+      <%= @customer.account_credit.univ_months_to_s %>
+      that you can apply now.
+    </p>
+    <p>
+      <%# Slightly tricky: If any expected params, keep apply_credit setting, else set to true by default -%>
+      <%# Also: we've got two right-hand-column divs: one hidden, one visible, that do and do not show the account credit. %>
+      <%#       We use JS here to swap them back and forth. %>
+
+
+        <%= check_box_tag 'apply_month_credit', 1, params[:credit_card] ? params[:apply_month_credit] : true,  
+            "onclick"=>"$('cart_month_credit').style.display= ($F('apply_month_credit') == 1) ? 'block' : 'none'; 
+                        $('cart_regular').style.display= ($F('apply_month_credit') == 1) ? 'none' : 'block'; 
+                        " %>
+        Apply 1 month of SmartFlix University credit to current order.
+      </p>
+  <% elsif can_use_acct_credit(@cart, @customer) -%>
+      <% display_credit_checkbox = true %> 
+      <p>
+        You have an account credit of
+        <%= number_to_currency(@customer.credit) %>
+        that you can apply now.
+      </p>
+      <p>
+        <%# Slightly tricky: If any expected params, keep apply_credit setting, else set to true by default -%>
+        <%# Also: we've got two right-hand-column divs: one hidden, one visible, that do and do not show the account credit. %>
+        <%#       We use JS here to swap them back and forth. %>
+
+
+        <%= check_box_tag 'apply_credit', 1, params[:credit_card] ? params[:apply_credit] : true,  
+            "onclick"=>"$('cart_account_credit').style.display= ($F('apply_credit') == 1) ? 'block' : 'none'; 
+                        $('cart_regular').style.display= ($F('apply_credit') == 1) ? 'none' : 'block'; 
+                        " %>
+        Apply <%= number_to_currency(@usable_account_credit) %> credit to current order.
+      </p>
+  <% end -%>
+
+  <%# XXXFIX DISPLAY: Error messages should show up more, and not say "saved" -%>
+  <%= error_messages_for :credit_card, :header_tag => :strong %>
+
+  <p>
+    <table border="0">
+      <% if !(@lastcc.nil? || @lastcc.last_four.nil?) %>
+        <tr>
+          <td>
+            <%= radio_button_tag 'payment_method', 'use_last_stored_card', true %>
+          </td>
+          <td>
+            Use <%= CreditCard.type_for_display(@lastcc.attributes["type"]) %> ending in:
+          </td>
+          <td>
+            XXXX-<%= @lastcc.last_four %>
+          </td>
+        </tr>
+      <% end %>
+      <tr>
+        <td>
+          <% if (@lastcc != nil) && (@lastcc.last_four != nil) %>
+            <%= radio_button_tag 'payment_method', 'use_new_card' %>
+          <% end %>
+        </td>
+        <td>
+          Credit card number:
+        </td>
+        <td align="left">
+          <%= fields_for :credit_card, @credit_card do |cc| -%>
+          <%= cc.text_field :number, :size => 21, :autocomplete => 'off', :onclick =>"$('payment_method_use_new_card').checked = true" %><br />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center" valign="top" style="padding-top: 4px;">Expiration Date:</td>
+        <td align="left">
+          <% if (params[:credit_card] && params[:credit_card].is_a?(Hash) && params[:credit_card][:month] && params[:credit_card][:year]) -%>
+            <% selected_date = Date.strptime("#{params[:credit_card][:year]}-#{params[:credit_card][:month]}-01") -%>
+          <% else -%>
+          <% selected_date = Date.today -%>
+            <% end -%>
+          <%= select_month(selected_date, :prefix => 'credit_card') %>
+          <%= select_year(selected_date, :prefix => 'credit_card', :start_year => Date.today.year, :end_year => (Date.today.year + 9)) %>
+        </td>
+      </tr>
+    </table>
+  </p>
+
+  <h2>Terms and Conditions</h2>
+
+  <%# We allow the customer to toggle between display and non-display -%>
+
+  <p>
+    <%= check_box_tag :terms_and_conditions, 1, true %>
+
+    I have read and agreed to the <a id="toggle_link" href="#">terms and conditions</a>.
+    <script>
+        $("#toggle_link").click( function() { $("#terms_and_conditions_text").toggle(); } );
+    </script>.
+  </p>
+
+  <div id="terms_and_conditions_text" style="display: none;">
+    <textarea rows="10" cols="60" READONLY="true">
+      <%= render :partial => 'shared/conditions_text' %>
+    </textarea>
+  </div>
+
+
+
+  <%# Keep the onepage token for when we're processing the postback, if that's how they came in -%>
+  <%= onepage_auth_hidden_field %>
+
+  <%# ABTEST: do we show text indicating free shipping if they checkout now? -%>
+  <% if false && [:checkout, :cart_and_checkout].include?(ab_test(:free_shipping_text, session)) -%>
+    <p>Place your rental order now and get free shipping!</p>
+  <% end -%>
+
+  <div style="float:right;">
+            <%= Button.new("secure checkout", nil, {:class => :orange, 
+                                                   :size => :large,
+                                                   :class=>"orange",
+                                                   :method => :submit }) %> 
+  </div>
+  <% end -%>
+
+  <% if (Rails.env != 'production') -%>
+    <p style="margin-top:40px;">
+      <font color="red">
+        DEVELOPMENT MODE -- NOT LIVE<br />
+        AMEX success: 370000000000002<br />
+        Discover success: 6011000000000012<br />
+        MC success: 5424000000000015<br />
+        Visa success: 4007000000027<br />
+        Failure: 4222222222222 (set price to desired error code)
+      </font>
+    </p>
+    <% end # content_for :cart_sidebar -%>
+
+<% end # form_for :order ...%>
+
+
+<!-- Google Code for SF precheckout Conversion Page -->
+<script language="JavaScript" type="text/javascript">
+<!--
+var google_conversion_id = 1071930775;
+var google_conversion_language = "en_US";
+var google_conversion_format = "1";
+var google_conversion_color = "ffffff";
+var google_conversion_label = "bP2ZCKCYUhCXu5H_Aw";
+//-->
+</script>
+<script language="JavaScript" src="https://www.googleadservices.com/pagead/conversion.js">
+</script>
+<noscript>
+<img height="1" width="1" border="0" src="https://www.googleadservices.com/pagead/conversion/1071930775/?label=bP2ZCKCYUhCXu5H_Aw&amp;script=0"/>
+</noscript>

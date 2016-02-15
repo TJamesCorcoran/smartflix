@@ -1,0 +1,12 @@
+<%= h(@message.message) %>
+
+------------------------------------------------------ 
+Office use only:
+
+           Name: <%= h(@message.name) %>
+          Email: <%= h(@message.email) %>
+ Logged in name: <%= @message.customer ? h(@message.customer.full_name) : 'Not logged in' %>
+Logged in email: <%= @message.customer ? h(@message.customer.email) : 'Not logged in' %>
+     IP Address: <%= @message.ip_address %>
+     User Agent: <%= @message.user_agent %>
+------------------------------------------------------ 

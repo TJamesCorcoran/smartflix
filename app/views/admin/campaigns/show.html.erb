@@ -1,0 +1,18 @@
+<% content_for :sidebar do %> 
+<table border=0>
+   <tr><td>  fixed cost</td><td> <%= @item.fixed_cost %></tr>
+   <tr><td>  var cost</td><td> <%= @item.variable_cost %></tr>
+   <tr><td>  total cost</td><td> <%= @item.total_cost %></tr>
+   <tr><td colspan=2></td></tr>
+   <tr><td>  hits</td><td> <%= @item.origins.count %></tr>
+   <tr><td>  order conversions</td><td> <%= @item.orders.count %></tr>
+   <tr><td colspan=2></td></tr>
+   <tr><td>  booked revenue</td><td> <%= @item.booked_revenue %></tr>
+   <tr><td>  booked profit</td><td> <%= @item.booked_profit %></tr>
+   <tr><td>  booked profit after advert</td><td> <%= @item.booked_profit_after_advert %></tr>
+</table>  
+<% end %>
+
+
+
+<%= render (:partial => 'admin/shared/show', :locals => { :item => @item, :reject =>[:customers] } )  %>

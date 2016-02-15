@@ -1,0 +1,227 @@
+<h1>Video Info</h1>
+<%= link_to "[smartflix]", "http://smartflix.com/store/video/#{@product.id}" %>
+
+<%
+#==========
+#   
+#  admin-block (floats right)
+#
+#==========
+%>
+
+<div class=ud_block>
+  <%= button_to "create copy", :controller=>"copies", :action=>"create", :video_id => @product.id  %>
+
+  <% if (! @product.product_set_membership.nil?) %>
+      <%= button_to "create copies for set", :controller=>"copies", :action=>"create", :video_id => @product.id, :set_id => @product.product_set_membership.product_set_id %>
+  <% end %>
+
+  <%= render(:partial => 'admin/purchasings/purchasing_widget', 
+                     :locals => { :r_controller => :products,
+                                  :r_action     => :show,
+                                  :r_id         => @product.id,
+                                  :product_id   => @product.id })  %>
+
+  <img src="http://smartflix.com/vidcaps/lvidcap_<%= @product.id %>.jpg">
+
+  <%= link_to "merge with other / destroy self", :action => :merge, :id => @product %>
+
+
+  <h2>Categories</h2>
+
+  <b> Remove </b>
+  <ul>
+      <% @product.categories.each do |cat| %>
+        <li> <%= button_to "Remove from #{cat.full_path_text}", :action => :remove_cat, :cat => cat, :prod => @product %>
+      <% end %>
+  </ul>
+
+  <b>    Add </b>
+   <ul>
+   <%= form_for(:products, :url => {:controller => "products", :action =>:add_cat}, :html => { :method => :put }) do |f| %>
+
+      <%=  hidden_field_tag "prod", @product.product_id  %> 
+
+      <% @cats = Category.find(:all).reject { |c| c.children.any?}.sort_by(&:full_path_text).map {|x| [ x.full_path_text, x.id ]  } %>
+      <%= fields_for("cat") do |cat| %>
+             <%= cat.select( :cat, @cats)  %> 
+      <% end %>
+
+
+
+
+      <%= submit_tag "Update" %>
+
+   <% end %>
+   </ul>
+
+</div>
+
+
+<%
+#==========
+#   
+#  basic data
+#
+#==========
+%>
+
+<%= render :partial => 'admin/shared/show_basicdata', :locals => { :item => @product }  %>
+
+
+<br style="clear:both;">
+
+<%
+#==========
+#   
+#  specialized code
+#
+#==========
+%>
+
+<h2>Set Membership</h2>
+<ul>
+<% if (! @product.product_set_membership.nil?) %>
+  <li><%=    @product.product_set_membership.ordinal.to_s + " of " + link_to(@product.product_set.name, :controller=>"product_sets", :action=>"show", :id=>@product.product_set.product_set_id) %>
+<% end %>
+</ul>
+<br>
+
+<h1>Customers waiting for this video</h1>
+
+
+<% if (@unshipped_lis.size == 0) %>
+    <i>none</i>
+<% else %>
+    <ul>
+    <% @unshipped_lis.each do |li| %>
+      <li>
+      <span class="<%= li.order.andand.university ? 'univ' : 'regular'%>">
+        <%=  link_to li.customer.andand.email, :controller=>:customers, :action=>:show, :id=>li.customer.andand.id    %>
+      </span>     
+    <% end %>
+    </ul>
+<% end %>
+
+<h1>Copies</h1>
+
+<%
+  status_array = Hash.new
+  status_array["total"] = 0
+  @product.copies.each do |cc|
+      if (status_array[cc.complex_status].nil?) then status_array[cc.complex_status] = 0 end
+      status_array[cc.complex_status] += 1
+      status_array["total"] += 1
+  end
+  %>
+
+  <ul>
+  <li> live / on schedule: <%= status_array["live"] %>     (noted in green text below)
+  <li> delayed:     <%= status_array["delayed"] %>  (noted in yellow text below)
+  <li> dead:       <%= status_array["dead"] %>     (noted in red text below)
+  <li> total:       <%= status_array["total"] %>
+  </ul>
+
+  <table border=0 class="sortable" id="copies">
+  <tr>
+  <%
+  my_cols =  Copy.columns.reject{ |c| c.name == "video_id"}
+  for column in my_cols %>
+      <th>
+        <%= column.human_name == "Death type" ? "health" : column.human_name %>
+      </th>
+  <% end %>
+  </tr>
+  <% @product.copies.each do |cc|
+    color = "f00"
+    if (cc.status == 1) then
+      color = "080"
+      if (cc.due_back.nil?) then
+        color = "880"
+      end
+    end
+%>
+<tr>
+  <% for column in my_cols %>
+  <td style="color:#<%= color %>">
+    <%=     if (column.name == "copy_id") 
+                link_to(cc.sticker_id, :controller=>"copies", :action=>"show", :id=>cc.send(column.name)) 
+            elsif (column.name == "death_type_id") 
+                 cc.death_type.andand.name  || "live"
+            else
+                 cc.send(column.name) 
+            end
+     %>
+  </td>
+  <% end %>
+</tr>
+<% end %>
+</table>
+
+
+
+<h1>Copies Ordered</h1>
+
+Ordered, not yet delivered: <%= inv = @product.inventory_ordered
+                                inv.nil? ? 0 : inv.quant_dvd  %>
+<p>
+Order (and receipt) history (NOTE: may be flakey before 25 June 2007):
+<ul>
+<% @product.vendor_order_logs.sort{ |a,b| a.orderDate <=> b.orderDate}.each do |vol| %>
+<li> <% if (vol.quant > 0) then %>
+<%=     link_to vol.orderDate, :controller=>"vendor_order_logs", :action=>"edit", :id=>vol.vendor_order_log_id  %>
+<% else %>
+<%=     vol.orderDate.to_s %>
+<% end %>
+: <%= vol.quant.abs %> <%= (vol.quant < 0) ? "received" : "ordered" %>
+
+ <%= if (vol.quant > 0)
+       " by " + link_to(vol.purchaser.name_first + " " + vol.purchaser.name_last, :controller=>:purchasers, :action=>:show, :id=>vol.purchaser.id )
+     end %>
+
+<% end %>
+
+</ul>
+
+<h1>Unfilled customer Orders</h1>
+
+<ul>
+<li>Unfilled customer orders (whether customer is throttled or not):
+  <%= @product.unshipped_lis.size %>
+<li>Unfilled, but fillable, customer orders:
+  <%= @product.unshipped_lis.reject{|li| li.potential_item }.size %>
+</ul>
+
+
+
+<h1>Universities</h1>
+<% if @product.universities.any? %>
+    <ul>
+      <% @product.universities.each do |univ| %>
+         <li>
+             <%= link_to univ.name, :controller => :university, :action => :show, :id =>univ %>
+             <%= button_to "remove_product", :controller=>"universities", :action=>"remove_product", :univ_id => univ, :product_id => @product.id, 
+                                     :r_controller =>:products , :r_action =>:show , :r_id => @product.id %>
+         </ul>
+       <% end %>
+    </ul>
+<% else %>
+   <i>none</i>
+<% end %>
+
+<%
+#==========
+#   
+#  relationships
+#
+#==========
+%>
+
+
+<%= render(:partial => 'admin/shared/show_relations', 
+           :locals => { :item => @product, 
+                        :reject => [:cart_items, :line_items, :vendor_order_logs, :inventory_ordered, :product_bundle_memberships, :author, :copies, :ratings, :vendor, :product_set_membership, :inventory_ordered, :good_copies, :good_instock_copies, :upsell_offers, :universities ] })  %>
+<p>
+
+<%= link_to 'Edit', :action => 'edit', :id => @product %> |
+<%= link_to 'Back', :action => 'index' %>

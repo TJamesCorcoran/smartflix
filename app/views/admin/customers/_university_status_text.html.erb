@@ -1,0 +1,95 @@
+<h3>Status</h3>
+        <ul>
+          <li><%= link_to "Screen shot", :action => :checkout_screen_shot, :order_id =>order.id %>
+          <li>Status as of today: 
+           <%=
+                case order.univ_status
+                when :live                 then "<span style='color:green;'>live, paid</span>"
+                when :live_unpaid          then "<span style='color:#080;'>live, but no valid payment</span>"
+                when :live_unpaid_in_field then "<span style='color:red;'>live, but no valid payment ... and customer has DVDs!!!</span>"
+                when :cancelled_full       then "<span style='color:#080;'>cancelled</span>"
+                when :cancelled_in_field   then "<span style='color:red;'>cancelled, but items still in field - we are billing!</span>"
+                else                       "<blink>internal error</blink>"
+                end
+
+             %>
+          <ul>
+            <li> order placed: <%= order.created_at %>
+            <li> replacement items that don't count for limits: <%= order.ignore_lis_count %>
+            <li> regular items that do count: <%= order.counts_lis_count %>
+          </ul>
+          <li><%= order.univ_dvd_rate  %>                  per month
+          <li>history of rate:
+              <% if order.univ_dvd_rate_history.any? %>
+                <ul>
+                <% order.univ_dvd_rate_history.each do |update| %>
+                  <li><%= update[:created_at] %> : <%= update[:univ_dvd_rate] %> dvds / month
+                <% end %>
+                </ul>
+              <% else %>
+                 <i>none</i>
+              <% end %>
+          <li>this month shipping calculation
+            <ul>
+              <li><%= order.line_items_in_field.size %>                  <b>in field now (total)</b>
+              <ul>
+                <li><%= order.line_items_in_field_good.size %>                  <b>in field now (good)</b>
+                <li><%= order.line_items_in_field_lost.size %>                  <b>in field now (lost)</b>
+              </ul>
+              <li><%= @customer.shipped_in_last_month_for_univ(order.university).size %>              <b>shipped in month </b>
+                       <ul>
+                       <% @customer.shipped_in_last_month_for_univ_that_count(order.university).map(&:shipment).uniq.each do |shipment| %>
+                           <li><%= link_to "#{shipment.id} / #{shipment.dateOut}", :controller => :shipments, :action => :show, :id =>shipment.id %><br>
+                        <% end %>
+                       </ul>
+            </ul>
+
+          <li>this month payments
+            <ul>
+              <% last_payment = order.payments.select(&:good?).max_by { |p| p.updated_at || DateTime.parse("1900-01-01") } %>
+              <li>last valid payment: 
+                   <%= last_payment ? link_to("# #{last_payment.andand.payment_id}", :controller => :payments, :action => :show, :id => last_payment.andand.id) : "n/a" %> /
+                   <%= last_payment ? last_payment.andand.updated_at.andand.to_date : "n/a" %> /
+                   <%= order.univ_fees_current? ? "current!" : "not current" %>
+              <li>univ_month_begin =  <%= order.univ_month_begin %>
+              <li>univ_month_end =    <%= order.univ_month_end %>
+
+              <li><% shippable_pair = @customer.shippable_count_for_univ_int(order.university, 0) %>
+                  <%= shippable_pair[0] %> shippable now
+                  <div style="border: 1px solid black; padding:5px;">
+                      <%= shippable_pair[1] %> 
+                  </div>
+              <% if @employee.andand.authority_cancel_univ_order 
+
+
+                  if order.live %>
+                      <li><%= button_to "cancel #{order.university.name} order", 
+                        { :action => :cancel_order, :id => order.id, :customer_id => @customer.id },
+                        { :confirm => 'Really cancel this university order? This is a huge deal !!!', :class=>"orange"}  %>
+                  <%
+                  else  
+                  %>
+                      <li><%= button_to "reinstate #{order.university.name} order", 
+                        { :action => :reinstate_order, :id => order.id, :customer_id => @customer.id },
+                        { :confirm => 'Really reinstate this university order?', :class=>"orange"}  %>
+
+                  <%
+                  end
+                  %>
+
+              <% else %>
+                  <li> <font color="red">you are not logged in, or do not have permission to cancel orders</font>
+              <% end %>
+            </ul>
+          <li>progress through uni
+            <ul>
+              <li><%= order.line_items_shipped.size  %>                  shipped
+              <li><%= order.line_items_back.size %>                     back
+              <li><%= order.line_items_cancelled.size %>                 cancelled
+              <li><%= order.line_items_unshipped_and_uncancelled.size %> yet to go
+            </ul>
+
+
+
+
+        </ul>

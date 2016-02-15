@@ -1,0 +1,6 @@
+<% if customer && (author,videos = customer.videos_by_recently_rented_author(2)).first %>
+  <div class="category-listing-section">
+    <h1 class="rent-dvds-like">Videos by <%= link_to_author(author) %></h1>
+    <%= render :partial => 'product_listing', :locals => { :products => videos } %>
+  </div>
+<% end %>

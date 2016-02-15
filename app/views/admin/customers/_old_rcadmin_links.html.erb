@@ -1,0 +1,28 @@
+<%
+  def add_token_to_url(url)
+
+    inner_url = url.dup
+    inner_url[:controller].match(/\/?(.*)/)
+    inner_url[:controller] = $1
+	url.merge(:token => OnepageAuthToken.create_token(@customer, 1, inner_url))
+  end
+
+  email_prefs_url   = add_token_to_url({ :controller => '/customer', :action => 'email_prefs' })
+  account_info_url  = add_token_to_url({ :controller => '/customer', :action => 'account_info' })
+  password_url      = add_token_to_url({ :controller => '/customer', :action => 'password_change' } )
+  shipping_addr_url = add_token_to_url({ :controller => '/customer', :action => 'address', :id => @customer.shipping_address_id } )
+  billing_addr_url  = add_token_to_url({ :controller => '/customer', :action => 'address', :id => @customer.billing_address_id } )
+  credit_card_url   = add_token_to_url({ :controller => '/customer', :action => 'manage_cc' } )
+%>
+
+
+<p>
+  <%= link_to 'Change email preferences', email_prefs_url   %> |
+  <%= link_to 'Change account info',      account_info_url  %> |
+  <%= link_to 'Change password',          password_url  %> |
+  <%= link_to 'Change shipping addr',     edit_admin_address_url(@customer.shipping_address) %> |
+  <%= link_to 'Change billing addr',      edit_admin_address_url(@customer.billing_address)  %> |
+  <%= link_to 'Change credit cards',      credit_card_url  %> |
+  <%= link_to "delay text", :action => :delay_text, :id => @customer.id %>
+
+</p>

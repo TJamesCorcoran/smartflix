@@ -1,0 +1,10 @@
+<% if @customer && !current_customer_project(@project) %>
+  <% link_text = @project.is_favorite_of?(@customer) ? 'Remove from Favorites' : 'Add to Favorites' %>
+  <%= link_to link_text, :remote => true,  :url => {:action => 'toggle_favorite_status', :id => @project }, :update => "favorite" %><br/>
+<% end %>
+
+<% favorite_count = @project.favorite_of_customers.count %>
+<% if favorite_count > 0 %>
+  This project has <%= pluralize(@project.favorite_of_customers.count, 'fan') %>
+<% end %>
+

@@ -1,0 +1,12 @@
+<div class="text-content">
+
+<h1>Redeem Gift Certificate</h1>
+
+<p>
+Please enter the code written on the back of your SmartFlix Gift Card
+<%= form_tag :action => 'redeem' do %>
+  <%= text_field_tag :id %>
+  <%= Button.new( "submit", {:class => :orange, :method => :submit}) %>
+<% end %>
+
+</div>

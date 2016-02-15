@@ -1,0 +1,78 @@
+
+<h1>Timesheet for <%= @person.name_first %>, week of <%= @week_begin.strftime("%d %b %Y") %></h1>
+
+<%
+   total_hours = 0
+   problemsP = false
+%>
+
+<%= form_for(:timesheets, :url => {:action => :update }, :html => { :method => :put }) do |f| %>
+    <%=     hidden_field("toplevel", "weekbegin", {:value=>@week_begin} ) %>
+    <%=     hidden_field("toplevel", "person_id", {:value=>@person.id} ) %>
+    <table class="timesheet">
+    <tr><th>day / date </th><th></th><th> in </th><th> out </th><th>total </th> </tr>
+    <%
+       (0..6).each do | ordinal | %>
+    <tr><td>
+    <%= (@week_begin + ordinal).strftime("%a - %d %b") %>
+    </td><td>
+    <%= 
+    if @editable[ordinal]
+      link_to '+', :action=>"add", :id => params[:id], :date => (@week_begin + ordinal).strftime, :display_date => @week_begin.strftime
+    end
+      %>
+    </td></tr>
+    <%	 if ( ! @timesheet.items[ordinal].nil? ) 
+             @timesheet.items[ordinal].each do | item | %>
+    <%= 
+    # raise @timesheet.items.inspect
+     %>
+    <tr><td></td><td></td>
+        <td>
+    <%= 
+    if @editable[ordinal]
+      select("begin_hr", item.id, @hours, { :selected => item.begin.strftime("%H").to_i} ) + ":" + 
+        select("begin_min", item.id, @mins, { :selected => item.begin.strftime("%M").to_i} )
+    else
+      item.begin.strftime("%I:%M %p") 
+    end
+     %></td>
+        <td><%= 
+    if  @editable[ordinal]
+       select("end_hr", item.id, @hours, { :selected => item.end.strftime("%H").to_i} ) + ":" + 
+       select("end_min", item.id, @mins, { :selected => item.end.strftime("%M").to_i} )
+    else
+      item.end.strftime("%I:%M %p") 
+    end
+
+     %></td>
+        <td><% hours = (item.end - item.begin) / 3600
+                total_hours += hours
+                if (hours < 0)
+                  problemsP = true
+                end
+    %>
+            <span style="color:<%= ((hours < 0) ? "#f55" : "000") %>">
+                 <%= hours %>
+    </span>
+
+    </tr>
+    <% 
+    end  # each/do
+    end # if ! nil?
+    end # day iteration
+    %>
+    <tr><th>total</th><td></td><td></td><td></td><td><%= total_hours %></td></tr>
+    </table>
+
+    <% if problemsP %>
+    <font color="red"><h1>One or more days negative!</h1></font>
+    <% end %>
+
+    <%=  submit_tag "Update" if (@editable.detect { |val| val } ) %>
+<%  end %>
+
+
+<%= link_to '<< Back 1 week',  :id => params[:id], :date=>(@week_begin - 7)  %> ... 
+<%= link_to 'Forward 1 week >>',  :id => params[:id], :date=>(@week_begin + 7)  %><br>
+<%= link_to 'Complete history',  :controller=>"persons", :action => "show", :id => params[:id] %>

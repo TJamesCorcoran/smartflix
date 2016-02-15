@@ -1,0 +1,25 @@
+<div id="univ-options">
+  <div class="clear"></div>
+  <div id="univ-box-header">
+    Money Saving Options 
+  </div>
+  <div id="univ-box">
+
+    <p>
+    Want to save 68% on this rental?
+    </p>
+
+    <p>
+    Consider a risk-free subscription plan that includes this DVD:
+    </p>
+
+    <ul>
+      <% @product.universities.each do |univ| %>
+        <li><%= link_to  univ.name, :action => :video, :id => univ.univ_stub %>
+            <%= single_add_to_cart_button_for(univ.univ_stub) %>
+      <% end %>
+    </ul>
+
+  </div>
+</div>
+

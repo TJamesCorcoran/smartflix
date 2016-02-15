@@ -1,0 +1,10 @@
+	<p><label>categories</label><br/>
+    <ul>
+	<% (1..5).each do | x | %> 	
+	<%= fields_for ( "category" + x.to_s ) do |titlecat| -%>
+    	     <li><%= titlecat.select( :category, @categories)  %> 
+    <% end %>
+    <% end %>
+    </ul>
+
+	</p>

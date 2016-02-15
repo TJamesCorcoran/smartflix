@@ -1,0 +1,47 @@
+<% ActionView::Base.send(:include, EmailHelper) -%>
+<%= render :partial => 'header' %>
+
+<% smartflix_link = link_to 'SmartFlix.com', url_for(:controller => 'store', :action => 'index', :ct => @ct_code, :host => WEB_SERVER), :style => "color: #991a14; font-weight: bolder; font-size: .9em; line-height: 1.4em;" %>
+
+<div style = "width: 380px; margin-left: 0px; padding-bottom: 20px; float: left;">
+  <p style = "font-size: 1em; line-height: 1.4em; color: black; margin-top: 0px;">Hello there,</p>
+  <p style = "font-size: 1em; line-height: 1.4em; color: black;">
+    <strong><%= h(@customer.full_name) %></strong> (<%= h(@customer.email) %>) asked us to send you this email about
+    <%= @product ? "a video that you might find interesting," : "#{smartflix_link}," %>
+    and included this message:
+  </p>
+  <p style = "font-size: 1em; line-height: 1.4em; margin-left: 20px; color: red;"><%= h(@message) %></p>
+  <p style = "font-size: 1em; line-height: 1.4em; color: black;">
+    This message was not written or reviewed by <%= smartflix_link %>. If you have questions about this email, please write to us at 
+    <a href="mailto:info@smartflix.com" style = "color: #991a14; font-weight: bolder; font-size: .9em; line-height: 1.4em;">info@smartflix.com</a>
+  </p>
+  <p style = "font-size: 1em; line-height: 1.4em; color: black;">
+    - the <%= smartflix_link %> Team
+  </p>
+</div>
+
+<div style = "width: 270px; margin-left: 420px;">
+<% if @product %>
+  <% product_url = url_for(:controller => 'store', :action => 'video', :id => @product.id, :ct => @ct_code, :host => WEB_SERVER) %>
+  <h2 style = "vertical-align:top; margin-top:0px;">
+    <%= link_to @product.name, product_url, :style => "color: #991a14; font-weight: bolder; font-size: 20px; line-height: 26px;" %>
+  </h2>
+  <%= link_to email_large_image_for(@product), product_url %>
+  <p style = "font-size: 1em; line-height: 1.4em; color: black;">
+    <%= @product.summary(150) %>...
+    <%= link_to '[Read more]', product_url, :style => "color: #991a14; font-weight: bolder; font-size: .9em; line-height: 1.4em;" %>
+  </p>
+  <% if @product.product_set_member? -%>
+    <%= email_add_to_cart_button(@product.product_set, :ct_code => @ct_code) %>
+  <% end -%>
+  <%= email_add_to_cart_button(@product, :ct_code => @ct_code) %>
+<% else %>
+  <% [Product.find(1447), Product.find(85)].each do |product| %>
+    <% product_url = url_for(:controller => 'store', :action => 'video', :id => product.id, :ct => @ct_code, :host => WEB_SERVER) %>
+    <%= link_to email_large_image_for(product), product_url %>
+  <% end %>
+  <p>&nbsp</p>
+<% end %>
+</div>
+
+<%= render :partial => 'footer' %>

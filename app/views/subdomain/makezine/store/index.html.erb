@@ -1,0 +1,11 @@
+<% @featured_category_products.sort_by { rand }.each do |featured_category, products| -%>
+<div class="category-listing-section">
+  <%=  "<h1 class=\"rent-dvds-like\">Rent #{link_to_category featured_category} DVDs, like</h1>" %>
+  <%=  products.collect { |p| render :partial => 'store/product_listing', :locals => { :products => [p] } } %>
+</div>
+<% end -%>
+
+<div class="category-listing-section">
+  <h1 class="rent-dvds-like">Or rent any of our thousands of other how-to videos, like</h1>
+  <%= render :partial => 'store/product_listing', :locals => { :products => @featured_products } %>
+</div>

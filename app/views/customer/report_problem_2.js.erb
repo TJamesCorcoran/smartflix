@@ -1,0 +1,7 @@
+li_id     = "#line_item_<%= @line_item.id %>";
+button_id = "#button_<%= @line_item.id %>";
+
+$(li_id).html("<td><%= escape_javascript( render( :partial => @partial ) ) %></td>");
+$(li_id).effect("highlight", {}, 4000);
+
+

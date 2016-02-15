@@ -1,0 +1,10 @@
+<%= @customer.full_name.split.map(&:capitalize).join(" ") %> rented <%= @customer.line_items_shipped_not_returned.size %> DVDs from us, agreed to return them, then failed to return them.
+
+
+<ul>
+<% @customer.line_items_shipped_not_returned.each do |li| %>
+  <li>Rented copy <%= li.copy.sticker_id %> on <%= li.shipment.dateOut %> ( $<%= li.copy.replacement_price %> )
+<% end %>
+</ul>
+
+Total replacement charges are $<%= @customer.line_items_shipped_not_returned.map { |li| li.copy.replacement_price }.sum %>

@@ -1,0 +1,66 @@
+to install
+----------
+
+0) unpack, put in your app's vendor/plugins
+
+1) link from your project db/migrate to this plugin's db/migrate/1221860216_add_url_tracker.rb
+
+2) in your application's app/controllers/application.rb, add this:
+
+	  include UrlTracker
+	  before_filter :url_tracker
+
+3) in your customer login code, add this:
+
+      UrlTracker
+
+and right after a customer logs in, say like this:
+
+      @customer = Customer.authenticate(params)	
+
+add this:
+
+      map_customer_to_session(@customer)
+
+4) OPTIONAL (if you're using a bifurcated application/db model,
+where your website data is pulled into another db and then that app
+wants to use the data - Amazon.com, SmartFlix.com and HeavyInk.com do
+this, you may or may not)
+
+    in your (backend ?) customer model, put this:
+
+		include UrlTracker
+		def url_tracks() url_tracks_for_customer(self.id)  end
+		def url_track_ids_for_controller_action(controller_str, action_str) 
+		  ids_for_last_n_customer_actions(self, controller_str, action_str)
+		end
+
+
+
+5) rake db:migrate 
+
+
+use
+---
+
+On the front end you can create a sidebar showing the customer things
+he's recently looked at like this:
+
+
+    @recently_viewed_videos = ids_for_last_n_session_actions(10, "store", "video").map{|id| Foo[id]}...
+
+On the backend, you can send a customer email about things that he's looked at like this:
+
+    Customer.find( XXXX ).url_track_ids_for_controller_action("store", "video")
+
+
+bugs
+----
+
+* You might have multiple apps talking to the same db (like
+  SmartFlix.com, Woodturner-U.com, Glasswork-U.com, etc.), and this
+  plugin does not capture domain name ... and it should.
+
+
+* We want session_id and customer_id to be indexes.
+

@@ -1,0 +1,23 @@
+<div style="float:right; margin: 10px; padding: 10px; background-color: white; border: 2px solid black; min-width:300px; min-height: 300px;">
+ <%= link_to "small claims", admin_customer_smallclaims_url(@customer) %>
+ <center>
+   <h1>Key</h1>
+ </center>
+
+ <h2>payments</h2>
+   <ul>
+      <li> red - bad
+      <li> yellow - tentative
+      <li> white - good
+   </ul>
+
+ <h2>line items</h2>
+    <ul>
+        <li>   white - regular
+        <li>   yellow - late fee
+        <li>   orange - lost fee
+        <li>   blue - university
+        <li>   purple - university replacement
+    </ul>
+</div>
+

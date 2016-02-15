@@ -1,0 +1,40 @@
+Hi <%= @customer.first_name %>,
+
+We're writing today about one or more lost DVDs.  We've purchased replacement
+copies, and we've charged you for the replacements.
+
+<% if @because_cc_expiring %>
+
+These DVDs were out with you and the credit card we have on hand for
+you is due to expire shortly, so we will no longer be able to charge
+you weekly rental fees, and instead have to mark these unreturned DVDs
+off our books, as specified in the previous weekly charge emails you
+have received.
+
+<% end %>
+
+The copies we shipped to you have now been marked in our database as
+no longer belonging to us - if they are still in your possession, they
+are yours to keep.
+
+<% @copies.each do |copy| %>
+* Copy #<%= copy.id %> of '<%= copy.product.name %>'.
+  Replacement price:  $<%= copy.replacement_price %>
+
+<% end %>
+
+All prices above include our estimate of the actual taxes, shipping,
+handling that we pay to replace the DVD, as well as a restocking fee
+to cover the labor and office overhead involved in purchasing a
+replacement and adding it to our inventory ( $10 ).
+
+Because we want to keep your costs as low as possible, we always buy
+replacements from the lowest cost vendor that we can find.
+
+Your credit card ending in x<%= @last_four %> was charged
+$<%= sprintf("%0.2f", @sum_price) %> on <%= Date.today.to_s %>
+
+
+The SmartFlix team.
+
+This email was sent to <%= @customer.email %>

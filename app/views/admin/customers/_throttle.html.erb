@@ -1,0 +1,23 @@
+<% if @employee.andand.authority_edit_order  %>
+  <div class="ud_block">
+
+	   <%= button_to "Create a new order for this customer", :controller=>:orders, :action=>:new, :customer_id =>@customer.id %><br>
+
+       Customer is
+       <% if @customer.throttleP %>
+           throttled
+     	   <%= button_to "Unthrottle customer",  :confirm => 'Are you sure?', :action=>:unthrottle, :id =>@customer.id %><br>
+       <% else %>  
+           not throttled
+     	   <%= button_to "Throttle customer", :action=>:throttle, :id =>@customer.id %><br>
+       <% end %>
+
+	   <%= button_to "Tried to sue, but snailmail bounced", {:action=>:no_addr, :id =>@customer.id}, :confirm => "Are you sure?" %><br>
+       <% if @customer.line_items_shipped_not_returned.select { |li| li.lawsuit_snailmail }.any? %>
+         <%= button_to "Lawsuit filed", { :action=>:lawsuit_filed, :id =>@customer.id}, :confirm => "Are you sure?" %><br>
+       <% else %>
+          no ability to file lawsuit - no warnings
+       <% end %>
+  </div>
+<% end %>
+

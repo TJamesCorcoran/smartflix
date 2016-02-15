@@ -1,0 +1,189 @@
+  <div style="float:left; padding-right:20px;">
+      <h1>
+         <%= order.university.name %> 
+      </h1>
+  </div>
+   
+  <div>
+     <%= button_to "cancel university", customer_university_cancel_url(order), { :confirm =>"Are you sure you want to cancel your subscription to #{order.university.name}? This is permanent! (click 'OK' to cancel anyway)", :class => "orange button"} %>
+
+     <p>
+     (<%= link_to "Change plan", :action => :change_plan, :id => order.id %> or 
+     view <%= link_to "payment details", :action => :university_details, :id => order.id %>)
+     </p>
+  </div>
+
+  <br class="clear">
+
+   <div>
+       <a href="#in_field">in field</a> | 
+       <a href="#not_yet">not sent yet</a> | 
+       <a href="#cancelled">cancelled</a> | 
+       <a href="#back">back</a> 
+   </div>
+
+          <% 
+           # ==========
+           #  in field
+           # ==========
+          %>
+         <% in_field = order.line_items_in_field_good %>
+
+          <a name="in_field"></a> 
+          <div>
+            <td colspan=7>
+                <h2>DVDs out with you (<%= in_field.size %>) </h2>
+            </td>
+          </div>
+
+          <% if in_field.any? %>
+            <p>(You may have already mailed these back, but we don't have them yet.)</p><!-- ' -->
+          <% end %>
+
+          <%= render :partial => 'university_lis', 
+                     :locals => {
+                                  :order           => order,
+                                  :lis             => in_field,
+                                  :empty_text      => "You have no DVDs out right now.",
+                                  :show_delay      => false,
+                                  :rating          => :new,
+                                  :cancel_button   => false,
+                                  :uncancel_button => false,
+                                  :move_button     => false ,
+                                  :dup_button      => false
+            } %>
+
+          <% 
+           # ==========
+           #  in field lost
+           # ==========
+          %>
+         <% in_field_lost = order.line_items_in_field_lost  %>
+         <% if in_field_lost.any? %>
+          <div>
+            <td colspan=7>
+                <h2>DVDs lost by USPS (<%= in_field_lost.size %>) </h2>
+            </td>
+          </div>
+          <div>
+            <td></td>
+            <td colspan=6>
+               <p>(These may have been recovered by you, but we don't have them yet.)</p><!-- ' -->
+            </td>
+          <%= render :partial => 'university_lis', 
+                     :locals => { :order       => order,
+                                  :lis             => in_field_lost,
+                                  :empty_text      => "You have no DVDs out right now.",
+                                  :show_delay      => false,
+                                  :rating          => :new,
+                                  :cancel_button   => false,
+                                  :uncancel_button => false,
+                                  :move_button     => false  ,
+                                  :dup_button      => false
+            } %>
+          <% end %>
+
+          <% 
+           # ==========
+           # not sent yet
+           # ==========
+          %>
+
+          <% not_sent = order.line_items_unshipped_and_uncancelled %>
+          <a name="not_yet"></a> 
+          <div>
+            <td colspan=7>
+               <h2>DVDs Yet to be sent (<%= not_sent.size %>)</h2>
+            </td>
+          </div>
+          <p>
+
+          <b>PLEASE NOTE</b>: DVDs ship as available. Moving items to
+          the top of your queue will prioritize them, but does not
+          guarantee that they ship next (some DVDs are out of print,
+          hard to acquire, etc.) </p>
+
+
+          <%= render :partial => 'university_lis', 
+                     :locals => { :order         => order,
+                                  :lis           => not_sent.sort_by(&:queue_position),
+                                  :empty_text    => "",
+                                  :show_delay    => true,
+                                  :rating        => :none,
+                                  :cancel_button => true,
+                                  :uncancel_button => false,
+                                  :move_button   => true,
+                                  :dup_button      => false } %>
+
+
+           <% if not_sent.size < 15 %>
+              <div>
+                <td colspan=7>
+                   <%= render :partial => "shared/queue_low_add_videos" %>
+                 </td>
+              </div>
+           <% end %>
+
+          <% 
+           # ==========
+           #  cancelled
+           # ==========
+          %>
+
+
+          <% lis_cancelled = order.line_items_cancelled %>
+          <% if lis_cancelled.any? %>
+
+          <a name="cancelled"></a> 
+          <div>
+            <td colspan=7>
+              <h2>Cancelled (<%= lis_cancelled.size %>)</h2>
+             </td>
+          </div>
+
+            <%= render :partial => 'university_lis', 
+                       :locals => {  
+                                    :order           => order,
+                                    :lis             => lis_cancelled,
+                                    :show_delay      => false,
+                                    :rating          => :none,
+                                    :empty_text      => "n/a",
+                                    :cancel_button   => false,
+                                    :uncancel_button => true,
+                                    :move_button     => false,
+                                    :dup_button      => false 
+ } %>
+
+          <% 
+           # ==========
+           #  back
+           # ==========
+          %>
+
+          <% back = order.line_items_back %>
+
+          <a name="back"></a> 
+          <div><td colspan=7>
+          <h2>DVDs We've Received Back (<%= back.size %>)</h2>
+          </td>
+          </div>
+          <%= render :partial => 'university_lis', 
+                     :locals => {  
+                                  :order           => order,
+                                  :lis             => back,
+                                  :show_delay      => false,
+                                  :rating          => :new,
+                                  :empty_text      => "No university DVDs been received back yet.",
+                                  :cancel_button   => false,
+                                  :uncancel_button => false,
+                                  :move_button     => false,
+                                  :dup_button      => true  
+       } %>
+
+
+          <% end %>
+
+      </table>
+
+
+

@@ -1,0 +1,12 @@
+<h1>Editing cobrand_payment</h1>
+
+<%= error_messages_for :cobrand_payment %>
+
+<%= form_for(:cobrand_payment, :url => cobrand_payment_path(@cobrand_payment), :html => { :method => :put }) do |f| %>
+  <p>
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', cobrand_payment_path(@cobrand_payment) %> |
+<%= link_to 'Back', cobrand_payments_path %>

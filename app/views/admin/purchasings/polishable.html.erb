@@ -1,0 +1,33 @@
+<% total_size = @polish_high.size + @polish_med.size + @polish_low.size 
+   num_at_start_of_day = (total_size + @num_polished_today + @num_dead_today)
+   num_expected_at_start_of_day = [(num_at_start_of_day / 10), [20, total_size].min ].max
+   num_done_today = (@num_polished_today + @num_dead_today)
+   expected_today = [num_expected_at_start_of_day - num_done_today, 0].max
+%>
+
+<div class="ud_block">
+  <%= form_tag :controller => :copies, :action => :update_for_polishing do %>
+     copy_id:
+     <p><%= text_field_tag 'stickerID' %></p>
+     <p style="display:none"><input type="submit" value="foobar" name="commit"/ onclick="return false;"></p>
+     <p><%= submit_tag 'fixed' %></p>
+     <p><%= submit_tag 'totally dead' %></p>
+  <% end %> 
+</div>
+
+<h1>Stats</h1>
+<ul>
+  <li> <%= total_size %> DVDs to be polished.
+  <li> <%= expected_today %> to polish today
+  <li> <%= @num_polished_today %> fixed today
+  <li> <%= @num_dead_today %> marked dead today
+</ul>
+
+<h1>High (<%= @polish_high.size %> items)</h1>
+<%=   table_from_enumerable(@polish_high.sort.map{|copy_id| link_to Copy.id_to_sticker(copy_id), :controller => :copies, :action=>:show, :id=>copy_id }, 4, nil, "width=200px").html_safe  %>
+
+<h1>Med (<%= @polish_med.size %> items)</h1>
+<%=   table_from_enumerable(@polish_med.sort.map{|copy_id| link_to Copy.id_to_sticker(copy_id), :controller => :copies, :action=>:show, :id=>copy_id }, 4, nil, "width=200px").html_safe  %>
+
+<h1>Low (<%= @polish_low.size %> items)</h1>
+<%=   table_from_enumerable(@polish_low.sort.map{|copy_id| link_to Copy.id_to_sticker(copy_id), :controller => :copies, :action=>:show, :id=>copy_id }, 4, nil, "width=200px").html_safe %>

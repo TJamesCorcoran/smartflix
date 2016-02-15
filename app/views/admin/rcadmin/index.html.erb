@@ -1,0 +1,27 @@
+<h1>Home</h1>
+
+<p>
+One question score <%= @one_question_survey.survey_answers.size %> responses:
+<b><%= '%0.2f' % @one_question_survey.one_question_score %></b>
+Last 500: <b><%= '%0.2f' % @one_question_survey.one_question_score(500) %></b>
+Last 100: <b><%= '%0.2f' % @one_question_survey.one_question_score(100) %></b>
+</p>
+
+
+<div class="box-float">
+<h3>Recent <%= link_to 'Orders', :controller => 'admin/orders' %>
+(today: <%= @order_count_today %> / <%= number_to_currency(@order_total_today) %>)</h3>
+<%= render :partial => 'order_table' %>
+</div>
+
+<div class="box-float">
+<h3>
+ New <%= link_to 'Customers', :controller => 'admin/customers' %>
+  (today: <%= @customer_count_full_today %> full + 
+		  <%= @customer_count_partial_today %> partial = 
+		  <%= @customer_count_full_today + @customer_count_partial_today %> ; 
+		  <%= @customer_count_orders_today %> with orders )
+</h3>
+<%= render :partial => 'customer_table' %>
+</div>
+

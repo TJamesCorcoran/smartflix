@@ -1,0 +1,54 @@
+<div id="newsletter_editor">
+  <h1>Newsletter: <%= @newsletter.headline %></h1>
+
+  <%= link_to 'Index', :action => :index %> |
+  <%= link_to 'Edit', :action => :edit, :id => @newsletter %>
+
+  <h2>Status</h2>
+
+  <%= button_to 'Send', {:action => :deliver, :id =>@newsletter}, 
+                        {:confirm => 'Are you sure you want to send?', :class => 'send'} %>
+  <%= button_to 'Kill', {:action => :kill, :id => @newsletter},
+                        { :confirm => 'Are you sure you want to stop sending?', :class => 'kill'} %>
+
+  <div id="status">
+    <%= render :partial => 'status' %>
+  </div>
+
+  <script>
+	$(document).ready(
+	  function(){
+		setInterval(function(){
+		      $('#status').load('<%= nl_status_admin_newsletter_url(@newsletter) %>');
+		}, 8000);
+	  });
+  </script>
+
+  <h2>Test</h2>
+  <%= form_tag :action =>:deliver, :id =>@newsletter do %>
+    <%= select_tag 'email', 
+        options_for_select([''] + 
+                           %w(xyz@smartflix.com
+                              xyzattach@smartflix.com
+                              xyz2020@gmail.com
+                              gus.webb@gmail.com
+                              dan@cohortdesign.com
+                              susanc@smartflix.com
+                              smartflix@gmail.com 
+                              smartflixtest@yahoo.com 
+                              smartflix@hotmail.com)) %>
+    <%= text_field_tag 'custom_email' %>
+    <%= submit_tag 'Send Preview' %>
+  <% end %>
+
+  <h2>Preview</h2>
+  <% begin %>
+    <div id="newsletter_preview">
+      <%= render :partial => 'newsletter', :locals => { :newsletter => @newsletter, :customer => nil } %>
+    </div>
+  <% rescue Exception => e %>
+    <div style="border: 3px solid #ff0000; background-color: #ffcccc; padding:20px;">     
+     ERROR: <%= e.message %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,87 @@
+  <div id="cart-guarantee">
+    <h1>100% Moneyback Guarantee</h1>
+    <p>
+    When you rent at SmartFlix, you've got our no-questions-asked, 100%-money-back, 60-day guarantee: if you can't honestly say that the DVDs you rent from SmartFlix gave you the skills you need, we will return one hundred and twenty percent of your money, promptly and courteously. It's the Smartflix Way! <!-- ' -->
+    </p>
+  </div>
+
+
+<div id="subcat-container">
+  <div id="subcat-container-header">
+    <h2>Rental Cart</h2>
+  </div>
+
+  <div id="subcat-wrapper">
+
+    <% if (@cart.cart_items.any? ) -%>
+      <%= 
+          # render :partial => 'cart_display', :locals => { :items => cart.items_to_buy  } 
+          cart_display_for(@cart, :items_to_buy, { :style => :full, :display_total => true })
+       %>
+      <p></p>
+      <%# ABTEST: do we show text indicating free shipping if they checkout now? -%>
+      <% if true -%>
+        <p>Check out now and get free shipping on your rentals!</p>
+      <% end -%>
+
+      <div style="margin-left:400px;">
+
+            <%= Button.new("secure checkout", nil, {:size => :large,
+                                                   :class=>"orange",
+                                                   :url => url_for(:action => 'checkout') }) %> 
+      </div>
+    <% else -%>
+      <p>There are no items in your cart</p>
+            <%= Button.new(:continue, nil, {       :size => :large,
+                                                   :class=>"orange",
+                                                   :url => url_for(:controller => 'store', :action => :index) }) %> 
+    <% end -%>
+
+  </div>
+</div>
+
+<div id="subcat-container">
+  <div id="subcat-container-header">
+    <%# ABTEST in progress: see if adding "wishlist" (save for later) buttons to places where "rent now" appears is helpful -%>
+    <% if false -%>
+      <h2>Wishlist</h2>
+    <% else -%>
+      <h2>Saved Items</h2>
+    <% end -%>
+
+  </div>
+  <div id="subcat-wrapper">
+
+    <%= cart_display_for(@cart, :items_saved, { :style => :full, :display_total => false }) %>
+
+    <%# Display the number of saved items -%>
+    <p>
+    <%= saved_items_count_string_for(@cart.items_saved.size) %>
+    </p>
+
+  </div>
+</div>
+
+<% also_rented = @cart.recommended_products -%>
+<% if also_rented.size > 0 -%>
+  <div class="category-listing-section">
+    <h1 class="rent-dvds-like">Customers who rented the videos in your cart also rented</h1>
+    <%= render :partial => 'store/product_listing', :locals => { :products => also_rented } %>
+  </div>
+<% end -%>
+
+	<!-- Google Code for SF basket Conversion Page -->
+	<script language="JavaScript" type="text/javascript">
+	<!--
+	var google_conversion_id = 1071930775;
+	var google_conversion_language = "en_US";
+	var google_conversion_format = "1";
+	var google_conversion_color = "ffffff";
+	var google_conversion_label = "sLSKCMaXUhCXu5H_Aw";
+	//-->
+	</script>
+	<script language="JavaScript" src="http://www.googleadservices.com/pagead/conversion.js">
+	</script>
+	<noscript>
+	<img height="1" width="1" border="0" src="http://www.googleadservices.com/pagead/conversion/1071930775/?label=sLSKCMaXUhCXu5H_Aw&amp;script=0"/>
+	</noscript>

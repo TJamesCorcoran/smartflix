@@ -1,0 +1,63 @@
+<%= javascript_include_tag 'newsletters.js' %>
+<% @jquery_loaded = true -%>
+<% idx = -1 -%>
+
+<div id="newsletter_editor">
+
+  <%= link_to 'Index', :action => :index %> |
+  <%= link_to 'Preview', :action => :show, :id =>@newsletter %> 
+  <% if @newsletter.new_record? %>
+    | <span class="new">(this newsletter is new and unsaved)</span>
+  <% else %>
+<!--    <%= link_to 'Status of this Newsletter &raquo;', :action => :status, :id =>@newsletter, :class => 'status' %> -->
+  <% end %>
+
+  <%= form_for @newsletter, :url => { :action => :update, :id => @newsletter }, :html => { :multipart => true } do |f| %>
+    <div class="newsletter">
+      <div class="category">
+        <label for="newsletter_category_id">Category</label>
+        <%= f.select 'newsletter_category_id', NewsletterCategory.find(:all).map { |nc| [nc.name,nc.id] } %>
+      </div>
+      <div class="headline">
+        <label for="headline">Title</label>
+        <%= f.text_field 'headline' %>
+      </div>
+    </div>
+  
+    <div id="sections">
+      <% @newsletter.sections.each_with_index do |section,idx| %>
+        <div class="section">
+          <%= select_tag 'type[]', options_for_select([''] + @templates.sort, section.section), :class => 'type', :autocomplete => 'off' %>
+          <%= hidden_field_tag 'idx[]', idx, :class => 'idx' %>
+          <%= hidden_field_tag 'order[]', idx, :class => 'order' %>
+          <div class="form">
+            <%= render :partial => 'section', 
+                :locals => { :template => NewsletterEditor.templates[section.section], :section => section, :idx => idx } %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    
+    <%= 
+      # This somehow calls public/javascripts/newsletters.js  newSection()
+      link_to 'Add New Section', '#', :id => 'new_section' %>
+
+    <%= submit_tag %>
+  <% end %>
+
+  <!--
+   This hidden template holds 
+  -->
+  <div id="section_template" style="display:none">
+    <div class="section">
+      <%= select_tag 'type[]', options_for_select([''] + @templates.sort, :include_blank => true), :class => 'type', :autocomplete => 'off' %>
+      <%= hidden_field_tag 'idx[]',  @newsletter.sections.size , :class => 'idx' %>
+      <%= hidden_field_tag 'order[]',  @newsletter.sections.size, :class => 'order' %>
+      <div class="form"></div>
+    </div>
+  </div>
+</div>
+
+<%= tinymce %>
+

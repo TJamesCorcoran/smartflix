@@ -1,0 +1,23 @@
+<p>
+  <strong>Name</strong><br />
+  <%= form.text_field :name %>
+</p>
+<p>
+  <strong>Description</strong><br />
+  <%= form.text_area :description %>
+</p>
+
+<p>
+  <strong>Discount Multiplier (e.g. 0.8)</strong><br />
+  <%= form.text_field :discount_multiplier %>
+</p>
+
+<p>
+  <strong>Products</strong>
+  <%= render :partial => 'dynamic_select', :locals => { :options => @products, :selected_options => @product_bundle.products } %>
+</p>
+
+<p>
+  <strong>Product Sets</strong>
+  <%= render :partial => 'dynamic_select', :locals => { :options => @product_sets, :text_attribute => 'name' } %>
+</p>

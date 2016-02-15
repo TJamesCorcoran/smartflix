@@ -1,0 +1,48 @@
+Hi <%= @customer.first_name %>,
+
+<% if @order.univ_status == :cancelled_in_field %>
+Your  <%= @order.university.name %> subscription is marked 
+as cancelled, but you still have DVDs that you haven't sent back yet.  Until we get
+them back, the monthly fee applies.
+<% end %>
+
+We tried to put through the monthly charge for your <%=
+@order.university.name %> subscription, but we don't have a working
+credit card for you.
+
+The error we got was
+
+  <%= @details %>
+
+If you've fixed the issue with your credit card, you can go here
+
+   http://smartflix.com/customer/university_status
+
+and click "try the card again"...
+
+... or you can go here
+
+   http://smartflix.com/customer/manage_cc
+
+and give us a new up-to-date credit card.
+
+<% if @copies.any? %>
+
+It's important that you update your credit card information ASAP.  You
+currently have DVDs out in the field, and the monthly charges can
+accrue from month to month!
+
+<% end %>
+
+Thank you,
+
+Your friends at SmartFlix.com
+
+
+
+--
+http://SmartFlix.com/
+Web's Biggest How-To DVD Rental Store
+
+
+This email was sent to <%= @customer.email %>

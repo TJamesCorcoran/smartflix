@@ -1,0 +1,1 @@
+../../vendor/plugins/apply_for_job/db/migrations/20110322165613_add_job_application.rb

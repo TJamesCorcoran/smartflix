@@ -1,0 +1,1 @@
+../../vendor/plugins/acts_as_notable/db/migrate/20100826204356_add_notes.rb

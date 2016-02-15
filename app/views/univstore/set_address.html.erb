@@ -1,0 +1,59 @@
+<div id="set_address_box">
+
+<h1>Where should we send your videos?</h1>
+
+<p>
+We can't wait to send you some great <b><%= @univ_choice.name_verb.downcase %></b> videos.
+</p>
+
+<p>Where should we mail them?
+</p>
+
+<%= form_for @address, :url => { :action => 'set_address' } do |f| -%>
+    <table class="set_address">
+      <tr>
+        <td class="form-label">First name:</td>
+        <td><%= f.text_field :first_name, :size => 40, :class => "text_input"  %></td>
+      </tr>
+      <tr>
+        <td class="form-label">Last name:</td>
+        <td><%= f.text_field :last_name, :size => 40, :class => "text_input"  %></td>
+      </tr>
+      <tr>
+        <td class="form-label">Street address:</td>
+        <td><%= f.text_field :address_1, :size => 40, :class => "text_input"  %></td>
+      </tr>
+      <tr>
+        <td class="form-label">Address Line 2:</td>
+        <td><%= f.text_field :address_2, :size => 40, :class => "text_input"  %></td>
+      </tr>
+      <tr>
+        <td class="form-label">City:</td>
+        <td><%= f.text_field :city, :size => 40, :class => "text_input"  %></td>
+      </tr>
+      <tr>
+        <td class="form-label">State:</td>
+        <td><%= f.select :state_id, @states %></td>
+      </tr>
+      <tr>
+        <td class="form-label">Postal Code:</td>
+        <td><%= f.text_field :postcode, :size => 40, :class => "text_input" %></td>
+      </tr>
+    </table>
+
+<table class="how_many_dvds">
+<tr>
+  <td class="form_label" id="secure_server_lock_white">
+      Secure server:
+  </td>
+  <td>
+      <%= submit_tag "Continue", :class => "submit_button" %>
+  </td>
+</tr>
+</table>
+
+
+
+<% end %>
+
+</div>

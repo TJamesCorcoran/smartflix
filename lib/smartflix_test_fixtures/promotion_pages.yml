@@ -1,0 +1,25 @@
+1_1:
+  promotion_page_id: 1
+  promotion_id: 1
+  content: 'Page 1-1'
+  order: 2
+1_2:
+  promotion_page_id: 2
+  promotion_id: 1
+  content: 'Page 1-2'
+  order: 1
+2_1:
+  promotion_page_id: 3
+  promotion_id: 2
+  content: 'Page 2-1'
+  order: 1
+3_1:
+  promotion_page_id: 4
+  promotion_id: 3
+  content: 'Page 3-1'
+  order: 1
+4_1:
+  promotion_page_id: 5
+  promotion_id: 4
+  content: 'You cant see me, bwahaha'
+  order: 1

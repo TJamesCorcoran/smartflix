@@ -1,0 +1,10 @@
+<% content_for :sidebar do %> 
+  <h1>State</h1>
+  <ul>
+  <% State.all.each do |ss| %>
+     <li> <%= ss.id %> - <%= ss.code %> / <%= ss.name %>
+  <% end %>
+  </ul>
+<% end %>
+
+<%= render :partial => 'admin/shared/edit', :locals => { :item => @item }   %>

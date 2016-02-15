@@ -1,0 +1,31 @@
+<div class="contests">
+  <div class="contests-left">
+    <h1>SmartFlix Cool Project Contest</h1>
+
+    <% if @contest.phase == Contest::ENTRY_PHASE %>
+      <%= render :partial => 'show_entry_phase' %>
+    <% elsif @contest.phase == Contest::VOTING_PHASE %>
+      <%= render :partial => 'show_voting_phase' %>
+    <% elsif @contest.phase == Contest::ARCHIVE_PHASE %>
+
+<!-- 
+    <div class="contest_nav_previous">
+      <%= link_to("previous contest", :action => :show, :id => @previous_contest.id) if @previous_contest %>
+    </div>
+    <div class="contest_nav_next">
+      <%= link_to("next contest", :action => :show, :id => @next_contest.id ) if @next_contest  %>
+    </div>
+    <div class="clear"></div>
+-->
+
+      <%= render :partial => 'show_archive_phase' %>
+    <% end %>
+  </div>
+  <div class="contests-right">
+    <% if @contest.phase == Contest::ENTRY_PHASE %>
+      <%= render :partial => 'other_entries' %>
+    <% elsif @contest.phase == Contest::VOTING_PHASE %>
+      <%= render :partial => 'vote_status' %>
+    <% end %>
+  </div>
+</div>

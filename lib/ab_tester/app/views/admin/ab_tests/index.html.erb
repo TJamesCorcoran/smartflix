@@ -1,0 +1,6 @@
+<% content_for :sidebar do %> 
+   <%= link_to "active", admin_ab_tests_active_url %>
+   <%= link_to "converged ", admin_ab_tests_converged_url %>
+<% end %>
+
+<%= render(:partial => 'admin/shared/index', :locals => { :items => @items } )  %>

@@ -1,0 +1,1 @@
+page.replace "flipper#{@promo.id}", :partial => "inner_flipper", :locals => { :id => @promo.id, :content => @out, :state => @state }

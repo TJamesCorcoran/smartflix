@@ -1,0 +1,309 @@
+bob_order:
+  order_id: 1
+  customer_id: 1
+  created_at: <%= DateTime.now %>
+non_bob_order:
+  order_id: 2
+  customer_id: 100000
+  created_at: <%= DateTime.now %>
+bob_order_shipped:
+  order_id: 3
+  customer_id: 1
+  created_at: <%= DateTime.now %>
+
+#----------
+# TVRM
+
+#----------------------------------------------------------------------
+#   LineItemTest
+#----------------------------------------------------------------------
+
+warn_no_lateMsg_already_sent:
+    order_id:  5000
+    server_name: "smartflix.com"
+    customer_id:  5000
+
+warn_no_is_back:
+    order_id:  5001
+    server_name: "smartflix.com"
+
+warn_no_is_badcopy:
+    order_id:  5002
+    server_name: "smartflix.com"
+
+
+warn_no_no_shipment:
+    order_id:  5003
+    server_name: "smartflix.com"
+
+warn_no_back_already:
+    order_id:   5004
+    server_name: "smartflix.com"
+
+warn_yes:
+    order_id:  5005
+    server_name: "smartflix.com"
+
+warn_no_univ:
+    order_id:  5006
+    server_name: "woodturner-u.com"
+    university_id: 5006
+
+#----------
+# shared between line_item tests and overdue_engine tests
+
+charge_yes_first:
+    order_id:   5010
+    server_name: "smartflix.com"
+    customer_id:  5010
+
+charge_yes_older_charge:
+    order_id:   5011
+    server_name: "smartflix.com"
+    customer_id:  5010
+    orderDate:     "2005-01-01"
+
+charge_yes_older_charge_thecharge:
+    order_id:   5012
+    server_name: "late charge"
+    customer_id:  5010
+    orderDate:     "2005-02-01"
+
+charge_no_just_charged:
+    order_id:   5013
+    server_name: "smartflix.com"
+    orderDate:     "2005-02-01"
+
+charge_no_just_charged_thecharge:
+    order_id:   5014
+    server_name: "late charge"
+    orderDate:     "2090-02-01"
+
+charge_expired_cc:
+    order_id:   5020
+    customer_id:  5020
+    server_name: "smartflix.com"
+
+
+#----------------------------------------------------------------------
+#   ShippingTest
+#----------------------------------------------------------------------
+
+customer_with_no_history:
+   order_id: 6000
+   customer_id: 6000
+
+customer_with_order:
+   order_id: 6100
+   customer_id: 6100
+   orderDate:  "2008-06-01"
+
+customer_with_dibs:
+   order_id: 6200
+   customer_id: 6200
+   orderDate:  "2008-01-01"
+
+#----------
+# customer / university / shipping testing
+
+# no
+non_univ_customer:
+   customer_id: 7000
+   order_id: 7000
+
+# single
+single_univ_customer:
+   customer_id: 7010
+   order_id: 7010
+   university_id: 7010
+
+# triple
+triple_univ_customer_o0:
+   order_id: 7020
+   customer_id: 7020
+
+triple_univ_customer_o1:
+   order_id: 7030
+   customer_id: 7020
+   university_id: 7010
+
+triple_univ_customer_o2:
+   order_id: 7040
+   customer_id: 7020
+   university_id: 7020
+
+#--------------------
+# shippable
+
+# no
+non_univ_customer_2:
+   customer_id: 7100
+   order_id: 7100
+   orderDate:  "2008-01-01"
+
+# single
+single_univ_customer_2:
+   customer_id: 7110
+   order_id: 7110
+   university_id: 7010
+   orderDate:  "2008-01-01"
+
+# triple
+triple_univ_customer_2_o0:
+   order_id: 7120
+   customer_id: 7120
+   orderDate:  "2008-01-01"
+
+triple_univ_customer_2_o1:
+   order_id: 7130
+   customer_id: 7120
+   university_id: 7010
+   orderDate:  "2008-01-01"
+
+triple_univ_customer_2_o2:
+   order_id: 7140
+   customer_id: 7120
+   university_id: 7020
+   orderDate:  "2008-01-01"
+
+#----------
+# pruning
+
+prune_none_recent:
+   order_id: 7200
+   customer_id: 7200
+   university_id: 7020
+   orderDate:  "2008-01-01"
+
+# li utility func tests
+
+utility_cancelled:
+  order_id:    8000
+  orderDate:  "2008-02-15"
+
+utility_infield:
+  order_id:    8001
+  orderDate:  "2008-02-15"
+
+utility_unshipped:
+  order_id:    8002
+  orderDate:  "2008-02-15"
+
+utility_back:
+  order_id:    8003
+  orderDate:  "2008-02-15"
+
+# test_live_university
+
+univ_order:
+  order_id:    8100
+  orderDate:  "2008-01-02"
+  university_id: 8100
+
+
+#----------------------------------------------------------------------
+#   university tests
+#----------------------------------------------------------------------
+
+univ_order_current:
+  order_id:    9000
+  orderDate:  "2008-01-01"
+  university_id: 9000
+
+univ_order_none_recent:
+  order_id:    9001
+  orderDate:  "2008-01-01"
+  university_id: 9000
+
+univ_order_none:
+  order_id:    9002
+  orderDate:  "2008-01-01"
+  university_id: 9000
+
+univ_order_recent_but_no_successful:
+  order_id:    9003
+  orderDate:  "2008-01-01"
+  university_id: 9000
+
+
+#----------------------------------------------------------------------
+#   orders tests
+#----------------------------------------------------------------------
+
+univ_payed_up_yes:
+   order_id: 9500
+   university_id: 7010
+
+univ_payed_up_outofdate:
+   order_id: 9501
+   university_id: 7010
+
+univ_payed_up_recent_failure:
+   order_id: 9502
+   university_id: 7010
+
+
+
+toreplace_order_univ:
+   university: foo_university
+   customer: toreplace_order
+
+toreplace_order_regular:
+   customer: toreplace_order
+
+
+
+toreplace_order_mixed_reg:
+  # university: <none> !!
+   customer: toreplace_order
+
+toreplace_order_mixed_univ1:
+   university_id: 1
+   customer: toreplace_order
+
+toreplace_order_mixed_univ_bar:
+   university_id: 2
+   customer: toreplace_order
+
+
+
+test_univ_fee_amount_to_charge_not_payed_full:
+   university_id: 7010
+   univ_dvd_rate: 3
+
+test_univ_fee_amount_to_charge_not_payed_discount:
+   university_id: 7010
+   univ_dvd_rate: 3
+
+test_univ_fee_amount_to_charge_not_payed_full_failed_to_charge:
+   university_id: 7010
+   univ_dvd_rate: 3
+
+test_univ_fee_amount_to_charge_not_payed_discount_failed_to_charge:
+   university_id: 7010
+   univ_dvd_rate: 3
+
+test_univ_fee_amount_to_charge_payed_full:
+   university_id: 7010
+   univ_dvd_rate: 3
+
+test_univ_fee_amount_to_charge_payed_discount:
+   university_id: 7010
+   univ_dvd_rate: 3
+
+test_univ_fee_amount_to_charge_not_univ:
+  university_id: nil
+  univ_dvd_rate: 3
+
+
+#----------------------------------------------------------------------
+#   products test
+#----------------------------------------------------------------------
+
+
+#----------
+# test_copies_needed_ignore_replacement_and_late_fees
+copies_needed_a:
+  university_id: nil
+  univ_dvd_rate: 3
+

@@ -1,0 +1,38 @@
+<div class="univ_element" id="video-<%= product.id %>-inner">
+  <h2><%= product.name %></h2>
+  <div class="univ_element_inner">
+      <%= small_image_for(product) %>
+        <h3>...with <%= product.author.name %></h3>
+
+    <p>
+    <%= product.description %>
+    <% if product.minutes && product.minutes > 10 -%>
+       <p>(about <%= product.minutes %> minutes)</p>
+    <% end -%>
+
+      <% if product.reviews_n_star(4).select {|rating| rating.review }.any? %>
+
+            <h3 class="customer_review_header">Featured Customer Review:</h3>
+
+            <%= h(product.reviews_n_star(5).first.andand.summary(1000) ||
+                  product.reviews_n_star(4).first.andand.summary(1000))  %>
+
+      <% end %>
+
+  </div>
+</div>
+
+<script type="text/javascript">
+        expand = "#video-<%= product.id %>-outer";
+
+        if (now_open != "none") {
+          $(now_open).toggle();
+          now_open = "none" ;
+        } 
+
+        $(expand).toggle();  
+        now_open = expand;
+
+
+ </script>
+

@@ -1,0 +1,20 @@
+<%
+   happened = case @phase
+   when Contest::VOTING_PHASE  : "begun accepting votes"
+   when Contest::ARCHIVE_PHASE : "concluded, and votes have been counted"
+   end
+-%>
+Hello from Smartflix!
+
+<%= "Just a quick email to let you know that the '#{h @title}' contest at SmartFlix.com has just #{happened}.  Stop by and check it out at:".wrap_at(72, -1) %>
+
+  <%= @contest_url %>
+
+Thanks!
+The Smartflix team
+
+
+--
+This email address was given to us by you or by one of our customers. If
+you did not signup for an account, or feel that you have received this
+email in error, please send an email to info@smartflix.com 

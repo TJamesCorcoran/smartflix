@@ -1,0 +1,22 @@
+<%= form_for(@project, :html => { :multipart => true, :onsubmit => 'return validate_form(this);' }) do |form| %>
+  <p><%= form.error_messages %></p>
+  <p>
+    <strong><%= content_tag :tag, 'Project name' %></strong>
+    <%= form.text_field :title %>
+  </p>
+  <p>
+    <strong><%= content_tag :tag, 'Project status' %></strong>
+    <%= form.select :status, Project.status_selects %>
+  </p>
+  <% if type == :create %>
+    <% if @project.inspired_by_id %>
+      <%= form.hidden_field :inspired_by_id %>
+    <% end %>
+    <%= render :partial => 'project_updates/update_photo_form' %>  
+    <%= fields_for(@project_update) do |fields| %>
+      <p><strong><%= content_tag :tag, 'Project description' %></strong></p>
+      <p><%= fields.text_area :text, :rows => 6, :cols => 50 %></p>
+    <% end %>
+  <% end %>
+  <p><%= form.submit type.to_s.capitalize, :class => 'button' %></p>
+<% end %>

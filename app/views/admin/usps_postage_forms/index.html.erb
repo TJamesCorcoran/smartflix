@@ -1,0 +1,43 @@
+<h1>USPS Postage Forms</h1>
+
+
+<%  if @new_ps3600_allowedP || session[:employee_number] == 1 %>
+	<table border=0>
+      <tr>
+        <td>
+          <%= button_to "print ps3600eze", "http://#{BACKEND_URL}/admin/usps_postage_forms/print?redirect_url=#{request.url.split("?")[0]}"   %>
+        </td>
+
+        <td>
+             ... for <%= @num_shipments %> envelopes
+        </td>
+      </tr>
+    </table>
+<% else %>
+   <i>can not print PS3600 - insufficient envelopes (<%= @num_shipments %>) since last form</i>
+<% end %>
+
+<br><br><br><br><br>
+<table border=0>
+    <tr>
+        <% UspsPostageForm.columns.each do |column| %>
+          <th> <%= column.name  %> </th>
+        <% end %>
+    </tr>
+
+    <% @usps_forms.each do |form| %>
+        <tr>
+            <% UspsPostageForm.columns.each do |column|%>
+                <td>
+                <%= if column.name == "hr_person_id"
+                        link_to Person.find_by_id(form.hr_person_id).andand.to_s, :controller=>"persons", :action=>"show", :id=>form.hr_person_id
+                    else
+                        form.send(column.name)
+                    end
+                 %>
+                </td>
+             <% end %>
+        </tr>
+    <% end %>
+</table>
+

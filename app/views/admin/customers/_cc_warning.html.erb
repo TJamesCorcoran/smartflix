@@ -1,0 +1,18 @@
+<% if @customer.valid_cards.empty? %>
+  <div class=cc_warning>
+     <center>
+        No good CC
+     </center>
+     <ul>
+     <% @customer.credit_cards.each do |cc| %>
+       <li><%= cc.name %> - <%= cc.expired? ? "expired" : cc.last_msg %> -
+           <% if cc.extra_attempts > 0 %>
+              EXTRA ATTEMPT SET = <%= cc.extra_attempts %>
+           <% else %>
+              <%= button_to "try again", admin_try_cc_again_url(cc) %> 
+           <% end %>
+     <% end %>
+
+     </ul>
+  </div>
+<% end %>

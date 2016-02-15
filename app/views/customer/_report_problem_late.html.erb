@@ -1,0 +1,41 @@
+<% if @line_item.pending? -%>
+
+    <%= render :partial => 'report_problem_shipping_delay' %>
+
+    <%= report_problem_close(:ok) %>
+
+<% elsif @line_item.cancelled? -%>
+
+    <p>This item was cancelled.</p>
+
+    <%= report_problem_close(:ok) %>
+
+<% elsif !@line_item.late? -%>
+
+    <p>This DVD was shipped on <%= @line_item.shipment_date_for_listing %>, and given typical shipping times could
+    arrive as late as <%= @line_item.late_arrival_date_for_listing %>. If the DVD has not arrived by that date, please
+    report its late arrival.</p>
+
+    <%= report_problem_close(:done) %>
+
+<% else -%>
+
+    <%= form_tag( customer_report_problem_3_url(@line_item.id), :remote => true ) do -%>
+
+    <%=  hidden_field_tag 'problem_type', h(@problem_type) %>
+    <%=  hidden_field_tag 'reship', 'yes' %>
+
+    <p>
+    Sorry about the delay! Sometimes things take a bit longer to arrive than
+    they should if they get misrouted in the postal system. If you'd like,
+    we can send a replacement that might get there faster, or you can wait a
+    bit longer.
+    </p>
+
+    <%= report_problem_back(:cancel) %>
+
+    <%= Button.new( "send replacement", { :class => :orange, :method => :submit }) %>
+
+<% end -%>
+
+<% end -%>

@@ -1,0 +1,42 @@
+<h1>Listing cobrands</h1>
+
+<table>
+  <tr>
+  <th align=right>name</th><th align=right>orders</th><th align=right>commissions</th><th align=right>payments to date</th><th align=right>outstanding</th><th></th>
+  </tr>
+
+<% for cc in @cobrands %>
+  <tr width=600px>
+  <td width=15% align=right><%= link_to cc.name, :action=>:show, :id =>cc.id %></td>
+  <td  width=15% align=right><%= number_to_currency(cc.sum_order_payments) %></td>
+  <td  width=15% align=right><%= 
+
+com = 0
+"NOT IMPLEMENTED"
+# com = cc.commissions
+# number_to_currency(com) 
+%>
+
+</td>
+  <td width=15% align=right><%= 
+pay = 0
+"NOT IMPLEMENTED"
+# pay = cc.sum_cobrand_payments
+# number_to_currency(pay)
+ %>
+
+</td>
+  <td width=15% align=right><%= number_to_currency(com - pay) %></td>
+  <td width=15% align=right>
+                <% if ((com - pay)> 0)
+                    form_for :cobrand_payments, :url => {:action => 'create_payment'} do |ff| %>
+                <%= ff.hidden_field :payment, :value => com - pay %>
+                <%= ff.hidden_field :cobrand_id, :value => cc.id %>
+                <%= submit_tag "pay now" %>
+           <%   end
+                end     %>
+  </td>
+  </tr>
+<% end %>
+</table>
+

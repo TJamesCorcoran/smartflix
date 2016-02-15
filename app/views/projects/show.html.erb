@@ -1,0 +1,65 @@
+<div class="project">
+
+  <div class="header">
+    <h1><%= h(@project.title) %></h1>
+    <div class="name">By <%= link_to_customer(@project.customer) %></div>
+  </div>
+
+  <br class="clear"/>
+
+  <div class="meta-top">
+    <div class="favorite" id="favorite">
+      <%= render :partial => 'toggle_favorite_status' %>
+    </div>
+    <div class="status"><strong>Status:</strong> <%= @project.status_select %>
+      <% if current_customer_project(@project) %>
+        <span class="tiny-link">[<%= link_to 'Change', edit_project_url(@project) %>]</span>
+      <% end %>
+    </div>
+    <div class="comment-count"><%= link_to pluralize(@project.comments.count, 'comment'), :anchor => 'comments'%></div>
+  </div>
+
+  <div class="project-body">
+    <%= render :partial => 'update', :locals => { :update => @project.initial_update, :header => false } %>
+  </div>
+
+  <%# Capture this content, and only show the div if there is something to show %>
+  <% meta_bottom_content = capture do %>
+    <% if @project.inspired_by %>
+      <p>Inspired by: <%= link_to(h(@project.inspired_by.title), @project.inspired_by) %> by <%= h(@project.inspired_by.customer.display_name) %></p>
+    <% end %>
+    <% if @project.inspirees.count > 0 %>
+      <p>This project has inspired <%= pluralize(@project.inspirees.count, "other project") %>:</p>
+      <ul>
+        <%= @project.inspirees.map { |ii| "<li>#{link_to(h(ii.title), ii)} by #{h(ii.customer.display_name)}</li>" }.join(' ') %>
+      </ul>
+    <% end %>
+    <% unless current_customer_project(@project) || @project.inspirees.map(&:customer).include?(@customer) %>
+      <p>Does this project inspire you? <%= link_to "I'm going to do a project like this!", new_project_url(:inspired_by_id => @project) %></p>
+    <% end %>
+  <% end %>
+
+  <% if meta_bottom_content.strip.size > 0 %>
+    <div class="meta-bottom"><%= meta_bottom_content %></div>
+  <% end %>
+
+  <br class="clear"/>  
+
+</div>
+
+<%= render :partial => 'update', :collection => @project.subsequent_updates, :locals => { :header => true } %>
+
+<% if current_customer_project(@project) %>
+  <p><%= link_to 'Add an Update to this Project', new_project_update_url(:project_id => @project.id) %></p>
+<% end %>
+
+<div class="project-comments">
+  <a name="comments"></a>
+  <% if @project.comments.count > 0 %>
+    <h2>Comments</h2>
+    <%= render :partial => 'comment', :collection => @project.comments %>
+  <% else %>
+    <h2>No Comments Yet!</h2>
+  <% end %>
+  <%= render :partial => 'write_comment', :locals => { :parent => @project } %>
+</div>

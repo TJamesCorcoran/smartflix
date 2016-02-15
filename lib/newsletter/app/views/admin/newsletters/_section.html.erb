@@ -1,0 +1,6 @@
+<%= hidden_field_tag "section[#{idx}][id]", section && section.id %>
+<% template.fields.each do |name,type| %>
+  <% field = section && section.fields.detect { |f| f.field == name } -%>
+  <%= render :partial => 'field', 
+      :locals => { :type => type, :name => name, :field => field || NewsletterSectionField.new, :idx => idx } %>
+<% end %>

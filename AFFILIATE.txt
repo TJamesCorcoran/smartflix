@@ -1,0 +1,64 @@
+An overview of affiliate program in SmartFlix
+---------------------------------------------
+
+0) Existing cust goes to smartflix.com, clicks "affiliate program"
+   link in left, ends at
+
+       http://smartflix.com/affiliate/introduction
+
+   signs up, which creates database entry in 'affiliates' table  [ ??? true ??? ]
+
+1) new cust arrives at site with url
+
+   	   http://smartflix.com/?ct=af200001
+
+2) app/controllers/application_controller.rb 
+
+	   include TrackOrigin
+
+	   before_filter :track_origin_and_redirect
+
+   referencing code in
+ 
+       vendor/plugins/track_origin/lib/track_origin.rb
+
+   this ends up creating a database entry in the 'origins' table, like
+   this:
+
+	  +-----------+---------+---------------+--------------+------------+-------------+---------------------+
+	  | origin_id | referer | first_uri     | first_coupon | session_id | customer_id | updated_at          |
+	  +-----------+---------+---------------+--------------+------------+-------------+---------------------+
+	  |   7298160 | NULL    | /?ct=af200001 | NULL         |   41601490 |        NULL | 2011-04-20 15:41:33 |
+	  +-----------+---------+---------------+--------------+------------+-------------+---------------------+
+	  1 row in set (0.00 sec)
+
+    Note that the cf=af in the first_uri field
+
+3) the cron job runs
+       lib/job_runner/do.rb  
+   	   Do.credit_affiliates() 
+   which runs
+       lib/affiliate_engine.rb
+       credit_affiliates()
+   which looks at origins from the last 30 days, finds which ones
+   		 (1) created actual paid-for orders
+		 (2) haven't already generated an affiliate payment
+	and then 
+		 calls AffiliateTransaction.create, giving the affiliate
+         either $5 or $20 in credit.
+
+4) Customer support person navigates to 
+
+         https://smartflix.com/admin/affiliate_transactions
+
+   which is 
+
+         app/controllers/admin/affiliate_transactions_controller.rb
+
+   and 
+         (a) cuts checks
+		 (b) clicks buttons to indicate a check was cut, which - in
+         turn - creates another AffiliateTransaction in db
+		 
+
+

@@ -1,0 +1,27 @@
+<h1>Listing product_bundles</h1>
+
+<p><%= link_to "View bundle stats", :action => 'stats' %></p>
+
+<table>
+  
+<% for product_bundle in @product_bundles %>
+  <tr>
+    <td><%= h(product_bundle.name) %></td>
+    <td><%= h(product_bundle.discount_multiplier) %></td>
+    <td>
+      <ul>
+        <% product_bundle.products.each do |product| -%>
+          <li><%= product.name %></li>
+        <% end -%>
+      <ul>
+    </td>
+    <td><%= link_to 'Show', :action => :show, :id => product_bundle %></td>
+    <td><%= link_to 'Edit',  :action => :edit, :id => product_bundle  %></td>
+    <td><%= link_to 'Destroy',  :action => :destroy, :id => product_bundle, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New product_bundle',  :action => :new %>

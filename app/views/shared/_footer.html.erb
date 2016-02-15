@@ -1,0 +1,29 @@
+    <div id="footer">
+      <center>
+      <%= link_to 'SmartFlix Instructional DVDs', :controller => 'store', :action => 'index' %> |
+      <%= link_to 'Press',    :controller => 'store', :action => 'press' %> |
+      <%= link_to 'About SmartFlix', :controller => 'store', :action => 'about_us' %> |
+      <%= link_to 'Terms and Conditions', :controller => 'store', :action => 'conditions' %> |
+      <%= link_to 'Legal',    :controller => 'help',  :action => 'legal' %> |
+      <%= link_to 'Contact SmartFlix',    :controller => 'store',  :action => 'contact_us' %> 
+      <br>
+      If you like SmartFlix, please check out our <%= link_to 'online comic book store', "http://heavyink.com" %>!
+      <br>
+      &copy; 2006- <%= Date.today.year %> SmartFlix
+      </center>
+    </div>
+    <% if  ("production" == Rails.env ) %>
+    <!-- Google analytics -->
+        <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <script type="text/javascript">
+        var pageTracker = _gat._getTracker("UA-269923-2");
+        pageTracker._initData();
+        pageTracker._trackPageview();
+        </script>
+    <!-- /Google analytics -->
+        <%= yield :google_checkout_analytics %>
+    <% end %>
+

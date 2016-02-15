@@ -1,0 +1,13 @@
+<%# Parameter: orders is an array of orders -%>
+<table cellpadding="4" width="60%">
+  <% orders.each do |order| -%>
+    <tr>
+      <td>Order #<%= order.id %></td>
+      <td><%= order.university.andand.name %></td>
+      <td><%= order.listing_date %></td>
+      <td><%= number_to_currency(order.total) %></td>
+      <td><%= "item".number_and_plural(order.line_items.size) %></td>
+  <td><%= Button.new(:view, :class => :orange, :url => url_for(:action => 'order', :id => order)) %></td>
+    </tr>
+  <% end -%>
+</table>

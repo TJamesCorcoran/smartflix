@@ -1,0 +1,36 @@
+<h1>Magazine Info</h1>
+<table border=0>
+<% for column in Magazine.content_columns %>
+<tr><td> <b>
+    <%= 
+if (column.human_name == "catID")
+	"SmartFlix category"
+else
+	column.human_name
+end
+
+ %>:</b></td><td> <%=
+
+            if (column.name == "url") 
+                link_to @magazine.url, @magazine.url
+            elsif (column.name == "catID") 
+				if (@magazine.catID.nil?)
+					""
+				else
+	                link_to  @magazine.category.description, :controller=>"categories", :action=>"show", :id=>@magazine.catID			    
+				end
+
+            else
+				@magazine.send(column.name) 
+			end
+%>
+</td></tr>
+<% end %>
+</table>
+
+<%= render(:partial => 'admin/shared/show_relations', :locals => { :item => @magazine, :reject => [] })  %>
+
+
+
+<%= link_to 'Edit', edit_magazine_path(@magazine) %> |
+<%= link_to 'Back', magazines_path %>

@@ -1,0 +1,28 @@
+<div class="box">
+  <h1>  editting "<%= @promotion.tagline %>" promotion</h1>
+(see also <%= link_to "pages", {:action=>'promotion_pages', :id => @promotion.promotion_id} %>)
+
+<br><br><br><br>
+  <%= form_for :promotion, @promotion, :url => { :action => 'promotion', :id => @promotion.id }, :builder => LabelBuilder do |f| %>
+    <%= f.text_field :tagline %>
+    <%= f.select :audience, Promotion::AUDIENCES %>
+    <%= f.select :default_status, Promotion::DEFAULT_STATUSES %>
+    <%= f.select :sticky, [['yes',true],['no',false]] %>
+    <%= f.select :ab_test_name, [['none', nil]] + (aat = AbTester.all_active_tests).zip(aat.map{|tst| tst.to_s}) %>
+
+    <%= f.text_field :ab_test_alternative %>
+
+    <%= f.text_field :display_page %>
+    <strong>Note: 'Display page' will be treated as a regular expression</strong><br><br>
+    <%= f.text_field :close_button %>
+    <%= f.text_field :minimize_button %>
+    <%= f.text_field :maximize_button %>
+    <%= f.text_field :next_button %>
+    <%= f.select :hide_next_on_last_page, [['yes',true],['no',false]] %>
+    <%= f.text_field :previous_button %>
+    <%= f.select :hide_previous_on_first_page, [['yes',true],['no',false]] %>
+    <%= f.text_area :css %>
+    <%= f.select :on, [['off',false],['on',true]] %>
+    <%= submit_tag %>
+  <% end %>
+</div>

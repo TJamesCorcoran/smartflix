@@ -1,0 +1,2 @@
+<%= render :partial => 'sortable_listing', :locals => { :products => @author.listable_products(@sort_option), :title => "#{@author.name} videos on DVD" } %>
+<%= affiliate_link @author %>

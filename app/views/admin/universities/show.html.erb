@@ -1,0 +1,82 @@
+<h1><%= @item.class.to_s %></h1>
+<%= link_to "back to index", :action => :index %><br>
+<%= link_to "edit", :action => :edit, :id => @item %><br>
+<%= link_to "customer view", :controller => "/store", :action => :video, :id => @item.univ_stub %>
+
+<div id="col_right" style="float:right; padding:20px; background-color:yellow;" >
+<% if @products_to_add.any? %>
+    <%= form_tag( {:action =>:add_product, :id => @item.id}, { :method => :put }) do  %>
+        <%= select_tag 'product_to_add', @products_to_add.map {|x| "<option>#{x}</option>"}.join %>
+        <br>
+        <%= submit_tag "Add product to univ" %>
+    <% end %>
+<% else %>
+   <i>No products are candidates for adding to this univ.</i>
+<% end %>
+</div>
+
+
+<%= render :partial => 'admin/shared/show_basicdata', :locals => { :item => @item, :partials => {} }  %>
+
+<h1>Current Inventory Shortfall</h1>
+
+Positive numbers are bad - they mean that we've got a shortfall.  Negative numbers are good - they mean that we've got surplus!
+
+<% info =  @item.univ_inventory_infos.max_by(&:created_at) %>
+<table border=0>
+<% [ :created_at, :shortfall_today, :shortfall_one_week ].each do |field | %>
+  <tr><td><%= field.to_s %></td><td> <%= info.send(field) %></td></tr>
+<% end %>
+</table>
+
+
+
+<h1>Products</h1>
+
+<%= form_for(:purchasings, 
+            :url  => {:controller => :purchasings, :action =>:update, :r_controller => :universities, :r_action => :show, :r_id => @item.id}, 
+            :html => { :method => :put }) do |f| %>
+
+  <table border=0>
+    <tr>
+       <td width = 400>
+       </td>
+       <td width = 400>
+          purchased by: 
+                 <%=  fields_for ( "purchaser") do |purch| -%>
+                          <%= purch.select  :purchaser_id, @purchasers  %> 
+                 <% end %>
+        </td>
+        <td>
+            <%= submit_tag "Update purchasing" %>
+        </td>
+      </tr>
+    </table>
+
+
+    <table border=0 class="sortable" id="univ_products">
+      <tr>
+         <th>item</th>
+         <th>pain</th>
+         <th>quant needed</th>
+      </tr>
+      <% @item.products.each do |product| %>
+        <tr>
+          <td><%= link_to product.name, :controller => :products, :action => :show, :id => product.id %></td>
+          <td><%= sprintf("%03s", product.tobuy.andand.pain) %>      </td>
+          <td><%= sprintf("%03s", product.tobuy.andand.quant) %>      </td>
+          <td>
+                     <%= fields_for ("tobuy" + product.product_id.to_s) do |tb| %>
+                          <%= tb.select :quant, @quant_choices  %> 
+                     <% end %>
+         </td>
+        </tr>
+      <% end %>
+    </table>
+
+
+
+
+<% end %>
+
+<%= render(:partial => 'admin/shared/show_relations', :locals => { :item => @item, :reject => [:university_curriculum_elements, :products, :univ_inventory_infos] })  %>

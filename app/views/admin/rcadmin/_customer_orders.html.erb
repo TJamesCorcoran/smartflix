@@ -1,0 +1,18 @@
+<%# Parameter: orders is an array of orders -%>
+<table cellpadding="4" width="60%">
+  <% orders.each do |order| -%>
+    <tr>
+      <td> 
+         <% if order.university %>
+           <%= button_to "credit 1 free month", :action => :credit_customer_account, :customer_id => customer.id, :months => 1 %>
+         <% end %>
+      </td>
+      <td>Order #<%= order.id %></td>
+      <td><%= order.university.andand.name %></td>
+      <td><%= order.listing_date %></td>
+      <td><%= number_to_currency(order.total) %></td>
+      <td><%= "item".number_and_plural(order.line_items.size) %></td>
+      <td><%= link_to button(:view, :bg => :b), :action => 'order', :id => order %></td>
+    </tr>
+  <% end -%>
+</table>

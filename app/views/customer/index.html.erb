@@ -1,0 +1,28 @@
+<div class="text-content">
+  <%= render :partial => 'customer_nav' %>
+
+  <%# Only display orders section if there are any -%>
+  <% if @customer.recent_orders.size > 0 -%>
+
+  <h2>Recent Orders</h2>
+
+  <p>
+  <%= render :partial => 'orders', :locals => { :orders => @customer.recent_orders } %>
+  </p>
+
+  <p>
+  <%= link_to 'Show all orders', :action => 'order_history' %>
+  </p>
+
+  <% end -%>
+
+
+  <% if @customer.credit > 0.0 -%>
+  <p>
+  You have an account credit of
+  <%= number_to_currency(@customer.credit) %>
+  that you can apply to your next order.
+  </p>
+  <% end -%>
+
+</div>

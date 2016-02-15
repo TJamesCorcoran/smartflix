@@ -1,0 +1,11 @@
+<h1>Editing person</h1>
+
+<%= error_messages_for :person %>
+
+<%= form_for(:person, :url => { :action => :update, :eid => @person.id}, :html => { :method => :put }) do |f| %>
+    <%= render :partial => 'form' %>
+
+    <%= submit_tag "Update" %>
+<% end %>
+
+<%= link_to 'Show', :action =>:show, :id => @person.id %> 

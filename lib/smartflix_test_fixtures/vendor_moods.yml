@@ -1,0 +1,12 @@
+hostile:
+  vendor_mood_id: 1
+  moodText: hostile
+
+neutral:
+  vendor_mood_id: 2
+  moodText: neutral
+
+friendly:
+  vendor_mood_id: 3
+  moodText: friendly
+

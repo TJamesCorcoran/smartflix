@@ -1,0 +1,40 @@
+<div id="right" class="column">
+
+  <%= render(:partial => 'shared/scanalert', 
+             :locals => { :divid => 'scan-alert-a' }) %>
+
+  <% @sidebar_type ||= 'rent' %>
+
+  <div id="<%= @sidebar_type %>-wrap">
+    <div class="clear"></div>
+    <div id="<%= @sidebar_type %>-box-header">
+      <%= "Place Order" if @sidebar_type == 'rent' %>
+    </div>
+    <div id="<%= @sidebar_type %>-box">
+      <div id="<%= @sidebar_type %>-box-padding">
+        <%# Insert rent buttons or whatever else is set up as right sidebar -%>
+        <%= @right_sidebar %>
+      </div>
+    </div>
+  </div>
+
+
+  <% if @right_sidebar_univ %>
+      <%= @right_sidebar_univ %>
+  <% end %>
+
+
+    <% if @recently_viewed_videos.andand.any? && ! @supress_recently_viewed %>
+      <div id="recent-wrap">
+        <div class="clear"></div>
+        <div id="recent-box-header"><%= image_tag "recently_viewed.jpg" %></div>
+        <div id="recently-viewed-box">
+
+          <% @recently_viewed_videos[0,3].each do |product| %>
+               <%= render :partial => 'product_listing_mini', :locals => { :product => product } %>
+          <% end -%>
+        </div>
+      </div>
+    <% end -%>
+
+</div>

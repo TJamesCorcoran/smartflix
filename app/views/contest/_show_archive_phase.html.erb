@@ -1,0 +1,19 @@
+<div id="contest-results">
+  <p>The "<%= h @contest.title %>" contest has ended!</p>
+  <p>Here's the contest description: <%= h @contest.description %></p>
+  <h3>Prize winners:</h3>
+  <div id="contest-winners">
+    <% @contest.ranked_entries[0,3].each_with_index do |entry, i| %>
+      <div class="contest-winner-result">
+        <p><%= h "#{i.succ.ordinalize} place" %> (<%= entry.vote_count %> votes)</p>
+      </div>
+      <%= render :partial => 'contest_entry', :object  => entry %>
+    <% end %>
+  </div>
+  <h3>Other entries (not in order of finish):</h3>
+  <div id="contest-winners">
+    <% @contest.ranked_entries[3,@contest.entries.count-3].sort_by { rand }.each_with_index do |entry, i| %>
+      <%= render :partial => 'contest_entry', :object  => entry %>
+    <% end %>
+  </div>
+</div>

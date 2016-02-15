@@ -1,0 +1,1 @@
+../../vendor/plugins/url_tracker/db/migrate/1249919478_add_session_id_index_to_url_tracker.rb

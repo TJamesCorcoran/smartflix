@@ -1,0 +1,16 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+bundle1:
+  product_bundle_id: 1
+  name: bundle1
+  description: Some videos here
+  discount_multiplier: 0.80
+bundle2:
+  product_bundle_id: 2
+  name: bundle2
+  description: Some other videos here
+  discount_multiplier: 0.80
+bundle3:
+  product_bundle_id: 3
+  name: bundleBindle
+  description: Bespoke to test the back-ordering logic
+  discount_multiplier: 0.80

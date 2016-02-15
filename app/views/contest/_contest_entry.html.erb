@@ -1,0 +1,34 @@
+<div class="contest-entry" id="<%= contest_entry.id %>">
+  <div class="header">
+    <div class="project-name"><%= h contest_entry.title %></div>
+    <div class="entry-by">by <%= link_to(h(contest_entry.full_name), :controller => :profiles, :action => :show, :id => contest_entry.customer.id) %></div>
+  </div>
+  <div class="photos">
+    <% contest_entry.contest_entry_photos.each do |photo| %>
+      <%= clickable_contest_thumbnail(photo) %>
+    <% end %>
+
+    <% if current_user.is_a?(Customer) && current_user.contest_admin? %>
+      <div class="ud_block">
+        <%= link_to contest_entry.customer.id, rcadmin_customer_url(contest_entry.customer) %><br>
+        <%= contest_entry.customer.email %><br>
+        <%= contest_entry.customer.full_name %>
+      </div>
+    <% end %>
+
+
+  </div>
+  <br class="clear"/>
+  <div class="description">
+    <p><strong>Project description:</strong> <%= h contest_entry.description %></p>
+  </div>
+  <% if defined?(allow_voting) && allow_voting %>
+    <div class="entry-vote">
+      <p>
+        Vote for "<%= h contest_entry.title %>" by <%= h contest_entry.full_name %>
+        <%= check_box_tag "selected[]", contest_entry.id, @selected.andand.include?(contest_entry.id) %>
+      </p>
+      <br class="clear"/>
+    </div>
+  <% end %>
+</div>

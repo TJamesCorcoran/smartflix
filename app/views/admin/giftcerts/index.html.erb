@@ -1,0 +1,5 @@
+<% content_for :sidebar do %> 
+   <%= link_to "create new giftcert", :action => :create_gift_certificate %>
+<% end %>
+
+<%= render :partial => 'admin/shared/index', :locals => { :items => @items }   %>

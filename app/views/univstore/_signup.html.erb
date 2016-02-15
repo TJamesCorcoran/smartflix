@@ -1,0 +1,113 @@
+
+<div id="signup_box" class="signup_box">
+  <% if SmartFlix::Application::FIRST_MONTH_FREE %>
+    <h2>Sign up for a <span class="signup_emphasis">Free</span> Trial</h2>
+  <% else %>
+    <h2>Sign up for a <span class="signup_emphasis">Satisfaction Guaranteed</span> Trial</h2>
+  <% end %>
+  <%= form_tag(:controller => :univstore, :action => :new_signup) do  %>
+
+      <table width="300px" class="signup_form" border="0" >
+
+          <%
+            #----------
+            # customer
+            #----------
+          %>
+
+          <% if @customer %>
+              <%= @customer.full_name.empty_is_nil || @customer.email %>
+          <% else %>
+                  <tr>
+                    <td width="160px;" class="form_label">Email:</td>
+                    <td><%= text_field 'customer', 'email', :class => "text_input" %></td>
+                  </tr>
+
+<!--                  <tr>
+                    <td width="160px;" class="form_label">Confirm Email:</td>
+                    <td><%= text_field 'customer', 'email_2', :class => "text_input"  %></td>
+                  </tr>
+-->
+                  <tr>
+                    <td width="160px;" class="form_label">Password:</td>
+                    <td><%= password_field 'customer', 'password', :class => "text_input"  %></td>
+                  </tr>
+<!--                  <tr>
+                    <td width="160px;" class="form_label">Confirm Password:</td>
+                    <td><%= password_field 'customer', 'password_2', :class => "text_input"  %></td>
+                  </tr>
+-->
+
+              <% end %>
+
+            <%
+              #----------
+              # univ
+              #----------
+            %>
+
+            <% if @univ_choice %>
+                <tr id="tr_uni_choice_set">
+                  <td class="form_label">
+                     I want to learn:
+                  </td>
+                  <td>
+                      <span class="clear_uni">
+                         (<%= link_to "clear", :remote => true,:url => { :action => :clear_uni } %>)
+                      </span>
+                      <span class="uni_label"><%= @univ_choice.name_verb %></span>
+
+                  </td>
+
+                </tr>
+
+            <% elsif @univ %>
+
+                <tr>
+                  <td class="form_label">I want to learn:</td>
+                  <td><span class="uni_label"><%= @univ.name_verb %></span></td>
+                </tr>
+                <%= hidden_field_tag "university[university_id]", @univ.id %>
+
+
+
+            <% else %>
+                <tr>
+                <%= render :partial => "tr_uni_choice_fluid" %>
+                </tr>
+            <% end %>
+
+        <%
+           #----------
+           # common
+           #----------
+        %>
+
+        <%= hidden_field_tag :src_controller, params[:controller] %>
+        <%= hidden_field_tag :src_action,     params[:action] %>
+        <%= hidden_field_tag :src_id,         params[:id] %>
+
+      <tr>
+        <td class="form_label" id="secure_server_lock_blue">Secure server:<!--<%= render :partial => 'secure_server', :locals => { :lock_color => "blue"} %>--></td>
+        <td>
+           <%= submit_tag "Continue", :class => "submit_button" %>
+        </td>
+      </tr>
+    </table>
+
+   <% end %>
+
+  <div id="spam_disclaimer">
+    We will never share your email address or send you spam.
+  </div>
+
+  <% unless local_assigns[:supress_show_all] && supress_show_all %>
+    <div id="show_all">
+      <%= link_to "Show all topics", :action => :all %>
+    </div>
+  <% end %>
+
+</div> <!-- close #signup-box -->
+
+
+

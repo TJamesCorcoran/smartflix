@@ -1,0 +1,626 @@
+---
+#  Not user selectable; automatic
+#
+#
+Header:
+  hide: true
+  fields: []
+  html: |
+    <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    <html>
+    <head>
+    <title>SmartFlix.com Newsletter</title>
+    <link rel= "shortcut icon" href= "http://smartflix.com/images/favicon.ico" />
+    <meta http-equiv= "Content-Type" content= "text/html; charset= utf-8">
+    <style type= "text/css">
+      body {margin: 0px; padding: 0px;}
+    </style>
+    </head>
+    <body margin= "0" padding= "0">
+      <div style = "background-color: #848284; margin: 0px; padding: 0px; padding-bottom: 20px; padding-top: 20px; font-family: georgia, serif; text-align: center;">
+      <div style = "background-color: white; width: 740px; margin-bottom: 40px; padding-bottom: 0px; text-align:left; margin: 0px auto; border:1px solid black;">
+        <div style =  "width:740px; background-color: #eceadd; padding-top: 20px; padding-bottom: 20px;">
+          <div style = "margin-left:20px; margin-right:0px;">
+          <a href= "http://smartflix.com"><img border= "0" src= "http://smartflix.com/images/new_logo.jpg"></a>
+          </div>
+        </div>
+      <div style =  "background-color:#107089; height:30px; width:740px;">
+        <p style =  "color:white; font-size:0.75em; margin-top:0px; padding-top: 8px; padding-left:20px; font-family: verdana, sans bold;">What do you want to learn?</p>
+      </div>
+      <div style =  "margin-left: 20px; margin-right: 20px; width: 700px;">
+        <h1 style =  "font-family:Georgia,serif; font-size:22px; line-height:32px; margin-bottom:20px; margin-top: 20px; width:670px;"><%= headline %></h1>
+#  Not user selectable; automatic
+#
+#
+Footer:
+  hide: true
+  fields: []
+  html: |
+    </div>
+    <div style = "margin-bottom:20px;">&nbsp;</div>
+    <div style =  "width: 740px; background-color: #F4F4F2;">
+      <p style =  "width: 700px; font-family: verdana, sans bold; color: #8F8F8F; font-size: 12px;  padding-top: 20px; padding-bottom: 20px; margin-left:20px; margin-right: 20px; margin-bottom:0px;">
+      We hope you enjoyed receiving this message. However, if you'd rather not receive future e-mails like this one, please visit our email preferences page:
+      <% email_url = customer && customer.email_preferences_url %>
+      <a style =  "color: #991a14; font-weight: bolder; font-size: .9em;line-height: 1.4em;" href= "<%= email_url %>"><%= email_url %></a></p>
+    </div>
+    </div>
+    </div>
+    </body>
+    </html>
+
+#  The real stuff
+#
+#
+
+Affiliate Custom:
+  fields:
+  - - title
+    - text
+  - - body
+    - richtext
+  html: |
+    <div>
+      <h2 style =  "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;"><%= title %></h2>
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;"><%= body %></p>
+    </div>
+
+Affiliate Prefilled:
+  fields: []
+  html: |
+    <div>
+      <h2 style =  "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;">SmartFlix Affiliate Program</h2>
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">Do you maintain your own website or blog? Are you looking to make a little extra cash to pay for your latest project? Do you know that you could earn credit for every click that turns into a customer? People just like you, who are interested in learning all about everything have earned from $50 all the way up to $500 using the <a href="http://smartflix.com/affiliate/introduction">SmartFlix Affiliate Program</a>!</p>
+    </div>
+
+Basic Block:
+  fields:
+  - - headline
+    - text
+  - - text
+    - richtext
+  html: |-
+    <newsletter_style p "font-size: 1em; line-height: 1.4em; color: black; width:670px; font-family: Verdana, Helvetica, Arial, sans-serif;">
+    <h2 style="font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;"><%= headline %></h2>
+    <%= text %>
+
+Club discounts and flyers:
+  fields: []
+  html: |
+    <div>
+      <h2 style =  "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;">Do you belong to a hobbyist club?  We've got a gift for you!</h2>
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+      Do you belong to a hobbyist club (sewing circle, ham radio club, machinist's get-together, shared pottery space, etc.) ?  If so, we've got a free gift for you and your club!
+      </p>
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+      We'd love to send our some free gifts to support your club - discount codes, gift certificates, things like that.
+      </p>
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+      How do you get some of these free goodies?  Just contact us at <a href="mailto:marketing@smartflix.com">marketing@smartflix.com</a> and tell us
+      <ol>
+         <li><span  style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;"> Your club's name and website </span>
+         <li><span  style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;"> What your club is about (painting, brewing, motorcycle repair, etc.)</span>
+         <li><span  style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;"> How many members are in the club</span>
+         <li><span  style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;"> If there's a particular event (auction, craft show, annual meeting, etc.)</span>
+         <li><span  style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;"> Where we should mail the goodies</span>
+      </ol>
+      </p>
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+       It's that easy ... and we'd love to support your club!
+      </p>
+    </div>
+Contest:
+  fields:
+    - - contestid
+      - text
+    - - intro
+      - richtext
+  html: |
+    <% @contest = Contest.find(contestid) %>
+    <h2 style =  "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;"><%= @contest.title %></h2>
+    <div style = "font-size: 1em; line-height: 1.4em; color: black; width: 670px;">
+    <p><%= intro %> </p>
+    <p><%= @contest.description %></p>
+    <p><%= link_to "Enter the contest!", email_url_for(@contest, customer) %>
+    </div>
+
+DVD Block:
+  fields:
+  - - title
+    - text
+  - - product_id
+    - text
+  - - body
+    - richtext
+  html: |
+    <div style = "font-size: 1em; line-height: 1.4em; color: black; width: 670px;">
+    <div style = "float: left;">
+      <div><a href="<%= email_url_for(Product.find(product_id)) %>"><%= email_large_image_for(Product.find(product_id)) %></a></div>
+      <div style="padding-left: 60px;"><%= email_add_to_cart_button( Product.find(product_id),:style=>"margin-bottom:10px;margin-top:5px;") %></div>
+    </div>
+    <h2 style = "font-family:Georgia,serif; font-size:14px; line-height:18px; margin-bottom:10px; margin-top: 20px; width:670px;"><%= title %></h2>
+    <%= body %>
+    </div>
+    <div style="clear:both; height:1px; margin-top:0px; margin-bottom:0px; padding:0px;">&nbsp;</div>
+Forum Post:
+  fields:
+    - - postid
+      - text
+  html: |
+    <% @post = Post.find(postid) %>
+    <h2 style = "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;">In the forums: '<%= @post.topic.title %>'</h2>
+    <div style = "font-size: 1em; line-height: 1.4em; color: black; width: 670px;">
+    <p>In the SmartFlix forums <%= @post.user.display_name %> posted:</p>
+    <p>
+      <% summary_length = 300 %>
+      <i><%= @post.body.summarize(summary_length) %></i>
+      <%= @post.body.size > summary_length ? link_to("... read the rest", @post.url) : "" %>
+    </p>
+    <% @responders = (@post.topic.posts.map {|post| post.user.display_name }.uniq - [ @post.user.display_name ]) %>
+    <% if @responders.size > 1 %>
+    <p>There are already <%= @post.topic.posts.size %> comments in the thread:
+       <%= @responders.to_sentence %>
+       <%= String.plural_choice(@responders, "has", "have") %> chimed in!
+    </p>
+    <% end %>
+    <p>
+    What do you think?   <%= link_to("Respond to #{ @post.user.display_name } or read other responses", @post.url) %>.  ... or start a new topic in the <%= link_to "#{@post.forum.name} forum", @post.forum.url %> !
+    </p>
+    </div>
+GiftCard Custom:
+  fields:
+  - - title
+    - text
+  - - body
+    - richtext
+  html: |
+    <div>
+      <h2 style =  "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;"><%= title %></h2>
+      <div style = "float:left;"><a href="<%= email_url_for_giftcert %>"><img style = "border:0px;" src = "http://smartflix.com/images/gift_card.jpg" /></a></div>
+      <div style="margin-left:276px;">
+        <p style = "font-size: 1em; line-height: 1.4em; color: black; width:670px;"><%= body %></p>
+        <div style = "font-size: 1em; line-height: 1.4em; color: black">
+        <table border=0>
+        <tr>
+          <td style = "padding-top: 7px;" valign="top">$10 Gift Certificate: </td>
+          <td style = "padding-left: 20px;"><%= email_add_to_cart_button( Product.find(3603),:style=>"margin-bottom:10px;margin-top:5px;") %></td>
+        </tr>
+        <tr>
+          <td style = "padding-top: 7px;" valign="top">$25 Gift Certificate: </td>
+          <td style = "padding-left: 20px;"><%= email_add_to_cart_button( Product.find(5834),:style=>"margin-bottom:10px;margin-top:5px;") %></td>
+        </tr>
+        <tr>
+          <td style = "padding-top: 7px;" valign="top">$50 Gift Certificate: </td>
+          <td style = "padding-left: 20px;"><%= email_add_to_cart_button( Product.find(5835),:style=>"margin-bottom:10px;margin-top:5px;") %></td>
+        </tr>
+        <tr>
+          <td style = "padding-top: 7px;" valign="top">$100 Gift Certificate :</td>
+          <td style = "padding-left: 20px;"><%= email_add_to_cart_button( Product.find(5836),:style=>"margin-bottom:10px;margin-top:5px;") %></td>
+        </tr>
+        </table>
+        </div>
+      </div>
+    </div>
+GiftCard Prefilled:
+  fields: []
+  html: |
+    <div>
+      <h2 style =  "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;">SmartFlix Gift Cards</h2>
+      <div style = "float:left;"><a href="<%= email_url_for_giftcert %>"><img style = "border:0px;" src = "http://smartflix.com/images/gift_card.jpg" /></a></div>
+      <div style="margin-left:276px;">
+          <p style = "font-size: 1em; line-height: 1.4em; color: black;">Give the gift of know-how with our <a href="http://smartflix.com/store/giftcert">SmartFlix Gift Cards</a>. Available in $10, $25, $50, and $100 denominations, they're the perfect gift for any occasion. With thousands of videos to choose from, the lucky recipient is sure to find something that they've always wanted to try!</p>
+          <div style = "font-size: 1em; line-height: 1.4em; color: black">
+          <table border=0>
+          <tr>
+            <td style = "padding-top: 7px;" valign="top">$10 Gift Certificate: </td>
+            <td style = "padding-left: 20px;"><%= email_add_to_cart_button( Product.find(3603),:style=>"margin-bottom:10px;margin-top:5px;") %></td>
+          </tr>
+          <tr>
+            <td style = "padding-top: 7px;" valign="top">$25 Gift Certificate: </td>
+            <td style = "padding-left: 20px;"><%= email_add_to_cart_button( Product.find(5834),:style=>"margin-bottom:10px;margin-top:5px;") %></td>
+          </tr>
+          <tr>
+            <td style = "padding-top: 7px;" valign="top">$50 Gift Certificate: </td>
+            <td style = "padding-left: 20px;"><%= email_add_to_cart_button( Product.find(5835),:style=>"margin-bottom:10px;margin-top:5px;") %></td>
+          </tr>
+          <tr>
+            <td style = "padding-top: 7px;" valign="top">$100 Gift Certificate :</td>
+            <td style = "padding-left: 20px;"><%= email_add_to_cart_button( Product.find(5836),:style=>"margin-bottom:10px;margin-top:5px;") %></td>
+          </tr>
+        </table>
+        </div>
+      </div>
+    </div>
+Image Block Floating:
+  fields:
+  - - title
+    - text
+  - - body
+    - richtext
+  - - picture
+    - upload
+  html: |
+    <h2 style = "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;"><%= title %></h2>
+    <div style="margin-bottom: 20px; margin-right: 20px; float: left;"><img src="<%= picture %>" /></div>
+    <div style = "font-size: 1em; line-height: 1.4em; color: black; width: 670px;"><%= body %></div>
+    <div style="clear:both; height:1px; margin-top:0px; margin-bottom:0px; padding:0px;">&nbsp;</div>
+
+Image Only:
+  fields:
+  - - picture
+    - upload
+  html: |
+    <div style="margin-top:20px; margin-bottom: 20px;"><img src="<%= picture %>" /></div>
+
+Image Regular:
+  fields:
+  - - title
+    - text
+  - - body
+    - richtext
+  - - picture
+    - upload
+  html: |
+    <h2 style = "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;"><%= title %></h2>
+    <div style="margin-top:20px; margin-bottom: 20px;"><img src="<%= picture %>" /></div>
+    <div style = "font-size: 1em; line-height: 1.4em; color: black; width: 670px;"><%= body %></div>
+
+Interview Header:
+  fields:
+  - - who
+    - text
+  - - lead_in
+    - richtext
+  html: |
+    <h2 style = "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;">SmartFlix interviews <span style="color: #6F0000;"><%= who %></span></h2>
+    <div style = "font-size: 1em; line-height: 1.4em; color: black; width: 670px; margin-bottom:20px;"><%= lead_in %></div>
+Interview Header with Image:
+  fields:
+  - - who
+    - text
+  - - lead_in
+    - richtext
+  - - picture
+    - upload
+  html: |
+    <h2 style = "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;">SmartFlix interviews <span style = "color:;#6F0000"><%= who %></span></h2>
+    <div style="margin-top:20px; margin-bottom: 20px;"><img src="<%= picture %>" /></div>
+    <div style = "font-size: 1em; line-height: 1.4em; color: black; width: 670px;"><%= lead_in %></div>
+Interview QA Pair:
+  fields:
+  - - question
+    - richtext
+  - - answer
+    - richtext
+  html: |
+    <div style="font-size: 1em; line-height: 1.4em; color: black; width: 620px; padding-right: 40px; padding-left:20px;">
+      <table>
+      <tr style = "color:#9F0000;"><td valign="top" style="padding-right: 10px;"><p style="font-size: 1em; line-height: 1.4em; font-weight: bold;">Q:</p> </td><td valign="top"><%= question %></td></tr>
+      <tr><td valign="top" style="padding-right: 10px;"><p style="font-size: 1em; line-height: 1.4em; font-weight: bold;">A:</p> </td><td valign="top"><%= answer %></td></tr>
+      </table>
+    </div>
+Interview QA Pair Last:
+  fields:
+  - - question
+    - richtext
+  - - answer
+    - richtext
+  html: |
+    <div style="font-size: 1em; line-height: 1.4em; color: black; width: 620px; margin-bottom: 20px; padding-right: 40px; padding-left:20px;">
+      <table>
+      <tr style = "color:#9F0000;"><td valign="top" style="padding-right: 10px;"><p style="font-size: 1em; line-height: 1.4em; font-weight: bold;">Q:</p> </td><td valign="top"><%= question %></td></tr>
+      <tr><td valign="top" style="padding-right: 10px;"><p style="font-size: 1em; line-height: 1.4em; font-weight: bold;">A:</p> </td><td valign="top"><%= answer %></td></tr>
+      </table>
+    </div>
+
+Project:
+  fields:
+    - - projectid
+      - text
+    - - para
+      - richtext
+  html: |
+    <% @project = Project.find(projectid) %>
+    <h2 style = "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;">
+    Featured Project: <%= @project.title %> by <%= @project.customer.display_name %>
+    </h2>
+    <div style = "float: left; padding-right:20px;">
+       <%= link_to email_large_image_for(@project), email_url_for(@project) %>
+    </div>
+    <div style = "font-size: 1em; line-height: 1.4em; color: black; width: 670px;">
+    <p style="font-size: 1em; line-height: 1.4em; color: black; width:670px;"><%= para %></p>
+
+    <p><%= @project.updates.first.text.summarize(100) %></p>
+    <p>Click <%= link_to "here for more information on #{@project.title}", email_url_for(@project) %>,
+    or <%= link_to "share your own project!", email_url_new_project() %>.</p>
+    </div>
+    <div style="clear:both; height:1px; margin-top:0px; margin-bottom:0px; padding:0px;">&nbsp;</div>
+
+Univ Block:
+  fields:
+  - - univ_id
+    - text
+  - - para
+    - richtext
+  html: |
+    <% @university = University.find(univ_id) %>
+    <h2 style = "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;">
+        <%= @university.name %>:
+    </h2>
+    </p>
+    <div style = "font-size: 1em; line-height: 1.4em; color: black; width: 670px;">
+      <div style = "float: left;">
+        <div>
+          <%= email_large_image_for(@university) %>
+        </div>
+        <div style="padding-left: 20px; margin-bottom:20px; margin-top:5px;">
+          <%= email_univ_sub_button( @university) %>
+        </div>
+      </div>
+    </div>
+    <p style="font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <%= para %>
+    </p>
+
+    <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <A href="<%= email_url_for(@university) %>"><%= @university.name %></a>
+        is a complete program of DVDs from the most talented artists and craftsmen in the field.
+        We ship you 3 DVDs per month - keep them as long as you want, with no late charges!
+        When you're ready for more, mail those DVDs back to us,
+        and we'll send you the next 3 DVDs (you get up to  3 new DVDs each month).
+    </p>
+    <p>
+       <%= @university.name %> is just <%= @university.subscription_charge.currency %>.
+    </p>
+    <p style = "font-size: 1em; line-height: 1.4em; color: black;
+        width:670px;">With exciting, informative, well shot videos from
+        names like <%= @university.top_authors.map(&:name).to_sentence %>
+        that you can keep as long as you want, the ability to cancel at
+        any time, <strong>and</strong> with a low monthly price of just
+        <%= @university.subscription_charge.currency %> per month this is a bargain
+        that you can't afford to miss!
+    </p>
+    <p style = "font-size: 1em; line-height: 1.4em; color: black;
+        Join the hundreds of satisfied <%= @university.name %> customers.  If you don't love it, cancel and owe nothing.
+    </p>
+
+    <div style="clear:both; height:1px; margin-top:0px; margin-bottom:0px; padding:0px;">&nbsp;</div>
+    <div style="font-size: 1em; line-height: 1.4em; color: black; width: 620px; padding-right: 40px; padding-left:20px;">
+
+Univ discount block and button:
+  fields:
+  - - univ_id
+    - text
+  - - para
+    - richtext
+  html: |
+    <% @university = University.find(univ_id) %>
+    <h2 style = "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;">
+        <%= @university.name %>:
+        normally <s><%= @university.subscription_charge.currency %></s>, <span style="color:red">now just <%= @university.subscription_charge_discount.currency %><span>
+    </h2>
+
+    <div style = "font-size: 1em; line-height: 1.4em; color: black; width: 670px;">
+      <div style = "float: left;">
+        <div>
+          <%= email_large_image_for(@university) %>
+        </div>
+        <div style="padding-left: 20px; margin-bottom:20px; margin-top:5px;">
+          <%= email_discount_univ_and_add_to_cart_button( @university) %>
+        </div>
+      </div>
+    </div>
+    <%= para %>
+
+    <p>
+        <A href="<%= email_url_for(@university) %>"><%= @university.name %></a>
+        is a complete program of DVDs from the most talented artists and craftsmen in the field.
+        We ship you <span style="color:red">3 DVDs per month - keep them as long as you want</span>, with no late charges!
+        When you're ready for more, mail those DVDs back to us,
+        and we'll send you the next 3 DVDs (you get up to  3 new DVDs each month).
+    </p>
+    <p>
+       <%= @university.name %> is normally <s><%= @university.subscription_charge.currency %></s>,
+       but for the next four days we're cutting the first month to <%= @university.subscription_charge_discount.currency %><span>
+    </p>
+    <p>
+        With exciting, informative, well shot videos from
+        names like <%= @university.top_authors.map(&:name).to_sentence %>
+        that you can keep as long as you want, the ability to cancel at
+        any time, <strong>and</strong> with a low monthly price of just
+        <span style="color:red;"><%= @university.subscription_charge_discount.currency %> for the first month</span> and
+        <%= @university.subscription_charge.currency %> thereafter, this is a bargain
+        that you can't afford to miss!
+    </p>
+    <p style = "font-size: 1em; line-height: 1.4em; color: black;
+        Join the hundreds of satisfied <%= @university.name %> customers.  If you don't love it, cancel and owe nothing.
+    </p>
+    <div style="clear:both; height:1px; margin-top:0px; margin-bottom:0px; padding:0px;">&nbsp;</div>
+    <div style="font-size: 1em; line-height: 1.4em; color: black; width: 620px; padding-right: 40px; padding-left:20px;">
+
+Univ free block and button:
+  fields:
+  - - univ_id
+    - text
+  - - para
+    - richtext
+  html: |
+    <newsletter_style p "font-size: 1em; line-height: 1.4em; color: black; width:670px; font-family: Verdana, Helvetica, Arial, sans-serif;">
+    <% @university = University.find(univ_id) %>
+    <h2 style = "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;">
+        <%= @university.name %>:
+        normally <s><%= @university.subscription_charge.currency %></s>, <span style="color:red">now FREE<span>
+    </h2>
+    </p>
+    <div style = "font-size: 1em; line-height: 1.4em; color: black; width: 670px;">
+      <div style = "float: left;">
+        <div>
+          <%= email_large_image_for(@university) %>
+        </div>
+        <div style="padding-left: 20px; margin-bottom:20px; margin-top:5px;">
+          <%= email_freemonth_univ_and_add_to_cart_button( @university) %>
+        </div>
+      </div>
+    </div>
+    <%= para %>
+    <strong><%= @university.name %></strong>
+    <p>
+        <A href="<%= email_url_for(@university) %>"><%= @university.name %></a>
+        is a complete program of DVDs from the most talented artists and craftsmen in the field.
+        We ship you <span style="color:red">3 DVDs per month - keep them as long as you want</span>, with no late charges!
+        When you're ready for more, mail those DVDs back to us,
+        and we'll send you the next 3 DVDs (you get up to  3 new DVDs each month).
+    </p>
+    <p>
+       <%= @university.name %> is normally <s><%= @university.subscription_charge.currency %></s>,
+       but for the next four days we're giving away the <span style="color:red">first month ENTIRELY FREE.</span><span>
+    </p>
+    <p>
+        With exciting, informative, well shot videos
+        <% if  @university.top_authors.any? %>
+         from names like <%= @university.top_authors.map(&:name).to_sentence %>
+        <% end %>
+        that you can keep as long as you want, the ability to cancel at
+        any time, <strong>and</strong> with a low monthly price of just
+        <span style="color:red;"><%= (0.0).currency %> (yes, zero dollars and zero cents!) for the first month</span> and
+        <%= @university.subscription_charge.currency %> thereafter, this is a bargain
+        that you can't afford to miss!
+    </p>
+    <p>
+        Join the hundreds of satisfied <%= @university.name %> customers.  If you don't love it, cancel and owe nothing.
+    </p>
+    <div style="clear:both; height:1px; margin-top:0px; margin-bottom:0px; padding:0px;">&nbsp;</div>
+    <div style="font-size: 1em; line-height: 1.4em; color: black; width: 620px; padding-right: 40px; padding-left:20px;">
+
+Univ FAQ:
+  fields: []
+  html: |
+    <h2 style = "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;">
+        What is a  SmartFlix University?
+    </h2>
+    <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+     SmartFlix Universities are unlike anything you've seen before - they're subscription programs that let you get a bundle of DVDs (3 at a time) on a topic of your choice from the most talented artists and craftsmen in your particular field of interest. We ship you 3 DVDs per month - keep them as long as you want, with no late charges! When you're ready for more, mail those DVDs back to us, and we'll send you the next 3 DVDs (you get up to 3 new DVDs each month).
+
+    With exciting, informative, well shot videos that you can keep as long as you want, the ability to cancel at any time, this is a bargain that you can't afford to miss! 
+    </p>
+      <div  style =  "margin-top:35px; margin-left:25px;">
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>Q:</b> How many DVDs do I get at a time?
+      </p>
+
+
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>A:</b> Up to three per month.
+      </p>
+    </div>
+
+
+    <div  style =  "margin-top:35px; margin-left:25px;">
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>Q:</b> Once I subscribe, can I quit?
+      </p>
+
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>A:</b> Yes, <strong>you can quit at any time</strong> at all.  Just send us an email and you're out - no more charges, ever.
+      </p>
+    </div>
+
+
+    <div  style =  "margin-top:35px; margin-left:25px;">
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>Q:</b> How much does it cost?
+      </p>
+
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>A:</b> 
+
+      <strong>Most universities are just <%= UnivStub.first.full_price.currency %> per month.</strong>
+
+      That's a huge savings over
+      the hundreds of dollars
+      or so it would cost to buy three new DVDs each month, and a
+      big savings over the normal rental cost.
+      </p>
+    </div>
+
+    <div  style =  "margin-top:35px; margin-left:25px;">
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>Q:</b> How much is shipping?
+
+      </p>
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>A:</b> It's free!
+      </p>
+    </div>
+
+    <div  style =  "margin-top:35px; margin-left:25px;">
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>Q:</b> How much are late fees?
+      </p>
+
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>A:</b> There are never any late fees!
+      </p>
+    </div>
+
+    <div  style =  "margin-top:35px; margin-left:25px;">
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>Q:</b> Can you clarify how the <strong>"three DVDs out-at-a-time, limit three per month"</strong> plan works?
+      </p>
+
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>A:</b> Let's say you sign up on the 10th of the month.  Your month then runs from the 10th of each month till the 10th of the next month.  We'll make sure that you always have three new DVDs to watch in your home.  We do it by sending out up to three DVDs during each month. 
+      </p>
+
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+         So, you sign up on the 10th.  We mail you three
+         DVDs immediately.  If you return one of them a week later, we accept the
+         return, but since we've mailed you three new DVDs this month, we wait
+         until the next month.  As soon as the 10th of the next month rolls around, we send you one DVD, so now you've again got 3 DVDs in your home.  A week after that, you return two more dvds.  We immediately replace them, so that you again have three dvds.
+      </p>
+    </div>
+
+    <div  style =  "margin-top:35px; margin-left:25px;">
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>Q:</b> Will my university subscription send me DVDs that I already ordered
+         as a SmartFlix customer?
+      </p>
+
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>A:</b> No!  We track what you've already rented, and we won't send out duplicates.
+      </p>
+    </div>
+
+    <div  style =  "margin-top:35px; margin-left:25px;">
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>Q:</b> What order do I get the DVDs in?
+      </p>
+
+
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>A:</b> We can't promise that you'll get the dvds in exactly the order listed below, but we do absolutely promise that we always send items out in an order that makes sense: you'll never get disk 2 in a set before disk 1.  More generally, we use customer feedback to structure the universities in an order that makes sense - basic stuff first, then more advanced topics.
+      </p>
+    </div>
+
+    <div  style =  "margin-top:35px; margin-left:25px;">
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>Q:</b> There's a DVD (or two, or three) on the list that I don't want to see - can I subscribe to a university, but somehow not get that DVD?
+      </p>
+
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>A:</b> Sure thing!  Just subscribe to the university, then send us an email telling us what DVDs you want to skip. 
+      </p>
+    </div>
+
+
+    <div  style =  "margin-top:35px; margin-left:25px;">
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>Q:</b> This is a pretty awesome deal, isn't it?
+      </p>
+
+      <p style =  "font-size: 1em; line-height: 1.4em; color: black; width:670px;">
+        <b>A:</b> Yes, it is!
+      </p>
+    </div>
+
+

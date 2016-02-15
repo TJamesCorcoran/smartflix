@@ -1,0 +1,127 @@
+\documentclass[letterpaper,12pt]{article}
+\pagestyle{empty}
+\usepackage{graphics}
+\usepackage[]{textpos}
+
+\begin{document}
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\evensidemargin}{0.0in}
+\TPGrid[0.0in,0.0in]{2}{2}
+\setlength{\TPHorizModule}{3.8in}
+\setlength{\TPVertModule}{5.5in}
+
+%% first number in parens below moves text up-and-down, second moves it left-right
+%%     first num: bigger numbers (0.5) move it up on page, smaller (0.0) move it lower
+%%     second num: smaller numbers (-0.2) move left on page, bigger (-0.1) move it right
+%%
+%% (ACTUALLY, we're rotating the image so that it's sideways on the
+%%  8x11 page, then feeding in stickers sideways too, so the LATEX
+%%  manual will tell you that first argument is X and second is Y)
+
+\begin{textblock}{1}(0.42,-0.27)
+\rotatebox{-90}{
+
+%%-------------------
+
+\mbox{
+%%-----
+%% left column
+%%-----
+\parbox[t]{1.6in} {
+
+    %%----------
+        %%  return address
+        %%
+        %%----------
+    \footnotesize{
+            SmartFlix \\
+                7 Central St \\
+                Suite 140 \\
+                Arlington MA 02476
+    }
+
+        %%----------
+        %% inventory
+        %%
+        %%----------
+    \footnotesize{
+
+        \begin{tabular}{|r @{ : } l|}
+            \hline
+        <% if boxP %>
+		**** box **** \\
+		<% end %>
+                <% copies.sort_by(&:id).each do | copy | %>
+                  <%= copy.sticker_id %>   &\textbf{ <%= copy.product.handout %> } \\ 
+                <% end %>
+                <% gift_certs.each do | gc | %>
+                  <%= gc %>   \\ 
+                <% end %>
+                \hline
+        \end{tabular}
+    }
+        %%----------
+        %% shipment info
+        %%
+        %%----------
+    \\
+
+        %%----------
+        %% barcode
+        %%
+        %%----------
+    \scalebox{.5}[.2]{%
+       \includegraphics{<%= barcode_file %>}
+    }%
+
+        %%----------
+        %% customs
+        %%
+        %%----------
+
+        <% if customsP %>
+    \addvspace{0.2in}
+        \fbox{
+    \parbox[t]{1.4in} {
+        \scriptsize {
+        CUSTOMS  INFO\\
+        tariff code: 8524.31.00.00  \\
+    value below US/C/A \$20\\
+        No tariff due.
+    }
+    }
+    }
+    <% end %>
+
+}
+
+%%-----
+%% right column
+%%-----
+
+\parbox[t]{2.0in} {
+    \addvspace{1.0in}
+    \Large { First Class Mail\\
+             ComBasePrice }
+
+
+    \addvspace{0.5in}
+
+        %%----------
+        %% cust addr
+        %%
+        %%----------
+        \parbox[t]{3.0in}{
+            \large {  
+                    <%= shipping_address %>
+                }
+        }
+
+}
+}
+}
+%%----------
+\end{textblock}
+
+\end{document}
+

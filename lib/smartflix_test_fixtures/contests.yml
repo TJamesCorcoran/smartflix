@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  contest_id:          1
+  title:       Test Contest 1
+  description: A test contest
+
+two:
+  contest_id:          2
+  title:       Test Contest 2
+  description: Another test contest
+  phase:       2
+
+three:
+  contest_id:          3
+  title:       Test Contest 3
+  description: Third test contest
+  phase:       3

@@ -1,0 +1,25 @@
+<h1>Editing copy	<%= @copy.copy_id  %></p>
+
+</h1>
+
+<%= error_messages_for :copy %>
+
+<%= form_for(:copy, :url => { :action => :update, :id => @copy } , :html => { :method => :put }) do |f| %>
+  <p>
+
+	<p><label for="old title">old title:</label>
+	<%= @copy.product.name  %></p>
+
+    <%= render :partial => 'form' %>
+<br><br><br><br><br>
+	<p><label for="confirm">Changing the title of a DVD is a <i><b>drastic step</b></i>.<br>
+         Talk to XYZ before doing this.  <br>To signal that you have talked to XYZ and you know what you're doing, please type the word 'confirm' here:</label><br/>
+<%= text_field_tag :confirm  %></p>
+
+
+    <%= submit_tag "Update" %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', :action => :show, :id => @copy %> 
+

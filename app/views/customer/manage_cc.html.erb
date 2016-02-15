@@ -1,0 +1,86 @@
+<div class="text-content">
+
+
+
+
+<%= render :partial => 'customer_nav' %>
+
+<p>
+You can either update an expiration date on an existing credit card, or enter a new card.
+</p>
+<br><br>
+<%= image_tag 'credit_card_logos.gif' %>
+<br><br>
+
+<% if (params[:credit_card] && params[:credit_card].is_a?(Hash) && params[:credit_card][:month] && params[:credit_card][:year])
+     selected_date = Date.strptime("#{params[:credit_card][:year]}-#{params[:credit_card][:month]}-01")
+   else 
+     selected_date = Date.today 
+   end
+ -%>
+
+
+
+<%= form_tag customer_manage_cc_url do |f| -%>
+<%# Need a hidden submit button to start with to make that the default action %>
+  <table border=0>
+	  <% if @credit_cards.empty? %>
+		<i>no credit cards on file</i>
+	  <% else %>
+		  <% @credit_cards.each do |cc| %>
+             <tr>
+               <td><%= radio_button_tag_21("card_choice", "credit_card_#{cc.last_four}", false, { :onclick => "gray_newcard();" } ) %></td>
+               <td>existing card: </td>
+               <td>x<%= cc.last_four %> 
+                   <%= hidden_field_tag "credit_card_#{cc.last_four}[last_four]", cc.last_four %> 
+               </td>
+               <td><%= select_month(cc.month, { :prefix => "credit_card_#{cc.last_four}" }, { :onclick=>"$('card_choice_credit_card_#{cc.last_four}').checked = true; gray_newcard();" } ) %></td>
+               <td><%= select_year( cc.year, { :prefix => "credit_card_#{cc.last_four}", :start_year => cc.year, :end_year => (Date.today.year + 9)}, { :onclick=>"$('card_choice_credit_card_#{cc.last_four}').checked = true; gray_newcard();" }) %></td>
+               <td>
+                 <%= onepage_auth_hidden_field %>
+               </td>
+               <td><%= Button.new( :delete, { :method => :submit, :name => 'delete', :value => cc.last_four, :confirm => 'Are you sure you want to remove this card?)'}) %></td>
+             </tr>
+		  <% end %>
+	  <% end %>
+
+    <%= onepage_auth_hidden_field %>
+
+    <tr>
+      <td><%= radio_button_tag("card_choice", "credit_card_new", true, { :onclick => "gray_newcard();" }) %></td>
+      <td>new card:</td>
+      <%= fields_for "credit_card_new" do |nn| %>
+          <td><%= nn.text_field("number")  %></td>
+          <td><%= select_month( selected_date,  :prefix => 'credit_card_new') %></td>
+          <td><%= select_year(  selected_date,  :prefix => 'credit_card_new') %></td>
+       <% end %>
+  
+
+      </td>
+    </tr>
+    <tr>
+      <td>
+                 <%= Button.new( :submit, {:class =>:orange, :method => :submit}) %>
+      </td>
+    </tr>
+  </table>
+
+
+
+<% end %>
+
+<% if (Rails.env != 'production') -%>
+<p>
+  <font color="red">
+    DEVELOPMENT MODE -- NOT LIVE<br />
+    AMEX success: 370000000000002<br />
+    Discover success: 6011000000000012<br />
+    MC success: 5424000000000015<br />
+    Visa success: 4007000000027<br />
+    Failure: 4222222222222 (set price to desired error code)
+  </font>
+</p>
+<% end -%>
+
+
+</div>

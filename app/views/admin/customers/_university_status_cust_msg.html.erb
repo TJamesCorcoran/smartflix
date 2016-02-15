@@ -1,0 +1,15 @@
+<h3>Copy/Paste Text</h3>
+<% last_payment = order.payments.select(&:good?).max_by(&:updated_at) %>
+
+<% if ! order.univ_fees_current? %>
+<textarea cols=60 rows=10>
+Your university order is on hold because we can't charge your credit card.
+The last valid charge we had was on  <%= last_payment.andand.updated_at.andand.to_date %>.
+
+We'd really like to help you get your university subscription back up and running!
+
+To update your credit card (which will automatically start the ball rolling), please go to 
+ 
+       https://smartflix.com/customer/manage_cc
+</textarea> 
+<% end %>

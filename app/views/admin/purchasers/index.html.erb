@@ -1,0 +1,45 @@
+<h1>Listing purchasers</h1>
+
+<table>
+
+<tr>
+<th></th>
+<% for column in Purchaser.columns.reject { |c| c.name == "description" } %>
+<th>
+<%=
+
+            if (column.name == "author_id") 
+			    "author"
+            else
+				column.name
+			end
+%>
+</th>
+<% end %>
+</tr>
+
+  
+<% for purchaser in @purchasers %>
+  <tr>
+    <td><%= link_to 'Edit', :action => :edit, :id => purchaser.id %></td>
+
+<% for column in Purchaser.columns.reject { |c| c.name == "description" } %>
+<td>
+<%=
+
+            if (column.name == "email") 
+			    link_to purchaser.email, :action=>:show, :id => purchaser.id
+            else
+				purchaser.send(column.name) 
+			end
+%>
+</td>
+<% end %>
+</tr>
+
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New purchaser', :action => :new %>

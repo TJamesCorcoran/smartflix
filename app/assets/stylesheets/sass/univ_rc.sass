@@ -1,0 +1,1161 @@
+/*------------------------------------------------------------
+ * NOTE: if this is a .css file, it is a GENERATED file, created
+ *        from a .sccs file. 
+ *
+ * DO NOT EDIT the .css file by hand
+ *
+ * regenerate file:
+ *    sass public/stylesheets/univ_rc.scss:public/stylesheets/univ_rc.css
+ *
+ * ...or set up a daemon to do it:
+ *    sass --watch public/stylesheets/univ_rc.scss:public/stylesheets/univ_rc.css
+ *------------------------------------------------------------ */
+
+/*----------
+ * SASS variables
+ *----------*/
+
+$nav_body_color          : #eceadc
+$nav_hi_color            : #107089
+$nav_lo_color            : #034854
+
+$button_orange_bg     : #ff6b00
+$button_orange_color  : #ffffff
+$button_orange_border : #ffffff
+
+$button_yellow_bg        : #ffcc00
+$button_yellow_color     : #000000
+
+$button_grey_bg          : #888888
+$button_grey_color       : #000000
+
+$nav_radius: 10px
+$button_radius: 5px
+
+@mixin top_rounded($radius) 
+  -moz-border-radius-topleft:      $radius
+  -moz-border-radius-topright:     $radius
+
+  -webkit-border-top-left-radius:  $radius
+  -webkit-border-top-right-radius: $radius 
+
+  border-radius: $radius  $radius 0px 0px
+
+  
+
+
+@mixin all_rounded($radius) 
+  -moz-border-radius-topleft:      $radius
+  -moz-border-radius-topright:     $radius
+  -moz-border-radius-bottomleft:      $radius
+  -moz-border-radius-bottomright:     $radius
+
+  -webkit-border-top-left-radius:  $radius
+  -webkit-border-top-right-radius: $radius 
+  -webkit-border-bottom-left-radius:  $radius
+  -webkit-border-bottom-right-radius: $radius 
+
+  border-radius: $radius  $radius   $radius  $radius
+
+  
+
+
+/*----------
+ * page layout
+ *----------*/
+
+$content_width: 950px
+$font_family: arial, verdana, sans-serif
+
+
+body 
+  background-color: #f2f2f2
+  margin: 0px auto
+  
+
+
+div#page 
+  height: 600px
+  background-image: url(/images/univstore/bg_grad.jpg)
+  background-repeat: repeat-x
+  /*background-color:white*/
+  
+
+
+div#content 
+  margin: 0px auto
+  width: $content_width
+  background-color: #ffffff
+  
+
+
+div#right_col 
+
+  width: 329px
+  margin: 20px
+  float: right
+  
+
+
+div.error-box 
+  padding: 20px
+  background-color: #FFff99
+  border:  3px solid #FF0000
+  
+
+
+span.error-span 
+  
+
+
+div.clear 
+  clear: both
+  height: 0px
+  
+
+
+div.clear_right 
+  clear: right
+  height: 0px
+  
+
+div.clear_left 
+  clear: left
+  height: 0px
+  
+
+
+
+span.highlight 
+  background-color: #ffff00
+  
+
+
+/*----------
+ *
+ * header
+ *
+ *----------*/
+
+#header 
+  background-color: #195477
+  height: 60px
+  
+
+
+#sf-logo 
+  text-align:center
+  margin-left: -880px
+  
+
+
+/*----------
+ *
+ * top nav
+ *
+ *----------*/
+
+$nav_link_height: 24px
+$nav_bar_padding: 9px
+$nav_link_padding: 3px
+$nav_total_height: $nav_link_height + $nav_bar_padding + ( 2 * $nav_link_padding)
+
+#topnavbar 
+  background-color: #01355A
+  height: $nav_total_height
+  
+
+
+#topnavlinks 
+  width: $content_width
+  margin: 0px auto
+  padding-top: $nav_bar_padding
+  
+
+
+div.topnavlink 
+  height: $nav_link_height
+  padding: $nav_link_padding
+
+  @include top_rounded($nav_radius)
+
+  border: 1px solid white
+
+  float: left
+  width: 234px
+  background-color: #020202
+  margin-right: 3px
+  color: yellow
+  text-align:center
+  margin-right: 20px
+  
+
+
+div.signin_link,
+div.signin_link a
+  
+  color: #ffffff
+  float: right
+  font: 16px/18px Arial, sans
+  vertical-align: middle
+  padding-right: 10px
+  
+
+
+
+div#lasttoplink 
+  width: 239px
+  margin-right: 0px
+  
+
+
+div.topnavlink, div.topnavlink a 
+  text-decoration:none
+  color: yellow
+  font: 16px/18px Arial, sans
+  vertical-align: middle
+  
+
+
+/*----------
+ *
+ * univ image
+ *
+ *----------*/
+
+div.uni_image 
+  padding: 20px 0px 20px 20px
+  margin-bottom: 5px
+  
+
+
+div.uni_image h1
+  
+  font-size: 30px
+  font-weight: bolder
+  color: #fff
+  margin-bottom: 5px
+  margin-top: 0px
+  
+
+
+div.uni_image ul 
+  
+  margin-top: 100px
+  margin-left: 10px
+  list-style-image: url(/images/univstore/white_check.jpg)
+  
+
+
+div.uni_image li
+  
+  font-size: 18px
+  font-weight: bold
+  color: #fff
+  
+
+
+
+/*----------
+ *
+ * signup box, other forms
+ *
+ *----------*/
+
+$signup_background: #e3f6ff
+$signup_border:     #6da6ce
+
+
+div.signup_box 
+  width: 310px
+
+  background-color: $signup_background
+  border: 1px solid $signup_border
+  padding: 10px
+
+  -moz-border-radius: 5px
+  -webkit-border-radius: 5px
+  border-radius: 5px
+
+  
+
+
+table.signup_form 
+  font-size: 12px
+  margin-top: 10px
+  
+
+
+table.signup_form tbody tr td 
+  padding-bottom: 5px
+
+table tbody tr td.form_label 
+  text-align: right
+  padding-right: 10px
+  font-family: $font_family
+  width: 160px
+  
+
+
+table tbody tr td.form_label div#secure_server 
+  font-size: 12px
+  margin: 0px
+  
+
+
+table td#secure_server_lock_blue 
+  background-image: url(/images/univstore/lock_blue.jpg)
+  background-repeat:no-repeat
+  background-position: top left
+  
+
+
+table td#secure_server_lock_white 
+  background-image: url(/images/univstore/lock_white.jpg)
+  background-repeat:no-repeat
+  background-position: top left
+  
+
+
+
+
+div#signup_box h2 
+  text-align: center
+  color: #00558F
+  font-family: $font_family
+  font-size: 16px
+  font-weight: bolder
+  margin-bottom: 10px
+  line-height: 22px
+  
+
+
+.signup_emphasis 
+  color: red
+  
+
+
+span.uni_label 
+  color: #00558F
+  font-family: $font_family
+  font-size: 12px
+  font-weight: bolder
+  /*margin-bottom: 10px*/
+  line-height: 16px
+  
+
+
+span.clear_uni 
+  float: right
+  
+
+
+
+div#signup_box form input, form select#university_university_id 
+  width: 165px
+  
+
+
+div#signup_box form select#university_university_id, 
+div#signup_box form input.submit_button 
+  width: 173px
+  
+
+
+
+form input.text_input 
+  background-color: #fbfcd4
+  border: 1px solid $signup_border
+  padding: 3px
+  font: $font_family
+  font-size: 12px
+  color: #5f5f5f
+  
+
+
+input.text_input:focus 
+  background-color: white
+  
+
+
+div#show_all,
+div#spam_disclaimer 
+  font-family: $font_family
+  font-size: 12px
+  margin-top: 10px
+  text-align:center
+  margin-bottom: 0px
+  
+
+
+/*----------
+ *
+ * testimonials & footer
+ *
+ *----------*/
+
+
+ p.fine_print 
+  margin-top: -20px
+  font-size: 10px
+  
+
+
+ p sup 
+  vertical-align: top
+  font-size: 12px
+  
+
+
+
+div#testimonial-block 
+  background-color:white
+  width: $content_width 
+  height: 100px
+  clear: both
+  
+
+
+div#testimonial-block h2 
+  text-transform: uppercase
+  letter-spacing: 4px
+  text-align: center
+  font-size: 15px
+  font-weight: bold
+  padding-top: 10px
+  padding-bottom: 10px
+  border-top: dashed 1px black
+  border-bottom: dashed 1px black
+  margin: 20px
+  
+
+
+div.cust-testimonial 
+  margin: 20px 
+  width: 276px 
+  float: left
+  background-color:white
+  
+
+
+div.testimonial-container 
+  background-color: white
+  
+
+
+div.cust-testimonial p 
+  font-family: $font_family
+  font-size: 12px
+  line-height: 17px
+  
+
+
+span.rating_stars 
+  font-weight: bolder
+  
+
+
+span.rating_writer 
+  font-weight: bolder
+  
+
+
+div#footer 
+  margin: 0 auto
+  width: $content_width
+  background-color: white
+  text-align: center
+  font-size: 12px
+  line-height: 16px
+  padding-bottom: 25px
+  padding-top: 25px
+  margin-top: 25px
+  clear: both
+  
+
+
+
+h1 
+  font-size: 20px
+  font-weight: bolder
+  font: verdana
+  margin-bottom: 10px
+  font-family: $font_family
+  margin-top: 20px
+  
+
+
+p 
+  font-family: $font_family
+  font-size: 14px 
+  line-height: 20px
+  margin-bottom: 20px
+  
+
+
+div#how_it_works_box 
+  float: left 
+  width: 500px
+  margin: 0px 20px 20px 20px
+  
+
+
+
+div#uni-linklist 
+  background-color:white
+  margin: 20px
+  width: 500px
+  float: left
+  font-size: 12px
+  
+
+
+body#univstore_one div#uni-linklist 
+  background-color:white
+  margin: 40px 20px 20px 0px
+  width: 330px
+  font-size: 12px
+  
+
+
+div#uni-linklist h2, div#uni-linklist h1 
+  font-size: 20px
+  font-weight: bolder
+  font: verdana
+  color: #00558f
+  margin-bottom: 10px
+  font-family: $font_family
+  
+
+
+div#uni-linklist p 
+  font-family: $font_family
+  margin-bottom: 20px 
+  font-size: 14px 
+  line-height: 20px
+  
+
+
+div.unilist-col-1 
+  float: left 
+  margin-right: 20px 
+  width: 150px
+
+div.unilist-col-2 
+  margin-left: 170px
+
+div.unilist-col-1 ul li.uni-list, 
+div.unilist-col-2 ul li.uni-list 
+  font-size: 14px 
+  font-family: $font_family
+  line-height: 20px
+  margin-bottom: 10px
+  
+
+
+div.unilist-col-1 ul li.uni-list a:link,
+div.unilist-col-2 ul li.uni-list a:link 
+  text-decoration: none
+  color: #00558f
+  /*font-weight: bold*/
+  
+
+
+div.unilist-col-1 ul li.uni-list a:visited,
+div.unilist-col-2 ul li.uni-list a:visited 
+  text-decoration: none
+  color: blue
+  font-weight: normal
+  
+
+
+div.unilist-col-1 ul li.uni-list a:hover,
+div.unilist-col-2 ul li.uni-list a:hover 
+  text-decoration: underline
+  color:red
+
+  
+
+
+div.unilist-col-1 ul li.uni-list a:active,
+div.unilist-col-1 ul li.uni-list a:active 
+  text-decoration: underline
+  color:green
+  
+
+
+
+/* SINGLE UNIV PAGE ---------------------------------------------------------------------------------------------------- */
+
+div#uni-info 
+  margin-top: 0px 
+  margin-left: 20px 
+  width: 560px
+  
+
+
+div#uni-info p 
+  margin-bottom: 20px 
+  font-family: $font_family
+  font-size: 12px 
+  line-height: 17px
+  
+
+
+div#uni-info h2.title 
+  margin-bottom: 14px
+  font-weight: bold
+  font-family: $font_family
+  color: #00558f
+  margin-bottom: 10px
+  
+
+
+div.univ_element 
+  border-bottom: solid #dfdfdf 1px
+  
+
+
+div.univ_element h2 
+  margin-bottom: 5px
+  font-weight: bold
+  font-family: $font_family
+  color: black
+  font-size: 16px
+  line-height: 18px
+  
+
+
+div.univ_element h3 
+  margin-bottom: 15px
+  font-weight: bold
+  font-family: $font_family
+  color: black
+  font-size: 12px
+  line-height: 15px
+  
+
+
+div.screencap 
+  float: left 
+  margin-bottom: 20px
+
+div.screencap img 
+  height: 180px 
+  width: 180px
+
+div.title-col 
+  margin-left: 200px 
+  margin-top: 20px
+
+/* HOW MANY DVDs PAGE -------------------------------------------------------------------------------------------------- */
+
+table.how_many_dvds 
+  margin-top: 20px
+  
+
+
+table.how_many_dvds tr td.form_label 
+  width: 120px
+  font-size: 12px
+  
+
+
+body#univstore_pick_how_many_dvds form input.submit_button 
+  width: 165px
+  
+
+
+div#qty-form-finish 
+  margin-left: 300px
+  
+
+
+div#qty-desc 
+  float: left
+  width: 300px
+  
+
+
+div#qty-choices 
+  margin: 20px 20px 20px 350px
+  
+
+
+div.qty-radio-b 
+  margin-top: 10px
+
+p.qty-form-number 
+  font-weight: bold
+  font-size: 16px
+  font-family: $font_family
+  color: #00558F
+  display: block
+  margin-bottom: 10px
+  
+
+
+p.qty-form-price 
+  font-size: 16px
+  font-weight: bolder
+  font-family: $font_family
+  display: block
+  margin-top: 10px
+  color: red
+  
+
+
+p.qty-form-free 
+  font-size: 12px
+  line-height: 15px
+  font-family: $font_family
+  display: block
+  margin-top: 20px
+  margin-bottom: 20px
+  
+
+
+div#dvd-qty h1 
+  padding-top: 20px
+  color: #00558F
+  text-align: center
+  font-weight: bolder
+  font-size: 20px
+  font-family: $font_family
+  
+
+
+span.cents 
+  font-size:x-small
+  vertical-align:top
+  margin-left: 5px
+  
+
+
+div#qty-desc 
+  margin: 20px
+  
+
+
+div#qty-desc p, 
+div#qty-choices p,
+div#qty-choices h2 
+  font-size: 12px
+  line-height: 16px
+  font-family: $font_family
+  margin-bottom: 10px
+  
+
+
+div#qty-choices h2 
+  font-size: 12px 
+  line-height: 16px 
+  font-weight: regular
+
+div.dvd_choice_3,
+div.dvd_choice_6,
+div.dvd_choice_8 
+  font-size: 12px
+  line-height: 18px
+  font-family: $font_family
+  
+
+
+
+
+/* SET ADDRESS PAGE ---------------------------------------------------------------------------------------------------- */
+
+body#univstore_set_address div.set_address_box 
+  font-size: 12px
+  
+
+
+body#univstore_set_address h1 
+  font-size: 20px
+  font-weight: bolder
+  font: verdana
+  color: #00558f
+  margin-bottom: 10px
+  font-family: $font_family
+  margin-top: 20px
+  
+
+
+body#univstore_set_address p 
+  font-family: $font_family
+  font-size: 14px 
+  line-height: 20px
+  margin-bottom: 20px
+  
+
+
+body#univstore_set_address div#set_address_box 
+  float: left 
+  width: 500px
+  margin: 0px 20px 20px 20px
+  
+
+
+body#univstore_set_address table 
+  margin-top: 20px 
+  width: 400px
+  font-size: 12px
+  
+
+
+body#univstore_set_address table.how_many_dvds 
+  margin-top: 5px
+  
+
+
+body#univstore_set_address table tbody tr td.form-label 
+  text-align: right
+  padding-right: 10px
+  font-family: $font_family
+  width: 120px
+  
+
+
+body#univstore_set_address table tbody tr td 
+  padding-bottom: 5px
+
+body#univstore_set_address form input, 
+body#univstore_set_address form select#university_university_id 
+  width: 220px
+  
+
+
+body#univstore_set_address form select#address_state_id, 
+body#univstore_set_address form input.submit_button 
+  width: 228px
+  
+
+
+
+body#univstore_set_address form input.text_input 
+  background-color: #fbfcd4
+  border: 1px solid $signup_border
+  padding: 3px
+  font: $font_family
+  font-size: 12px
+  color: #5f5f5f
+  
+
+
+body#univstore_set_address input.text_input:focus 
+  background-color: white
+  
+
+
+
+
+/* SET CREDIT CARD PAGE ------------------------------------------------------------------------------------------------ */
+
+
+body#univstore_set_cc h1 
+  font-size: 20px
+  font-weight: bolder
+  font: verdana
+  color: #00558f
+  margin-bottom: 10px
+  font-family: $font_family
+  margin-top: 20px
+  
+
+
+body#univstore_set_cc p 
+  font-family: $font_family
+  font-size: 14px 
+  line-height: 20px
+  margin-bottom: 20px
+  
+
+
+body#univstore_set_cc div#set_cc_box 
+  float: left 
+  width: 700px
+  margin: 0px 20px 20px 20px
+  
+
+
+body#univstore_set_cc table 
+  margin-top: 20px
+
+body#univstore_set_cc table tbody tr td.form-label 
+  text-align: right
+  padding-right: 10px
+  font-family: $font_family
+  
+
+
+body#univstore_set_cc table tbody tr td 
+  padding-bottom: 5px
+
+body#univstore_set_cc form input, form select 
+  width: 200px
+  
+
+
+body#univstore_set_cc form select#date_month,
+body#univstore_set_cc form select#date_year 
+  width: 102px
+  
+
+
+body#univstore_set_cc p#t_and_c 
+  margin-top: 10px
+  font-size: 12px
+  
+
+
+body#univstore_set_cc p#cc_production 
+  margin-top: 30px
+
+body#univstore_set_cc table 
+  margin-top: 20px 
+  width: 400px
+  font-size: 12px
+  
+
+
+body#univstore_set_cc table.set_cc 
+  margin-top: 5px
+  
+
+
+body#univstore_set_cc table tbody tr td.form-label 
+  text-align: right
+  padding-right: 10px
+  font-family: $font_family
+  width: 120px
+  
+
+
+body#univstore_set_cc table tbody tr td 
+  padding-bottom: 5px
+
+body#univstore_set_cc form select#date_month,
+body#univstore_set_cc form select#date_year 
+  width: 112px
+  
+
+
+body#univstore_set_cc form input.submit_button 
+  width: 228px
+  
+
+
+body#univstore_set_cc form input#number 
+  background-color: #fbfcd4
+  border: 1px solid $signup_border
+  padding: 3px
+  font: $font_family
+  font-size: 12px
+  color: #5f5f5f
+  width: 220px
+  
+
+
+body#univstore_set_cc input#number:focus 
+  background-color: white
+  
+
+
+
+
+/* ORDER COMPLETE PAGE ------------------------------------------------------------------------------------------------- */
+
+body#univstore_done h1 
+  font-size: 20px
+  font-weight: bolder
+  font: verdana
+  color: #00558f
+  margin-bottom: 10px
+  font-family: $font_family
+  margin-top: 20px
+  
+
+
+body#univstore_done p 
+  font-family: $font_family
+  font-size: 14px 
+  line-height: 20px
+  margin-bottom: 20px
+  
+
+
+body#univstore_done p strong 
+  font-weight: bolder 
+
+body#univstore_done div.signup_complete 
+  float: left 
+  width: 700px
+  margin: 0px 20px 20px 20px
+  
+
+
+
+
+
+
+
+/*---------- 
+ * Buttons
+ *---------- */
+
+  /* common to all buttons */
+a.button,
+button,
+input.button 
+  -moz-border-radius: 10px
+  -webkit-border-radius: 10px
+  border-radius: 10px
+
+  font-weight: bolder
+
+  padding: 3px
+  padding-left: 6px
+  margin-bottom: 10px
+
+  width: 95 px
+
+  
+
+
+input.submit_button 
+  background-color: $button_orange_bg
+  color: $button_orange_color
+  border: 2px solid $button_orange_border
+  /*  font-weight: bolder */
+
+  padding: 3px
+  width: 125px
+  margin-left: 3px
+
+  font: $font_family
+  font-size: 12px
+
+  @include all_rounded($button_radius)
+  
+
+
+a.button, button 
+  display: block
+  
+
+
+button 
+  border: 0
+  margin: 0
+  
+
+
+a.button 
+  cursor: default
+  text-align: center
+  text-decoration: none
+  
+
+
+
+a.button span, button span 
+  font-family: inherit
+  color: white
+  font-weight: bold
+  
+
+
+
+  /*---
+   * size
+   *-- */
+
+a.large,
+button.large 
+  height: 26px
+  width: 200px
+  
+
+
+
+button.tall_button 
+  min-height: 40px
+  
+
+
+
+button.tiny span 
+  line-height: 15px
+  margin: 0 3px 0 0
+  
+
+
+a.button.tiny span 
+  line-height: 19
+  margin-right: 3px
+  
+
+
+  /*---
+   * color
+   *-- */
+
+a.orange,
+button.orange, 
+input.orange 
+  background-color: $button_orange_bg
+  color:            $button_orange_color
+
+  
+ 
+
+
+button.grey,
+a.button.grey 
+  background-color: $button_grey_bg
+  color:            $button_grey_color
+
+  
+
+
+button.dark,
+a.button.dark 
+  background-color: $button_grey_bg
+  color:            $button_grey_color
+
+  
+
+
+button.yellow,
+a.button.yellow 
+  background-color: $button_yellow_bg
+  color:            $button_yellow_color
+
+  
+
+
+/* scanalert */
+div#smartflix-secure 
+  float: right
+  width: 150px
+  background-color: white
+  border: 1px solid #827f6c
+  margin: 20px 20px 20px 0
+  font-family : Verdana, Helvetica, Arial, sans-serif
+  font-size : 12px
+  padding: 10px
+  
+
+
+div#smartflix-secure ul 
+  margin: 20px
+  list-style: disc 
+  
+
+
+div#smartflix-secure ul li 
+  display: list-item
+  font-family: Verdana, Helvetica, Arial, sans-serif
+  font-size: .75em
+  
+

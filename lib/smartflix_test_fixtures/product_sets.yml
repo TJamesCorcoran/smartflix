@@ -1,0 +1,50 @@
+product_set1:
+  product_set_id: 1
+  name: 'Product set 1'
+  describe_each_title: true
+  discount_multiplier: 0.80
+product_set_backordered:
+  product_set_id: 2
+  name: 'Product set 2 (back ordered)'
+  describe_each_title: true
+  discount_multiplier: 0.80
+
+savings_set:
+  product_set_id: 20
+  discount_multiplier: 0.80
+
+savings_set_30:
+  product_set_id: 30
+  discount_multiplier: 0.80
+
+
+#----------
+# TVRM
+
+#----------------------------------------------------------------------
+#   smartflix_adwords_test
+#----------------------------------------------------------------------
+
+fishstar:
+   product_set_id: 4040
+   describe_each_title: 1
+
+squidstar:
+   product_set_id: 4050
+   describe_each_title: 1
+
+#----------------------------------------------------------------------
+#   ShippingTest
+#----------------------------------------------------------------------
+
+setA:
+  product_set_id: 6020
+  order_matters: 1
+
+setB:
+  product_set_id: 6030
+  order_matters: 1
+
+setC:
+  product_set_id: 6040
+  order_matters: 0

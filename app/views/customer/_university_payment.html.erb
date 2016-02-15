@@ -1,0 +1,16 @@
+<div class="univ_payment">
+  <% if last_payment %>
+      Your last payment <%= last_payment.good? ? "was successful!" : "had a problem" %>
+      </p>
+      <ul>
+        <li> payment # <%= last_payment.andand.payment_id %>
+        <li> on <%= last_payment.andand.updated_at.andand.to_date %>
+        <li> using card <%= last_payment.andand.credit_card.andand.name || "n/a" %> 
+        <li> status message: <%= last_payment.message || "n/a" %>
+      </ul>
+   <% else %>
+      <p>
+        There are no payments.
+      </p>
+   <% end %>
+</div>

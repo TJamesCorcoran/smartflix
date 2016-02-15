@@ -1,0 +1,22 @@
+<h1>SmartFlix Universities</h1>
+
+<p>
+SmartFlix Universities are unlike anything you've seen before - they're
+complete programs of DVDs from the most talented artists and
+craftsmen in each field. We ship you 3 DVDs per month - keep them as
+long as you want, with no late charges! When you're ready for more,
+mail those DVDs back to us, and we'll send you the next 3 DVDs (you
+get up to 3 new DVDs each month).
+</p>
+
+<p> With exciting, informative, well shot videos from the top names in
+each field that you can keep as long as you want, the ability to
+cancel at any time, and with a monthly price as low as 
+<%= University.find(:all).map{|u| u.subscription_charge_for_n(3) }.min.currency  %>, 
+these universities are a bargain that
+you can't afford to miss!  </p>
+
+<% # sorting is expensive - takes about 3 seconds.  Cache it.
+   cache(:action_suffix => 'sorted_univs') do  %>
+  <%= render :partial => 'product_listing', :locals => { :products => @univ_stubs.sort_by { |stub| stub.university.orders.size }.reverse } %>
+<% end %>

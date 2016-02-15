@@ -1,0 +1,35 @@
+<h1>Contests</h1>
+
+<%= link_to "View active contest", :controller => :"/contest" %> |
+<%= link_to 'Create new contest', :controller => "admin/rcadmin", :action => :contest  %>
+
+
+
+<table border=0>
+  <tr>
+     <th>num</th>
+     <th>name</th>
+     <th>description</th>
+     <th>phase</th>
+     <th>entries</th>
+     <th>votes</th>
+     <th>manage</th>
+  <tr>
+
+  <% @contests.reverse.each do |contest| %>
+    <tr>
+      <td> <%= h contest.id %></td>
+      <td> <%= link_to contest.title, :controller => "/contest", :action => :show, :id => contest.id %>
+
+      <td> <%= h contest.description %></td>
+      <td> <%= h contest.phase %> (<%= h contest.phase_to_text %>)</td>
+      <td> <%= contest.entries.count %></td>
+      <td>   <%= contest.entries.map{ |e| e.contest_votes.count }.sum %></td>
+      <td>
+       <%= link_to "Edit", :action => :contest, :id => contest.id %>
+       <% if contest.phase != Contest::ARCHIVE_PHASE %>
+         <%= button_to "Next Phase", { :action => 'contest_phase_increment', :id => contest }, { :confirm => 'Are you sure?' } %>
+       <% end %>
+      </td>
+  <% end %>
+</table>

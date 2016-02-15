@@ -1,0 +1,50 @@
+<% ActionView::Base.send(:include, ApplicationHelper)
+   ActionView::Base.send(:include, EmailHelper)
+ -%>
+<%# Parameters: 
+  #  products is an array of Product
+  #  token
+  #  ctcode
+ -%>
+
+<% products.each do |product| -%>
+
+  <div class="section">
+    <h2 style = "font-family:Georgia,serif; font-size:16px; line-height:20px; margin-bottom:20px; margin-top: 20px; width:670px;">
+        <%= product.name %>
+    </h2>
+
+	<div style = "font-size: 1em; line-height: 1.4em; color: black; width: 670px;">
+
+	<div style = "float: left;">
+      <a href="http://www.smartflix.com/store/video/<%= product.id %>" border=0>
+          <%= email_large_image_for(product) %>
+      </a>
+    </div>
+	<p>
+      <%= product.summary(450) %>...
+      <a href="http://www.smartflix.com/store/video/<%= product.id %>">Read more</a>
+    </p>
+	</div>
+
+  </div>
+
+
+    <div style="margin-top: 10px;  height: 70px;  width: 100px;  margin-bottom: 10px;  margin-left:20px; margin-right: 20px; float:right;">
+      <% if product.product_set_member? -%>
+        <%= email_add_to_cart_button(product.product_set, token, :product_listing => true, :ctcode => ctcode) %>
+      <% end -%>
+      <%= email_add_to_cart_button(product, token, :product_listing => true, :ctcode => ctcode) %>
+    </div>
+
+	<% if product.reviews_n_star(4).select {|rating| rating.review }.any? %>
+        <div>
+          <strong>Featured Customer Review:</strong>
+          <%= product.reviews_n_star(5).first.andand.summary(130) || product.reviews_n_star(4).first.andand.summary(130)  %>
+        </div>
+	<% end %>
+
+	<div style="clear:both; height:1px; margin-top:0px; margin-bottom:0px; padding:0px;">&nbsp;</div>
+
+<% end -%>
+

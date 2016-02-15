@@ -1,0 +1,13 @@
+<h1>ship rate</h1>
+<div class="customer-admin">
+    <p>
+    Ship rate: <%= @customer.ship_rate.to_s %>
+    </p>
+    <%= form_tag :action => 'update_dvd_rate', :id => @customer do %>
+      <%= text_field_tag :rate -%> 
+      <%= hidden_field_tag :customer_id, @customer.id -%>
+      <%= Button.new( "apply", { :class => :orange, :method => :submit}) %>
+      </p>
+    <% end %>
+</div>
+

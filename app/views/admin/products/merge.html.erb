@@ -1,0 +1,10 @@
+
+<h2>
+Merge (<%= @product.id %> ) - <%= @product.name %> with ...
+</h2>
+    <%= form_for @product, :url => {:action =>"merge"}, :html => { :method => :post } do |f| %>
+        <%= fields_for ( "product_target" ) do |target| -%>
+                 <%= target.select( :target, @products)  %> 
+        <% end %>
+        <%= submit_tag "merge with another product", :confirm => "really do this ???? - this is a huge deal !!!" %>
+    <% end %>

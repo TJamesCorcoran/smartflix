@@ -1,0 +1,34 @@
+<h1>revenue</h1>
+  <div class="customer-admin" >
+    (<a href="#" onclick="$('revenue_int').hide(); return false;">hide</a> / 
+    <a href="#" onclick="$('revenue_int').show(); return false;">show</a>)
+
+    <div id="revenue_int" style="display:none;">
+
+
+      <table style="margin-left:30px;" border=0>
+      <tr>
+          <th></th>
+          <th>booked revenue</th>
+          <th>refunded</th></tr>
+      </tr>
+      <% 
+        # XYZFIX P3: arrayhack.rb wants a function that does a partial sort 
+        Order.charge_types_for_stats.sort{|a,b| 
+          if    (a == :rental) then -1    
+          elsif (b == :rental) then 1
+          elsif (a == :all)    then 1
+          elsif (b == :all)    then -1
+          else   a.to_s <=> b.to_s
+         end }.each do |charge_type|
+       %>
+      <tr>
+          <th align=left><%= charge_type.to_s %></th>
+          <% [false, true].each do |cancelled| %>
+              <td><%= number_to_currency(@customer.revenue_by_type(charge_type, cancelled)) %> </td>
+          <% end %>
+      </tr>
+      <% end %>
+      </table>
+  </div>
+</div>

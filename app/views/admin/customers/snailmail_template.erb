@@ -1,0 +1,81 @@
+\documentclass[12pt]{letter}
+\pagestyle{empty}
+\setlength{\textwidth}{ 7.5 in}
+\setlength{\topmargin}{ -1.0 in}
+\oddsidemargin -0.5in
+\begin{document}
+
+<%= Date.today %>\\
+\vspace{1.0in}
+
+{\addtolength{\leftskip}{0.5 in}
+  <%= customer.billing_address.to_s.tex_quote.gsub(/\n/) { |z| '\\\\'} %> \par}
+
+\addvspace{0.5in}		
+<%= customer.first_name %>,
+
+
+We're writing today about <%= copies.size %> unreturned DVDs.  We've
+sent you multiple emails about each but haven't received them back.
+
+\textbf{
+We are about to file against you in Middlesex County Small Claims court for up to <%= (sum_replace + sum_late).currency.tex_quote %>.
+}
+
+Here are your options:
+
+1) We will forgive  \textbf{  all  } late fees if we receive the DVDs in good condition by \textbf{<%= due_date %>} in a rigid, padded envelope to
+
+{\addtolength{\leftskip}{1.0 in}
+    SmartFlix\\
+    7 Central St\\
+    Suite 140\\
+    Arlington MA 02476 \par
+}
+
+
+2) We will forgive \textbf{ all } late fees if we receive a valid
+check by <%= due_date %> made out to "SmartFlix" for the total
+replacement cost of <%= sum_replace.currency.tex_quote %> .
+
+3) If we do not receive either the DVDs in good condition or a check
+by <%= due_date %>, we will file for the total replacement cost of 
+<%= sum_replace.currency.tex_quote %>
+\textbf{ plus } unpaid late fees of
+<%= sum_late.currency.tex_quote %> 
+( <%= (sum_replace + sum_late).currency.tex_quote %> total ).
+
+
+
+The DVDs we need to get back are:
+
+<% copies.sort_by(&:name).each do |cc| %>
+\begin{tabbing}
+\hspace*{1.0in}* Copy \#<%= cc.sticker_id %> of '<%= cc.name.latex_escape %>'.\\
+\hspace*{1.0in}  Rented on:\hspace*{1.0in}\= <%= cc.last_line_item.order.orderDate %>\\
+\hspace*{1.0in}  Shipped on:\><%= cc.last_line_item.shipment.dateOut %>\\
+\hspace*{1.0in}  Overdue on:\> <%= cc.last_line_item.shipment.dateOut + 21 %>\\
+\hspace*{1.0in}  Replacement price:\><%= cc.replacement_price.currency.tex_quote %>\\
+\hspace*{1.0in}  Late fees:\><%= cc.last_line_item.total_late_fee.currency.tex_quote %>\\
+% \hspace*{1.0in}  First email sent     <%= cc.last_line_item.lateMsg1Sent %>\\
+% \hspace*{1.0in}  Second email sent    <%= cc.last_line_item.lateMsg2Sent %>\\
+\end{tabbing}
+
+
+<% end %>
+
+While we always prefer to resolve issues without recourse to the
+courts, we have taken similar matters to court dozens of times before
+and we almost always prevail.
+
+We look forward to resolving this matter as soon as possible, but certainly by \textbf{<%= due_date %>}.
+\vspace{1.5in}		
+
+Asset Control Department \\
+SmartFlix\\
+7 Central St\\
+Suite 140\\
+Arlington MA 02476\\
+
+
+\end{document}

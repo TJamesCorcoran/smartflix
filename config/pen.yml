@@ -1,0 +1,86 @@
+# This is YAML.
+#
+# The backend hosts to be proxied to. Ports can be a single port (8000) or a
+# range (8000..8002).
+hosts:
+- 127.0.0.1:
+    ports: 8001..8004
+    max_connections: 1
+
+# Pen listening port
+port: 127.0.0.1:8000
+
+# Used to send Pen commands.
+# Default: none
+# control_port: 8081
+
+# Attach X_FORWARDED_FOR headers. (Don't.)
+# Default: false
+# proxy_headers: true
+
+# Use poll() instead of select().
+# Default: false
+# use_poll: true
+
+# Dump any debug data in ASCII format.
+# Default: false
+# debug_ascii: true
+
+# Put servers that don't respond on a blacklist for 5 seconds.
+# Default: 0
+# blacklist_time: 5
+
+# Maximum number of HTTP clients.
+# Default: 2048
+# max_clients: 1024
+
+# Log debug information.
+# Default: false
+# debug: false
+
+# If all servers are down, direct to this host.
+# emergency_host: backup.railsapp.com:80
+
+# Hash the IP before assigning it to a server.
+# Default: false
+# use_ip_hash: true
+
+# chroot Pen to this directory.
+# Default: none
+# chroot: /var/chroot/pen/
+
+# Log Pen info to this file.
+# Default: none
+# log_file: /var/log/pen.log
+
+# Use blocking sockets. (Don't.)
+# Default: false
+# disable_asynchronous_sockets: false
+
+# Use simple round-robin assignments instead of sticky sessions.
+# Default: false
+disable_tracking: true
+
+# Don't load balance. (Don't?)
+# Default: false
+# disable_failover: false
+
+# Connection timeout, in seconds.
+# Default: 5
+# timeout: 10
+
+# Run Pen as this user.
+# Default: none (whoever runs pen-service, usually root.)
+user: smart
+
+# Log Pen's pid to this file.
+# Default: /var/run/pen.pid
+pid_file: /home/smart/rails/railscart/shared/log/pen.pid
+
+# Maximum number of simultaneous connections.
+# Default: 256
+max_connections: 4
+
+# Log HTML-formatted usage statistics to this file.
+# Default: none
+# stats_file: /var/www/stats/pen-stats.html

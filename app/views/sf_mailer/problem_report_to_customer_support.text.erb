@@ -1,0 +1,14 @@
+           Customer: <%= h(@customer.full_name) %> (<%= h(@customer.email) %>)
+            Order #: <%= @line_item.order.id %>
+         Product ID: <%= @line_item.product.id %>
+       Product name: <%= @line_item.product.listing_name_with_disc_number %>
+       Problem type: <%= @death_type.to_s %>
+<% if @note -%>
+    Problem details: <%= h(@note) %>
+<% end -%>
+    Replacement DVD: <%= @replacement_order ? 'YES' : 'NO' %>
+<% if @replacement_order -%>
+Replacement Order #: <%= @replacement_order.id %>
+
+(Note: the replacement order has already been inserted)
+<% end -%>

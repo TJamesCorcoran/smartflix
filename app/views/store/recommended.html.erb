@@ -1,0 +1,10 @@
+<div id="subcat-title">
+  <h1>Your Recommended Titles</h1>
+</div>
+
+<p>
+Based on the videos you've rented from us in the past, you might be
+interested in checking out these videos too:
+</p>
+
+<%= render :partial => 'product_listing', :locals => { :products => @recommended_products } %>

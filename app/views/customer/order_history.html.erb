@@ -1,0 +1,17 @@
+<div class="text-content">
+
+<%= render :partial => 'customer_nav' %>
+
+
+<h2>Order History</h2>
+
+<p><strong>To check the status</strong> on any order you've placed,
+click the "view" button next to the order.</p>
+
+<p><strong>To report a problem</strong> with an item, click the "view"
+button next to the order, then click the "report a problem" button next
+to the item and fill out the form.</p>
+
+<%= render :partial => 'orders', :locals => { :orders => @orders } %>
+
+</div>

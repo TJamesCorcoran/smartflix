@@ -1,0 +1,159 @@
+<div class="univ_faq">
+  <div class="univ_faq_question">
+  <p><b>Q:</b> How many DVDs do I get at a time?
+  </p>
+  </div>
+
+  <p><b>A:</b> Up to three per month.
+  </p>
+</div>
+
+<%   #====================           
+     #  Your Custom Univ
+     #      special case
+     #====================
+%>
+<% if @product.andand.extra_custom_text_in_view? %>
+
+    <div class="univ_faq">
+      <div class="univ_faq_question">
+      <p><b>Q:</b> How do I chose DVDs for Your Custom University?
+      </p>
+      </div>
+
+      <p><b>A:</b> It's easy! Once you have subscribed to Your Custom University on our 
+    website, simply browse the website and click on "add to queue" next to 
+    those DVDs that interest you.
+      </p>
+    </div>
+<% end %>
+
+<div class="univ_faq">
+  <div class="univ_faq_question">
+  <p><b>Q:</b> Once I subscribe, can I quit?
+  </p>
+  </div>
+
+  <p><b>A:</b> Yes, <strong>you can quit at any time</strong> at all.  Just send us an email and you're out - no more charges, ever.
+  </p>
+</div>
+
+
+<div class="univ_faq">
+  <div class="univ_faq_question">
+  <p><b>Q:</b> How much does it cost?
+  </p>
+  </div>
+
+  <p><b>A:</b> 
+
+  <strong>
+  <% if @product %>
+  Just
+       <% if @product.price == @product.full_price %>
+          <%= @product.price.currency %>
+       <% else %>
+          <% if SmartFlix::Application::FIRST_MONTH_FREE %>
+            <%= @product.price.currency %> for the first month, and 
+            <%= @product.full_price.currency %> per month after that
+          <% else %>
+            <%= @product.full_price.currency %>.
+          <% end %>
+       <% end %>.
+  <% else %>
+     Just <%= price %>.
+  <% end %>
+  </strong>
+
+  That's a huge savings over
+  the
+
+  <% if @product %>
+     <%= @product.purchase_price.currency %> 
+  <% else %>
+     <%= purchase_price %>
+  <% end %>
+
+  or so it would cost to buy three new DVDs each month, and a
+  big savings over the normal rental cost.
+  </p>
+</div>
+
+<div class="univ_faq">
+  <div class="univ_faq_question">
+    <p><b>Q:</b> How much is shipping?</p>
+  </div>
+
+
+  <p><b>A:</b> It's free!
+  </p>
+</div>
+
+<div class="univ_faq">
+  <div class="univ_faq_question">
+  <p><b>Q:</b> How much are late fees?
+  </p>
+  </div>
+
+  <p><b>A:</b> There are never any late fees!
+  </p>
+</div>
+
+<div class="univ_faq">
+  <div class="univ_faq_question">
+  <p><b>Q:</b> Can you clarify how the <strong>"three DVDs out-at-a-time, limit three per month"</strong> plan works?
+  </p>
+  </div>
+
+  <p><b>A:</b> Let's say you sign up on the 10th of the month.  Your month then runs from the 10th of each month till the 10th of the next month.  We'll make sure that you always have three new DVDs to watch in your home.  We do it by sending out up to three DVDs during each month. 
+  </p>
+
+  <p>
+     So, you sign up on the 10th.  We mail you three
+     DVDs immediately.  If you return one of them a week later, we accept the
+     return, but since we've mailed you three new DVDs this month, we wait
+     until the next month.  As soon as the 10th of the next month rolls around, we send you one DVD, so now you've again got 3 DVDs in your home.  A week after that, you return two more dvds.  We immediately replace them, so that you again have three dvds.
+  </p>
+</div>
+
+<div class="univ_faq">
+  <div class="univ_faq_question">
+  <p><b>Q:</b> Will my university subscription send me DVDs that I already ordered
+     as a SmartFlix customer?
+  </p>
+  </div>
+
+  <p><b>A:</b> No!  We track what you've already rented, and we won't send out duplicates.
+  </p>
+</div>
+
+<div class="univ_faq">
+  <div class="univ_faq_question">
+  <p><b>Q:</b> What order do I get the DVDs in?
+  </p>
+  </div>
+
+
+  <p><b>A:</b> We can't promise that you'll get the dvds in exactly the order listed below, but we do absolutely promise that we always send items out in an order that makes sense: you'll never get disk 2 in a set before disk 1.  More generally, we use customer feedback to structure the universities in an order that makes sense - basic stuff first, then more advanced topics.
+  </p>
+</div>
+
+<div class="univ_faq">
+  <div class="univ_faq_question">
+  <p><b>Q:</b> There's a DVD (or two, or three) on the list that I don't want to see - can I subscribe to <%= name %>, but somehow not get that DVD?
+  </p>
+  </div>
+
+  <p><b>A:</b> Sure thing!  Just subscribe to the university, then send us an email telling us what DVDs you want to skip. 
+  </p>
+</div>
+
+
+<div class="univ_faq">
+  <div class="univ_faq_question">
+  <p><b>Q:</b> This is a pretty awesome deal, isn't it?
+  </p>
+  </div>
+
+  <p><b>A:</b> Yes, it is!
+</div>

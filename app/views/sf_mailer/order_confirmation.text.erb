@@ -1,0 +1,61 @@
+Order Confirmation from SmartFlix
+
+<%= h(@order.customer.full_name) %>,
+
+Thanks for renting from us today!
+
+The following are the details of your order:
+
+------------------------------------------------------
+Order Number: <%= @order.id %>
+Date Ordered: <%= @order.listing_date %>
+Detailed Invoice: <%= @url %>
+
+Items ordered:
+------------------------------------------------------
+<%# XXXFIX P2: Use a template (order)? Also, handle set stuff -%>
+<% @order.line_items.each do |li| -%>
+<%# Only display a price if it's non-zero -%>
+<%= li.product.name %> <%= (li.price > 0.0) ? number_to_currency(li.price) : '' %>
+<% end -%>
+------------------------------------------------------
+Sub-Total: <%= number_to_currency(@order.sub_total) %>
+<% @order.price_modifiers.each do |pm| -%>
+<%= "#{h(pm.display_string)}: #{number_to_currency(pm.amount)}" %>
+<% end -%>
+Free Shipping: <%= number_to_currency(0.00) %>
+Total: <%= number_to_currency(@order.total) %>
+
+Delivery Address
+------------------------------------------------------
+<%# XXXFIX P2: Big time use a template here, with h() of everything as in top one -%>
+<% addr = @order.customer.shipping_address -%>
+<%= h(addr.first_name) %> <%= h(addr.last_name) %>
+<%= h(addr.address_1) %>
+<% if addr.address_2.length > 0 -%>
+<%= h(addr.address_2) %>
+<% end -%>
+<%= h(addr.city) %>, <%= h(addr.state_code) %> <%= h(addr.postcode) %>
+<%= h(addr.country_name) %>
+
+Billing Address
+------------------------------------------------------
+<% addr = @order.customer.billing_address -%>
+<%= addr.first_name %> <%= addr.last_name %>
+<%= addr.address_1 %>
+<% if addr.address_2.length > 0 -%>
+<%= addr.address_2 %>
+<% end -%>
+<%= addr.city %>, <%= addr.state_code %> <%= addr.postcode %>
+<%= addr.country_name %>
+
+Payment Method
+------------------------------------------------------
+<%= @order.payment_method %>
+
+-----
+<%# XXXFIX P2: Common disclaimer in template -%>
+This email address was given to us by you or by one of our customers. If
+you feel that you have received this email in error, please send an
+email to info@smartflix.com
+-----

@@ -1,0 +1,50 @@
+<% self.extend(CartHelper) %>
+
+<table border=0>
+   <tr>
+      <td><h1>Customer Info</h1></td>
+      <td><%= render :partial => "search" %></td>
+   </tr>
+</table>
+
+<%= render(:partial => 'throttle') %>
+<%= render(:partial => 'key') %>
+<%= render(:partial => 'stats') %>
+
+<%= render(:partial => 'cc_warning') %>
+<%= render(:partial => 'old_rcadmin_links') %>
+<%= render(:partial => 'ship_rate') %>
+<%= render(:partial => 'account_credit') %>
+
+<%= render(:partial => 'scheduled_emails') %>
+
+<a name="basic_data"></a><a href="#basic_data">#</a>
+<%= render(:partial => 'basic_data') %>
+
+<a name="notes"></a><a href="#notes">#</a>
+<%= render(:partial => 'notes') %>
+
+<a name="relations"></a><a href="#relations">#</a>
+<%= render(:partial => 'relations') %>
+
+<a name="university_orders"></a><a href="#university_orders">#</a>
+<%= render(:partial => 'university_orders') %>
+
+<a name="line_items"></a><a href="#line_items">#</a>
+<%= render(:partial => 'line_items') %>
+
+<a name="shopping_cart"></a><a href="#shopping_cart">#</a>
+<%= render(:partial => 'shopping_cart') %>
+
+<a name="browsed"></a><a href="#browsed">#</a>
+<%= render(:partial => 'browsed') %>
+
+<a name="ratings"></a><a href="#ratings">#</a>
+<%= render(:partial => 'ratings') %>
+
+<a name="revenue"></a><a href="#revenue">#</a>
+<%= render(:partial => 'revenue') %>
+
+<a name="happiness"></a><a href="#happiness">#</a>
+<%= render(:partial => 'happiness') %>
+

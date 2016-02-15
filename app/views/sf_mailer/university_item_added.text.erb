@@ -1,0 +1,51 @@
+Dear <%= h(@customer.full_name) %>,
+
+Based on customer requests, we just added a new video to
+<%= @university.name %>.  Because most customers want to get all of the
+DVDs in a university, we've added this to your subscription.
+
+Here's the description of the video:
+
+    <%= @product.name %> by <%= @product.author.name %>
+
+<%= word_wrap(@product.summary(400), :line_width => 60).gsub(/^/, " " *4) %>
+
+...but if you don't want this DVD, you can remove it this page:
+
+     <%= url_for(:host => WEB_SERVER, :only_path => false, :controller => :customer, :action => :university_status) %>
+
+Just scroll to the bottom of the "DVDs yet to be sent" list, find the
+DVD, and click "cancel".
+
+Speaking of changing the items in your queue, you can also go anywhere
+on the website and add new videos to your university by clicking an
+"add to queue" button.  For example, to add Arc Welding to your
+university, go here and click the "add to queue" button.
+
+     <%= url_for(:host => WEB_SERVER, :only_path => false, :controller => :store, :action => :video, :id => 11) %>
+
+And, as a reminder, you can change the rate at which you get DVDs at
+this page:
+
+     <%= url_for(:host => WEB_SERVER, :only_path => false, :controller => :customer, :action => :change_plan) %>
+
+If you ever have a question, a suggestion, or a comment, please contact
+us at
+
+   info@smartflix.com
+
+We read every single customer email, and we look forward to making you
+as satisfied with our service as the thousands of others who've rented
+from us since 2002.
+
+Sincerely,
+
+Xxx, President
+
+<%= @university.name %>
+http://smartflix.com
+
+
+This email address was given to us by you or by one of our customers. If
+you did not signup for an account, or feel that you have received this
+email in error, please send an email to info@smartflix.com

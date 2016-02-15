@@ -1,0 +1,22 @@
+<table border=0>
+<% Category.content_columns.each do |col| %>
+	<tr>
+       <td><%= col.name %> ?</td>
+       <td><%= 
+         if (col.type == :boolean) 
+			 radio_button('category', col.name,  true)  + "yes" + 
+			 radio_button('category', col.name,  false) + "no"
+         else
+#			 field_type = (col.type == :string) ? :text_area : :text_field
+			 field_type = (col.name == "introText") ? :text_area : :text_field
+             send(field_type,  'category', col.name)
+         end
+        %></td>
+        <td>
+          <%= (col.name == "description_verbs") ? "seperate with semicolons (;)" : "" %>
+        </td>
+    </tr>
+
+<% end %>
+
+</table>

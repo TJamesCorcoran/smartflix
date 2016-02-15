@@ -1,0 +1,6 @@
+<h3>Cancellation Log</h3>
+       <ul>
+       <% order.cancellation_logs.each do |cl| %>
+           <li> <%= cl.created_at.strftime("%Y-%m-%d") %>: <%= cl.new_liveness ? "reinstated" : "cancelled" %>
+       <% end %>
+       </ul>

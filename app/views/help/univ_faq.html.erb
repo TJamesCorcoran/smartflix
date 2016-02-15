@@ -1,0 +1,9 @@
+<h1>Help with SmartFlix Universities</h1>
+  <%= render :partial => 'shared/univ_faq',
+      :locals => { :name => "a SmartFlix University", 
+                   :price => " #{University.base_plan_price.to_f} to $#{University.max_plan_price.to_f} per month (depending on which university)",
+                   :purchase_price => "$210"} %>
+
+<h1>What Universities are available?<h1>
+
+<%= render :partial => 'store/product_listing', :locals => { :products => @univ_stubs } %>

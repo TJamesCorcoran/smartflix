@@ -1,0 +1,31 @@
+<h1>Sales Tax</h1>
+
+<table>
+  <tr>
+  </tr>
+  
+<tr>
+<th></th>
+<th>quarter</th>
+<th></th>
+<th>revenue from MA</th>
+<th></th>
+<th>expected sales tax</th>
+</tr>
+<%  cssclass = "dark"
+    @sales_taxes.keys.sort.each do |date | 
+    cssclass = ((cssclass == "dark") ? "light" : "dark")
+%>
+  <tr>
+    <td  class="<%=cssclass%>" width=50px></td>
+    <td  class="<%=cssclass%>"><%= date %></td>
+    <td  class="<%=cssclass%>" width=50px></td>
+    <td  class="<%=cssclass%>" align=right><%= number_to_currency(@sales_taxes[date]) %></td>
+    <td  class="<%=cssclass%>" width=50px></td>
+    <td  class="<%=cssclass%>" align=right><%= number_to_currency(@sales_taxes[date] * 0.05 ) %></td>
+  </tr>
+<% end %>
+</table>
+
+
+

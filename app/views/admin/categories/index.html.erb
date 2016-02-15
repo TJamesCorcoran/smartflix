@@ -1,0 +1,55 @@
+
+<%= form_tag ( {:action => 'index'}, {:method => :get} ) do %>
+  <%= text_field_tag  'search_str'  %>
+  <%= submit_tag 'Search by Category text' %>
+<% end %>
+
+<table border=0><tr><td>
+<h1>
+Category list</h1></td><td>
+(<%= link_to 'unfiltered', :action => 'list' %>)</td></tr></table>
+<hr>
+<table class="sortable" id="categories" >
+
+
+
+<tr>
+<th></th><th></th>
+<%
+rejected_columns = /^()$/
+ for column in Category.content_columns.reject { |c| c.name =~ rejected_columns } %>
+<th>
+<%=
+
+					column.name
+%>
+</th>
+<% end %>
+</tr>
+  
+<% for category in @categories %>
+  <tr>
+    <td><%= link_to 'Show',  :action => :show, :id => category %></td>
+    <td><%= link_to 'Edit',  :action => :edit, :id => category %></td>
+
+<% for column in Category.content_columns.reject  { |c| c.name =~ rejected_columns } %>
+<td>
+<%=
+
+            if (column.name == "url") 
+			    link_to category.url, category.url
+            elsif (column.name == "parentCatID") 
+                link_to category.parentCat.andand.description, :controller=>"categories", :action=>"show", :id=>category.parentCatID			    
+            else
+				category.send(column.name) 
+			end
+%>
+</td>
+<% end %>
+</tr>
+<% end %>
+</table>
+
+<br />
+<hr>
+<%= link_to 'New category',  :action => :new %>

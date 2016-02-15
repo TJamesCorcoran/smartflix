@@ -1,0 +1,8 @@
+<% if customer && customer.cart && customer.cart.items_saved.size > 1 %>
+  <div class="category-listing-section">
+    <h1 class="rent-dvds-like">Treat Yourself</h1>
+    <%= render :partial => 'product_listing', :locals => { 
+      :products => customer.cart.items_saved.sort_by { rand }[0,2].map(&:product) } %>
+  </div>
+<% end %>
+

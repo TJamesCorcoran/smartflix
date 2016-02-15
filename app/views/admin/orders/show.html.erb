@@ -1,0 +1,73 @@
+<% require "andand" %>
+
+<%= render(:partial => "search") %>
+
+<table border=0>
+  <tr>
+    <td><%= link_to "<", :id => (params[:id].to_i - 1) %></td>
+    <td><h1>Order Info</h1></td>
+    <td><%= link_to ">", :id => (params[:id].to_i + 1) %></td>
+  </tr>
+</table>
+
+<div class="ud_block">
+  <% if @employee.andand.authority_edit_order %>
+     <h2>View checkout</h2>
+      <%= link_to "here", :controller =>"customers", :action =>"checkout_screen_shot", :order_id => @order.id %>
+     <h2>
+       Backdate order
+     </h2>
+     <p>
+        Make sure you  know what you're doing!
+     </p>
+	 <%= form_for(:order, :url => { :action =>:update, :id => @order}, :html => { :method => :put }) do |f| %>
+	   <%=  text_field :order, 'orderDate' %>
+       <br>
+	   <%= submit_tag "Update orderdate" %>
+	 <% end %>
+  <% end %>
+
+  <% if @employee.andand.authority_chargeback %>   
+     <h2>
+       Dispute chargeback
+     </h2>
+     <%= link_to "dispute a chargeback", :action=>:dispute_chargeback_preview, :id => @order.id  %>
+  <% end %>
+
+</div>
+
+
+
+<%= render(:partial => 'admin/shared/show_basicdata', :locals => { :item => @order, :partials => {} })  %>
+<%= render(:partial => 'admin/shared/show_relations', :locals => { :item => @order, :reject => [  :line_items, :products, :univ_dvd_rate_updates] })  %>
+
+<% person = session[:employee_number].nil? ? Person.new : Person.find(session[:employee_number])  %>
+<% if person.authority_chargeback %>   
+    <%= link_to "want to dispute this?", :action=>:dispute_chargeback_preview, :id => @order.id  %>
+<% end %>
+<p>
+
+<h2>Line Items</h2>
+
+
+<%= render :partial => "admin/line_items/line_item_all", :locals => {:line_item_all => @order.line_items }  %>
+
+<% if @order.replacement? %>
+	<h2>Chargeback Disputes</h2>
+
+	<% if @order.chargeback_disputes.empty? %>
+	   <i>no chargeback disputes</i>
+	<% end %>
+
+	<ul>
+	<% @order.chargeback_disputes.each do |dispute| %>
+	  <li><%= "#{dispute.created_at} - by #{Person.find(dispute.id).to_s}" %>
+	<% end %>
+	</ul>
+
+    <%= link_to "chargeback challenge preview", :action => 'dispute_chargeback_preview' %>
+
+<% end %>
+<p>
+
+<%= link_to 'Back', :action => :index %>

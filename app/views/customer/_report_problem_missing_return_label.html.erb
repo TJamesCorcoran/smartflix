@@ -1,0 +1,11 @@
+<%= form_tag( customer_report_problem_3_url(@line_item.id), :remote => true ) do %>
+
+    <%=  hidden_field_tag 'problem_type', h(@problem_type) %>
+    <%=  hidden_field_tag 'final', '1' %>
+
+    <p>You can send the DVDs back to us at</p>
+    <p>
+    <%= SmartFlix::Application::SF_MAILING_ADDRESS_HTML.html_safe %>
+    </p>
+
+<% end -%>

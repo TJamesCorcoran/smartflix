@@ -1,0 +1,61 @@
+for_all:
+  promotion_id: 1
+  'on': 1
+  tagline: 'a catchy tagline'
+  default_status: 'full'
+  display_page: '^(\/|\/index)$'
+  sticky: 1
+  close_button: 'close'
+  minimize_button: 'min'
+  maximize_button: 'max'
+  next_button: ''
+  previous_button: ''
+  audience: 'all'
+  hide_next_on_last_page: 1
+  hide_previous_on_first_page: 0
+for_new:
+  promotion_id: 2
+  'on': 1
+  tagline: 'a catchy tagline'
+  default_status: 'full'
+  display_page: '^\/store\/category\/133\/Academic$'
+  sticky: 1
+  close_button: 'close'
+  minimize_button: 'min'
+  maximize_button: 'max'
+  next_button: ''
+  previous_button: ''
+  audience: 'new'
+  hide_next_on_last_page: 1
+  hide_previous_on_first_page: 0
+for_existing:
+  promotion_id: 3
+  'on': 1
+  tagline: 'a catchy tagline'
+  default_status: 'minimize'
+  display_page: '^(\/|\/index)$'
+  sticky: 0
+  close_button: 'close'
+  minimize_button: 'min'
+  maximize_button: 'max'
+  next_button: ''
+  previous_button: ''
+  audience: 'existing'
+  hide_next_on_last_page: 1
+  hide_previous_on_first_page: 0
+off:
+  promotion_id: 4
+  'on': 0
+  tagline: 'a catchy tagline'
+  default_status: 'full'
+  display_page: '^(\/|\/index)$'
+  sticky: 1
+  close_button: 'close'
+  minimize_button: 'min'
+  maximize_button: 'max'
+  next_button: ''
+  previous_button: ''
+  audience: 'all'
+  hide_next_on_last_page: 1
+  hide_previous_on_first_page: 0
+  

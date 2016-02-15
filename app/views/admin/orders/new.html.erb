@@ -1,0 +1,15 @@
+<h1>New Order</h1>
+
+<%= form_for @order, :url => {:action =>"create_it"} do |f| %>
+	<%= fields_for "customer_id" do |customer| -%>
+        <%= hidden_field "customer_id", params[:customer_id] %>
+    <% end %>
+
+	<% 10.times do | x | %> 	
+        <%= fields_for  "product" + x.to_s  do |product| -%>
+                 <li><%= product.select(:product, @products)  %> 
+        <% end %>
+    <% end %>
+
+    <%= submit_tag "Create new order" %>
+<% end %>

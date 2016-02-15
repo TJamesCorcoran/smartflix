@@ -1,0 +1,34 @@
+cp1:
+  product_id: 1
+  category_id: 2
+cp2:
+  product_id: 2
+  category_id: 2
+cp3:
+  product_id: 3
+  category_id: 3
+cp4:
+  product_id: 4
+  category_id: 3
+cp5:
+  product_id: 5
+  category_id: 3
+
+#----------------------------------------------------------------------
+#   railscart integration tests
+#----------------------------------------------------------------------
+
+wood_video: 
+  product_id: 8000
+  category_id: 10
+
+metal_video: 
+  product_id: 8001
+  category_id: 11
+
+
+paint_video: 
+  product_id: 8002
+  category_id: 12
+
+

@@ -1,0 +1,31 @@
+<%# Order of display is inverted %>
+<%= links_to_previous_next(@coupon_pages, :invert => true) %>
+
+<p>
+
+<table cellpadding="1" border="0">
+<tr>
+<th>Created</th>
+<th>Code</th>
+<th>Expires</th>
+<th>Amount</th>
+<th>Times Used</th>
+<th>New Cust</th>
+<th>Single Use</th>
+<th>Active</th>
+<th>Change</th>
+</tr>
+<% @coupons.each do |c| -%>
+<tr>
+<td valign="top"><%= c.created_at.to_date %></td>
+<td valign="top"><%= c.code %></td>
+<td valign="top"><%= c.end_date %></td>
+<td valign="top"><%= number_to_currency(c.amount) %></td>
+<td align="center" valign="top"><%= c.uses.size %></td>
+<td align="center" valign="top"><%= c.new_customers_only ? 'X' : '' %></td>
+<td align="center" valign="top"><%= c.single_use_only ? 'X' : '' %></td>
+<td align="center" valign="top"><%= c.active ? 'YES' : 'NO' %></td>
+<td align="center"><%= button_to c.active ? 'Deactivate' : 'Activate', :action => 'toggle_coupon', :id => c %></td>
+</tr>
+<% end -%>
+</table>

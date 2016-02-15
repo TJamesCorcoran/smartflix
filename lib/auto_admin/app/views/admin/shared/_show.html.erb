@@ -1,0 +1,62 @@
+<div style="float:right; background-color:#ccc; min-width:400px; min-height:400px;padding:20px;">
+   <%= yield :sidebar %> 
+
+
+   <% if @item.respond_to?(:add_note) && @item.respond_to?(:notes) %>
+	    <%
+          # for acts_as_notable plugin
+        %>
+		<% if @item.notes.empty? %>
+			 <i>no notes yet</i>
+		  <% else %>
+			  most recent note first:
+			  <% @item.notes.reverse.each do |note| %>
+				<div style="border: 1px solid black; margin:5px;">
+				  <b><%= note.created_at.strftime("%Y-%m-%d %H:%M:%S") %> - <%= Person[note.employee_id].full_name if note.employee_id >0 %></b>
+				  <br><br>
+				  <%= note.note %>
+				</div>
+			<% end %>
+		  <% end %>
+
+		  New note:
+		  <div style="border: 1px solid black; margin:5px;">
+			<% form_tag( {:action => 'add_note'}, {:method => :post} ) do %>
+			  <%= text_area_tag 'text', "", { :cols => 80, :row => 5} %>     
+			  <%= hidden_field_tag 'id', @item.id %>     
+			  <%= submit_tag "Create" %>
+			<% end %>
+		  </div>
+   <% end %>
+
+</div>
+
+<h1>
+   One <%= @item.class.to_s %>
+   <% if @item.methods.include?("name") %>
+     : <%= @item.name %>
+   <% end %>
+</h1>
+<td><%= render(:partial => "admin/shared/search") %></td>
+
+<%= url(@item) ? link_to("customer view", url(@item)) : "no customer view" %>  
+/
+<%= link_to "back to index", :action => :index %>
+/
+<%= link_to "edit", :action => :edit, :id => @item %>
+
+<%= render(:partial => 'admin/shared/show_basicdata', :locals => { :item => @item })  %>
+
+<%= render(:partial => 'admin/shared/show_relations',
+            :locals => { :item => @item, 
+                         :reject => (local_assigns[:reject].nil? ? [] : reject) 
+                       })  %>
+
+<% if local_assigns[:reject] %>
+  <h2>non-displayed relations</h2>
+  <ul>
+    <% local_assigns[:reject].each do |reject| %>
+      <li><%= reject %>
+    <% end %>
+  </ul>
+<% end %>

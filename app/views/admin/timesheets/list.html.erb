@@ -1,0 +1,44 @@
+
+<%= form_tag :action => 'index', :id => @title do %>
+  <%= text_field_tag  'search_str'  %>
+  <%= submit_tag 'Search' %>
+<% end %>
+
+<table border=0><tr><td>
+<h1>
+Listing titles</h1></td><td>
+(<%= link_to 'unfiltered', :action => 'list' %>)</td></tr></table>
+
+<table>
+  <tr>
+  <th></th>
+  <% for column in Title.content_columns.reject { |c| c.name == "description" } %>
+    <th align=left><%= 
+				column.human_name
+			 %></th>
+  <% end %>
+  </tr>
+
+<% for title in @titles %>
+  <tr>
+<td><%= link_to '(edit)', :action => 'edit', :id => title %></td> 
+  <%
+ for column in Title.content_columns.reject { |c| c.name == "description" } %>
+    <td><%= 
+            if (column.name == "name") 
+                link_to(title.name, :action => 'show', :id => title)
+            else
+				title.send(column.name) 
+			end
+	%></td>
+  <% end %>
+  </tr>
+<% end %>
+</table>
+
+<hr>
+<%= link_to 'Previous page', { :page => @title_pages.current.previous } if @title_pages.current.previous  %> <%= link_to 'Next page', { :page => @title_pages.current.next } if @title_pages.current.next %> 
+
+<br>
+<%= link_to 'New title', :action => 'new' %>
+

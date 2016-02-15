@@ -1,0 +1,7 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+one:
+  survey_question_id: 1
+  survey_id: 1
+  question: "How likely are blah blah blah..."
+  answer_html: "<input type='text' name='survey_question[1]'>"
+  answer_validator: "^(10|[1-9])$"  

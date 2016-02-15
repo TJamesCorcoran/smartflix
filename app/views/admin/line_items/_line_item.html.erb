@@ -1,0 +1,156 @@
+
+<tr>
+<%
+  # XYZFIX P3: rewrite this to use the univ/rental/late fee/replacement colors in public/stylesheets/scaffold.css 
+  color =  "000"
+  bgcolor = { :replacement => "f60", :late => "ff6", :regular => "fff", :university => "9ff"}[line_item.charge_type]
+  bgcolor = "cc99ff" if line_item.ignore_for_univ_limits
+%>
+
+<td>
+  <%= line_item.where_in_list_str  %>
+</td>
+
+<td><%= if line_item.cancellable? && person.andand.authority_edit_order
+          button_to("cancel", 
+                     {:controller=> :line_items, :action =>:cancel, :id=>line_item.id, 
+                     :r_controller=>params[:controller], :r_action => params[:action], :r_id => params[:id]}, 
+                     :confirm => "Are you sure?") +
+            check_box_tag("li_ids_clone[#{line_item.id}]", 1, false,  :onclick => "$('li_ids_#{line_item.id}').checked = $('li_ids_clone_#{line_item.id}').checked" )
+
+            # NOTE that this is a 'shadow' checkbox.  
+            #
+            # It's not part of any form.  The entire point of it is to
+            # trigger an 'onclick' event, which then sets (or unsets)
+            # the REAL (but hidden) checkbox.  
+            #
+            # Why do this craziness?
+            #
+            # Because we want one checkbox in each row, and checkboxes
+            # have to be inside forms, and thus the form would have to
+            # wrap the entire table ... but the table wants to include
+            # other buttons ("reship", etc.), and if we put those
+            # mini-forms inside a bigger form, the WRONG THING
+            # happens.
+            #
+            # We could have put the entire form AFTER the table and
+            # then used javascript to manipulate the absolute
+            # positioning of the CSS of the checkboxes to put them in
+            # the right rows, but it turns out that the CSS absolute
+            # positioning stuff doesn't interact well with tables
+            # because of a hole in the CSS spec.
+            #
+            # Gah.          
+
+        elsif line_item.uncancellable?
+          button_to("uncancel", 
+                     {:controller=> :line_items, :action =>:uncancel, :id=>line_item.id, 
+                     :r_controller=>params[:controller], :r_action => params[:action], :r_id => params[:id]}, 
+                     :confirm => "Are you sure?")
+
+        end %>
+</td>
+<td><%= if line_item.univ_doesnt_countable? && person.andand.authority_edit_order
+          button_to("univ dont count", 
+                     {:controller=> :line_items, :action =>:univ_doesnt_count, :id=>line_item.id, 
+                     :r_controller=>params[:controller], :r_action => params[:action], :r_id => params[:id]}, 
+                     :confirm => "Are you sure?")
+        end %>
+</td>
+
+<td>
+    <% if line_item.graceable?  && person.andand.authority_edit_order %>
+         <%= form_tag( {:controller => :line_items, 
+                       :action => :give_grace}, 
+                      {:method => :post} ) do %>
+             <%= text_field_tag   :days, nil, { :size=>5} %>
+             <%= hidden_field_tag :id,           line_item.id %>
+             <%= hidden_field_tag :r_controller, params[:controller] %>
+             <%= hidden_field_tag :r_action,     params[:action] %>
+             <%= hidden_field_tag :r_id,         params[:id] %>
+
+            <% opts = {}
+               opts[:confirm] = "Already has #{line_item.overdueGraceGranted} days grace - give more ?!??" if line_item.overdueGraceGranted > 0 
+              %>
+             <%= submit_tag "grace", opts %>
+         <% end %>
+          
+		
+      <%  end %>
+</td>
+<td><% if line_item.in_field?  && line_item.copy.andand.live?  && person.andand.authority_edit_order %>
+         <%= form_tag( {:controller => :customers, 
+                       :action => :mark_copy_defective_and_reship}, 
+                      {:method => :post} ) do %>
+             <%= text_field_tag   :days, nil, { :size=>10} %>
+             <%= hidden_field_tag :id, line_item.id %>
+             <%= hidden_field_tag :r_controller, params[:controller] %>
+             <%= hidden_field_tag :r_action,     params[:action] %>
+             <%= hidden_field_tag :r_id,         params[:id] %>
+
+             <%= submit_tag "defect / reship", { :confirm => "Really want to mark as bad and ship a replacement?" } %>
+       <% end %>
+     <% end %>
+</td>
+
+
+<td style="color:#<%= color %>; background:#<%= bgcolor %>">
+    <%= (line_item.charge_type == :rental) ? "" : line_item.charge_type.to_s %>
+    <%= line_item.charge_type == :university ? link_to(line_item.order.university.name.gsub(/University/,""), :controller => :university, :action => :show, :id => line_item.order.university.university_id) : "" %>
+</td>
+<td style="color:#<%= color %>; background:#<%= bgcolor %>"><%= line_item.order.orderDate %></td>
+
+<td>
+   <% if line_item.order.university_id  %>
+       <%= link_to( "jump",  "#order_#{ line_item.order_id}") %>
+   <% elsif line_item.order.payments.empty? %>
+       <span style="color:red;"><blink>ERROR!</blink></span>
+   <% else %>
+       <% line_item.order.payments.each do |payment|  %>
+          <%= render :partial => "admin/line_items/payment", :locals => { :payment => payment, :verbose => false } %>
+       <% end %>
+   <% end %>
+
+
+</td>
+
+
+<% columns.each do |column| %>
+
+<td align=right style="color:#<%= color %>; background:#<%= bgcolor %>">
+<%=
+            if (column.name == "copy_id")
+              begin
+              (line_item.copy_id.nil? ? "" : link_to(line_item.copy.sticker_id, :controller=>:copies, :action=>:show, :id=> line_item.copy_id))
+              rescue
+                "error: #{line_item.copy_id}"
+              end
+            elsif (column.name == "product_id")
+              link_to line_item.product.name[0..20].tr(" ", "_"), { :controller=>:products, :action=>:show, :id=>line_item.send(column.name) }, { :title => line_item.product.name }
+            elsif (column.name == "order_id")
+              link_to line_item.send(column.name), :controller=>:orders, :action=>:show, :id=>line_item.send(column.name)
+            elsif (column.name == "shipment_id")
+              if  line_item.shipment_id
+                link_text = line_item.shipment_id.to_s
+                link_text += "// #{line_item.shipment.dateOut}" if line_item.in_field? 
+                link_to( link_text, :controller=>:shipments, :action=>:show, :id=>line_item.send(column.name))  +
+                   (line_item.reshippable? ? 
+                    ( button_to( "lost / reship entire", {:controller =>:shipments, :action => :lost_reorder,  :id=>line_item.shipment.id, 
+                                 :r_controller=>params[:controller], :r_action => params[:action], :r_id => params[:id]}, 
+                               :confirm => "Are you sure?") +
+                      button_to( "lost / no reship entire", {:controller =>:shipments, :action => :lost_no_reorder,  :id=>line_item.shipment.id, 
+                                 :r_controller=>params[:controller], :r_action => params[:action], :r_id => params[:id]}, 
+                               :confirm => "Are you sure?")) : "")
+              end
+            elsif (column.name == "price")
+              number_to_currency(line_item.price)
+            else
+              line_item.send(column.name)
+            end  %></td>
+<% end %>
+<td>
+  <%= "shipping today!" if line_item.potential_item %>
+</td>
+
+</tr>
+
